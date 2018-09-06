@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GoodsTests {
+public class GoodsApplicationTests {
 	@Autowired
 	OrderMapper orderMapper;
 	@Autowired

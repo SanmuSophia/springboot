@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("gcyl.entity.domain.mapper")
-public class Goods {
+public class GoodsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Goods.class, args);
+		SpringApplication.run(GoodsApplication.class, args);
 	}
 }
