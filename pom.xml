@@ -9,9 +9,10 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>entity-goods</module>
-		<module>entity-order</module>
+		<module>entity-controller</module>
 		<module>entity-domain</module>
+		<module>entity-service</module>
+		<module>entity-common</module>
 	</modules>
 
 	<name>entity</name>
@@ -33,6 +34,8 @@
 		<pagehelper.version>1.2.3</pagehelper.version>
 		<commons.lang3.version>3.4</commons.lang3.version>
 		<jedis.version>2.9.0</jedis.version>
+		<aspectj.version>1.8.3</aspectj.version>
+		<swagger.version>1.1.0.RELEASE</swagger.version>
 
 		<!-- plugin -->
 		<compiler.plugin.version>3.1</compiler.plugin.version>
@@ -66,6 +69,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
+
 		<!-- redis -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -99,11 +103,30 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<!-- swagger -->
+		<dependency>
+			<groupId>com.didispace</groupId>
+			<artifactId>spring-boot-starter-swagger</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- aop -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- jackson -->
@@ -123,6 +146,8 @@
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-parameter-names</artifactId>
 		</dependency>
+
+		<!-- fast json -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -142,6 +167,14 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons.lang3.version}</version>
 		</dependency>
+
+		<!-- aspectj -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
