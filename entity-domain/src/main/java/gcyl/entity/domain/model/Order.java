@@ -2,124 +2,81 @@ package gcyl.entity.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Order implements Serializable {
-    private Long orderId;
+    private Long id;
 
-    private Long memberSponsorId;
+    private String orderId;
 
-    private Long shopIsponsorD;
+    private Integer orderState;
+
+    private Boolean isPay;
 
     private Long shopId;
 
-    private Long distributionShopId;
+    private String tableNum;
 
-    private Byte identityTypes;
+    private BigDecimal consumeSum;
 
-    private String identifier;
+    private BigDecimal settleSum;
 
-    private Long redPackageId;
+    private BigDecimal consumption;
 
-    private String sponsorPaymentAccount;
+    private String description;
 
-    private Long orderNumber;
+    private Integer personNum;
 
-    private Long selectedAdressId;
+    private Integer goodsNum;
 
-    private BigDecimal shopCommodityTotalFigure;
+    private String payMethod;
 
-    private BigDecimal commodityTotalFigure;
+    private Date gmtCreate;
 
-    private BigDecimal mailFee;
+    private Date gmtReceive;
 
-    private Byte isPay;
+    private Date gmtPay;
 
-    private Byte getCommodityMethod;
+    private Date gmtModify;
 
-    private Byte payMethod;
+    private Date gmtFinish;
 
-    private BigDecimal shopRealGetMoney;
+    private Long version;
 
-    private BigDecimal realPayMoney;
-
-    private Long confirmCode;
-
-    private String leaveComment;
-
-    private Byte payEnvironment;
-
-    private Byte orderType;
-
-    private Byte orderSource;
-
-    private Long expectedArrivalTime;
-
-    private Long acceptOrderFormTime;
-
-    private Long createTime;
-
-    private Long canleTime;
-
-    private Long payTime;
-
-    private Long strikeBargainTime;
-
-    private Byte orderState;
-
-    private Long sendCommodityTime;
-
-    private String waybillNumber;
-
-    private String logisticsCompany;
-
-    private Byte offsetMode;
-
-    private BigDecimal offsetFigure;
-
-    private Byte sponsorGetWelfare;
-
-    private BigDecimal sponsorGetWelfareFigure;
-
-    private Byte chamberlainGetWelfare;
-
-    private BigDecimal chamberlainWelfareFigure;
-
-    private BigDecimal fullGetConsumerTicket;
-
-    private BigDecimal serviceFee;
-
-    private Byte isDelete;
-
-    private Long deleteTime;
-
-    private Long updateTime;
-
-    private String remark;
+    private Boolean cutOff;
 
     private static final long serialVersionUID = 1L;
 
-    public Long getOrderId() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId == null ? null : orderId.trim();
     }
 
-    public Long getMemberSponsorId() {
-        return memberSponsorId;
+    public Integer getOrderState() {
+        return orderState;
     }
 
-    public void setMemberSponsorId(Long memberSponsorId) {
-        this.memberSponsorId = memberSponsorId;
+    public void setOrderState(Integer orderState) {
+        this.orderState = orderState;
     }
 
-    public Long getShopIsponsorD() {
-        return shopIsponsorD;
+    public Boolean getIsPay() {
+        return isPay;
     }
 
-    public void setShopIsponsorD(Long shopIsponsorD) {
-        this.shopIsponsorD = shopIsponsorD;
+    public void setIsPay(Boolean isPay) {
+        this.isPay = isPay;
     }
 
     public Long getShopId() {
@@ -130,339 +87,123 @@ public class Order implements Serializable {
         this.shopId = shopId;
     }
 
-    public Long getDistributionShopId() {
-        return distributionShopId;
+    public String getTableNum() {
+        return tableNum;
     }
 
-    public void setDistributionShopId(Long distributionShopId) {
-        this.distributionShopId = distributionShopId;
+    public void setTableNum(String tableNum) {
+        this.tableNum = tableNum == null ? null : tableNum.trim();
     }
 
-    public Byte getIdentityTypes() {
-        return identityTypes;
+    public BigDecimal getConsumeSum() {
+        return consumeSum;
     }
 
-    public void setIdentityTypes(Byte identityTypes) {
-        this.identityTypes = identityTypes;
+    public void setConsumeSum(BigDecimal consumeSum) {
+        this.consumeSum = consumeSum;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public BigDecimal getSettleSum() {
+        return settleSum;
     }
 
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier == null ? null : identifier.trim();
+    public void setSettleSum(BigDecimal settleSum) {
+        this.settleSum = settleSum;
     }
 
-    public Long getRedPackageId() {
-        return redPackageId;
+    public BigDecimal getConsumption() {
+        return consumption;
     }
 
-    public void setRedPackageId(Long redPackageId) {
-        this.redPackageId = redPackageId;
+    public void setConsumption(BigDecimal consumption) {
+        this.consumption = consumption;
     }
 
-    public String getSponsorPaymentAccount() {
-        return sponsorPaymentAccount;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSponsorPaymentAccount(String sponsorPaymentAccount) {
-        this.sponsorPaymentAccount = sponsorPaymentAccount == null ? null : sponsorPaymentAccount.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
-    public Long getOrderNumber() {
-        return orderNumber;
+    public Integer getPersonNum() {
+        return personNum;
     }
 
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setPersonNum(Integer personNum) {
+        this.personNum = personNum;
     }
 
-    public Long getSelectedAdressId() {
-        return selectedAdressId;
+    public Integer getGoodsNum() {
+        return goodsNum;
     }
 
-    public void setSelectedAdressId(Long selectedAdressId) {
-        this.selectedAdressId = selectedAdressId;
+    public void setGoodsNum(Integer goodsNum) {
+        this.goodsNum = goodsNum;
     }
 
-    public BigDecimal getShopCommodityTotalFigure() {
-        return shopCommodityTotalFigure;
-    }
-
-    public void setShopCommodityTotalFigure(BigDecimal shopCommodityTotalFigure) {
-        this.shopCommodityTotalFigure = shopCommodityTotalFigure;
-    }
-
-    public BigDecimal getCommodityTotalFigure() {
-        return commodityTotalFigure;
-    }
-
-    public void setCommodityTotalFigure(BigDecimal commodityTotalFigure) {
-        this.commodityTotalFigure = commodityTotalFigure;
-    }
-
-    public BigDecimal getMailFee() {
-        return mailFee;
-    }
-
-    public void setMailFee(BigDecimal mailFee) {
-        this.mailFee = mailFee;
-    }
-
-    public Byte getIsPay() {
-        return isPay;
-    }
-
-    public void setIsPay(Byte isPay) {
-        this.isPay = isPay;
-    }
-
-    public Byte getGetCommodityMethod() {
-        return getCommodityMethod;
-    }
-
-    public void setGetCommodityMethod(Byte getCommodityMethod) {
-        this.getCommodityMethod = getCommodityMethod;
-    }
-
-    public Byte getPayMethod() {
+    public String getPayMethod() {
         return payMethod;
     }
 
-    public void setPayMethod(Byte payMethod) {
-        this.payMethod = payMethod;
+    public void setPayMethod(String payMethod) {
+        this.payMethod = payMethod == null ? null : payMethod.trim();
     }
 
-    public BigDecimal getShopRealGetMoney() {
-        return shopRealGetMoney;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setShopRealGetMoney(BigDecimal shopRealGetMoney) {
-        this.shopRealGetMoney = shopRealGetMoney;
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
-    public BigDecimal getRealPayMoney() {
-        return realPayMoney;
+    public Date getGmtReceive() {
+        return gmtReceive;
     }
 
-    public void setRealPayMoney(BigDecimal realPayMoney) {
-        this.realPayMoney = realPayMoney;
+    public void setGmtReceive(Date gmtReceive) {
+        this.gmtReceive = gmtReceive;
     }
 
-    public Long getConfirmCode() {
-        return confirmCode;
+    public Date getGmtPay() {
+        return gmtPay;
     }
 
-    public void setConfirmCode(Long confirmCode) {
-        this.confirmCode = confirmCode;
+    public void setGmtPay(Date gmtPay) {
+        this.gmtPay = gmtPay;
     }
 
-    public String getLeaveComment() {
-        return leaveComment;
+    public Date getGmtModify() {
+        return gmtModify;
     }
 
-    public void setLeaveComment(String leaveComment) {
-        this.leaveComment = leaveComment == null ? null : leaveComment.trim();
+    public void setGmtModify(Date gmtModify) {
+        this.gmtModify = gmtModify;
     }
 
-    public Byte getPayEnvironment() {
-        return payEnvironment;
+    public Date getGmtFinish() {
+        return gmtFinish;
     }
 
-    public void setPayEnvironment(Byte payEnvironment) {
-        this.payEnvironment = payEnvironment;
+    public void setGmtFinish(Date gmtFinish) {
+        this.gmtFinish = gmtFinish;
     }
 
-    public Byte getOrderType() {
-        return orderType;
+    public Long getVersion() {
+        return version;
     }
 
-    public void setOrderType(Byte orderType) {
-        this.orderType = orderType;
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
-    public Byte getOrderSource() {
-        return orderSource;
+    public Boolean getCutOff() {
+        return cutOff;
     }
 
-    public void setOrderSource(Byte orderSource) {
-        this.orderSource = orderSource;
-    }
-
-    public Long getExpectedArrivalTime() {
-        return expectedArrivalTime;
-    }
-
-    public void setExpectedArrivalTime(Long expectedArrivalTime) {
-        this.expectedArrivalTime = expectedArrivalTime;
-    }
-
-    public Long getAcceptOrderFormTime() {
-        return acceptOrderFormTime;
-    }
-
-    public void setAcceptOrderFormTime(Long acceptOrderFormTime) {
-        this.acceptOrderFormTime = acceptOrderFormTime;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getCanleTime() {
-        return canleTime;
-    }
-
-    public void setCanleTime(Long canleTime) {
-        this.canleTime = canleTime;
-    }
-
-    public Long getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(Long payTime) {
-        this.payTime = payTime;
-    }
-
-    public Long getStrikeBargainTime() {
-        return strikeBargainTime;
-    }
-
-    public void setStrikeBargainTime(Long strikeBargainTime) {
-        this.strikeBargainTime = strikeBargainTime;
-    }
-
-    public Byte getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(Byte orderState) {
-        this.orderState = orderState;
-    }
-
-    public Long getSendCommodityTime() {
-        return sendCommodityTime;
-    }
-
-    public void setSendCommodityTime(Long sendCommodityTime) {
-        this.sendCommodityTime = sendCommodityTime;
-    }
-
-    public String getWaybillNumber() {
-        return waybillNumber;
-    }
-
-    public void setWaybillNumber(String waybillNumber) {
-        this.waybillNumber = waybillNumber == null ? null : waybillNumber.trim();
-    }
-
-    public String getLogisticsCompany() {
-        return logisticsCompany;
-    }
-
-    public void setLogisticsCompany(String logisticsCompany) {
-        this.logisticsCompany = logisticsCompany == null ? null : logisticsCompany.trim();
-    }
-
-    public Byte getOffsetMode() {
-        return offsetMode;
-    }
-
-    public void setOffsetMode(Byte offsetMode) {
-        this.offsetMode = offsetMode;
-    }
-
-    public BigDecimal getOffsetFigure() {
-        return offsetFigure;
-    }
-
-    public void setOffsetFigure(BigDecimal offsetFigure) {
-        this.offsetFigure = offsetFigure;
-    }
-
-    public Byte getSponsorGetWelfare() {
-        return sponsorGetWelfare;
-    }
-
-    public void setSponsorGetWelfare(Byte sponsorGetWelfare) {
-        this.sponsorGetWelfare = sponsorGetWelfare;
-    }
-
-    public BigDecimal getSponsorGetWelfareFigure() {
-        return sponsorGetWelfareFigure;
-    }
-
-    public void setSponsorGetWelfareFigure(BigDecimal sponsorGetWelfareFigure) {
-        this.sponsorGetWelfareFigure = sponsorGetWelfareFigure;
-    }
-
-    public Byte getChamberlainGetWelfare() {
-        return chamberlainGetWelfare;
-    }
-
-    public void setChamberlainGetWelfare(Byte chamberlainGetWelfare) {
-        this.chamberlainGetWelfare = chamberlainGetWelfare;
-    }
-
-    public BigDecimal getChamberlainWelfareFigure() {
-        return chamberlainWelfareFigure;
-    }
-
-    public void setChamberlainWelfareFigure(BigDecimal chamberlainWelfareFigure) {
-        this.chamberlainWelfareFigure = chamberlainWelfareFigure;
-    }
-
-    public BigDecimal getFullGetConsumerTicket() {
-        return fullGetConsumerTicket;
-    }
-
-    public void setFullGetConsumerTicket(BigDecimal fullGetConsumerTicket) {
-        this.fullGetConsumerTicket = fullGetConsumerTicket;
-    }
-
-    public BigDecimal getServiceFee() {
-        return serviceFee;
-    }
-
-    public void setServiceFee(BigDecimal serviceFee) {
-        this.serviceFee = serviceFee;
-    }
-
-    public Byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public Long getDeleteTime() {
-        return deleteTime;
-    }
-
-    public void setDeleteTime(Long deleteTime) {
-        this.deleteTime = deleteTime;
-    }
-
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setCutOff(Boolean cutOff) {
+        this.cutOff = cutOff;
     }
 }

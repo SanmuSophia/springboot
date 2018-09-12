@@ -1,4 +1,4 @@
-package gcyl.entity.controller.dataSource;
+package gcyl.entity.controller.config.dataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @ServletComponentScan //用于扫描所有的Servlet、filter、listener
 public class DruidConfig {
     @Bean
-    @ConfigurationProperties(prefix="spring.datasource") //加载时读取指定的配置信息,前缀为spring.datasource
+    @ConfigurationProperties(prefix = "spring.datasource") //加载时读取指定的配置信息,前缀为spring.datasource
     public DataSource druidDataSource() {
         return new DruidDataSource();
     }

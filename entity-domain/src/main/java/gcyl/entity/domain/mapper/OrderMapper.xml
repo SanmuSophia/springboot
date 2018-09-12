@@ -2,581 +2,447 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gcyl.entity.domain.mapper.OrderMapper" >
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Order" >
-    <id column="order_id" property="orderId" jdbcType="BIGINT" />
-    <result column="member_sponsor_id" property="memberSponsorId" jdbcType="BIGINT" />
-    <result column="shop_isponsor_d" property="shopIsponsorD" jdbcType="BIGINT" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
-    <result column="distribution_shop_id" property="distributionShopId" jdbcType="BIGINT" />
-    <result column="identity_types" property="identityTypes" jdbcType="TINYINT" />
-    <result column="identifier" property="identifier" jdbcType="VARCHAR" />
-    <result column="red_package_id" property="redPackageId" jdbcType="BIGINT" />
-    <result column="sponsor_payment_account" property="sponsorPaymentAccount" jdbcType="VARCHAR" />
-    <result column="order_number" property="orderNumber" jdbcType="BIGINT" />
-    <result column="selected_adress_id" property="selectedAdressId" jdbcType="BIGINT" />
-    <result column="shop_commodity_total_figure" property="shopCommodityTotalFigure" jdbcType="DECIMAL" />
-    <result column="commodity_total_figure" property="commodityTotalFigure" jdbcType="DECIMAL" />
-    <result column="mail_fee" property="mailFee" jdbcType="DECIMAL" />
-    <result column="is_pay" property="isPay" jdbcType="TINYINT" />
-    <result column="get_commodity_method" property="getCommodityMethod" jdbcType="TINYINT" />
-    <result column="pay_method" property="payMethod" jdbcType="TINYINT" />
-    <result column="shop_real_get_money" property="shopRealGetMoney" jdbcType="DECIMAL" />
-    <result column="real_pay_money" property="realPayMoney" jdbcType="DECIMAL" />
-    <result column="confirm_code" property="confirmCode" jdbcType="BIGINT" />
-    <result column="leave_comment" property="leaveComment" jdbcType="VARCHAR" />
-    <result column="pay_environment" property="payEnvironment" jdbcType="TINYINT" />
-    <result column="order_type" property="orderType" jdbcType="TINYINT" />
-    <result column="order_source" property="orderSource" jdbcType="TINYINT" />
-    <result column="expected_arrival_time" property="expectedArrivalTime" jdbcType="BIGINT" />
-    <result column="accept_order_form_time" property="acceptOrderFormTime" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="canle_time" property="canleTime" jdbcType="BIGINT" />
-    <result column="pay_time" property="payTime" jdbcType="BIGINT" />
-    <result column="strike_bargain_time" property="strikeBargainTime" jdbcType="BIGINT" />
-    <result column="order_state" property="orderState" jdbcType="TINYINT" />
-    <result column="send_commodity_time" property="sendCommodityTime" jdbcType="BIGINT" />
-    <result column="waybill_number" property="waybillNumber" jdbcType="VARCHAR" />
-    <result column="logistics_company" property="logisticsCompany" jdbcType="VARCHAR" />
-    <result column="offset_mode" property="offsetMode" jdbcType="TINYINT" />
-    <result column="offset_figure" property="offsetFigure" jdbcType="DECIMAL" />
-    <result column="sponsor_get_welfare" property="sponsorGetWelfare" jdbcType="TINYINT" />
-    <result column="sponsor_get_welfare_figure" property="sponsorGetWelfareFigure" jdbcType="DECIMAL" />
-    <result column="chamberlain_get_welfare" property="chamberlainGetWelfare" jdbcType="TINYINT" />
-    <result column="chamberlain_welfare_figure" property="chamberlainWelfareFigure" jdbcType="DECIMAL" />
-    <result column="full_get_consumer_ticket" property="fullGetConsumerTicket" jdbcType="DECIMAL" />
-    <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
-    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
-    <result column="delete_time" property="deleteTime" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="table_num" property="tableNum" jdbcType="VARCHAR" />
+    <result column="consume_sum" property="consumeSum" jdbcType="DECIMAL" />
+    <result column="settle_sum" property="settleSum" jdbcType="DECIMAL" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="person_num" property="personNum" jdbcType="INTEGER" />
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="pay_method" property="payMethod" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    order_id, member_sponsor_id, shop_isponsor_d, shop_id, distribution_shop_id, identity_types, 
-    identifier, red_package_id, sponsor_payment_account, order_number, selected_adress_id, 
-    shop_commodity_total_figure, commodity_total_figure, mail_fee, is_pay, get_commodity_method, 
-    pay_method, shop_real_get_money, real_pay_money, confirm_code, leave_comment, pay_environment, 
-    order_type, order_source, expected_arrival_time, accept_order_form_time, create_time, 
-    canle_time, pay_time, strike_bargain_time, order_state, send_commodity_time, waybill_number, 
-    logistics_company, offset_mode, offset_figure, sponsor_get_welfare, sponsor_get_welfare_figure, 
-    chamberlain_get_welfare, chamberlain_welfare_figure, full_get_consumer_ticket, service_fee, 
-    is_delete, delete_time, update_time, remark
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
   </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_id, order_state, is_pay, shop_id, table_num, consume_sum, settle_sum, consumption, 
+    description, person_num, goods_num, pay_method, gmt_create, gmt_receive, gmt_pay, 
+    gmt_modify, gmt_finish, version, cut_off
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tyg_ms_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tyg_order
-    where order_id = #{orderId,jdbcType=BIGINT}
+    from tyg_ms_order
+    where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tyg_order
-    where order_id = #{orderId,jdbcType=BIGINT}
+    delete from tyg_ms_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderExample" >
+    delete from tyg_ms_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.Order" >
-    insert into tyg_order (order_id, member_sponsor_id, shop_isponsor_d, 
-      shop_id, distribution_shop_id, identity_types, 
-      identifier, red_package_id, sponsor_payment_account, 
-      order_number, selected_adress_id, shop_commodity_total_figure, 
-      commodity_total_figure, mail_fee, is_pay, 
-      get_commodity_method, pay_method, shop_real_get_money, 
-      real_pay_money, confirm_code, leave_comment, 
-      pay_environment, order_type, order_source, 
-      expected_arrival_time, accept_order_form_time, 
-      create_time, canle_time, pay_time, 
-      strike_bargain_time, order_state, send_commodity_time, 
-      waybill_number, logistics_company, offset_mode, 
-      offset_figure, sponsor_get_welfare, sponsor_get_welfare_figure, 
-      chamberlain_get_welfare, chamberlain_welfare_figure, 
-      full_get_consumer_ticket, service_fee, is_delete, 
-      delete_time, update_time, remark
-      )
-    values (#{orderId,jdbcType=BIGINT}, #{memberSponsorId,jdbcType=BIGINT}, #{shopIsponsorD,jdbcType=BIGINT}, 
-      #{shopId,jdbcType=BIGINT}, #{distributionShopId,jdbcType=BIGINT}, #{identityTypes,jdbcType=TINYINT}, 
-      #{identifier,jdbcType=VARCHAR}, #{redPackageId,jdbcType=BIGINT}, #{sponsorPaymentAccount,jdbcType=VARCHAR}, 
-      #{orderNumber,jdbcType=BIGINT}, #{selectedAdressId,jdbcType=BIGINT}, #{shopCommodityTotalFigure,jdbcType=DECIMAL}, 
-      #{commodityTotalFigure,jdbcType=DECIMAL}, #{mailFee,jdbcType=DECIMAL}, #{isPay,jdbcType=TINYINT}, 
-      #{getCommodityMethod,jdbcType=TINYINT}, #{payMethod,jdbcType=TINYINT}, #{shopRealGetMoney,jdbcType=DECIMAL}, 
-      #{realPayMoney,jdbcType=DECIMAL}, #{confirmCode,jdbcType=BIGINT}, #{leaveComment,jdbcType=VARCHAR}, 
-      #{payEnvironment,jdbcType=TINYINT}, #{orderType,jdbcType=TINYINT}, #{orderSource,jdbcType=TINYINT}, 
-      #{expectedArrivalTime,jdbcType=BIGINT}, #{acceptOrderFormTime,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=BIGINT}, #{canleTime,jdbcType=BIGINT}, #{payTime,jdbcType=BIGINT}, 
-      #{strikeBargainTime,jdbcType=BIGINT}, #{orderState,jdbcType=TINYINT}, #{sendCommodityTime,jdbcType=BIGINT}, 
-      #{waybillNumber,jdbcType=VARCHAR}, #{logisticsCompany,jdbcType=VARCHAR}, #{offsetMode,jdbcType=TINYINT}, 
-      #{offsetFigure,jdbcType=DECIMAL}, #{sponsorGetWelfare,jdbcType=TINYINT}, #{sponsorGetWelfareFigure,jdbcType=DECIMAL}, 
-      #{chamberlainGetWelfare,jdbcType=TINYINT}, #{chamberlainWelfareFigure,jdbcType=DECIMAL}, 
-      #{fullGetConsumerTicket,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, #{isDelete,jdbcType=TINYINT}, 
-      #{deleteTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}
-      )
+    insert into tyg_ms_order (id, order_id, order_state, 
+      is_pay, shop_id, table_num, 
+      consume_sum, settle_sum, consumption, 
+      description, person_num, goods_num, 
+      pay_method, gmt_create, gmt_receive, 
+      gmt_pay, gmt_modify, gmt_finish, 
+      version, cut_off)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER}, 
+      #{isPay,jdbcType=BIT}, #{shopId,jdbcType=BIGINT}, #{tableNum,jdbcType=VARCHAR}, 
+      #{consumeSum,jdbcType=DECIMAL}, #{settleSum,jdbcType=DECIMAL}, #{consumption,jdbcType=DECIMAL}, 
+      #{description,jdbcType=VARCHAR}, #{personNum,jdbcType=INTEGER}, #{goodsNum,jdbcType=INTEGER}, 
+      #{payMethod,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtReceive,jdbcType=TIMESTAMP}, 
+      #{gmtPay,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{gmtFinish,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT}, #{cutOff,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" >
-    insert into tyg_order
+    insert into tyg_ms_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="orderId != null" >
         order_id,
-      </if>
-      <if test="memberSponsorId != null" >
-        member_sponsor_id,
-      </if>
-      <if test="shopIsponsorD != null" >
-        shop_isponsor_d,
-      </if>
-      <if test="shopId != null" >
-        shop_id,
-      </if>
-      <if test="distributionShopId != null" >
-        distribution_shop_id,
-      </if>
-      <if test="identityTypes != null" >
-        identity_types,
-      </if>
-      <if test="identifier != null" >
-        identifier,
-      </if>
-      <if test="redPackageId != null" >
-        red_package_id,
-      </if>
-      <if test="sponsorPaymentAccount != null" >
-        sponsor_payment_account,
-      </if>
-      <if test="orderNumber != null" >
-        order_number,
-      </if>
-      <if test="selectedAdressId != null" >
-        selected_adress_id,
-      </if>
-      <if test="shopCommodityTotalFigure != null" >
-        shop_commodity_total_figure,
-      </if>
-      <if test="commodityTotalFigure != null" >
-        commodity_total_figure,
-      </if>
-      <if test="mailFee != null" >
-        mail_fee,
-      </if>
-      <if test="isPay != null" >
-        is_pay,
-      </if>
-      <if test="getCommodityMethod != null" >
-        get_commodity_method,
-      </if>
-      <if test="payMethod != null" >
-        pay_method,
-      </if>
-      <if test="shopRealGetMoney != null" >
-        shop_real_get_money,
-      </if>
-      <if test="realPayMoney != null" >
-        real_pay_money,
-      </if>
-      <if test="confirmCode != null" >
-        confirm_code,
-      </if>
-      <if test="leaveComment != null" >
-        leave_comment,
-      </if>
-      <if test="payEnvironment != null" >
-        pay_environment,
-      </if>
-      <if test="orderType != null" >
-        order_type,
-      </if>
-      <if test="orderSource != null" >
-        order_source,
-      </if>
-      <if test="expectedArrivalTime != null" >
-        expected_arrival_time,
-      </if>
-      <if test="acceptOrderFormTime != null" >
-        accept_order_form_time,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="canleTime != null" >
-        canle_time,
-      </if>
-      <if test="payTime != null" >
-        pay_time,
-      </if>
-      <if test="strikeBargainTime != null" >
-        strike_bargain_time,
       </if>
       <if test="orderState != null" >
         order_state,
       </if>
-      <if test="sendCommodityTime != null" >
-        send_commodity_time,
+      <if test="isPay != null" >
+        is_pay,
       </if>
-      <if test="waybillNumber != null" >
-        waybill_number,
+      <if test="shopId != null" >
+        shop_id,
       </if>
-      <if test="logisticsCompany != null" >
-        logistics_company,
+      <if test="tableNum != null" >
+        table_num,
       </if>
-      <if test="offsetMode != null" >
-        offset_mode,
+      <if test="consumeSum != null" >
+        consume_sum,
       </if>
-      <if test="offsetFigure != null" >
-        offset_figure,
+      <if test="settleSum != null" >
+        settle_sum,
       </if>
-      <if test="sponsorGetWelfare != null" >
-        sponsor_get_welfare,
+      <if test="consumption != null" >
+        consumption,
       </if>
-      <if test="sponsorGetWelfareFigure != null" >
-        sponsor_get_welfare_figure,
+      <if test="description != null" >
+        description,
       </if>
-      <if test="chamberlainGetWelfare != null" >
-        chamberlain_get_welfare,
+      <if test="personNum != null" >
+        person_num,
       </if>
-      <if test="chamberlainWelfareFigure != null" >
-        chamberlain_welfare_figure,
+      <if test="goodsNum != null" >
+        goods_num,
       </if>
-      <if test="fullGetConsumerTicket != null" >
-        full_get_consumer_ticket,
+      <if test="payMethod != null" >
+        pay_method,
       </if>
-      <if test="serviceFee != null" >
-        service_fee,
+      <if test="gmtCreate != null" >
+        gmt_create,
       </if>
-      <if test="isDelete != null" >
-        is_delete,
+      <if test="gmtReceive != null" >
+        gmt_receive,
       </if>
-      <if test="deleteTime != null" >
-        delete_time,
+      <if test="gmtPay != null" >
+        gmt_pay,
       </if>
-      <if test="updateTime != null" >
-        update_time,
+      <if test="gmtModify != null" >
+        gmt_modify,
       </if>
-      <if test="remark != null" >
-        remark,
+      <if test="gmtFinish != null" >
+        gmt_finish,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="cutOff != null" >
+        cut_off,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="orderId != null" >
-        #{orderId,jdbcType=BIGINT},
+        #{orderId,jdbcType=VARCHAR},
       </if>
-      <if test="memberSponsorId != null" >
-        #{memberSponsorId,jdbcType=BIGINT},
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
       </if>
-      <if test="shopIsponsorD != null" >
-        #{shopIsponsorD,jdbcType=BIGINT},
+      <if test="isPay != null" >
+        #{isPay,jdbcType=BIT},
       </if>
       <if test="shopId != null" >
         #{shopId,jdbcType=BIGINT},
       </if>
-      <if test="distributionShopId != null" >
-        #{distributionShopId,jdbcType=BIGINT},
+      <if test="tableNum != null" >
+        #{tableNum,jdbcType=VARCHAR},
       </if>
-      <if test="identityTypes != null" >
-        #{identityTypes,jdbcType=TINYINT},
+      <if test="consumeSum != null" >
+        #{consumeSum,jdbcType=DECIMAL},
       </if>
-      <if test="identifier != null" >
-        #{identifier,jdbcType=VARCHAR},
+      <if test="settleSum != null" >
+        #{settleSum,jdbcType=DECIMAL},
       </if>
-      <if test="redPackageId != null" >
-        #{redPackageId,jdbcType=BIGINT},
+      <if test="consumption != null" >
+        #{consumption,jdbcType=DECIMAL},
       </if>
-      <if test="sponsorPaymentAccount != null" >
-        #{sponsorPaymentAccount,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
-      <if test="orderNumber != null" >
-        #{orderNumber,jdbcType=BIGINT},
+      <if test="personNum != null" >
+        #{personNum,jdbcType=INTEGER},
       </if>
-      <if test="selectedAdressId != null" >
-        #{selectedAdressId,jdbcType=BIGINT},
-      </if>
-      <if test="shopCommodityTotalFigure != null" >
-        #{shopCommodityTotalFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="commodityTotalFigure != null" >
-        #{commodityTotalFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="mailFee != null" >
-        #{mailFee,jdbcType=DECIMAL},
-      </if>
-      <if test="isPay != null" >
-        #{isPay,jdbcType=TINYINT},
-      </if>
-      <if test="getCommodityMethod != null" >
-        #{getCommodityMethod,jdbcType=TINYINT},
+      <if test="goodsNum != null" >
+        #{goodsNum,jdbcType=INTEGER},
       </if>
       <if test="payMethod != null" >
-        #{payMethod,jdbcType=TINYINT},
+        #{payMethod,jdbcType=VARCHAR},
       </if>
-      <if test="shopRealGetMoney != null" >
-        #{shopRealGetMoney,jdbcType=DECIMAL},
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="realPayMoney != null" >
-        #{realPayMoney,jdbcType=DECIMAL},
+      <if test="gmtReceive != null" >
+        #{gmtReceive,jdbcType=TIMESTAMP},
       </if>
-      <if test="confirmCode != null" >
-        #{confirmCode,jdbcType=BIGINT},
+      <if test="gmtPay != null" >
+        #{gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="leaveComment != null" >
-        #{leaveComment,jdbcType=VARCHAR},
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
       </if>
-      <if test="payEnvironment != null" >
-        #{payEnvironment,jdbcType=TINYINT},
+      <if test="gmtFinish != null" >
+        #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderType != null" >
-        #{orderType,jdbcType=TINYINT},
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
       </if>
-      <if test="orderSource != null" >
-        #{orderSource,jdbcType=TINYINT},
-      </if>
-      <if test="expectedArrivalTime != null" >
-        #{expectedArrivalTime,jdbcType=BIGINT},
-      </if>
-      <if test="acceptOrderFormTime != null" >
-        #{acceptOrderFormTime,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="canleTime != null" >
-        #{canleTime,jdbcType=BIGINT},
-      </if>
-      <if test="payTime != null" >
-        #{payTime,jdbcType=BIGINT},
-      </if>
-      <if test="strikeBargainTime != null" >
-        #{strikeBargainTime,jdbcType=BIGINT},
-      </if>
-      <if test="orderState != null" >
-        #{orderState,jdbcType=TINYINT},
-      </if>
-      <if test="sendCommodityTime != null" >
-        #{sendCommodityTime,jdbcType=BIGINT},
-      </if>
-      <if test="waybillNumber != null" >
-        #{waybillNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="logisticsCompany != null" >
-        #{logisticsCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="offsetMode != null" >
-        #{offsetMode,jdbcType=TINYINT},
-      </if>
-      <if test="offsetFigure != null" >
-        #{offsetFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="sponsorGetWelfare != null" >
-        #{sponsorGetWelfare,jdbcType=TINYINT},
-      </if>
-      <if test="sponsorGetWelfareFigure != null" >
-        #{sponsorGetWelfareFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="chamberlainGetWelfare != null" >
-        #{chamberlainGetWelfare,jdbcType=TINYINT},
-      </if>
-      <if test="chamberlainWelfareFigure != null" >
-        #{chamberlainWelfareFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="fullGetConsumerTicket != null" >
-        #{fullGetConsumerTicket,jdbcType=DECIMAL},
-      </if>
-      <if test="serviceFee != null" >
-        #{serviceFee,jdbcType=DECIMAL},
-      </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=TINYINT},
-      </if>
-      <if test="deleteTime != null" >
-        #{deleteTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
+      <if test="cutOff != null" >
+        #{cutOff,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Order" >
-    update tyg_order
+  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from tyg_ms_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tyg_ms_order
     <set >
-      <if test="memberSponsorId != null" >
-        member_sponsor_id = #{memberSponsorId,jdbcType=BIGINT},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="shopIsponsorD != null" >
-        shop_isponsor_d = #{shopIsponsorD,jdbcType=BIGINT},
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderState != null" >
+        order_state = #{record.orderState,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPay != null" >
+        is_pay = #{record.isPay,jdbcType=BIT},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tableNum != null" >
+        table_num = #{record.tableNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumeSum != null" >
+        consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.settleSum != null" >
+        settle_sum = #{record.settleSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.consumption != null" >
+        consumption = #{record.consumption,jdbcType=DECIMAL},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personNum != null" >
+        person_num = #{record.personNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsNum != null" >
+        goods_num = #{record.goodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.payMethod != null" >
+        pay_method = #{record.payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtReceive != null" >
+        gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtPay != null" >
+        gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModify != null" >
+        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtFinish != null" >
+        gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=BIGINT},
+      </if>
+      <if test="record.cutOff != null" >
+        cut_off = #{record.cutOff,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tyg_ms_order
+    set id = #{record.id,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      order_state = #{record.orderState,jdbcType=INTEGER},
+      is_pay = #{record.isPay,jdbcType=BIT},
+      shop_id = #{record.shopId,jdbcType=BIGINT},
+      table_num = #{record.tableNum,jdbcType=VARCHAR},
+      consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
+      settle_sum = #{record.settleSum,jdbcType=DECIMAL},
+      consumption = #{record.consumption,jdbcType=DECIMAL},
+      description = #{record.description,jdbcType=VARCHAR},
+      person_num = #{record.personNum,jdbcType=INTEGER},
+      goods_num = #{record.goodsNum,jdbcType=INTEGER},
+      pay_method = #{record.payMethod,jdbcType=VARCHAR},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
+      gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
+      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
+      version = #{record.version,jdbcType=BIGINT},
+      cut_off = #{record.cutOff,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Order" >
+    update tyg_ms_order
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=BIT},
       </if>
       <if test="shopId != null" >
         shop_id = #{shopId,jdbcType=BIGINT},
       </if>
-      <if test="distributionShopId != null" >
-        distribution_shop_id = #{distributionShopId,jdbcType=BIGINT},
+      <if test="tableNum != null" >
+        table_num = #{tableNum,jdbcType=VARCHAR},
       </if>
-      <if test="identityTypes != null" >
-        identity_types = #{identityTypes,jdbcType=TINYINT},
+      <if test="consumeSum != null" >
+        consume_sum = #{consumeSum,jdbcType=DECIMAL},
       </if>
-      <if test="identifier != null" >
-        identifier = #{identifier,jdbcType=VARCHAR},
+      <if test="settleSum != null" >
+        settle_sum = #{settleSum,jdbcType=DECIMAL},
       </if>
-      <if test="redPackageId != null" >
-        red_package_id = #{redPackageId,jdbcType=BIGINT},
+      <if test="consumption != null" >
+        consumption = #{consumption,jdbcType=DECIMAL},
       </if>
-      <if test="sponsorPaymentAccount != null" >
-        sponsor_payment_account = #{sponsorPaymentAccount,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="orderNumber != null" >
-        order_number = #{orderNumber,jdbcType=BIGINT},
+      <if test="personNum != null" >
+        person_num = #{personNum,jdbcType=INTEGER},
       </if>
-      <if test="selectedAdressId != null" >
-        selected_adress_id = #{selectedAdressId,jdbcType=BIGINT},
-      </if>
-      <if test="shopCommodityTotalFigure != null" >
-        shop_commodity_total_figure = #{shopCommodityTotalFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="commodityTotalFigure != null" >
-        commodity_total_figure = #{commodityTotalFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="mailFee != null" >
-        mail_fee = #{mailFee,jdbcType=DECIMAL},
-      </if>
-      <if test="isPay != null" >
-        is_pay = #{isPay,jdbcType=TINYINT},
-      </if>
-      <if test="getCommodityMethod != null" >
-        get_commodity_method = #{getCommodityMethod,jdbcType=TINYINT},
+      <if test="goodsNum != null" >
+        goods_num = #{goodsNum,jdbcType=INTEGER},
       </if>
       <if test="payMethod != null" >
-        pay_method = #{payMethod,jdbcType=TINYINT},
+        pay_method = #{payMethod,jdbcType=VARCHAR},
       </if>
-      <if test="shopRealGetMoney != null" >
-        shop_real_get_money = #{shopRealGetMoney,jdbcType=DECIMAL},
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="realPayMoney != null" >
-        real_pay_money = #{realPayMoney,jdbcType=DECIMAL},
+      <if test="gmtReceive != null" >
+        gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
       </if>
-      <if test="confirmCode != null" >
-        confirm_code = #{confirmCode,jdbcType=BIGINT},
+      <if test="gmtPay != null" >
+        gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="leaveComment != null" >
-        leave_comment = #{leaveComment,jdbcType=VARCHAR},
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
-      <if test="payEnvironment != null" >
-        pay_environment = #{payEnvironment,jdbcType=TINYINT},
+      <if test="gmtFinish != null" >
+        gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderType != null" >
-        order_type = #{orderType,jdbcType=TINYINT},
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
       </if>
-      <if test="orderSource != null" >
-        order_source = #{orderSource,jdbcType=TINYINT},
-      </if>
-      <if test="expectedArrivalTime != null" >
-        expected_arrival_time = #{expectedArrivalTime,jdbcType=BIGINT},
-      </if>
-      <if test="acceptOrderFormTime != null" >
-        accept_order_form_time = #{acceptOrderFormTime,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="canleTime != null" >
-        canle_time = #{canleTime,jdbcType=BIGINT},
-      </if>
-      <if test="payTime != null" >
-        pay_time = #{payTime,jdbcType=BIGINT},
-      </if>
-      <if test="strikeBargainTime != null" >
-        strike_bargain_time = #{strikeBargainTime,jdbcType=BIGINT},
-      </if>
-      <if test="orderState != null" >
-        order_state = #{orderState,jdbcType=TINYINT},
-      </if>
-      <if test="sendCommodityTime != null" >
-        send_commodity_time = #{sendCommodityTime,jdbcType=BIGINT},
-      </if>
-      <if test="waybillNumber != null" >
-        waybill_number = #{waybillNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="logisticsCompany != null" >
-        logistics_company = #{logisticsCompany,jdbcType=VARCHAR},
-      </if>
-      <if test="offsetMode != null" >
-        offset_mode = #{offsetMode,jdbcType=TINYINT},
-      </if>
-      <if test="offsetFigure != null" >
-        offset_figure = #{offsetFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="sponsorGetWelfare != null" >
-        sponsor_get_welfare = #{sponsorGetWelfare,jdbcType=TINYINT},
-      </if>
-      <if test="sponsorGetWelfareFigure != null" >
-        sponsor_get_welfare_figure = #{sponsorGetWelfareFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="chamberlainGetWelfare != null" >
-        chamberlain_get_welfare = #{chamberlainGetWelfare,jdbcType=TINYINT},
-      </if>
-      <if test="chamberlainWelfareFigure != null" >
-        chamberlain_welfare_figure = #{chamberlainWelfareFigure,jdbcType=DECIMAL},
-      </if>
-      <if test="fullGetConsumerTicket != null" >
-        full_get_consumer_ticket = #{fullGetConsumerTicket,jdbcType=DECIMAL},
-      </if>
-      <if test="serviceFee != null" >
-        service_fee = #{serviceFee,jdbcType=DECIMAL},
-      </if>
-      <if test="isDelete != null" >
-        is_delete = #{isDelete,jdbcType=TINYINT},
-      </if>
-      <if test="deleteTime != null" >
-        delete_time = #{deleteTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
+      <if test="cutOff != null" >
+        cut_off = #{cutOff,jdbcType=BIT},
       </if>
     </set>
-    where order_id = #{orderId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Order" >
-    update tyg_order
-    set member_sponsor_id = #{memberSponsorId,jdbcType=BIGINT},
-      shop_isponsor_d = #{shopIsponsorD,jdbcType=BIGINT},
+    update tyg_ms_order
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      order_state = #{orderState,jdbcType=INTEGER},
+      is_pay = #{isPay,jdbcType=BIT},
       shop_id = #{shopId,jdbcType=BIGINT},
-      distribution_shop_id = #{distributionShopId,jdbcType=BIGINT},
-      identity_types = #{identityTypes,jdbcType=TINYINT},
-      identifier = #{identifier,jdbcType=VARCHAR},
-      red_package_id = #{redPackageId,jdbcType=BIGINT},
-      sponsor_payment_account = #{sponsorPaymentAccount,jdbcType=VARCHAR},
-      order_number = #{orderNumber,jdbcType=BIGINT},
-      selected_adress_id = #{selectedAdressId,jdbcType=BIGINT},
-      shop_commodity_total_figure = #{shopCommodityTotalFigure,jdbcType=DECIMAL},
-      commodity_total_figure = #{commodityTotalFigure,jdbcType=DECIMAL},
-      mail_fee = #{mailFee,jdbcType=DECIMAL},
-      is_pay = #{isPay,jdbcType=TINYINT},
-      get_commodity_method = #{getCommodityMethod,jdbcType=TINYINT},
-      pay_method = #{payMethod,jdbcType=TINYINT},
-      shop_real_get_money = #{shopRealGetMoney,jdbcType=DECIMAL},
-      real_pay_money = #{realPayMoney,jdbcType=DECIMAL},
-      confirm_code = #{confirmCode,jdbcType=BIGINT},
-      leave_comment = #{leaveComment,jdbcType=VARCHAR},
-      pay_environment = #{payEnvironment,jdbcType=TINYINT},
-      order_type = #{orderType,jdbcType=TINYINT},
-      order_source = #{orderSource,jdbcType=TINYINT},
-      expected_arrival_time = #{expectedArrivalTime,jdbcType=BIGINT},
-      accept_order_form_time = #{acceptOrderFormTime,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=BIGINT},
-      canle_time = #{canleTime,jdbcType=BIGINT},
-      pay_time = #{payTime,jdbcType=BIGINT},
-      strike_bargain_time = #{strikeBargainTime,jdbcType=BIGINT},
-      order_state = #{orderState,jdbcType=TINYINT},
-      send_commodity_time = #{sendCommodityTime,jdbcType=BIGINT},
-      waybill_number = #{waybillNumber,jdbcType=VARCHAR},
-      logistics_company = #{logisticsCompany,jdbcType=VARCHAR},
-      offset_mode = #{offsetMode,jdbcType=TINYINT},
-      offset_figure = #{offsetFigure,jdbcType=DECIMAL},
-      sponsor_get_welfare = #{sponsorGetWelfare,jdbcType=TINYINT},
-      sponsor_get_welfare_figure = #{sponsorGetWelfareFigure,jdbcType=DECIMAL},
-      chamberlain_get_welfare = #{chamberlainGetWelfare,jdbcType=TINYINT},
-      chamberlain_welfare_figure = #{chamberlainWelfareFigure,jdbcType=DECIMAL},
-      full_get_consumer_ticket = #{fullGetConsumerTicket,jdbcType=DECIMAL},
-      service_fee = #{serviceFee,jdbcType=DECIMAL},
-      is_delete = #{isDelete,jdbcType=TINYINT},
-      delete_time = #{deleteTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT},
-      remark = #{remark,jdbcType=VARCHAR}
-    where order_id = #{orderId,jdbcType=BIGINT}
+      table_num = #{tableNum,jdbcType=VARCHAR},
+      consume_sum = #{consumeSum,jdbcType=DECIMAL},
+      settle_sum = #{settleSum,jdbcType=DECIMAL},
+      consumption = #{consumption,jdbcType=DECIMAL},
+      description = #{description,jdbcType=VARCHAR},
+      person_num = #{personNum,jdbcType=INTEGER},
+      goods_num = #{goodsNum,jdbcType=INTEGER},
+      pay_method = #{payMethod,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
+      gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIGINT},
+      cut_off = #{cutOff,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

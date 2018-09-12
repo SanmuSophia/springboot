@@ -29,7 +29,6 @@ public class WebLogAspect {
 
     @Pointcut("execution(public * gcyl.entity.controller..*.*(..)) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
     public void webLog(){
-        System.out.println("test");
     }
 
     @Before("webLog()")

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableSwagger2Doc
 @MapperScan("gcyl.entity.domain.mapper")
-@ComponentScan(basePackages = {"gcyl.entity.service", "gcyl.entity.controller"})
+@ComponentScan(basePackages = "gcyl.entity")
 @SpringBootApplication
 public class Application {
 
