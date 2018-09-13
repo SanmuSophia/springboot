@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 
 /**
@@ -23,12 +25,16 @@ public class TestController {
 
     @Autowired
     ITestService testService;
+    @Autowired
+    JedisPool jedisPool;
 
     @ResponseBody
     @ApiOperation(value = "get测试")
     @RequestMapping(value = "/controller", method = RequestMethod.GET)
-    public String getTest(String goods) {
-        return goods;
+    public void getTest(String goods) {
+        Jedis jedis = jedisPool.getResource();
+        jedis.sadd("key", "value");
+        jedis.close();
     }
 
     @ResponseBody

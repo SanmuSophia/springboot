@@ -42,26 +42,30 @@ public class WebLogAspect {
         // 记录下请求内容
         StringBuilder sb = new StringBuilder("\r\n");
         if ("GET".equals(request.getMethod())) {
-            sb.append("url: " + request.getRequestURL().toString() + "?" + request.getQueryString() + "\r\n");
-            sb.append("ip: " + request.getRemoteAddr() + "\r\n");
-            sb.append("content-type: " + request.getContentType() + "\r\n");
-            sb.append("method : " + request.getMethod());
+            sb.append("\r\n" + "url: " + request.getRequestURL().toString());
+            if (request.getQueryString() != null) {
+                sb.append("?" + request.getQueryString());
+            }
+            sb.append("\r\n" + "ip: " + request.getRemoteAddr());
+            sb.append("\r\n" + "content-type: " + request.getContentType());
+            sb.append("\r\n" + "method : " + request.getMethod());
         } else {
-            sb.append("url: " + request.getRequestURL().toString() + "\r\n");
-            sb.append("ip: " + request.getRemoteAddr() + "\r\n");
-            sb.append("content-type: " + request.getContentType() + "\r\n");
-            sb.append("method : " + request.getMethod() + "\r\n");
+            sb.append("\r\n" + "url: " + request.getRequestURL().toString());
+            sb.append("\r\n" + "ip: " + request.getRemoteAddr());
+            sb.append("\r\n" + "content-type: " + request.getContentType());
+            sb.append("\r\n" + "method : " + request.getMethod());
 //            sb.append(this.getRequestBody(request));
         }
+        sb.append("\r\n");
         LogUtils.debug(sb.toString());
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) {
         // 处理完请求，返回内容
-        StringBuilder sb = new StringBuilder("\r\n");
+        StringBuilder sb = new StringBuilder("\r\n\n");
         sb.append("response: " + JSON.toJSON(ret) + "\r\n");
-        sb.append("time: " + (System.currentTimeMillis() - startTime.get()) + "ms");
+        sb.append("time: " + (System.currentTimeMillis() - startTime.get()) + "ms"  + "\r\n");
         LogUtils.debug(sb.toString());
     }
 

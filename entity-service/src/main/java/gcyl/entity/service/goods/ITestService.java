@@ -7,4 +7,6 @@ package gcyl.entity.service.goods;
  */
 public interface ITestService {
     String test();
+
+    String testRedis();
 }
