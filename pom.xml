@@ -13,6 +13,7 @@
 		<module>entity-domain</module>
 		<module>entity-service</module>
 		<module>entity-common</module>
+		<module>entity-config</module>
 	</modules>
 
 	<name>entity</name>

@@ -1,4 +1,4 @@
-package gcyl.entity.controller;
+package gcyl.entity;
 
 import com.didispace.swagger.EnableSwagger2Doc;
 import org.mybatis.spring.annotation.MapperScan;

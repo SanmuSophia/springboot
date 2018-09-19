@@ -43,6 +43,10 @@ spring:
       auto: true
       proxy-target-class: false
 
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+
 swagger:
   title: entity-gcyl
   description: 实体

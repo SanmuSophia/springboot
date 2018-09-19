@@ -1,4 +1,4 @@
-package gcyl.entity.controller.aop;
+package gcyl.entity.aop;
 
 import com.alibaba.fastjson.JSON;
 import gcyl.entity.common.utils.LogUtils;
@@ -46,12 +46,10 @@ public class WebLogAspect {
             if (request.getQueryString() != null) {
                 sb.append("?" + request.getQueryString());
             }
-            sb.append("\r\n" + "ip: " + request.getRemoteAddr());
             sb.append("\r\n" + "content-type: " + request.getContentType());
             sb.append("\r\n" + "method : " + request.getMethod());
         } else {
             sb.append("\r\n" + "url: " + request.getRequestURL().toString());
-            sb.append("\r\n" + "ip: " + request.getRemoteAddr());
             sb.append("\r\n" + "content-type: " + request.getContentType());
             sb.append("\r\n" + "method : " + request.getMethod());
 //            sb.append(this.getRequestBody(request));

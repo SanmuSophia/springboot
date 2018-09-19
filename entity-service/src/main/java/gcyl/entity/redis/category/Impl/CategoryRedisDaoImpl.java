@@ -2,8 +2,6 @@ package gcyl.entity.redis.category.Impl;
 
 import gcyl.entity.domain.model.Category;
 import gcyl.entity.redis.category.ICategoryRedisDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,10 +13,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryRedisDaoImpl implements ICategoryRedisDao {
 
-    @Autowired
-    RedisTemplate<String, String> template;
-//    @Autowired
-//    JedisPool jedisPool;
     /**
      * 增加店铺类目
      *

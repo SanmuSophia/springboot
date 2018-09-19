@@ -1,4 +1,4 @@
-package gcyl.entity.controller.config.redis;
+package gcyl.entity.config.redis;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +45,7 @@ public class RedisConfiguration {
         config.setMaxIdle(maxIdle);
         config.setMaxWaitMillis(maxWait);
         config.setMinIdle(minIdle);
-        return new JedisPoolConfig();
+        return config;
     }
 
     @Bean

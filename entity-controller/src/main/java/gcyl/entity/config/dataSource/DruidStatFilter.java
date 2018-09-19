@@ -1,4 +1,4 @@
-package gcyl.entity.controller.config.dataSource;
+package gcyl.entity.config.dataSource;
 
 import com.alibaba.druid.support.http.WebStatFilter;
 
