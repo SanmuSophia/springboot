@@ -1,11 +1,10 @@
 package gcyl.entity.controller.goods;
 
+import gcyl.entity.domain.mapper.my.CategoryExtMapper;
 import gcyl.entity.domain.mapper.OrderMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,8 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ControllerTest {
+public class ControllerTest1 {
 
+    @Test1(1)
+    private Integer intValue;
+
+    @Autowired
+    CategoryExtMapper categoryExtMapper;
     @Autowired
     OrderMapper orderMapper;
     @Autowired
@@ -35,6 +39,6 @@ public class ControllerTest {
 
     @Test
     public void test() {
-        System.out.println(template.getClass());
+        System.out.println(categoryExtMapper.count());
     }
 }

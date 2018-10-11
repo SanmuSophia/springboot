@@ -1,3 +1,35 @@
 spring:
     profiles:
       include: dev
+
+    aop:
+      auto: true
+      proxy-target-class: false
+
+    jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+
+swagger:
+  title: entity-gcyl
+  description: 实体
+  version: 1.1.0.RELEASE
+  license: Apache License, Version 2.0
+  licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact.name: lican
+  contact.email: afmrlii@163.com
+  base-package: gcyl.entity.controller
+  base-path: /**
+  exclude-path: /error, /ops/**
+
+#  paging plugin
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+#mybatis:
+#  mapper-locations: classpath*:gcyl.entity.domain.mapper/*.xml
+#  type-aliases-package: gcyl.entity.domain.model

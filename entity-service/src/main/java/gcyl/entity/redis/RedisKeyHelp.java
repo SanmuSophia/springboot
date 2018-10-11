@@ -22,6 +22,12 @@ public class RedisKeyHelp {
         return C_PREFIX + ":shopId:" + shopId.toString();
     }
 
+    /**
+     * 获取类目key
+     */
+    public static String getCategoryKey(String categoryId) {
+        return C_PREFIX + ":categoryId:" + categoryId;
+    }
 
     /*******                       商品                         *******/
 

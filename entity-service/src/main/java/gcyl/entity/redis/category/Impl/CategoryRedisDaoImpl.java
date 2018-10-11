@@ -23,3 +23,4 @@ public class CategoryRedisDaoImpl extends AbstractRedisDao<Category> implements 
     public void addShopCategory(Category category) {
     }
 }
+
