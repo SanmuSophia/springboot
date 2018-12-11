@@ -15,6 +15,8 @@ public class Order implements Serializable {
 
     private Long shopId;
 
+    private Long userId;
+
     private String tableNum;
 
     private BigDecimal consumeSum;
@@ -33,17 +35,15 @@ public class Order implements Serializable {
 
     private Date gmtCreate;
 
+    private Date gmtModify;
+
     private Date gmtReceive;
 
     private Date gmtPay;
 
-    private Date gmtModify;
-
     private Date gmtFinish;
 
-    private Long version;
-
-    private Boolean cutOff;
+    private Byte cutOff;
 
     private static final long serialVersionUID = 1L;
 
@@ -85,6 +85,14 @@ public class Order implements Serializable {
 
     public void setShopId(Long shopId) {
         this.shopId = shopId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTableNum() {
@@ -159,6 +167,14 @@ public class Order implements Serializable {
         this.gmtCreate = gmtCreate;
     }
 
+    public Date getGmtModify() {
+        return gmtModify;
+    }
+
+    public void setGmtModify(Date gmtModify) {
+        this.gmtModify = gmtModify;
+    }
+
     public Date getGmtReceive() {
         return gmtReceive;
     }
@@ -175,14 +191,6 @@ public class Order implements Serializable {
         this.gmtPay = gmtPay;
     }
 
-    public Date getGmtModify() {
-        return gmtModify;
-    }
-
-    public void setGmtModify(Date gmtModify) {
-        this.gmtModify = gmtModify;
-    }
-
     public Date getGmtFinish() {
         return gmtFinish;
     }
@@ -191,19 +199,11 @@ public class Order implements Serializable {
         this.gmtFinish = gmtFinish;
     }
 
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Boolean getCutOff() {
+    public Byte getCutOff() {
         return cutOff;
     }
 
-    public void setCutOff(Boolean cutOff) {
+    public void setCutOff(Byte cutOff) {
         this.cutOff = cutOff;
     }
 }

@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gcyl.entity.domain.mapper.OrderDetailMapper" >
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.OrderDetail" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
-    <result column="goods_detail_id" property="goodsDetailId" jdbcType="BIGINT" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+    <result column="spec_name" property="specName" jdbcType="VARCHAR" />
+    <result column="spec_price" property="specPrice" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, goods_id, goods_detail_id
+    id, order_sn, goods_sn, goods_name, goods_unit, goods_img, spec_name, spec_price
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.OrderDetailExample" >
     select
@@ -82,15 +86,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from tyg_ms_order_detail
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tyg_ms_order_detail
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" >
     delete from tyg_ms_order_detail
@@ -99,10 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.OrderDetail" >
-    insert into tyg_ms_order_detail (id, order_id, goods_id, 
-      goods_detail_id)
-    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, 
-      #{goodsDetailId,jdbcType=BIGINT})
+    insert into tyg_ms_order_detail (id, order_sn, goods_sn, 
+      goods_name, goods_unit, goods_img, 
+      spec_name, spec_price)
+    values (#{id,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, #{goodsSn,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsUnit,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, 
+      #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.OrderDetail" >
     insert into tyg_ms_order_detail
@@ -110,28 +116,52 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="orderId != null" >
-        order_id,
+      <if test="orderSn != null" >
+        order_sn,
       </if>
-      <if test="goodsId != null" >
-        goods_id,
+      <if test="goodsSn != null" >
+        goods_sn,
       </if>
-      <if test="goodsDetailId != null" >
-        goods_detail_id,
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="goodsUnit != null" >
+        goods_unit,
+      </if>
+      <if test="goodsImg != null" >
+        goods_img,
+      </if>
+      <if test="specName != null" >
+        spec_name,
+      </if>
+      <if test="specPrice != null" >
+        spec_price,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderId != null" >
-        #{orderId,jdbcType=VARCHAR},
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsId != null" >
-        #{goodsId,jdbcType=VARCHAR},
+      <if test="goodsSn != null" >
+        #{goodsSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsDetailId != null" >
-        #{goodsDetailId,jdbcType=BIGINT},
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUnit != null" >
+        #{goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null" >
+        #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="specName != null" >
+        #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="specPrice != null" >
+        #{specPrice,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -145,16 +175,28 @@
     update tyg_ms_order_detail
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.orderId != null" >
-        order_id = #{record.orderId,jdbcType=VARCHAR},
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsId != null" >
-        goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      <if test="record.goodsSn != null" >
+        goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsDetailId != null" >
-        goods_detail_id = #{record.goodsDetailId,jdbcType=BIGINT},
+      <if test="record.goodsName != null" >
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsUnit != null" >
+        goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsImg != null" >
+        goods_img = #{record.goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specName != null" >
+        spec_name = #{record.specName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specPrice != null" >
+        spec_price = #{record.specPrice,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -163,10 +205,14 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update tyg_ms_order_detail
-    set id = #{record.id,jdbcType=INTEGER},
-      order_id = #{record.orderId,jdbcType=VARCHAR},
-      goods_id = #{record.goodsId,jdbcType=VARCHAR},
-      goods_detail_id = #{record.goodsDetailId,jdbcType=BIGINT}
+    set id = #{record.id,jdbcType=BIGINT},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
+      goods_img = #{record.goodsImg,jdbcType=VARCHAR},
+      spec_name = #{record.specName,jdbcType=VARCHAR},
+      spec_price = #{record.specPrice,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -174,23 +220,39 @@
   <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.OrderDetail" >
     update tyg_ms_order_detail
     <set >
-      <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=VARCHAR},
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=VARCHAR},
+      <if test="goodsSn != null" >
+        goods_sn = #{goodsSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsDetailId != null" >
-        goods_detail_id = #{goodsDetailId,jdbcType=BIGINT},
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUnit != null" >
+        goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null" >
+        goods_img = #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="specName != null" >
+        spec_name = #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="specPrice != null" >
+        spec_price = #{specPrice,jdbcType=DECIMAL},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.OrderDetail" >
     update tyg_ms_order_detail
-    set order_id = #{orderId,jdbcType=VARCHAR},
-      goods_id = #{goodsId,jdbcType=VARCHAR},
-      goods_detail_id = #{goodsDetailId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=INTEGER}
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      goods_img = #{goodsImg,jdbcType=VARCHAR},
+      spec_name = #{specName,jdbcType=VARCHAR},
+      spec_price = #{specPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

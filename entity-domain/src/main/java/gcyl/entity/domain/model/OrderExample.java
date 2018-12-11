@@ -416,6 +416,66 @@ public class OrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdEqualTo(Long value) {
+            addCriterion("user_id =", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotEqualTo(Long value) {
+            addCriterion("user_id <>", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThan(Long value) {
+            addCriterion("user_id >", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("user_id >=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThan(Long value) {
+            addCriterion("user_id <", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThanOrEqualTo(Long value) {
+            addCriterion("user_id <=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIn(List<Long> values) {
+            addCriterion("user_id in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotIn(List<Long> values) {
+            addCriterion("user_id not in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdBetween(Long value1, Long value2) {
+            addCriterion("user_id between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotBetween(Long value1, Long value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
         public Criteria andTableNumIsNull() {
             addCriterion("table_num is null");
             return (Criteria) this;
@@ -986,6 +1046,66 @@ public class OrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andGmtModifyIsNull() {
+            addCriterion("gmt_modify is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyIsNotNull() {
+            addCriterion("gmt_modify is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyEqualTo(Date value) {
+            addCriterion("gmt_modify =", value, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyNotEqualTo(Date value) {
+            addCriterion("gmt_modify <>", value, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyGreaterThan(Date value) {
+            addCriterion("gmt_modify >", value, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyGreaterThanOrEqualTo(Date value) {
+            addCriterion("gmt_modify >=", value, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyLessThan(Date value) {
+            addCriterion("gmt_modify <", value, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyLessThanOrEqualTo(Date value) {
+            addCriterion("gmt_modify <=", value, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyIn(List<Date> values) {
+            addCriterion("gmt_modify in", values, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyNotIn(List<Date> values) {
+            addCriterion("gmt_modify not in", values, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyBetween(Date value1, Date value2) {
+            addCriterion("gmt_modify between", value1, value2, "gmtModify");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtModifyNotBetween(Date value1, Date value2) {
+            addCriterion("gmt_modify not between", value1, value2, "gmtModify");
+            return (Criteria) this;
+        }
+
         public Criteria andGmtReceiveIsNull() {
             addCriterion("gmt_receive is null");
             return (Criteria) this;
@@ -1106,66 +1226,6 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyIsNull() {
-            addCriterion("gmt_modify is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyIsNotNull() {
-            addCriterion("gmt_modify is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyEqualTo(Date value) {
-            addCriterion("gmt_modify =", value, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyNotEqualTo(Date value) {
-            addCriterion("gmt_modify <>", value, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyGreaterThan(Date value) {
-            addCriterion("gmt_modify >", value, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyGreaterThanOrEqualTo(Date value) {
-            addCriterion("gmt_modify >=", value, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyLessThan(Date value) {
-            addCriterion("gmt_modify <", value, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyLessThanOrEqualTo(Date value) {
-            addCriterion("gmt_modify <=", value, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyIn(List<Date> values) {
-            addCriterion("gmt_modify in", values, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyNotIn(List<Date> values) {
-            addCriterion("gmt_modify not in", values, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyBetween(Date value1, Date value2) {
-            addCriterion("gmt_modify between", value1, value2, "gmtModify");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifyNotBetween(Date value1, Date value2) {
-            addCriterion("gmt_modify not between", value1, value2, "gmtModify");
-            return (Criteria) this;
-        }
-
         public Criteria andGmtFinishIsNull() {
             addCriterion("gmt_finish is null");
             return (Criteria) this;
@@ -1226,66 +1286,6 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andVersionIsNull() {
-            addCriterion("version is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionIsNotNull() {
-            addCriterion("version is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionEqualTo(Long value) {
-            addCriterion("version =", value, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionNotEqualTo(Long value) {
-            addCriterion("version <>", value, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionGreaterThan(Long value) {
-            addCriterion("version >", value, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionGreaterThanOrEqualTo(Long value) {
-            addCriterion("version >=", value, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionLessThan(Long value) {
-            addCriterion("version <", value, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionLessThanOrEqualTo(Long value) {
-            addCriterion("version <=", value, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionIn(List<Long> values) {
-            addCriterion("version in", values, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionNotIn(List<Long> values) {
-            addCriterion("version not in", values, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionBetween(Long value1, Long value2) {
-            addCriterion("version between", value1, value2, "version");
-            return (Criteria) this;
-        }
-
-        public Criteria andVersionNotBetween(Long value1, Long value2) {
-            addCriterion("version not between", value1, value2, "version");
-            return (Criteria) this;
-        }
-
         public Criteria andCutOffIsNull() {
             addCriterion("cut_off is null");
             return (Criteria) this;
@@ -1296,52 +1296,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andCutOffEqualTo(Boolean value) {
+        public Criteria andCutOffEqualTo(Byte value) {
             addCriterion("cut_off =", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotEqualTo(Boolean value) {
+        public Criteria andCutOffNotEqualTo(Byte value) {
             addCriterion("cut_off <>", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffGreaterThan(Boolean value) {
+        public Criteria andCutOffGreaterThan(Byte value) {
             addCriterion("cut_off >", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andCutOffGreaterThanOrEqualTo(Byte value) {
             addCriterion("cut_off >=", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffLessThan(Boolean value) {
+        public Criteria andCutOffLessThan(Byte value) {
             addCriterion("cut_off <", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffLessThanOrEqualTo(Boolean value) {
+        public Criteria andCutOffLessThanOrEqualTo(Byte value) {
             addCriterion("cut_off <=", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffIn(List<Boolean> values) {
+        public Criteria andCutOffIn(List<Byte> values) {
             addCriterion("cut_off in", values, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotIn(List<Boolean> values) {
+        public Criteria andCutOffNotIn(List<Byte> values) {
             addCriterion("cut_off not in", values, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffBetween(Boolean value1, Boolean value2) {
+        public Criteria andCutOffBetween(Byte value1, Byte value2) {
             addCriterion("cut_off between", value1, value2, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andCutOffNotBetween(Byte value1, Byte value2) {
             addCriterion("cut_off not between", value1, value2, "cutOff");
             return (Criteria) this;
         }

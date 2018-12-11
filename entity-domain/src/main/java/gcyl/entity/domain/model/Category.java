@@ -8,13 +8,15 @@ public class Category implements Serializable {
 
     private Long shopId;
 
-    private String categoryId;
+    private String categorySn;
 
-    private String categoryName;
+    private String categotyName;
 
     private Date gmtCreate;
 
     private Date gmtModify;
+
+    private Byte cutOff;
 
     private static final long serialVersionUID = 1L;
 
@@ -34,20 +36,20 @@ public class Category implements Serializable {
         this.shopId = shopId;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getCategorySn() {
+        return categorySn;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId == null ? null : categoryId.trim();
+    public void setCategorySn(String categorySn) {
+        this.categorySn = categorySn == null ? null : categorySn.trim();
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategotyName() {
+        return categotyName;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName == null ? null : categoryName.trim();
+    public void setCategotyName(String categotyName) {
+        this.categotyName = categotyName == null ? null : categotyName.trim();
     }
 
     public Date getGmtCreate() {
@@ -64,5 +66,13 @@ public class Category implements Serializable {
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+
+    public Byte getCutOff() {
+        return cutOff;
+    }
+
+    public void setCutOff(Byte cutOff) {
+        this.cutOff = cutOff;
     }
 }

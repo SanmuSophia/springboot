@@ -1,25 +1,20 @@
 package gcyl.entity.domain.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Goods implements Serializable {
     private Long id;
 
-    private String goodsId;
+    private String goodsSn;
 
     private String goodsName;
 
-    private Long shopId;
-
-    private String categoryId;
+    private String categorySn;
 
     private String categoryName;
 
-    private String unit;
-
-    private BigDecimal price;
+    private String goodsUnit;
 
     private Long dayStock;
 
@@ -39,6 +34,8 @@ public class Goods implements Serializable {
 
     private Date gmtModify;
 
+    private Byte cutOff;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -49,12 +46,12 @@ public class Goods implements Serializable {
         this.id = id;
     }
 
-    public String getGoodsId() {
-        return goodsId;
+    public String getGoodsSn() {
+        return goodsSn;
     }
 
-    public void setGoodsId(String goodsId) {
-        this.goodsId = goodsId == null ? null : goodsId.trim();
+    public void setGoodsSn(String goodsSn) {
+        this.goodsSn = goodsSn == null ? null : goodsSn.trim();
     }
 
     public String getGoodsName() {
@@ -65,20 +62,12 @@ public class Goods implements Serializable {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public Long getShopId() {
-        return shopId;
+    public String getCategorySn() {
+        return categorySn;
     }
 
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId == null ? null : categoryId.trim();
+    public void setCategorySn(String categorySn) {
+        this.categorySn = categorySn == null ? null : categorySn.trim();
     }
 
     public String getCategoryName() {
@@ -89,20 +78,12 @@ public class Goods implements Serializable {
         this.categoryName = categoryName == null ? null : categoryName.trim();
     }
 
-    public String getUnit() {
-        return unit;
+    public String getGoodsUnit() {
+        return goodsUnit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit == null ? null : unit.trim();
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit = goodsUnit == null ? null : goodsUnit.trim();
     }
 
     public Long getDayStock() {
@@ -175,5 +156,13 @@ public class Goods implements Serializable {
 
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
+    }
+
+    public Byte getCutOff() {
+        return cutOff;
+    }
+
+    public void setCutOff(Byte cutOff) {
+        this.cutOff = cutOff;
     }
 }

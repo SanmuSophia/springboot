@@ -7,6 +7,7 @@
     <result column="order_state" property="orderState" jdbcType="INTEGER" />
     <result column="is_pay" property="isPay" jdbcType="BIT" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="table_num" property="tableNum" jdbcType="VARCHAR" />
     <result column="consume_sum" property="consumeSum" jdbcType="DECIMAL" />
     <result column="settle_sum" property="settleSum" jdbcType="DECIMAL" />
@@ -16,12 +17,11 @@
     <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
     <result column="pay_method" property="payMethod" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
     <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
-    <result column="version" property="version" jdbcType="BIGINT" />
-    <result column="cut_off" property="cutOff" jdbcType="BIT" />
+    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,9 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, order_state, is_pay, shop_id, table_num, consume_sum, settle_sum, consumption, 
-    description, person_num, goods_num, pay_method, gmt_create, gmt_receive, gmt_pay, 
-    gmt_modify, gmt_finish, version, cut_off
+    id, order_id, order_state, is_pay, shop_id, user_id, table_num, consume_sum, settle_sum, 
+    consumption, description, person_num, goods_num, pay_method, gmt_create, gmt_modify, 
+    gmt_receive, gmt_pay, gmt_finish, cut_off
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.OrderExample" >
     select
@@ -118,19 +118,19 @@
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.Order" >
     insert into tyg_ms_order (id, order_id, order_state, 
-      is_pay, shop_id, table_num, 
+      is_pay, shop_id, user_id, table_num, 
       consume_sum, settle_sum, consumption, 
       description, person_num, goods_num, 
-      pay_method, gmt_create, gmt_receive, 
-      gmt_pay, gmt_modify, gmt_finish, 
-      version, cut_off)
+      pay_method, gmt_create, gmt_modify, 
+      gmt_receive, gmt_pay, gmt_finish, 
+      cut_off)
     values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER}, 
-      #{isPay,jdbcType=BIT}, #{shopId,jdbcType=BIGINT}, #{tableNum,jdbcType=VARCHAR}, 
+      #{isPay,jdbcType=BIT}, #{shopId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{tableNum,jdbcType=VARCHAR}, 
       #{consumeSum,jdbcType=DECIMAL}, #{settleSum,jdbcType=DECIMAL}, #{consumption,jdbcType=DECIMAL}, 
       #{description,jdbcType=VARCHAR}, #{personNum,jdbcType=INTEGER}, #{goodsNum,jdbcType=INTEGER}, 
-      #{payMethod,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtReceive,jdbcType=TIMESTAMP}, 
-      #{gmtPay,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{gmtFinish,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=BIGINT}, #{cutOff,jdbcType=BIT})
+      #{payMethod,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{gmtReceive,jdbcType=TIMESTAMP}, #{gmtPay,jdbcType=TIMESTAMP}, #{gmtFinish,jdbcType=TIMESTAMP}, 
+      #{cutOff,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" >
     insert into tyg_ms_order
@@ -149,6 +149,9 @@
       </if>
       <if test="shopId != null" >
         shop_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="tableNum != null" >
         table_num,
@@ -177,20 +180,17 @@
       <if test="gmtCreate != null" >
         gmt_create,
       </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
       <if test="gmtReceive != null" >
         gmt_receive,
       </if>
       <if test="gmtPay != null" >
         gmt_pay,
       </if>
-      <if test="gmtModify != null" >
-        gmt_modify,
-      </if>
       <if test="gmtFinish != null" >
         gmt_finish,
-      </if>
-      <if test="version != null" >
-        version,
       </if>
       <if test="cutOff != null" >
         cut_off,
@@ -211,6 +211,9 @@
       </if>
       <if test="shopId != null" >
         #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="tableNum != null" >
         #{tableNum,jdbcType=VARCHAR},
@@ -239,23 +242,20 @@
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
       <if test="gmtReceive != null" >
         #{gmtReceive,jdbcType=TIMESTAMP},
       </if>
       <if test="gmtPay != null" >
         #{gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
       <if test="gmtFinish != null" >
         #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="version != null" >
-        #{version,jdbcType=BIGINT},
-      </if>
       <if test="cutOff != null" >
-        #{cutOff,jdbcType=BIT},
+        #{cutOff,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -282,6 +282,9 @@
       </if>
       <if test="record.shopId != null" >
         shop_id = #{record.shopId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.tableNum != null" >
         table_num = #{record.tableNum,jdbcType=VARCHAR},
@@ -310,23 +313,20 @@
       <if test="record.gmtCreate != null" >
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.gmtModify != null" >
+        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.gmtReceive != null" >
         gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
       </if>
       <if test="record.gmtPay != null" >
         gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtModify != null" >
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.gmtFinish != null" >
         gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.version != null" >
-        version = #{record.version,jdbcType=BIGINT},
-      </if>
       <if test="record.cutOff != null" >
-        cut_off = #{record.cutOff,jdbcType=BIT},
+        cut_off = #{record.cutOff,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -340,6 +340,7 @@
       order_state = #{record.orderState,jdbcType=INTEGER},
       is_pay = #{record.isPay,jdbcType=BIT},
       shop_id = #{record.shopId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
       table_num = #{record.tableNum,jdbcType=VARCHAR},
       consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
       settle_sum = #{record.settleSum,jdbcType=DECIMAL},
@@ -349,12 +350,11 @@
       goods_num = #{record.goodsNum,jdbcType=INTEGER},
       pay_method = #{record.payMethod,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
       gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
-      version = #{record.version,jdbcType=BIGINT},
-      cut_off = #{record.cutOff,jdbcType=BIT}
+      cut_off = #{record.cutOff,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -373,6 +373,9 @@
       </if>
       <if test="shopId != null" >
         shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="tableNum != null" >
         table_num = #{tableNum,jdbcType=VARCHAR},
@@ -401,23 +404,20 @@
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
       <if test="gmtReceive != null" >
         gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
       </if>
       <if test="gmtPay != null" >
         gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
       <if test="gmtFinish != null" >
         gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="version != null" >
-        version = #{version,jdbcType=BIGINT},
-      </if>
       <if test="cutOff != null" >
-        cut_off = #{cutOff,jdbcType=BIT},
+        cut_off = #{cutOff,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -428,6 +428,7 @@
       order_state = #{orderState,jdbcType=INTEGER},
       is_pay = #{isPay,jdbcType=BIT},
       shop_id = #{shopId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
       table_num = #{tableNum,jdbcType=VARCHAR},
       consume_sum = #{consumeSum,jdbcType=DECIMAL},
       settle_sum = #{settleSum,jdbcType=DECIMAL},
@@ -437,12 +438,11 @@
       goods_num = #{goodsNum,jdbcType=INTEGER},
       pay_method = #{payMethod,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
       gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=BIGINT},
-      cut_off = #{cutOff,jdbcType=BIT}
+      cut_off = #{cutOff,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

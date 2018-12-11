@@ -4,10 +4,11 @@
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Category" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
-    <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
-    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="category_sn" property="categorySn" jdbcType="VARCHAR" />
+    <result column="categoty_name" property="categotyName" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, shop_id, category_id, category_name, gmt_create, gmt_modify
+    id, shop_id, category_sn, categoty_name, gmt_create, gmt_modify, cut_off
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.CategoryExample" >
     select
@@ -101,12 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.Category" >
-    insert into tyg_ms_category (id, shop_id, category_id, 
-      category_name, gmt_create, gmt_modify
-      )
-    values (#{id,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{categoryId,jdbcType=VARCHAR}, 
-      #{categoryName,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
-      )
+    insert into tyg_ms_category (id, shop_id, category_sn, 
+      categoty_name, gmt_create, gmt_modify, 
+      cut_off)
+    values (#{id,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{categorySn,jdbcType=VARCHAR}, 
+      #{categotyName,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{cutOff,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Category" >
     insert into tyg_ms_category
@@ -117,17 +118,20 @@
       <if test="shopId != null" >
         shop_id,
       </if>
-      <if test="categoryId != null" >
-        category_id,
+      <if test="categorySn != null" >
+        category_sn,
       </if>
-      <if test="categoryName != null" >
-        category_name,
+      <if test="categotyName != null" >
+        categoty_name,
       </if>
       <if test="gmtCreate != null" >
         gmt_create,
       </if>
       <if test="gmtModify != null" >
         gmt_modify,
+      </if>
+      <if test="cutOff != null" >
+        cut_off,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -137,17 +141,20 @@
       <if test="shopId != null" >
         #{shopId,jdbcType=BIGINT},
       </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=VARCHAR},
+      <if test="categorySn != null" >
+        #{categorySn,jdbcType=VARCHAR},
       </if>
-      <if test="categoryName != null" >
-        #{categoryName,jdbcType=VARCHAR},
+      <if test="categotyName != null" >
+        #{categotyName,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
       <if test="gmtModify != null" >
         #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cutOff != null" >
+        #{cutOff,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -166,17 +173,20 @@
       <if test="record.shopId != null" >
         shop_id = #{record.shopId,jdbcType=BIGINT},
       </if>
-      <if test="record.categoryId != null" >
-        category_id = #{record.categoryId,jdbcType=VARCHAR},
+      <if test="record.categorySn != null" >
+        category_sn = #{record.categorySn,jdbcType=VARCHAR},
       </if>
-      <if test="record.categoryName != null" >
-        category_name = #{record.categoryName,jdbcType=VARCHAR},
+      <if test="record.categotyName != null" >
+        categoty_name = #{record.categotyName,jdbcType=VARCHAR},
       </if>
       <if test="record.gmtCreate != null" >
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.gmtModify != null" >
         gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cutOff != null" >
+        cut_off = #{record.cutOff,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -187,10 +197,11 @@
     update tyg_ms_category
     set id = #{record.id,jdbcType=BIGINT},
       shop_id = #{record.shopId,jdbcType=BIGINT},
-      category_id = #{record.categoryId,jdbcType=VARCHAR},
-      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_sn = #{record.categorySn,jdbcType=VARCHAR},
+      categoty_name = #{record.categotyName,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP}
+      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      cut_off = #{record.cutOff,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -201,11 +212,11 @@
       <if test="shopId != null" >
         shop_id = #{shopId,jdbcType=BIGINT},
       </if>
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=VARCHAR},
+      <if test="categorySn != null" >
+        category_sn = #{categorySn,jdbcType=VARCHAR},
       </if>
-      <if test="categoryName != null" >
-        category_name = #{categoryName,jdbcType=VARCHAR},
+      <if test="categotyName != null" >
+        categoty_name = #{categotyName,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -213,16 +224,20 @@
       <if test="gmtModify != null" >
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
+      <if test="cutOff != null" >
+        cut_off = #{cutOff,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Category" >
     update tyg_ms_category
     set shop_id = #{shopId,jdbcType=BIGINT},
-      category_id = #{categoryId,jdbcType=VARCHAR},
-      category_name = #{categoryName,jdbcType=VARCHAR},
+      category_sn = #{categorySn,jdbcType=VARCHAR},
+      categoty_name = #{categotyName,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      cut_off = #{cutOff,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
