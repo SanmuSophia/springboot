@@ -10,7 +10,7 @@ public class Goods implements Serializable {
 
     private String goodsName;
 
-    private String categorySn;
+    private String categoryId;
 
     private String categoryName;
 
@@ -62,12 +62,12 @@ public class Goods implements Serializable {
         this.goodsName = goodsName;
     }
 
-    public String getCategorySn() {
-        return categorySn;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategorySn(String categorySn) {
-        this.categorySn = categorySn;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryName() {

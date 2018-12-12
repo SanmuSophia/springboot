@@ -166,73 +166,73 @@ public class GoodsSpecExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnIsNull() {
-            addCriterion("goods_sn is null");
+        public Criteria andGoodsIdIsNull() {
+            addCriterion("goods_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnIsNotNull() {
-            addCriterion("goods_sn is not null");
+        public Criteria andGoodsIdIsNotNull() {
+            addCriterion("goods_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnEqualTo(String value) {
-            addCriterion("goods_sn =", value, "goodsSn");
+        public Criteria andGoodsIdEqualTo(String value) {
+            addCriterion("goods_id =", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnNotEqualTo(String value) {
-            addCriterion("goods_sn <>", value, "goodsSn");
+        public Criteria andGoodsIdNotEqualTo(String value) {
+            addCriterion("goods_id <>", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnGreaterThan(String value) {
-            addCriterion("goods_sn >", value, "goodsSn");
+        public Criteria andGoodsIdGreaterThan(String value) {
+            addCriterion("goods_id >", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnGreaterThanOrEqualTo(String value) {
-            addCriterion("goods_sn >=", value, "goodsSn");
+        public Criteria andGoodsIdGreaterThanOrEqualTo(String value) {
+            addCriterion("goods_id >=", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnLessThan(String value) {
-            addCriterion("goods_sn <", value, "goodsSn");
+        public Criteria andGoodsIdLessThan(String value) {
+            addCriterion("goods_id <", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnLessThanOrEqualTo(String value) {
-            addCriterion("goods_sn <=", value, "goodsSn");
+        public Criteria andGoodsIdLessThanOrEqualTo(String value) {
+            addCriterion("goods_id <=", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnLike(String value) {
-            addCriterion("goods_sn like", value, "goodsSn");
+        public Criteria andGoodsIdLike(String value) {
+            addCriterion("goods_id like", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnNotLike(String value) {
-            addCriterion("goods_sn not like", value, "goodsSn");
+        public Criteria andGoodsIdNotLike(String value) {
+            addCriterion("goods_id not like", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnIn(List<String> values) {
-            addCriterion("goods_sn in", values, "goodsSn");
+        public Criteria andGoodsIdIn(List<String> values) {
+            addCriterion("goods_id in", values, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnNotIn(List<String> values) {
-            addCriterion("goods_sn not in", values, "goodsSn");
+        public Criteria andGoodsIdNotIn(List<String> values) {
+            addCriterion("goods_id not in", values, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnBetween(String value1, String value2) {
-            addCriterion("goods_sn between", value1, value2, "goodsSn");
+        public Criteria andGoodsIdBetween(String value1, String value2) {
+            addCriterion("goods_id between", value1, value2, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsSnNotBetween(String value1, String value2) {
-            addCriterion("goods_sn not between", value1, value2, "goodsSn");
+        public Criteria andGoodsIdNotBetween(String value1, String value2) {
+            addCriterion("goods_id not between", value1, value2, "goodsId");
             return (Criteria) this;
         }
 

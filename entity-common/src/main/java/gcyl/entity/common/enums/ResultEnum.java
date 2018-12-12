@@ -7,7 +7,8 @@ package gcyl.entity.common.enums;
  * @date 2018/9/11
  */
 public enum ResultEnum {
-    SUCCESS("0001", "处理成功");
+    SUCCESS("0001", "处理成功"),
+    ERROR("9999", "系统异常");
 
     String code;
 

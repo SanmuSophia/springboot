@@ -39,6 +39,7 @@
 		<jedis.version>2.9.0</jedis.version>
 		<aspectj.version>1.8.3</aspectj.version>
 		<swagger.version>1.1.0.RELEASE</swagger.version>
+		<hibernate.validate>5.2.1.Final</hibernate.validate>
 
 		<!-- plugin -->
 		<compiler.plugin.version>3.1</compiler.plugin.version>
@@ -181,6 +182,12 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validate}</version>
 		</dependency>
 
 	</dependencies>

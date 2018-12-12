@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 public class OrderDetail implements Serializable {
     private Long id;
 
-    private String orderSn;
+    private String orderId;
 
-    private String goodsSn;
+    private String goodsId;
 
     private String goodsName;
 
@@ -30,20 +30,20 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    public String getOrderSn() {
-        return orderSn;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getGoodsSn() {
-        return goodsSn;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoodsSn(String goodsSn) {
-        this.goodsSn = goodsSn;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getGoodsName() {

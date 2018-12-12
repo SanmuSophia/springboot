@@ -8,8 +8,6 @@ public class Category implements Serializable {
 
     private Long shopId;
 
-    private String categorySn;
-
     private String categoryName;
 
     private Date gmtCreate;
@@ -34,14 +32,6 @@ public class Category implements Serializable {
 
     public void setShopId(Long shopId) {
         this.shopId = shopId;
-    }
-
-    public String getCategorySn() {
-        return categorySn;
-    }
-
-    public void setCategorySn(String categorySn) {
-        this.categorySn = categorySn;
     }
 
     public String getCategoryName() {

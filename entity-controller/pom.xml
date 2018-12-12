@@ -29,7 +29,17 @@
 		</dependency>
 		<dependency>
 			<groupId>gcyl</groupId>
-			<artifactId>entity-service</artifactId>
+			<artifactId>entity-service-category</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>gcyl</groupId>
+			<artifactId>entity-service-goods</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>gcyl</groupId>
+			<artifactId>entity-service-order</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

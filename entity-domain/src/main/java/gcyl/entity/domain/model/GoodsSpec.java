@@ -7,7 +7,7 @@ import java.util.Date;
 public class GoodsSpec implements Serializable {
     private Long id;
 
-    private String goodsSn;
+    private String goodsId;
 
     private String specName;
 
@@ -31,12 +31,12 @@ public class GoodsSpec implements Serializable {
         this.id = id;
     }
 
-    public String getGoodsSn() {
-        return goodsSn;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoodsSn(String goodsSn) {
-        this.goodsSn = goodsSn;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public String getSpecName() {

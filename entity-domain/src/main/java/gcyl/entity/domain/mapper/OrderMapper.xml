@@ -1,47 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gcyl.entity.domain.mapper.OrderMapper">
-  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Order">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
-    <result column="order_state" jdbcType="INTEGER" property="orderState" />
-    <result column="is_pay" jdbcType="BIT" property="isPay" />
-    <result column="shop_id" jdbcType="BIGINT" property="shopId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="table_num" jdbcType="VARCHAR" property="tableNum" />
-    <result column="consume_sum" jdbcType="DECIMAL" property="consumeSum" />
-    <result column="settle_sum" jdbcType="DECIMAL" property="settleSum" />
-    <result column="consumption" jdbcType="DECIMAL" property="consumption" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="person_num" jdbcType="INTEGER" property="personNum" />
-    <result column="goods_num" jdbcType="INTEGER" property="goodsNum" />
-    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
-    <result column="gmt_receive" jdbcType="TIMESTAMP" property="gmtReceive" />
-    <result column="gmt_pay" jdbcType="TIMESTAMP" property="gmtPay" />
-    <result column="gmt_finish" jdbcType="TIMESTAMP" property="gmtFinish" />
-    <result column="cut_off" jdbcType="TINYINT" property="cutOff" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gcyl.entity.domain.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="table_num" property="tableNum" jdbcType="VARCHAR" />
+    <result column="consume_sum" property="consumeSum" jdbcType="DECIMAL" />
+    <result column="settle_sum" property="settleSum" jdbcType="DECIMAL" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="person_num" property="personNum" jdbcType="INTEGER" />
+    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
+    <result column="pay_method" property="payMethod" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -52,25 +52,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -81,42 +81,42 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, order_id, order_state, is_pay, shop_id, user_id, table_num, consume_sum, settle_sum, 
     consumption, description, person_num, goods_num, pay_method, gmt_create, gmt_modify, 
     gmt_receive, gmt_pay, gmt_finish, cut_off
   </sql>
-  <select id="selectByExample" parameterType="gcyl.entity.domain.model.OrderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.OrderExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from tyg_ms_order
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from tyg_ms_order
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tyg_ms_order
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderExample">
+  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderExample" >
     delete from tyg_ms_order
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="gcyl.entity.domain.model.Order">
+  <insert id="insert" parameterType="gcyl.entity.domain.model.Order" >
     insert into tyg_ms_order (id, order_id, order_state, 
       is_pay, shop_id, user_id, table_num, 
       consume_sum, settle_sum, consumption, 
@@ -132,208 +132,208 @@
       #{gmtReceive,jdbcType=TIMESTAMP}, #{gmtPay,jdbcType=TIMESTAMP}, #{gmtFinish,jdbcType=TIMESTAMP}, 
       #{cutOff,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order">
+  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" >
     insert into tyg_ms_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="orderId != null">
+      <if test="orderId != null" >
         order_id,
       </if>
-      <if test="orderState != null">
+      <if test="orderState != null" >
         order_state,
       </if>
-      <if test="isPay != null">
+      <if test="isPay != null" >
         is_pay,
       </if>
-      <if test="shopId != null">
+      <if test="shopId != null" >
         shop_id,
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id,
       </if>
-      <if test="tableNum != null">
+      <if test="tableNum != null" >
         table_num,
       </if>
-      <if test="consumeSum != null">
+      <if test="consumeSum != null" >
         consume_sum,
       </if>
-      <if test="settleSum != null">
+      <if test="settleSum != null" >
         settle_sum,
       </if>
-      <if test="consumption != null">
+      <if test="consumption != null" >
         consumption,
       </if>
-      <if test="description != null">
+      <if test="description != null" >
         description,
       </if>
-      <if test="personNum != null">
+      <if test="personNum != null" >
         person_num,
       </if>
-      <if test="goodsNum != null">
+      <if test="goodsNum != null" >
         goods_num,
       </if>
-      <if test="payMethod != null">
+      <if test="payMethod != null" >
         pay_method,
       </if>
-      <if test="gmtCreate != null">
+      <if test="gmtCreate != null" >
         gmt_create,
       </if>
-      <if test="gmtModify != null">
+      <if test="gmtModify != null" >
         gmt_modify,
       </if>
-      <if test="gmtReceive != null">
+      <if test="gmtReceive != null" >
         gmt_receive,
       </if>
-      <if test="gmtPay != null">
+      <if test="gmtPay != null" >
         gmt_pay,
       </if>
-      <if test="gmtFinish != null">
+      <if test="gmtFinish != null" >
         gmt_finish,
       </if>
-      <if test="cutOff != null">
+      <if test="cutOff != null" >
         cut_off,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderId != null">
+      <if test="orderId != null" >
         #{orderId,jdbcType=VARCHAR},
       </if>
-      <if test="orderState != null">
+      <if test="orderState != null" >
         #{orderState,jdbcType=INTEGER},
       </if>
-      <if test="isPay != null">
+      <if test="isPay != null" >
         #{isPay,jdbcType=BIT},
       </if>
-      <if test="shopId != null">
+      <if test="shopId != null" >
         #{shopId,jdbcType=BIGINT},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="tableNum != null">
+      <if test="tableNum != null" >
         #{tableNum,jdbcType=VARCHAR},
       </if>
-      <if test="consumeSum != null">
+      <if test="consumeSum != null" >
         #{consumeSum,jdbcType=DECIMAL},
       </if>
-      <if test="settleSum != null">
+      <if test="settleSum != null" >
         #{settleSum,jdbcType=DECIMAL},
       </if>
-      <if test="consumption != null">
+      <if test="consumption != null" >
         #{consumption,jdbcType=DECIMAL},
       </if>
-      <if test="description != null">
+      <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="personNum != null">
+      <if test="personNum != null" >
         #{personNum,jdbcType=INTEGER},
       </if>
-      <if test="goodsNum != null">
+      <if test="goodsNum != null" >
         #{goodsNum,jdbcType=INTEGER},
       </if>
-      <if test="payMethod != null">
+      <if test="payMethod != null" >
         #{payMethod,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
+      <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null">
+      <if test="gmtModify != null" >
         #{gmtModify,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtReceive != null">
+      <if test="gmtReceive != null" >
         #{gmtReceive,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtPay != null">
+      <if test="gmtPay != null" >
         #{gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtFinish != null">
+      <if test="gmtFinish != null" >
         #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="cutOff != null">
+      <if test="cutOff != null" >
         #{cutOff,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderExample" resultType="java.lang.Integer" >
     select count(*) from tyg_ms_order
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update tyg_ms_order
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.orderId != null">
+      <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=VARCHAR},
       </if>
-      <if test="record.orderState != null">
+      <if test="record.orderState != null" >
         order_state = #{record.orderState,jdbcType=INTEGER},
       </if>
-      <if test="record.isPay != null">
+      <if test="record.isPay != null" >
         is_pay = #{record.isPay,jdbcType=BIT},
       </if>
-      <if test="record.shopId != null">
+      <if test="record.shopId != null" >
         shop_id = #{record.shopId,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null">
+      <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.tableNum != null">
+      <if test="record.tableNum != null" >
         table_num = #{record.tableNum,jdbcType=VARCHAR},
       </if>
-      <if test="record.consumeSum != null">
+      <if test="record.consumeSum != null" >
         consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
       </if>
-      <if test="record.settleSum != null">
+      <if test="record.settleSum != null" >
         settle_sum = #{record.settleSum,jdbcType=DECIMAL},
       </if>
-      <if test="record.consumption != null">
+      <if test="record.consumption != null" >
         consumption = #{record.consumption,jdbcType=DECIMAL},
       </if>
-      <if test="record.description != null">
+      <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.personNum != null">
+      <if test="record.personNum != null" >
         person_num = #{record.personNum,jdbcType=INTEGER},
       </if>
-      <if test="record.goodsNum != null">
+      <if test="record.goodsNum != null" >
         goods_num = #{record.goodsNum,jdbcType=INTEGER},
       </if>
-      <if test="record.payMethod != null">
+      <if test="record.payMethod != null" >
         pay_method = #{record.payMethod,jdbcType=VARCHAR},
       </if>
-      <if test="record.gmtCreate != null">
+      <if test="record.gmtCreate != null" >
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtModify != null">
+      <if test="record.gmtModify != null" >
         gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtReceive != null">
+      <if test="record.gmtReceive != null" >
         gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtPay != null">
+      <if test="record.gmtPay != null" >
         gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.gmtFinish != null">
+      <if test="record.gmtFinish != null" >
         gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.cutOff != null">
+      <if test="record.cutOff != null" >
         cut_off = #{record.cutOff,jdbcType=TINYINT},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update tyg_ms_order
     set id = #{record.id,jdbcType=BIGINT},
       order_id = #{record.orderId,jdbcType=VARCHAR},
@@ -355,518 +355,74 @@
       gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
       gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
       cut_off = #{record.cutOff,jdbcType=TINYINT}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Order">
+  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Order" >
     update tyg_ms_order
-    <set>
-      <if test="orderId != null">
+    <set >
+      <if test="orderId != null" >
         order_id = #{orderId,jdbcType=VARCHAR},
       </if>
-      <if test="orderState != null">
+      <if test="orderState != null" >
         order_state = #{orderState,jdbcType=INTEGER},
       </if>
-      <if test="isPay != null">
+      <if test="isPay != null" >
         is_pay = #{isPay,jdbcType=BIT},
       </if>
-      <if test="shopId != null">
+      <if test="shopId != null" >
         shop_id = #{shopId,jdbcType=BIGINT},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="tableNum != null">
+      <if test="tableNum != null" >
         table_num = #{tableNum,jdbcType=VARCHAR},
       </if>
-      <if test="consumeSum != null">
+      <if test="consumeSum != null" >
         consume_sum = #{consumeSum,jdbcType=DECIMAL},
       </if>
-      <if test="settleSum != null">
+      <if test="settleSum != null" >
         settle_sum = #{settleSum,jdbcType=DECIMAL},
       </if>
-      <if test="consumption != null">
+      <if test="consumption != null" >
         consumption = #{consumption,jdbcType=DECIMAL},
       </if>
-      <if test="description != null">
+      <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="personNum != null">
+      <if test="personNum != null" >
         person_num = #{personNum,jdbcType=INTEGER},
       </if>
-      <if test="goodsNum != null">
+      <if test="goodsNum != null" >
         goods_num = #{goodsNum,jdbcType=INTEGER},
       </if>
-      <if test="payMethod != null">
+      <if test="payMethod != null" >
         pay_method = #{payMethod,jdbcType=VARCHAR},
       </if>
-      <if test="gmtCreate != null">
+      <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null">
+      <if test="gmtModify != null" >
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtReceive != null">
+      <if test="gmtReceive != null" >
         gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtPay != null">
+      <if test="gmtPay != null" >
         gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtFinish != null">
+      <if test="gmtFinish != null" >
         gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="cutOff != null">
+      <if test="cutOff != null" >
         cut_off = #{cutOff,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Order">
-    update tyg_ms_order
-    set order_id = #{orderId,jdbcType=VARCHAR},
-      order_state = #{orderState,jdbcType=INTEGER},
-      is_pay = #{isPay,jdbcType=BIT},
-      shop_id = #{shopId,jdbcType=BIGINT},
-      user_id = #{userId,jdbcType=BIGINT},
-      table_num = #{tableNum,jdbcType=VARCHAR},
-      consume_sum = #{consumeSum,jdbcType=DECIMAL},
-      settle_sum = #{settleSum,jdbcType=DECIMAL},
-      consumption = #{consumption,jdbcType=DECIMAL},
-      description = #{description,jdbcType=VARCHAR},
-      person_num = #{personNum,jdbcType=INTEGER},
-      goods_num = #{goodsNum,jdbcType=INTEGER},
-      pay_method = #{payMethod,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
-      gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
-      gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
-      cut_off = #{cutOff,jdbcType=TINYINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Order">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
-    <result column="order_state" jdbcType="INTEGER" property="orderState" />
-    <result column="is_pay" jdbcType="BIT" property="isPay" />
-    <result column="shop_id" jdbcType="BIGINT" property="shopId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="table_num" jdbcType="VARCHAR" property="tableNum" />
-    <result column="consume_sum" jdbcType="DECIMAL" property="consumeSum" />
-    <result column="settle_sum" jdbcType="DECIMAL" property="settleSum" />
-    <result column="consumption" jdbcType="DECIMAL" property="consumption" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="person_num" jdbcType="INTEGER" property="personNum" />
-    <result column="goods_num" jdbcType="INTEGER" property="goodsNum" />
-    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
-    <result column="gmt_receive" jdbcType="TIMESTAMP" property="gmtReceive" />
-    <result column="gmt_pay" jdbcType="TIMESTAMP" property="gmtPay" />
-    <result column="gmt_finish" jdbcType="TIMESTAMP" property="gmtFinish" />
-    <result column="cut_off" jdbcType="TINYINT" property="cutOff" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, order_id, order_state, is_pay, shop_id, user_id, table_num, consume_sum, settle_sum, 
-    consumption, description, person_num, goods_num, pay_method, gmt_create, gmt_modify, 
-    gmt_receive, gmt_pay, gmt_finish, cut_off
-  </sql>
-  <select id="selectByExample" parameterType="gcyl.entity.domain.model.OrderExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tyg_ms_order
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tyg_ms_order
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tyg_ms_order
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderExample">
-    delete from tyg_ms_order
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="gcyl.entity.domain.model.Order">
-    insert into tyg_ms_order (id, order_id, order_state, 
-      is_pay, shop_id, user_id, table_num, 
-      consume_sum, settle_sum, consumption, 
-      description, person_num, goods_num, 
-      pay_method, gmt_create, gmt_modify, 
-      gmt_receive, gmt_pay, gmt_finish, 
-      cut_off)
-    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER}, 
-      #{isPay,jdbcType=BIT}, #{shopId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{tableNum,jdbcType=VARCHAR}, 
-      #{consumeSum,jdbcType=DECIMAL}, #{settleSum,jdbcType=DECIMAL}, #{consumption,jdbcType=DECIMAL}, 
-      #{description,jdbcType=VARCHAR}, #{personNum,jdbcType=INTEGER}, #{goodsNum,jdbcType=INTEGER}, 
-      #{payMethod,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{gmtReceive,jdbcType=TIMESTAMP}, #{gmtPay,jdbcType=TIMESTAMP}, #{gmtFinish,jdbcType=TIMESTAMP}, 
-      #{cutOff,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order">
-    insert into tyg_ms_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="orderId != null">
-        order_id,
-      </if>
-      <if test="orderState != null">
-        order_state,
-      </if>
-      <if test="isPay != null">
-        is_pay,
-      </if>
-      <if test="shopId != null">
-        shop_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="tableNum != null">
-        table_num,
-      </if>
-      <if test="consumeSum != null">
-        consume_sum,
-      </if>
-      <if test="settleSum != null">
-        settle_sum,
-      </if>
-      <if test="consumption != null">
-        consumption,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="personNum != null">
-        person_num,
-      </if>
-      <if test="goodsNum != null">
-        goods_num,
-      </if>
-      <if test="payMethod != null">
-        pay_method,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify,
-      </if>
-      <if test="gmtReceive != null">
-        gmt_receive,
-      </if>
-      <if test="gmtPay != null">
-        gmt_pay,
-      </if>
-      <if test="gmtFinish != null">
-        gmt_finish,
-      </if>
-      <if test="cutOff != null">
-        cut_off,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="orderId != null">
-        #{orderId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderState != null">
-        #{orderState,jdbcType=INTEGER},
-      </if>
-      <if test="isPay != null">
-        #{isPay,jdbcType=BIT},
-      </if>
-      <if test="shopId != null">
-        #{shopId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="tableNum != null">
-        #{tableNum,jdbcType=VARCHAR},
-      </if>
-      <if test="consumeSum != null">
-        #{consumeSum,jdbcType=DECIMAL},
-      </if>
-      <if test="settleSum != null">
-        #{settleSum,jdbcType=DECIMAL},
-      </if>
-      <if test="consumption != null">
-        #{consumption,jdbcType=DECIMAL},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="personNum != null">
-        #{personNum,jdbcType=INTEGER},
-      </if>
-      <if test="goodsNum != null">
-        #{goodsNum,jdbcType=INTEGER},
-      </if>
-      <if test="payMethod != null">
-        #{payMethod,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtReceive != null">
-        #{gmtReceive,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtPay != null">
-        #{gmtPay,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtFinish != null">
-        #{gmtFinish,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cutOff != null">
-        #{cutOff,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderExample" resultType="java.lang.Integer">
-    select count(*) from tyg_ms_order
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tyg_ms_order
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.orderId != null">
-        order_id = #{record.orderId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.orderState != null">
-        order_state = #{record.orderState,jdbcType=INTEGER},
-      </if>
-      <if test="record.isPay != null">
-        is_pay = #{record.isPay,jdbcType=BIT},
-      </if>
-      <if test="record.shopId != null">
-        shop_id = #{record.shopId,jdbcType=BIGINT},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.tableNum != null">
-        table_num = #{record.tableNum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.consumeSum != null">
-        consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
-      </if>
-      <if test="record.settleSum != null">
-        settle_sum = #{record.settleSum,jdbcType=DECIMAL},
-      </if>
-      <if test="record.consumption != null">
-        consumption = #{record.consumption,jdbcType=DECIMAL},
-      </if>
-      <if test="record.description != null">
-        description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.personNum != null">
-        person_num = #{record.personNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsNum != null">
-        goods_num = #{record.goodsNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.payMethod != null">
-        pay_method = #{record.payMethod,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gmtCreate != null">
-        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtModify != null">
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtReceive != null">
-        gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtPay != null">
-        gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtFinish != null">
-        gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.cutOff != null">
-        cut_off = #{record.cutOff,jdbcType=TINYINT},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tyg_ms_order
-    set id = #{record.id,jdbcType=BIGINT},
-      order_id = #{record.orderId,jdbcType=VARCHAR},
-      order_state = #{record.orderState,jdbcType=INTEGER},
-      is_pay = #{record.isPay,jdbcType=BIT},
-      shop_id = #{record.shopId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      table_num = #{record.tableNum,jdbcType=VARCHAR},
-      consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
-      settle_sum = #{record.settleSum,jdbcType=DECIMAL},
-      consumption = #{record.consumption,jdbcType=DECIMAL},
-      description = #{record.description,jdbcType=VARCHAR},
-      person_num = #{record.personNum,jdbcType=INTEGER},
-      goods_num = #{record.goodsNum,jdbcType=INTEGER},
-      pay_method = #{record.payMethod,jdbcType=VARCHAR},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
-      gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
-      gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
-      cut_off = #{record.cutOff,jdbcType=TINYINT}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Order">
-    update tyg_ms_order
-    <set>
-      <if test="orderId != null">
-        order_id = #{orderId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderState != null">
-        order_state = #{orderState,jdbcType=INTEGER},
-      </if>
-      <if test="isPay != null">
-        is_pay = #{isPay,jdbcType=BIT},
-      </if>
-      <if test="shopId != null">
-        shop_id = #{shopId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="tableNum != null">
-        table_num = #{tableNum,jdbcType=VARCHAR},
-      </if>
-      <if test="consumeSum != null">
-        consume_sum = #{consumeSum,jdbcType=DECIMAL},
-      </if>
-      <if test="settleSum != null">
-        settle_sum = #{settleSum,jdbcType=DECIMAL},
-      </if>
-      <if test="consumption != null">
-        consumption = #{consumption,jdbcType=DECIMAL},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="personNum != null">
-        person_num = #{personNum,jdbcType=INTEGER},
-      </if>
-      <if test="goodsNum != null">
-        goods_num = #{goodsNum,jdbcType=INTEGER},
-      </if>
-      <if test="payMethod != null">
-        pay_method = #{payMethod,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModify != null">
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtReceive != null">
-        gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtPay != null">
-        gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtFinish != null">
-        gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cutOff != null">
-        cut_off = #{cutOff,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Order">
+  <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Order" >
     update tyg_ms_order
     set order_id = #{orderId,jdbcType=VARCHAR},
       order_state = #{orderState,jdbcType=INTEGER},

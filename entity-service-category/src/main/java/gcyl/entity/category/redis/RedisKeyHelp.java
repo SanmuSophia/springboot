@@ -1,4 +1,4 @@
-package gcyl.entity.redis;
+package gcyl.entity.category.redis;
 
 
 /**
@@ -9,7 +9,7 @@ package gcyl.entity.redis;
  */
 public class RedisKeyHelp {
 
-    private static final String C_PREFIX = "entity:ms:c";  //类目
+    private static final String C_PREFIX = "entity:category";  //类目
 
     /**
      * 获取店铺类目key
