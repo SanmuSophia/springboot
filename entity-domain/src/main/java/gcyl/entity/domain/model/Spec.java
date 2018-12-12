@@ -3,14 +3,12 @@ package gcyl.entity.domain.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Category implements Serializable {
+public class Spec implements Serializable {
     private Long id;
 
-    private Long shopId;
+    private Long parentId;
 
-    private String categorySn;
-
-    private String categoryName;
+    private String specName;
 
     private Date gmtCreate;
 
@@ -28,28 +26,20 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Long getShopId() {
-        return shopId;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
-    public String getCategorySn() {
-        return categorySn;
+    public String getSpecName() {
+        return specName;
     }
 
-    public void setCategorySn(String categorySn) {
-        this.categorySn = categorySn;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setSpecName(String specName) {
+        this.specName = specName;
     }
 
     public Date getGmtCreate() {

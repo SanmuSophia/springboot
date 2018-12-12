@@ -11,9 +11,11 @@
 	<modules>
 		<module>entity-controller</module>
 		<module>entity-domain</module>
-		<module>entity-service</module>
 		<module>entity-common</module>
 		<module>entity-config</module>
+		<module>entity-service-category</module>
+		<module>entity-service-goods</module>
+		<module>entity-service-order</module>
 	</modules>
 
 	<name>entity</name>
@@ -43,6 +45,11 @@
 	</properties>
 
 	<dependencies>
+		<!--<dependency>-->
+			<!--<groupId>gcyl</groupId>-->
+			<!--<artifactId>gcyl-domain</artifactId>-->
+			<!--<version>${project.version}</version>-->
+		<!--</dependency>-->
 		<!-- amqp -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -192,5 +199,20 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<!-- 发布版本 -->
+		<repository>
+			<id>gcyl-releases</id>
+			<name>releases</name>
+			<url>http://192.168.1.178:8081/repository/gcyl-releases/</url>
+		</repository>
+		<!-- 快照版本 -->
+		<snapshotRepository>
+			<id>gcyl-snapshots</id>
+			<name>snapshots</name>
+			<url>http://192.168.1.178:8081/repository/gcyl-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>

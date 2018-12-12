@@ -60,7 +60,7 @@ public class Order implements Serializable {
     }
 
     public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+        this.orderId = orderId;
     }
 
     public Integer getOrderState() {
@@ -100,7 +100,7 @@ public class Order implements Serializable {
     }
 
     public void setTableNum(String tableNum) {
-        this.tableNum = tableNum == null ? null : tableNum.trim();
+        this.tableNum = tableNum;
     }
 
     public BigDecimal getConsumeSum() {
@@ -132,7 +132,7 @@ public class Order implements Serializable {
     }
 
     public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+        this.description = description;
     }
 
     public Integer getPersonNum() {
@@ -156,7 +156,7 @@ public class Order implements Serializable {
     }
 
     public void setPayMethod(String payMethod) {
-        this.payMethod = payMethod == null ? null : payMethod.trim();
+        this.payMethod = payMethod;
     }
 
     public Date getGmtCreate() {

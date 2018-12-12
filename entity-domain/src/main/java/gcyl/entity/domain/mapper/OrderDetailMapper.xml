@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="gcyl.entity.domain.mapper.OrderDetailMapper" >
-  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.OrderDetail" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
-    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
-    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
-    <result column="spec_name" property="specName" jdbcType="VARCHAR" />
-    <result column="spec_price" property="specPrice" jdbcType="DECIMAL" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gcyl.entity.domain.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.OrderDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_unit" jdbcType="VARCHAR" property="goodsUnit" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="spec_name" jdbcType="VARCHAR" property="specName" />
+    <result column="spec_price" jdbcType="DECIMAL" property="specPrice" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,40 +69,40 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, order_sn, goods_sn, goods_name, goods_unit, goods_img, spec_name, spec_price
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.OrderDetailExample" >
+  <select id="selectByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from tyg_ms_order_detail
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tyg_ms_order_detail
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tyg_ms_order_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" >
+  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample">
     delete from tyg_ms_order_detail
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="gcyl.entity.domain.model.OrderDetail" >
+  <insert id="insert" parameterType="gcyl.entity.domain.model.OrderDetail">
     insert into tyg_ms_order_detail (id, order_sn, goods_sn, 
       goods_name, goods_unit, goods_img, 
       spec_name, spec_price)
@@ -110,100 +110,100 @@
       #{goodsName,jdbcType=VARCHAR}, #{goodsUnit,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, 
       #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.OrderDetail" >
+  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.OrderDetail">
     insert into tyg_ms_order_detail
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="orderSn != null" >
+      <if test="orderSn != null">
         order_sn,
       </if>
-      <if test="goodsSn != null" >
+      <if test="goodsSn != null">
         goods_sn,
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name,
       </if>
-      <if test="goodsUnit != null" >
+      <if test="goodsUnit != null">
         goods_unit,
       </if>
-      <if test="goodsImg != null" >
+      <if test="goodsImg != null">
         goods_img,
       </if>
-      <if test="specName != null" >
+      <if test="specName != null">
         spec_name,
       </if>
-      <if test="specPrice != null" >
+      <if test="specPrice != null">
         spec_price,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderSn != null" >
+      <if test="orderSn != null">
         #{orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsSn != null" >
+      <if test="goodsSn != null">
         #{goodsSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsUnit != null" >
+      <if test="goodsUnit != null">
         #{goodsUnit,jdbcType=VARCHAR},
       </if>
-      <if test="goodsImg != null" >
+      <if test="goodsImg != null">
         #{goodsImg,jdbcType=VARCHAR},
       </if>
-      <if test="specName != null" >
+      <if test="specName != null">
         #{specName,jdbcType=VARCHAR},
       </if>
-      <if test="specPrice != null" >
+      <if test="specPrice != null">
         #{specPrice,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" resultType="java.lang.Integer">
     select count(*) from tyg_ms_order_detail
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update tyg_ms_order_detail
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.orderSn != null" >
+      <if test="record.orderSn != null">
         order_sn = #{record.orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsSn != null" >
+      <if test="record.goodsSn != null">
         goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsName != null" >
+      <if test="record.goodsName != null">
         goods_name = #{record.goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsUnit != null" >
+      <if test="record.goodsUnit != null">
         goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsImg != null" >
+      <if test="record.goodsImg != null">
         goods_img = #{record.goodsImg,jdbcType=VARCHAR},
       </if>
-      <if test="record.specName != null" >
+      <if test="record.specName != null">
         spec_name = #{record.specName,jdbcType=VARCHAR},
       </if>
-      <if test="record.specPrice != null" >
+      <if test="record.specPrice != null">
         spec_price = #{record.specPrice,jdbcType=DECIMAL},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update tyg_ms_order_detail
     set id = #{record.id,jdbcType=BIGINT},
       order_sn = #{record.orderSn,jdbcType=VARCHAR},
@@ -213,38 +213,292 @@
       goods_img = #{record.goodsImg,jdbcType=VARCHAR},
       spec_name = #{record.specName,jdbcType=VARCHAR},
       spec_price = #{record.specPrice,jdbcType=DECIMAL}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.OrderDetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.OrderDetail">
     update tyg_ms_order_detail
-    <set >
-      <if test="orderSn != null" >
+    <set>
+      <if test="orderSn != null">
         order_sn = #{orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsSn != null" >
+      <if test="goodsSn != null">
         goods_sn = #{goodsSn,jdbcType=VARCHAR},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsUnit != null" >
+      <if test="goodsUnit != null">
         goods_unit = #{goodsUnit,jdbcType=VARCHAR},
       </if>
-      <if test="goodsImg != null" >
+      <if test="goodsImg != null">
         goods_img = #{goodsImg,jdbcType=VARCHAR},
       </if>
-      <if test="specName != null" >
+      <if test="specName != null">
         spec_name = #{specName,jdbcType=VARCHAR},
       </if>
-      <if test="specPrice != null" >
+      <if test="specPrice != null">
         spec_price = #{specPrice,jdbcType=DECIMAL},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.OrderDetail" >
+  <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.OrderDetail">
+    update tyg_ms_order_detail
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      goods_img = #{goodsImg,jdbcType=VARCHAR},
+      spec_name = #{specName,jdbcType=VARCHAR},
+      spec_price = #{specPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.OrderDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_unit" jdbcType="VARCHAR" property="goodsUnit" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="spec_name" jdbcType="VARCHAR" property="specName" />
+    <result column="spec_price" jdbcType="DECIMAL" property="specPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_sn, goods_sn, goods_name, goods_unit, goods_img, spec_name, spec_price
+  </sql>
+  <select id="selectByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tyg_ms_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tyg_ms_order_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tyg_ms_order_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample">
+    delete from tyg_ms_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="gcyl.entity.domain.model.OrderDetail">
+    insert into tyg_ms_order_detail (id, order_sn, goods_sn, 
+      goods_name, goods_unit, goods_img, 
+      spec_name, spec_price)
+    values (#{id,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, #{goodsSn,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsUnit,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, 
+      #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.OrderDetail">
+    insert into tyg_ms_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderSn != null">
+        order_sn,
+      </if>
+      <if test="goodsSn != null">
+        goods_sn,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsUnit != null">
+        goods_unit,
+      </if>
+      <if test="goodsImg != null">
+        goods_img,
+      </if>
+      <if test="specName != null">
+        spec_name,
+      </if>
+      <if test="specPrice != null">
+        spec_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSn != null">
+        #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUnit != null">
+        #{goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null">
+        #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="specName != null">
+        #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="specPrice != null">
+        #{specPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="gcyl.entity.domain.model.OrderDetailExample" resultType="java.lang.Integer">
+    select count(*) from tyg_ms_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tyg_ms_order_detail
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderSn != null">
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsSn != null">
+        goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null">
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsUnit != null">
+        goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsImg != null">
+        goods_img = #{record.goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specName != null">
+        spec_name = #{record.specName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specPrice != null">
+        spec_price = #{record.specPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tyg_ms_order_detail
+    set id = #{record.id,jdbcType=BIGINT},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
+      goods_img = #{record.goodsImg,jdbcType=VARCHAR},
+      spec_name = #{record.specName,jdbcType=VARCHAR},
+      spec_price = #{record.specPrice,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.OrderDetail">
+    update tyg_ms_order_detail
+    <set>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSn != null">
+        goods_sn = #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUnit != null">
+        goods_unit = #{goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null">
+        goods_img = #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="specName != null">
+        spec_name = #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="specPrice != null">
+        spec_price = #{specPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.OrderDetail">
     update tyg_ms_order_detail
     set order_sn = #{orderSn,jdbcType=VARCHAR},
       goods_sn = #{goodsSn,jdbcType=VARCHAR},

@@ -1,16 +1,19 @@
 package gcyl.entity.domain.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Category implements Serializable {
+public class GoodsSpec implements Serializable {
     private Long id;
 
-    private Long shopId;
+    private String goodsSn;
 
-    private String categorySn;
+    private String specName;
 
-    private String categoryName;
+    private BigDecimal specPrice;
+
+    private Long specStock;
 
     private Date gmtCreate;
 
@@ -28,28 +31,36 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Long getShopId() {
-        return shopId;
+    public String getGoodsSn() {
+        return goodsSn;
     }
 
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
+    public void setGoodsSn(String goodsSn) {
+        this.goodsSn = goodsSn;
     }
 
-    public String getCategorySn() {
-        return categorySn;
+    public String getSpecName() {
+        return specName;
     }
 
-    public void setCategorySn(String categorySn) {
-        this.categorySn = categorySn;
+    public void setSpecName(String specName) {
+        this.specName = specName;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public BigDecimal getSpecPrice() {
+        return specPrice;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setSpecPrice(BigDecimal specPrice) {
+        this.specPrice = specPrice;
+    }
+
+    public Long getSpecStock() {
+        return specStock;
+    }
+
+    public void setSpecStock(Long specStock) {
+        this.specStock = specStock;
     }
 
     public Date getGmtCreate() {

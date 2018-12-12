@@ -51,7 +51,7 @@ public class Goods implements Serializable {
     }
 
     public void setGoodsSn(String goodsSn) {
-        this.goodsSn = goodsSn == null ? null : goodsSn.trim();
+        this.goodsSn = goodsSn;
     }
 
     public String getGoodsName() {
@@ -59,7 +59,7 @@ public class Goods implements Serializable {
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+        this.goodsName = goodsName;
     }
 
     public String getCategorySn() {
@@ -67,7 +67,7 @@ public class Goods implements Serializable {
     }
 
     public void setCategorySn(String categorySn) {
-        this.categorySn = categorySn == null ? null : categorySn.trim();
+        this.categorySn = categorySn;
     }
 
     public String getCategoryName() {
@@ -75,7 +75,7 @@ public class Goods implements Serializable {
     }
 
     public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName == null ? null : categoryName.trim();
+        this.categoryName = categoryName;
     }
 
     public String getGoodsUnit() {
@@ -83,7 +83,7 @@ public class Goods implements Serializable {
     }
 
     public void setGoodsUnit(String goodsUnit) {
-        this.goodsUnit = goodsUnit == null ? null : goodsUnit.trim();
+        this.goodsUnit = goodsUnit;
     }
 
     public Long getDayStock() {
@@ -131,7 +131,7 @@ public class Goods implements Serializable {
     }
 
     public void setGoodsImg(String goodsImg) {
-        this.goodsImg = goodsImg == null ? null : goodsImg.trim();
+        this.goodsImg = goodsImg;
     }
 
     public Long getVersion() {

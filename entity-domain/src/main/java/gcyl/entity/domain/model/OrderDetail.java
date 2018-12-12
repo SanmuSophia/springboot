@@ -35,7 +35,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn == null ? null : orderSn.trim();
+        this.orderSn = orderSn;
     }
 
     public String getGoodsSn() {
@@ -43,7 +43,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setGoodsSn(String goodsSn) {
-        this.goodsSn = goodsSn == null ? null : goodsSn.trim();
+        this.goodsSn = goodsSn;
     }
 
     public String getGoodsName() {
@@ -51,7 +51,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+        this.goodsName = goodsName;
     }
 
     public String getGoodsUnit() {
@@ -59,7 +59,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setGoodsUnit(String goodsUnit) {
-        this.goodsUnit = goodsUnit == null ? null : goodsUnit.trim();
+        this.goodsUnit = goodsUnit;
     }
 
     public String getGoodsImg() {
@@ -67,7 +67,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setGoodsImg(String goodsImg) {
-        this.goodsImg = goodsImg == null ? null : goodsImg.trim();
+        this.goodsImg = goodsImg;
     }
 
     public String getSpecName() {
@@ -75,7 +75,7 @@ public class OrderDetail implements Serializable {
     }
 
     public void setSpecName(String specName) {
-        this.specName = specName == null ? null : specName.trim();
+        this.specName = specName;
     }
 
     public BigDecimal getSpecPrice() {
