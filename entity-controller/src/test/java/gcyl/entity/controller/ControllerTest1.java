@@ -1,4 +1,4 @@
-package gcyl.entity.controller.goods;
+package gcyl.entity.controller;
 
 import gcyl.entity.domain.mapper.my.CategoryExtMapper;
 import gcyl.entity.domain.mapper.OrderMapper;
@@ -39,6 +39,6 @@ public class ControllerTest1 {
 
     @Test
     public void test() {
-        System.out.println(categoryExtMapper.count());
+        System.out.println();
     }
 }

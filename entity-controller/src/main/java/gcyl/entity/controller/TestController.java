@@ -1,4 +1,4 @@
-package gcyl.entity.controller.goods;
+package gcyl.entity.controller;
 
 import gcyl.entity.annotation.UserLogin;
 import gcyl.entity.common.utils.IpContext;

@@ -18,7 +18,6 @@ public class Result implements Serializable {
     private boolean success;
     private String code;
     private String msg;
-    private String ex;
     private Object data;
 
     public Result() {
@@ -31,47 +30,54 @@ public class Result implements Serializable {
     public void success(Object data) {
         String code = ResultEnum.SUCCESS.getCode();
         String msg = ResultEnum.SUCCESS.getMes();
-        this.set(true, code, msg, null, data);
+        this.set(true, code, msg, data);
     }
 
-    public void error(String msg) {
-        this.set(false, null, msg, null, null);
+    public void error(String mes) {
+        this.set(false, null, mes, null);
     }
 
     public void error(ResultEnum rEnum) {
-        this.set(false, rEnum.getCode(), rEnum.getMes(), null, null);
+        this.set(false, rEnum.getCode(), rEnum.getMes(), null);
     }
 
-    private void set(boolean success, String code, String mes, String ex, Object data){
+    private void set(boolean success, String code, String mes, Object data){
         this.success = success;
         this.code = code;
         this.msg = mes;
-        this.ex = ex;
         this.data = data;
-    }
-
-    public static Logger getLog() {
-        return log;
     }
 
     public boolean isSuccess() {
         return success;
     }
 
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
     public String getCode() {
         return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getMsg() {
         return msg;
     }
 
-    public String getEx() {
-        return ex;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public Object getData() {
         return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 
     @Override

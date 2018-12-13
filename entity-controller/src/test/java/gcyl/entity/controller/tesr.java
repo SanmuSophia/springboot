@@ -1,4 +1,4 @@
-package gcyl.entity.controller.goods;
+package gcyl.entity.controller;
 
 /**
  * @author lican

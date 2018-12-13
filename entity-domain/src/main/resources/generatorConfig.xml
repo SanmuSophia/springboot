@@ -51,7 +51,8 @@
         <table tableName="tyg_ms_goods" domainObjectName="Goods"/>
         <table tableName="tyg_ms_goods_spec" domainObjectName="GoodsSpec"/>
         <table tableName="tyg_ms_unit" domainObjectName="Unit"/>
-        <table tableName="tyg_ms_spec" domainObjectName="Spec"/>
+        <table tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>
+        <table tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>
         <table tableName="tyg_ms_order" domainObjectName="Order"/>
         <table tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>
     </context>

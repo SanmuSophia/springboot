@@ -2,9 +2,9 @@ package gcyl.entity.common.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class HttpGetIpUtil {
+public class HttpGetIpUtils {
 
-    public HttpGetIpUtil() {
+    public HttpGetIpUtils() {
     }
 
     public static final String getIpAddress(HttpServletRequest request) {

@@ -67,9 +67,9 @@ public final class JsonUtils {
     /**
      * 将JSON转换正JavaBeanList
      *
-     * @param jsonStr
-     * @param beanClass
-     * @return
+     * @param jsonStr    json串对象
+     * @param beanClass  指定的bean
+     * @return 转换后的java bean list对象
      */
     public static <T> List<T> toBeanList(String jsonStr, Class<T> beanClass) {
         List<T> ts = null;
@@ -85,10 +85,9 @@ public final class JsonUtils {
 
     /**
      * 将json字符串数组转换成实体列表
-     * @param jsonStr
-     * @param beanClass
-     * @param <T>
-     * @return
+     * @param jsonStr    json串对象
+     * @param beanClass  指定的bean
+     * @return 转换后的java bean list对象
      */
     public static <T> List<T> arrayToBeanList(String jsonStr, Class<T> beanClass) {
         List<T> ts = null;

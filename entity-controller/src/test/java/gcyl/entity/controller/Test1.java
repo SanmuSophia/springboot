@@ -1,4 +1,4 @@
-package gcyl.entity.controller.goods;
+package gcyl.entity.controller;
 
 
 import java.lang.annotation.ElementType;

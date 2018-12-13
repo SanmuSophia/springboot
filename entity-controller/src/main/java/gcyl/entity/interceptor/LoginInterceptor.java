@@ -1,7 +1,7 @@
 package gcyl.entity.interceptor;
 
 import gcyl.entity.annotation.UserLogin;
-import gcyl.entity.common.utils.HttpGetIpUtil;
+import gcyl.entity.common.utils.HttpGetIpUtils;
 import gcyl.entity.common.utils.IpContext;
 import gcyl.entity.common.utils.LogUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -21,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String userIp = HttpGetIpUtil.getIpAddress(request);
+        String userIp = HttpGetIpUtils.getIpAddress(request);
         LogUtils.debug("当前用户请求ip:" + userIp);
         IpContext.setCurrentContext(userIp);
 
