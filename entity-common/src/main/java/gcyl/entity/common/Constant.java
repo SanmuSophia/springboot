@@ -1,7 +1,7 @@
 package gcyl.entity.common;
 
 /**
- * 常量管理类
+ * 静态常量管理类
  * 1.永远不变或几乎不变的变量
  * 2.与配置变量区分
  * @author lican
@@ -9,5 +9,11 @@ package gcyl.entity.common;
  */
 public interface Constant {
     //时区
-    String gmt = "+8";
+    String GMT = "+8";
+
+    //商品编号前缀
+    String G_SN_PREFIX = "MSG";
+
+    //订单编号前缀
+    String O_SN_PREFIX = "MSO";
 }

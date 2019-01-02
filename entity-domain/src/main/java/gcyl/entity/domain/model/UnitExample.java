@@ -425,52 +425,52 @@ public class UnitExample {
             return (Criteria) this;
         }
 
-        public Criteria andCutOffEqualTo(Byte value) {
+        public Criteria andCutOffEqualTo(Boolean value) {
             addCriterion("cut_off =", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotEqualTo(Byte value) {
+        public Criteria andCutOffNotEqualTo(Boolean value) {
             addCriterion("cut_off <>", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffGreaterThan(Byte value) {
+        public Criteria andCutOffGreaterThan(Boolean value) {
             addCriterion("cut_off >", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffGreaterThanOrEqualTo(Byte value) {
+        public Criteria andCutOffGreaterThanOrEqualTo(Boolean value) {
             addCriterion("cut_off >=", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffLessThan(Byte value) {
+        public Criteria andCutOffLessThan(Boolean value) {
             addCriterion("cut_off <", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffLessThanOrEqualTo(Byte value) {
+        public Criteria andCutOffLessThanOrEqualTo(Boolean value) {
             addCriterion("cut_off <=", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffIn(List<Byte> values) {
+        public Criteria andCutOffIn(List<Boolean> values) {
             addCriterion("cut_off in", values, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotIn(List<Byte> values) {
+        public Criteria andCutOffNotIn(List<Boolean> values) {
             addCriterion("cut_off not in", values, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffBetween(Byte value1, Byte value2) {
+        public Criteria andCutOffBetween(Boolean value1, Boolean value2) {
             addCriterion("cut_off between", value1, value2, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotBetween(Byte value1, Byte value2) {
+        public Criteria andCutOffNotBetween(Boolean value1, Boolean value2) {
             addCriterion("cut_off not between", value1, value2, "cutOff");
             return (Criteria) this;
         }

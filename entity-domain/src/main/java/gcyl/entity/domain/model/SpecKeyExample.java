@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SpecExample {
+public class SpecKeyExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SpecExample() {
+    public SpecKeyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,133 +165,73 @@ public class SpecExample {
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNull() {
-            addCriterion("parent_id is null");
+        public Criteria andSpecKeyIsNull() {
+            addCriterion("spec_key is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNotNull() {
-            addCriterion("parent_id is not null");
+        public Criteria andSpecKeyIsNotNull() {
+            addCriterion("spec_key is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdEqualTo(Long value) {
-            addCriterion("parent_id =", value, "parentId");
+        public Criteria andSpecKeyEqualTo(String value) {
+            addCriterion("spec_key =", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotEqualTo(Long value) {
-            addCriterion("parent_id <>", value, "parentId");
+        public Criteria andSpecKeyNotEqualTo(String value) {
+            addCriterion("spec_key <>", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThan(Long value) {
-            addCriterion("parent_id >", value, "parentId");
+        public Criteria andSpecKeyGreaterThan(String value) {
+            addCriterion("spec_key >", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("parent_id >=", value, "parentId");
+        public Criteria andSpecKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("spec_key >=", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThan(Long value) {
-            addCriterion("parent_id <", value, "parentId");
+        public Criteria andSpecKeyLessThan(String value) {
+            addCriterion("spec_key <", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThanOrEqualTo(Long value) {
-            addCriterion("parent_id <=", value, "parentId");
+        public Criteria andSpecKeyLessThanOrEqualTo(String value) {
+            addCriterion("spec_key <=", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIn(List<Long> values) {
-            addCriterion("parent_id in", values, "parentId");
+        public Criteria andSpecKeyLike(String value) {
+            addCriterion("spec_key like", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotIn(List<Long> values) {
-            addCriterion("parent_id not in", values, "parentId");
+        public Criteria andSpecKeyNotLike(String value) {
+            addCriterion("spec_key not like", value, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdBetween(Long value1, Long value2) {
-            addCriterion("parent_id between", value1, value2, "parentId");
+        public Criteria andSpecKeyIn(List<String> values) {
+            addCriterion("spec_key in", values, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotBetween(Long value1, Long value2) {
-            addCriterion("parent_id not between", value1, value2, "parentId");
+        public Criteria andSpecKeyNotIn(List<String> values) {
+            addCriterion("spec_key not in", values, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andSpecNameIsNull() {
-            addCriterion("spec_name is null");
+        public Criteria andSpecKeyBetween(String value1, String value2) {
+            addCriterion("spec_key between", value1, value2, "specKey");
             return (Criteria) this;
         }
 
-        public Criteria andSpecNameIsNotNull() {
-            addCriterion("spec_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameEqualTo(String value) {
-            addCriterion("spec_name =", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameNotEqualTo(String value) {
-            addCriterion("spec_name <>", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameGreaterThan(String value) {
-            addCriterion("spec_name >", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameGreaterThanOrEqualTo(String value) {
-            addCriterion("spec_name >=", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameLessThan(String value) {
-            addCriterion("spec_name <", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameLessThanOrEqualTo(String value) {
-            addCriterion("spec_name <=", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameLike(String value) {
-            addCriterion("spec_name like", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameNotLike(String value) {
-            addCriterion("spec_name not like", value, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameIn(List<String> values) {
-            addCriterion("spec_name in", values, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameNotIn(List<String> values) {
-            addCriterion("spec_name not in", values, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameBetween(String value1, String value2) {
-            addCriterion("spec_name between", value1, value2, "specName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecNameNotBetween(String value1, String value2) {
-            addCriterion("spec_name not between", value1, value2, "specName");
+        public Criteria andSpecKeyNotBetween(String value1, String value2) {
+            addCriterion("spec_key not between", value1, value2, "specKey");
             return (Criteria) this;
         }
 
@@ -425,52 +365,52 @@ public class SpecExample {
             return (Criteria) this;
         }
 
-        public Criteria andCutOffEqualTo(Byte value) {
+        public Criteria andCutOffEqualTo(Boolean value) {
             addCriterion("cut_off =", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotEqualTo(Byte value) {
+        public Criteria andCutOffNotEqualTo(Boolean value) {
             addCriterion("cut_off <>", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffGreaterThan(Byte value) {
+        public Criteria andCutOffGreaterThan(Boolean value) {
             addCriterion("cut_off >", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffGreaterThanOrEqualTo(Byte value) {
+        public Criteria andCutOffGreaterThanOrEqualTo(Boolean value) {
             addCriterion("cut_off >=", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffLessThan(Byte value) {
+        public Criteria andCutOffLessThan(Boolean value) {
             addCriterion("cut_off <", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffLessThanOrEqualTo(Byte value) {
+        public Criteria andCutOffLessThanOrEqualTo(Boolean value) {
             addCriterion("cut_off <=", value, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffIn(List<Byte> values) {
+        public Criteria andCutOffIn(List<Boolean> values) {
             addCriterion("cut_off in", values, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotIn(List<Byte> values) {
+        public Criteria andCutOffNotIn(List<Boolean> values) {
             addCriterion("cut_off not in", values, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffBetween(Byte value1, Byte value2) {
+        public Criteria andCutOffBetween(Boolean value1, Boolean value2) {
             addCriterion("cut_off between", value1, value2, "cutOff");
             return (Criteria) this;
         }
 
-        public Criteria andCutOffNotBetween(Byte value1, Byte value2) {
+        public Criteria andCutOffNotBetween(Boolean value1, Boolean value2) {
             addCriterion("cut_off not between", value1, value2, "cutOff");
             return (Criteria) this;
         }

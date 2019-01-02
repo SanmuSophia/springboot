@@ -7,7 +7,7 @@
     <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
-    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
+    <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -105,7 +105,7 @@
       gmt_create, gmt_modify, cut_off
       )
     values (#{id,jdbcType=BIGINT}, #{unitType,jdbcType=TINYINT}, #{unitName,jdbcType=VARCHAR}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{cutOff,jdbcType=TINYINT}
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{cutOff,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Unit" >
@@ -147,7 +147,7 @@
         #{gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="cutOff != null" >
-        #{cutOff,jdbcType=TINYINT},
+        #{cutOff,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -176,7 +176,7 @@
         gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="record.cutOff != null" >
-        cut_off = #{record.cutOff,jdbcType=TINYINT},
+        cut_off = #{record.cutOff,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -190,7 +190,7 @@
       unit_name = #{record.unitName,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      cut_off = #{record.cutOff,jdbcType=TINYINT}
+      cut_off = #{record.cutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,7 +211,7 @@
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="cutOff != null" >
-        cut_off = #{cutOff,jdbcType=TINYINT},
+        cut_off = #{cutOff,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -222,7 +222,7 @@
       unit_name = #{unitName,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      cut_off = #{cutOff,jdbcType=TINYINT}
+      cut_off = #{cutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

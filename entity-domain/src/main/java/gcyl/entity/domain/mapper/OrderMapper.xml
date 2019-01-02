@@ -3,25 +3,29 @@
 <mapper namespace="gcyl.entity.domain.mapper.OrderMapper" >
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Order" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
     <result column="order_state" property="orderState" jdbcType="INTEGER" />
     <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="pay_method" property="payMethod" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="INTEGER" />
     <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="table_num" property="tableNum" jdbcType="VARCHAR" />
-    <result column="consume_sum" property="consumeSum" jdbcType="DECIMAL" />
-    <result column="settle_sum" property="settleSum" jdbcType="DECIMAL" />
+    <result column="table_num" property="tableNum" jdbcType="INTEGER" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
+    <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="deduct_amount" property="deductAmount" jdbcType="DECIMAL" />
+    <result column="deduct_method" property="deductMethod" jdbcType="INTEGER" />
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="person_num" property="personNum" jdbcType="INTEGER" />
-    <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
-    <result column="pay_method" property="payMethod" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
     <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
+    <result column="gmt_serving_finish" property="gmtServingFinish" jdbcType="TIMESTAMP" />
     <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
-    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
+    <result column="shop_cut_off" property="shopCutOff" jdbcType="BIT" />
+    <result column="user_cut_off" property="userCutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,9 +86,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, order_state, is_pay, shop_id, user_id, table_num, consume_sum, settle_sum, 
-    consumption, description, person_num, goods_num, pay_method, gmt_create, gmt_modify, 
-    gmt_receive, gmt_pay, gmt_finish, cut_off
+    id, order_sn, order_state, is_pay, pay_method, pay_way, shop_id, user_id, table_num, 
+    consume_amount, settle_amount, deduct_amount, deduct_method, consumption, description, 
+    person_num, gmt_create, gmt_modify, gmt_receive, gmt_pay, gmt_serving_finish, gmt_finish, 
+    shop_cut_off, user_cut_off
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.OrderExample" >
     select
@@ -117,20 +122,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.Order" >
-    insert into tyg_ms_order (id, order_id, order_state, 
-      is_pay, shop_id, user_id, table_num, 
-      consume_sum, settle_sum, consumption, 
-      description, person_num, goods_num, 
-      pay_method, gmt_create, gmt_modify, 
-      gmt_receive, gmt_pay, gmt_finish, 
-      cut_off)
-    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER}, 
-      #{isPay,jdbcType=BIT}, #{shopId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{tableNum,jdbcType=VARCHAR}, 
-      #{consumeSum,jdbcType=DECIMAL}, #{settleSum,jdbcType=DECIMAL}, #{consumption,jdbcType=DECIMAL}, 
-      #{description,jdbcType=VARCHAR}, #{personNum,jdbcType=INTEGER}, #{goodsNum,jdbcType=INTEGER}, 
-      #{payMethod,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{gmtReceive,jdbcType=TIMESTAMP}, #{gmtPay,jdbcType=TIMESTAMP}, #{gmtFinish,jdbcType=TIMESTAMP}, 
-      #{cutOff,jdbcType=TINYINT})
+    insert into tyg_ms_order (id, order_sn, order_state, 
+      is_pay, pay_method, pay_way, 
+      shop_id, user_id, table_num, 
+      consume_amount, settle_amount, deduct_amount, 
+      deduct_method, consumption, description, 
+      person_num, gmt_create, gmt_modify, 
+      gmt_receive, gmt_pay, gmt_serving_finish, 
+      gmt_finish, shop_cut_off, user_cut_off
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, #{orderState,jdbcType=INTEGER}, 
+      #{isPay,jdbcType=BIT}, #{payMethod,jdbcType=INTEGER}, #{payWay,jdbcType=INTEGER}, 
+      #{shopId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{tableNum,jdbcType=INTEGER}, 
+      #{consumeAmount,jdbcType=DECIMAL}, #{settleAmount,jdbcType=DECIMAL}, #{deductAmount,jdbcType=DECIMAL}, 
+      #{deductMethod,jdbcType=INTEGER}, #{consumption,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, 
+      #{personNum,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{gmtReceive,jdbcType=TIMESTAMP}, #{gmtPay,jdbcType=TIMESTAMP}, #{gmtServingFinish,jdbcType=TIMESTAMP}, 
+      #{gmtFinish,jdbcType=TIMESTAMP}, #{shopCutOff,jdbcType=BIT}, #{userCutOff,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" >
     insert into tyg_ms_order
@@ -138,14 +147,20 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="orderId != null" >
-        order_id,
+      <if test="orderSn != null" >
+        order_sn,
       </if>
       <if test="orderState != null" >
         order_state,
       </if>
       <if test="isPay != null" >
         is_pay,
+      </if>
+      <if test="payMethod != null" >
+        pay_method,
+      </if>
+      <if test="payWay != null" >
+        pay_way,
       </if>
       <if test="shopId != null" >
         shop_id,
@@ -156,11 +171,17 @@
       <if test="tableNum != null" >
         table_num,
       </if>
-      <if test="consumeSum != null" >
-        consume_sum,
+      <if test="consumeAmount != null" >
+        consume_amount,
       </if>
-      <if test="settleSum != null" >
-        settle_sum,
+      <if test="settleAmount != null" >
+        settle_amount,
+      </if>
+      <if test="deductAmount != null" >
+        deduct_amount,
+      </if>
+      <if test="deductMethod != null" >
+        deduct_method,
       </if>
       <if test="consumption != null" >
         consumption,
@@ -170,12 +191,6 @@
       </if>
       <if test="personNum != null" >
         person_num,
-      </if>
-      <if test="goodsNum != null" >
-        goods_num,
-      </if>
-      <if test="payMethod != null" >
-        pay_method,
       </if>
       <if test="gmtCreate != null" >
         gmt_create,
@@ -189,25 +204,37 @@
       <if test="gmtPay != null" >
         gmt_pay,
       </if>
+      <if test="gmtServingFinish != null" >
+        gmt_serving_finish,
+      </if>
       <if test="gmtFinish != null" >
         gmt_finish,
       </if>
-      <if test="cutOff != null" >
-        cut_off,
+      <if test="shopCutOff != null" >
+        shop_cut_off,
+      </if>
+      <if test="userCutOff != null" >
+        user_cut_off,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderId != null" >
-        #{orderId,jdbcType=VARCHAR},
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
       </if>
       <if test="orderState != null" >
         #{orderState,jdbcType=INTEGER},
       </if>
       <if test="isPay != null" >
         #{isPay,jdbcType=BIT},
+      </if>
+      <if test="payMethod != null" >
+        #{payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=INTEGER},
       </if>
       <if test="shopId != null" >
         #{shopId,jdbcType=BIGINT},
@@ -216,13 +243,19 @@
         #{userId,jdbcType=BIGINT},
       </if>
       <if test="tableNum != null" >
-        #{tableNum,jdbcType=VARCHAR},
+        #{tableNum,jdbcType=INTEGER},
       </if>
-      <if test="consumeSum != null" >
-        #{consumeSum,jdbcType=DECIMAL},
+      <if test="consumeAmount != null" >
+        #{consumeAmount,jdbcType=DECIMAL},
       </if>
-      <if test="settleSum != null" >
-        #{settleSum,jdbcType=DECIMAL},
+      <if test="settleAmount != null" >
+        #{settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductAmount != null" >
+        #{deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductMethod != null" >
+        #{deductMethod,jdbcType=INTEGER},
       </if>
       <if test="consumption != null" >
         #{consumption,jdbcType=DECIMAL},
@@ -232,12 +265,6 @@
       </if>
       <if test="personNum != null" >
         #{personNum,jdbcType=INTEGER},
-      </if>
-      <if test="goodsNum != null" >
-        #{goodsNum,jdbcType=INTEGER},
-      </if>
-      <if test="payMethod != null" >
-        #{payMethod,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -251,11 +278,17 @@
       <if test="gmtPay != null" >
         #{gmtPay,jdbcType=TIMESTAMP},
       </if>
+      <if test="gmtServingFinish != null" >
+        #{gmtServingFinish,jdbcType=TIMESTAMP},
+      </if>
       <if test="gmtFinish != null" >
         #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="cutOff != null" >
-        #{cutOff,jdbcType=TINYINT},
+      <if test="shopCutOff != null" >
+        #{shopCutOff,jdbcType=BIT},
+      </if>
+      <if test="userCutOff != null" >
+        #{userCutOff,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -271,14 +304,20 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.orderId != null" >
-        order_id = #{record.orderId,jdbcType=VARCHAR},
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
       </if>
       <if test="record.orderState != null" >
         order_state = #{record.orderState,jdbcType=INTEGER},
       </if>
       <if test="record.isPay != null" >
         is_pay = #{record.isPay,jdbcType=BIT},
+      </if>
+      <if test="record.payMethod != null" >
+        pay_method = #{record.payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.payWay != null" >
+        pay_way = #{record.payWay,jdbcType=INTEGER},
       </if>
       <if test="record.shopId != null" >
         shop_id = #{record.shopId,jdbcType=BIGINT},
@@ -287,13 +326,19 @@
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.tableNum != null" >
-        table_num = #{record.tableNum,jdbcType=VARCHAR},
+        table_num = #{record.tableNum,jdbcType=INTEGER},
       </if>
-      <if test="record.consumeSum != null" >
-        consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
+      <if test="record.consumeAmount != null" >
+        consume_amount = #{record.consumeAmount,jdbcType=DECIMAL},
       </if>
-      <if test="record.settleSum != null" >
-        settle_sum = #{record.settleSum,jdbcType=DECIMAL},
+      <if test="record.settleAmount != null" >
+        settle_amount = #{record.settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deductAmount != null" >
+        deduct_amount = #{record.deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deductMethod != null" >
+        deduct_method = #{record.deductMethod,jdbcType=INTEGER},
       </if>
       <if test="record.consumption != null" >
         consumption = #{record.consumption,jdbcType=DECIMAL},
@@ -303,12 +348,6 @@
       </if>
       <if test="record.personNum != null" >
         person_num = #{record.personNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsNum != null" >
-        goods_num = #{record.goodsNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.payMethod != null" >
-        pay_method = #{record.payMethod,jdbcType=VARCHAR},
       </if>
       <if test="record.gmtCreate != null" >
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -322,11 +361,17 @@
       <if test="record.gmtPay != null" >
         gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.gmtServingFinish != null" >
+        gmt_serving_finish = #{record.gmtServingFinish,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.gmtFinish != null" >
         gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.cutOff != null" >
-        cut_off = #{record.cutOff,jdbcType=TINYINT},
+      <if test="record.shopCutOff != null" >
+        shop_cut_off = #{record.shopCutOff,jdbcType=BIT},
+      </if>
+      <if test="record.userCutOff != null" >
+        user_cut_off = #{record.userCutOff,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -336,25 +381,29 @@
   <update id="updateByExample" parameterType="map" >
     update tyg_ms_order
     set id = #{record.id,jdbcType=BIGINT},
-      order_id = #{record.orderId,jdbcType=VARCHAR},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
       order_state = #{record.orderState,jdbcType=INTEGER},
       is_pay = #{record.isPay,jdbcType=BIT},
+      pay_method = #{record.payMethod,jdbcType=INTEGER},
+      pay_way = #{record.payWay,jdbcType=INTEGER},
       shop_id = #{record.shopId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
-      table_num = #{record.tableNum,jdbcType=VARCHAR},
-      consume_sum = #{record.consumeSum,jdbcType=DECIMAL},
-      settle_sum = #{record.settleSum,jdbcType=DECIMAL},
+      table_num = #{record.tableNum,jdbcType=INTEGER},
+      consume_amount = #{record.consumeAmount,jdbcType=DECIMAL},
+      settle_amount = #{record.settleAmount,jdbcType=DECIMAL},
+      deduct_amount = #{record.deductAmount,jdbcType=DECIMAL},
+      deduct_method = #{record.deductMethod,jdbcType=INTEGER},
       consumption = #{record.consumption,jdbcType=DECIMAL},
       description = #{record.description,jdbcType=VARCHAR},
       person_num = #{record.personNum,jdbcType=INTEGER},
-      goods_num = #{record.goodsNum,jdbcType=INTEGER},
-      pay_method = #{record.payMethod,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
       gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
+      gmt_serving_finish = #{record.gmtServingFinish,jdbcType=TIMESTAMP},
       gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
-      cut_off = #{record.cutOff,jdbcType=TINYINT}
+      shop_cut_off = #{record.shopCutOff,jdbcType=BIT},
+      user_cut_off = #{record.userCutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -362,14 +411,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Order" >
     update tyg_ms_order
     <set >
-      <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=VARCHAR},
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
       </if>
       <if test="orderState != null" >
         order_state = #{orderState,jdbcType=INTEGER},
       </if>
       <if test="isPay != null" >
         is_pay = #{isPay,jdbcType=BIT},
+      </if>
+      <if test="payMethod != null" >
+        pay_method = #{payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="payWay != null" >
+        pay_way = #{payWay,jdbcType=INTEGER},
       </if>
       <if test="shopId != null" >
         shop_id = #{shopId,jdbcType=BIGINT},
@@ -378,13 +433,19 @@
         user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="tableNum != null" >
-        table_num = #{tableNum,jdbcType=VARCHAR},
+        table_num = #{tableNum,jdbcType=INTEGER},
       </if>
-      <if test="consumeSum != null" >
-        consume_sum = #{consumeSum,jdbcType=DECIMAL},
+      <if test="consumeAmount != null" >
+        consume_amount = #{consumeAmount,jdbcType=DECIMAL},
       </if>
-      <if test="settleSum != null" >
-        settle_sum = #{settleSum,jdbcType=DECIMAL},
+      <if test="settleAmount != null" >
+        settle_amount = #{settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductAmount != null" >
+        deduct_amount = #{deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductMethod != null" >
+        deduct_method = #{deductMethod,jdbcType=INTEGER},
       </if>
       <if test="consumption != null" >
         consumption = #{consumption,jdbcType=DECIMAL},
@@ -394,12 +455,6 @@
       </if>
       <if test="personNum != null" >
         person_num = #{personNum,jdbcType=INTEGER},
-      </if>
-      <if test="goodsNum != null" >
-        goods_num = #{goodsNum,jdbcType=INTEGER},
-      </if>
-      <if test="payMethod != null" >
-        pay_method = #{payMethod,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -413,36 +468,46 @@
       <if test="gmtPay != null" >
         gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
       </if>
+      <if test="gmtServingFinish != null" >
+        gmt_serving_finish = #{gmtServingFinish,jdbcType=TIMESTAMP},
+      </if>
       <if test="gmtFinish != null" >
         gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
       </if>
-      <if test="cutOff != null" >
-        cut_off = #{cutOff,jdbcType=TINYINT},
+      <if test="shopCutOff != null" >
+        shop_cut_off = #{shopCutOff,jdbcType=BIT},
+      </if>
+      <if test="userCutOff != null" >
+        user_cut_off = #{userCutOff,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Order" >
     update tyg_ms_order
-    set order_id = #{orderId,jdbcType=VARCHAR},
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
       order_state = #{orderState,jdbcType=INTEGER},
       is_pay = #{isPay,jdbcType=BIT},
+      pay_method = #{payMethod,jdbcType=INTEGER},
+      pay_way = #{payWay,jdbcType=INTEGER},
       shop_id = #{shopId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=BIGINT},
-      table_num = #{tableNum,jdbcType=VARCHAR},
-      consume_sum = #{consumeSum,jdbcType=DECIMAL},
-      settle_sum = #{settleSum,jdbcType=DECIMAL},
+      table_num = #{tableNum,jdbcType=INTEGER},
+      consume_amount = #{consumeAmount,jdbcType=DECIMAL},
+      settle_amount = #{settleAmount,jdbcType=DECIMAL},
+      deduct_amount = #{deductAmount,jdbcType=DECIMAL},
+      deduct_method = #{deductMethod,jdbcType=INTEGER},
       consumption = #{consumption,jdbcType=DECIMAL},
       description = #{description,jdbcType=VARCHAR},
       person_num = #{personNum,jdbcType=INTEGER},
-      goods_num = #{goodsNum,jdbcType=INTEGER},
-      pay_method = #{payMethod,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
       gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
+      gmt_serving_finish = #{gmtServingFinish,jdbcType=TIMESTAMP},
       gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
-      cut_off = #{cutOff,jdbcType=TINYINT}
+      shop_cut_off = #{shopCutOff,jdbcType=BIT},
+      user_cut_off = #{userCutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

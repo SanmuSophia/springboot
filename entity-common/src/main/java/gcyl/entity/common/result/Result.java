@@ -3,8 +3,6 @@ package gcyl.entity.common.result;
 
 import com.alibaba.fastjson.JSON;
 import gcyl.entity.common.enums.ResultEnum;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 
@@ -12,8 +10,6 @@ import java.io.Serializable;
  * 结果
  */
 public class Result implements Serializable {
-
-    private static final Logger log = LogManager.getLogger(Result.class);
 
     private boolean success;
     private String code;

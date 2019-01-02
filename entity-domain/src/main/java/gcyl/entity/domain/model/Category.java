@@ -14,7 +14,7 @@ public class Category implements Serializable {
 
     private Date gmtModify;
 
-    private Byte cutOff;
+    private Boolean cutOff;
 
     private static final long serialVersionUID = 1L;
 
@@ -58,11 +58,28 @@ public class Category implements Serializable {
         this.gmtModify = gmtModify;
     }
 
-    public Byte getCutOff() {
+    public Boolean getCutOff() {
         return cutOff;
     }
 
-    public void setCutOff(Byte cutOff) {
+    public void setCutOff(Boolean cutOff) {
         this.cutOff = cutOff;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", categoryName=").append(categoryName);
+        sb.append(", gmtCreate=").append(gmtCreate);
+        sb.append(", gmtModify=").append(gmtModify);
+        sb.append(", cutOff=").append(cutOff);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

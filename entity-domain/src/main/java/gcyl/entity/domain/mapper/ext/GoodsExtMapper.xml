@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gcyl.entity.domain.mapper.ext.GoodsExtMapper" >
+  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.ext.GoodsExt" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+    <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
+    <result column="sales_count" property="salesCount" jdbcType="INTEGER" />
+    <result column="month_sales" property="monthSales" jdbcType="INTEGER" />
+    <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
+    <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
+    <result column="is_default" property="isDefault" jdbcType="BIT" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="cut_off" property="cutOff" jdbcType="BIT" />
+    <result column="minSpecStock" property="minSpecStock" jdbcType="INTEGER" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="specNum" property="specNum" jdbcType="INTEGER" />
+  </resultMap>
+
+  <!-- 插入商品同时返回商品主键 -->
+  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Goods"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into tyg_ms_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="goodsSn != null" >
+        goods_sn,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="goodsUnit != null" >
+        goods_unit,
+      </if>
+      <if test="salesCount != null" >
+        sales_count,
+      </if>
+      <if test="monthSales != null" >
+        month_sales,
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend,
+      </if>
+      <if test="isOnSale != null" >
+        is_on_sale,
+      </if>
+      <if test="isDefault != null" >
+        is_default,
+      </if>
+      <if test="goodsImg != null" >
+        goods_img,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="cutOff != null" >
+        cut_off,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsSn != null" >
+        #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsUnit != null" >
+        #{goodsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="salesCount != null" >
+        #{salesCount,jdbcType=INTEGER},
+      </if>
+      <if test="monthSales != null" >
+        #{monthSales,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="isOnSale != null" >
+        #{isOnSale,jdbcType=BIT},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="goodsImg != null" >
+        #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cutOff != null" >
+        #{cutOff,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 商品列表搜索字段 -->
+  <sql id="Goods_List_Column">
+    id,
+    goods_name,
+    goods_unit,
+    goods_img,
+    g.month_sales,
+    is_on_sale,
+    stock,
+    minSpecStock,
+    price,
+    specNum
+  </sql>
+  <sql id="Goods_List_Column_Tmp">
+    g.id,
+    g.shop_id,
+    g.goods_name,
+    g.goods_unit,
+    g.goods_img,
+    g.month_sales,
+    g.is_recommend,
+    g.is_on_sale,
+    g.is_default,
+    g.category_id,
+    sum (gs.spec_stock) as stock,
+    min (gs.spec_stock) as minSpecStock,
+    min (gs.spec_price) as price,
+    count (gs.id) as specNum
+  </sql>
+
+  <!-- 根据条件搜索 -->
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Goods_List_Column"/>
+    from (
+      select
+      <include refid="Goods_List_Column_Tmp"/>
+      from
+        tyg_ms_goods g
+      left join
+        tyg_ms_goods_spec gs on g.id = gs.goods_id
+      where
+        g.cut_off = 0
+      and gs.cut_off = 0
+      group by g.id
+      ) as tmp
+    <where>
+      <trim prefixOverrides="and">
+        <if test="shopId != null">
+          and tmp.shopId = #{shopId}
+        </if>
+        <if test="sellOut == true">
+          and tmp.minSpecStock &lt;=0
+        </if>
+        <if test="isRecommend != null">
+          and tmp.is_recommend = #{isRecommend}
+        </if>
+        <if test="isDefault != null">
+          and tmp.is_default = #{isDefault}
+        </if>
+        <if test="isOnSale != null">
+          and tmp.is_on_sale = #{isOnSale}
+        </if>
+        <if test="categoryId != null">
+          and tmp.category_id = #{categoryId}
+        </if>
+      </trim>
+    </where>
+    <if test="orderBy != null">
+      order by ${orderBy}
+    </if>
+  </select>
+
+  <!-- 商品详情返回 -->
+  <resultMap id="DetailResultMap" type="gcyl.entity.domain.model.ext.GoodsExt" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
+    <result column="month_sales" property="monthSales" jdbcType="INTEGER" />
+    <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
+    <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
+    <result column="is_default" property="isDefault" jdbcType="BIT" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+    <collection property="goodsSpecList" column="id" ofType="GoodsSpec" select="gcyl.entity.domain.mapper.ext.GoodsSpecExtMapper.selectByGoodsId"/>
+  </resultMap>
+  <!-- 商品详情搜索字段 -->
+  <sql id="Goods_Detail_Column">
+    g.id,
+    g.goods_name,
+    g.goods_unit,
+    g.month_sales,
+    g.is_recommend,
+    g.is_on_sale,
+    g.is_default,
+    g.goods_img,
+    c.category_name
+  </sql>
+  <!-- 商品详情搜索 -->
+  <select id="selectGoodsDetail" parameterType="long" resultMap="DetailResultMap">
+    select
+    <include refid="Goods_Detail_Column"/>
+    from
+      tyg_ms_goods g
+    left join
+      tyg_ms_category c on g.category_id = c.id
+    where
+      g.id = #{id}
+    and g.cut_off = 0
+  </select>
+</mapper>

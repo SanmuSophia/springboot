@@ -1,14 +1,11 @@
 package gcyl.entity.controller;
 
-import gcyl.entity.annotation.UserLogin;
 import gcyl.entity.common.utils.IpContext;
 import gcyl.entity.request.TestRequest;
-import gcyl.entity.service.goods.ITestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 
@@ -21,9 +18,6 @@ import redis.clients.jedis.JedisPool;
 @Api(description = "商品接口")
 
 public class TestController {
-
-    @Autowired
-    ITestService testService;
     @Autowired
     JedisPool jedisPool;
     public static String str = "1";

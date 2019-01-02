@@ -9,7 +9,7 @@ import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.common.utils.DateUtils;
 import gcyl.entity.domain.mapper.CategoryMapper;
-import gcyl.entity.domain.mapper.my.CategoryExtMapper;
+import gcyl.entity.domain.mapper.ext.CategoryExtMapper;
 import gcyl.entity.domain.model.Category;
 import gcyl.entity.domain.model.CategoryExample;
 import org.slf4j.Logger;
@@ -120,8 +120,8 @@ public class CategoryServiceImpl implements ICategoryService {
         int i = categoryMapper.updateByExampleSelective(category, example);
 
         if (i <= 0) {
-            result.error(ResultEnum.C3001);
             logger.info(ResultEnum.C3001.toString());
+            result.error(ResultEnum.C3001);
             return result;
         }
 

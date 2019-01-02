@@ -175,62 +175,52 @@ public class OrderDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdEqualTo(String value) {
+        public Criteria andOrderIdEqualTo(Long value) {
             addCriterion("order_id =", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotEqualTo(String value) {
+        public Criteria andOrderIdNotEqualTo(Long value) {
             addCriterion("order_id <>", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThan(String value) {
+        public Criteria andOrderIdGreaterThan(Long value) {
             addCriterion("order_id >", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThanOrEqualTo(String value) {
+        public Criteria andOrderIdGreaterThanOrEqualTo(Long value) {
             addCriterion("order_id >=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThan(String value) {
+        public Criteria andOrderIdLessThan(Long value) {
             addCriterion("order_id <", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThanOrEqualTo(String value) {
+        public Criteria andOrderIdLessThanOrEqualTo(Long value) {
             addCriterion("order_id <=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLike(String value) {
-            addCriterion("order_id like", value, "orderId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderIdNotLike(String value) {
-            addCriterion("order_id not like", value, "orderId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderIdIn(List<String> values) {
+        public Criteria andOrderIdIn(List<Long> values) {
             addCriterion("order_id in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotIn(List<String> values) {
+        public Criteria andOrderIdNotIn(List<Long> values) {
             addCriterion("order_id not in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdBetween(String value1, String value2) {
+        public Criteria andOrderIdBetween(Long value1, Long value2) {
             addCriterion("order_id between", value1, value2, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotBetween(String value1, String value2) {
+        public Criteria andOrderIdNotBetween(Long value1, Long value2) {
             addCriterion("order_id not between", value1, value2, "orderId");
             return (Criteria) this;
         }
@@ -245,62 +235,52 @@ public class OrderDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdEqualTo(String value) {
+        public Criteria andGoodsIdEqualTo(Long value) {
             addCriterion("goods_id =", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdNotEqualTo(String value) {
+        public Criteria andGoodsIdNotEqualTo(Long value) {
             addCriterion("goods_id <>", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdGreaterThan(String value) {
+        public Criteria andGoodsIdGreaterThan(Long value) {
             addCriterion("goods_id >", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdGreaterThanOrEqualTo(String value) {
+        public Criteria andGoodsIdGreaterThanOrEqualTo(Long value) {
             addCriterion("goods_id >=", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdLessThan(String value) {
+        public Criteria andGoodsIdLessThan(Long value) {
             addCriterion("goods_id <", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdLessThanOrEqualTo(String value) {
+        public Criteria andGoodsIdLessThanOrEqualTo(Long value) {
             addCriterion("goods_id <=", value, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdLike(String value) {
-            addCriterion("goods_id like", value, "goodsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsIdNotLike(String value) {
-            addCriterion("goods_id not like", value, "goodsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andGoodsIdIn(List<String> values) {
+        public Criteria andGoodsIdIn(List<Long> values) {
             addCriterion("goods_id in", values, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdNotIn(List<String> values) {
+        public Criteria andGoodsIdNotIn(List<Long> values) {
             addCriterion("goods_id not in", values, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdBetween(String value1, String value2) {
+        public Criteria andGoodsIdBetween(Long value1, Long value2) {
             addCriterion("goods_id between", value1, value2, "goodsId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsIdNotBetween(String value1, String value2) {
+        public Criteria andGoodsIdNotBetween(Long value1, Long value2) {
             addCriterion("goods_id not between", value1, value2, "goodsId");
             return (Criteria) this;
         }
@@ -515,6 +495,66 @@ public class OrderDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andSpecIdIsNull() {
+            addCriterion("spec_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdIsNotNull() {
+            addCriterion("spec_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdEqualTo(Long value) {
+            addCriterion("spec_id =", value, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdNotEqualTo(Long value) {
+            addCriterion("spec_id <>", value, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdGreaterThan(Long value) {
+            addCriterion("spec_id >", value, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("spec_id >=", value, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdLessThan(Long value) {
+            addCriterion("spec_id <", value, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdLessThanOrEqualTo(Long value) {
+            addCriterion("spec_id <=", value, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdIn(List<Long> values) {
+            addCriterion("spec_id in", values, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdNotIn(List<Long> values) {
+            addCriterion("spec_id not in", values, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdBetween(Long value1, Long value2) {
+            addCriterion("spec_id between", value1, value2, "specId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIdNotBetween(Long value1, Long value2) {
+            addCriterion("spec_id not between", value1, value2, "specId");
+            return (Criteria) this;
+        }
+
         public Criteria andSpecNameIsNull() {
             addCriterion("spec_name is null");
             return (Criteria) this;
@@ -642,6 +682,66 @@ public class OrderDetailExample {
 
         public Criteria andSpecPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("spec_price not between", value1, value2, "specPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumIsNull() {
+            addCriterion("spec_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumIsNotNull() {
+            addCriterion("spec_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumEqualTo(Integer value) {
+            addCriterion("spec_num =", value, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumNotEqualTo(Integer value) {
+            addCriterion("spec_num <>", value, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumGreaterThan(Integer value) {
+            addCriterion("spec_num >", value, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("spec_num >=", value, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumLessThan(Integer value) {
+            addCriterion("spec_num <", value, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumLessThanOrEqualTo(Integer value) {
+            addCriterion("spec_num <=", value, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumIn(List<Integer> values) {
+            addCriterion("spec_num in", values, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumNotIn(List<Integer> values) {
+            addCriterion("spec_num not in", values, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumBetween(Integer value1, Integer value2) {
+            addCriterion("spec_num between", value1, value2, "specNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("spec_num not between", value1, value2, "specNum");
             return (Criteria) this;
         }
     }

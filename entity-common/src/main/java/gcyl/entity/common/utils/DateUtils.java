@@ -21,8 +21,8 @@ public class DateUtils {
     * @return 当前日期
     */
    public static Date getDate() {
-       return Date.from(LocalDateTime.now(ZoneId.of(Constant.gmt))
-               .toInstant(ZoneOffset.of(Constant.gmt)));
+       return Date.from(LocalDateTime.now(ZoneId.of(Constant.GMT))
+               .toInstant(ZoneOffset.of(Constant.GMT)));
    }
 
    /**
@@ -30,8 +30,22 @@ public class DateUtils {
     * @return 当前时间
     */
    public static long getDateTime() {
-      return LocalDateTime.now(ZoneId.of(Constant.gmt))
-              .toInstant(ZoneOffset.of(Constant.gmt))
+      return LocalDateTime.now(ZoneId.of(Constant.GMT))
+              .toInstant(ZoneOffset.of(Constant.GMT))
               .toEpochMilli();
+   }
+
+   /**
+    * 获取当天23:59:59:999999999的时间
+    * @return 时间戳
+    */
+   public static long getDateEndTime() {
+         return LocalDateTime.now(ZoneId.of(Constant.GMT))
+                 .withHour(23)
+                 .withMinute(59)
+                 .withSecond(59)
+                 .withNano(999999999)
+                 .toInstant(ZoneOffset.of(Constant.GMT))
+                 .toEpochMilli();
    }
 }

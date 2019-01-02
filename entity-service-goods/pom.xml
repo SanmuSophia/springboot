@@ -28,6 +28,11 @@
             <artifactId>entity-config</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>gcyl</groupId>
+            <artifactId>entity-service-category</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

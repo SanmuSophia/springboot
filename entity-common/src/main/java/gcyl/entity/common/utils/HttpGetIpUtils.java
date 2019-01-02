@@ -7,7 +7,7 @@ public class HttpGetIpUtils {
     public HttpGetIpUtils() {
     }
 
-    public static final String getIpAddress(HttpServletRequest request) {
+    public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
         if (LogUtils.isInfoEnabled()) {
             LogUtils.info(" - X-Forwarded-For - String ip = " + ip);

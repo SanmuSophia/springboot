@@ -7,22 +7,20 @@ package gcyl.entity.common.enums;
  * @date 2018/12/13
  */
 public enum CutOffEnum {
-    TRUE((byte) 1, "删除"),
-    FALSE((byte) 0, "未删除");
 
-    private byte code;
-    private String name;
+    TRUE(true, "删除"),
+    FALSE(false, "未删除");
 
-    CutOffEnum(byte code, String name) {
+    boolean code;
+    String name;
+
+    CutOffEnum(boolean code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public byte getCode() {
+    public boolean getCode() {
         return code;
     }
 
-    public String getName() {
-        return name;
-    }
 }

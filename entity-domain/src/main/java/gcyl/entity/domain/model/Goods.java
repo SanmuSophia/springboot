@@ -6,19 +6,19 @@ import java.util.Date;
 public class Goods implements Serializable {
     private Long id;
 
+    private Long shopId;
+
     private String goodsSn;
 
     private String goodsName;
 
-    private String categoryId;
-
-    private String categoryName;
+    private Long categoryId;
 
     private String goodsUnit;
 
-    private Long dayStock;
+    private Integer salesCount;
 
-    private Long salesVolume;
+    private Integer monthSales;
 
     private Boolean isRecommend;
 
@@ -34,7 +34,7 @@ public class Goods implements Serializable {
 
     private Date gmtModify;
 
-    private Byte cutOff;
+    private Boolean cutOff;
 
     private static final long serialVersionUID = 1L;
 
@@ -44,6 +44,14 @@ public class Goods implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
     }
 
     public String getGoodsSn() {
@@ -62,20 +70,12 @@ public class Goods implements Serializable {
         this.goodsName = goodsName;
     }
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public String getGoodsUnit() {
@@ -86,20 +86,20 @@ public class Goods implements Serializable {
         this.goodsUnit = goodsUnit;
     }
 
-    public Long getDayStock() {
-        return dayStock;
+    public Integer getSalesCount() {
+        return salesCount;
     }
 
-    public void setDayStock(Long dayStock) {
-        this.dayStock = dayStock;
+    public void setSalesCount(Integer salesCount) {
+        this.salesCount = salesCount;
     }
 
-    public Long getSalesVolume() {
-        return salesVolume;
+    public Integer getMonthSales() {
+        return monthSales;
     }
 
-    public void setSalesVolume(Long salesVolume) {
-        this.salesVolume = salesVolume;
+    public void setMonthSales(Integer monthSales) {
+        this.monthSales = monthSales;
     }
 
     public Boolean getIsRecommend() {
@@ -158,11 +158,38 @@ public class Goods implements Serializable {
         this.gmtModify = gmtModify;
     }
 
-    public Byte getCutOff() {
+    public Boolean getCutOff() {
         return cutOff;
     }
 
-    public void setCutOff(Byte cutOff) {
+    public void setCutOff(Boolean cutOff) {
         this.cutOff = cutOff;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", goodsSn=").append(goodsSn);
+        sb.append(", goodsName=").append(goodsName);
+        sb.append(", categoryId=").append(categoryId);
+        sb.append(", goodsUnit=").append(goodsUnit);
+        sb.append(", salesCount=").append(salesCount);
+        sb.append(", monthSales=").append(monthSales);
+        sb.append(", isRecommend=").append(isRecommend);
+        sb.append(", isOnSale=").append(isOnSale);
+        sb.append(", isDefault=").append(isDefault);
+        sb.append(", goodsImg=").append(goodsImg);
+        sb.append(", version=").append(version);
+        sb.append(", gmtCreate=").append(gmtCreate);
+        sb.append(", gmtModify=").append(gmtModify);
+        sb.append(", cutOff=").append(cutOff);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

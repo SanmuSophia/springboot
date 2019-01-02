@@ -7,31 +7,35 @@ import java.util.Date;
 public class Order implements Serializable {
     private Long id;
 
-    private String orderId;
+    private String orderSn;
 
     private Integer orderState;
 
     private Boolean isPay;
 
+    private Integer payMethod;
+
+    private Integer payWay;
+
     private Long shopId;
 
     private Long userId;
 
-    private String tableNum;
+    private Integer tableNum;
 
-    private BigDecimal consumeSum;
+    private BigDecimal consumeAmount;
 
-    private BigDecimal settleSum;
+    private BigDecimal settleAmount;
+
+    private BigDecimal deductAmount;
+
+    private Integer deductMethod;
 
     private BigDecimal consumption;
 
     private String description;
 
     private Integer personNum;
-
-    private Integer goodsNum;
-
-    private String payMethod;
 
     private Date gmtCreate;
 
@@ -41,9 +45,13 @@ public class Order implements Serializable {
 
     private Date gmtPay;
 
+    private Date gmtServingFinish;
+
     private Date gmtFinish;
 
-    private Byte cutOff;
+    private Boolean shopCutOff;
+
+    private Boolean userCutOff;
 
     private static final long serialVersionUID = 1L;
 
@@ -55,12 +63,12 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getOrderSn() {
+        return orderSn;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrderSn(String orderSn) {
+        this.orderSn = orderSn;
     }
 
     public Integer getOrderState() {
@@ -79,6 +87,22 @@ public class Order implements Serializable {
         this.isPay = isPay;
     }
 
+    public Integer getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(Integer payMethod) {
+        this.payMethod = payMethod;
+    }
+
+    public Integer getPayWay() {
+        return payWay;
+    }
+
+    public void setPayWay(Integer payWay) {
+        this.payWay = payWay;
+    }
+
     public Long getShopId() {
         return shopId;
     }
@@ -95,28 +119,44 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public String getTableNum() {
+    public Integer getTableNum() {
         return tableNum;
     }
 
-    public void setTableNum(String tableNum) {
+    public void setTableNum(Integer tableNum) {
         this.tableNum = tableNum;
     }
 
-    public BigDecimal getConsumeSum() {
-        return consumeSum;
+    public BigDecimal getConsumeAmount() {
+        return consumeAmount;
     }
 
-    public void setConsumeSum(BigDecimal consumeSum) {
-        this.consumeSum = consumeSum;
+    public void setConsumeAmount(BigDecimal consumeAmount) {
+        this.consumeAmount = consumeAmount;
     }
 
-    public BigDecimal getSettleSum() {
-        return settleSum;
+    public BigDecimal getSettleAmount() {
+        return settleAmount;
     }
 
-    public void setSettleSum(BigDecimal settleSum) {
-        this.settleSum = settleSum;
+    public void setSettleAmount(BigDecimal settleAmount) {
+        this.settleAmount = settleAmount;
+    }
+
+    public BigDecimal getDeductAmount() {
+        return deductAmount;
+    }
+
+    public void setDeductAmount(BigDecimal deductAmount) {
+        this.deductAmount = deductAmount;
+    }
+
+    public Integer getDeductMethod() {
+        return deductMethod;
+    }
+
+    public void setDeductMethod(Integer deductMethod) {
+        this.deductMethod = deductMethod;
     }
 
     public BigDecimal getConsumption() {
@@ -141,22 +181,6 @@ public class Order implements Serializable {
 
     public void setPersonNum(Integer personNum) {
         this.personNum = personNum;
-    }
-
-    public Integer getGoodsNum() {
-        return goodsNum;
-    }
-
-    public void setGoodsNum(Integer goodsNum) {
-        this.goodsNum = goodsNum;
-    }
-
-    public String getPayMethod() {
-        return payMethod;
-    }
-
-    public void setPayMethod(String payMethod) {
-        this.payMethod = payMethod;
     }
 
     public Date getGmtCreate() {
@@ -191,6 +215,14 @@ public class Order implements Serializable {
         this.gmtPay = gmtPay;
     }
 
+    public Date getGmtServingFinish() {
+        return gmtServingFinish;
+    }
+
+    public void setGmtServingFinish(Date gmtServingFinish) {
+        this.gmtServingFinish = gmtServingFinish;
+    }
+
     public Date getGmtFinish() {
         return gmtFinish;
     }
@@ -199,11 +231,54 @@ public class Order implements Serializable {
         this.gmtFinish = gmtFinish;
     }
 
-    public Byte getCutOff() {
-        return cutOff;
+    public Boolean getShopCutOff() {
+        return shopCutOff;
     }
 
-    public void setCutOff(Byte cutOff) {
-        this.cutOff = cutOff;
+    public void setShopCutOff(Boolean shopCutOff) {
+        this.shopCutOff = shopCutOff;
+    }
+
+    public Boolean getUserCutOff() {
+        return userCutOff;
+    }
+
+    public void setUserCutOff(Boolean userCutOff) {
+        this.userCutOff = userCutOff;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", orderSn=").append(orderSn);
+        sb.append(", orderState=").append(orderState);
+        sb.append(", isPay=").append(isPay);
+        sb.append(", payMethod=").append(payMethod);
+        sb.append(", payWay=").append(payWay);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", userId=").append(userId);
+        sb.append(", tableNum=").append(tableNum);
+        sb.append(", consumeAmount=").append(consumeAmount);
+        sb.append(", settleAmount=").append(settleAmount);
+        sb.append(", deductAmount=").append(deductAmount);
+        sb.append(", deductMethod=").append(deductMethod);
+        sb.append(", consumption=").append(consumption);
+        sb.append(", description=").append(description);
+        sb.append(", personNum=").append(personNum);
+        sb.append(", gmtCreate=").append(gmtCreate);
+        sb.append(", gmtModify=").append(gmtModify);
+        sb.append(", gmtReceive=").append(gmtReceive);
+        sb.append(", gmtPay=").append(gmtPay);
+        sb.append(", gmtServingFinish=").append(gmtServingFinish);
+        sb.append(", gmtFinish=").append(gmtFinish);
+        sb.append(", shopCutOff=").append(shopCutOff);
+        sb.append(", userCutOff=").append(userCutOff);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

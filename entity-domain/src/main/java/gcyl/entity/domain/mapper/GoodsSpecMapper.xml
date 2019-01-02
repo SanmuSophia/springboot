@@ -3,13 +3,15 @@
 <mapper namespace="gcyl.entity.domain.mapper.GoodsSpecMapper" >
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.GoodsSpec" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="spec_key" property="specKey" jdbcType="VARCHAR" />
     <result column="spec_name" property="specName" jdbcType="VARCHAR" />
     <result column="spec_price" property="specPrice" jdbcType="DECIMAL" />
-    <result column="spec_stock" property="specStock" jdbcType="BIGINT" />
+    <result column="spec_day_stock" property="specDayStock" jdbcType="INTEGER" />
+    <result column="spec_stock" property="specStock" jdbcType="INTEGER" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
-    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
+    <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, goods_id, spec_name, spec_price, spec_stock, gmt_create, gmt_modify, cut_off
+    id, goods_id, spec_key, spec_name, spec_price, spec_day_stock, spec_stock, gmt_create, 
+    gmt_modify, cut_off
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.GoodsSpecExample" >
     select
@@ -103,12 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.GoodsSpec" >
-    insert into tyg_ms_goods_spec (id, goods_id, spec_name, 
-      spec_price, spec_stock, gmt_create, 
-      gmt_modify, cut_off)
-    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=VARCHAR}, #{specName,jdbcType=VARCHAR}, 
-      #{specPrice,jdbcType=DECIMAL}, #{specStock,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModify,jdbcType=TIMESTAMP}, #{cutOff,jdbcType=TINYINT})
+    insert into tyg_ms_goods_spec (id, goods_id, spec_key, 
+      spec_name, spec_price, spec_day_stock, 
+      spec_stock, gmt_create, gmt_modify, 
+      cut_off)
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{specKey,jdbcType=VARCHAR}, 
+      #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL}, #{specDayStock,jdbcType=INTEGER}, 
+      #{specStock,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{cutOff,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.GoodsSpec" >
     insert into tyg_ms_goods_spec
@@ -119,11 +124,17 @@
       <if test="goodsId != null" >
         goods_id,
       </if>
+      <if test="specKey != null" >
+        spec_key,
+      </if>
       <if test="specName != null" >
         spec_name,
       </if>
       <if test="specPrice != null" >
         spec_price,
+      </if>
+      <if test="specDayStock != null" >
+        spec_day_stock,
       </if>
       <if test="specStock != null" >
         spec_stock,
@@ -143,7 +154,10 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="goodsId != null" >
-        #{goodsId,jdbcType=VARCHAR},
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="specKey != null" >
+        #{specKey,jdbcType=VARCHAR},
       </if>
       <if test="specName != null" >
         #{specName,jdbcType=VARCHAR},
@@ -151,8 +165,11 @@
       <if test="specPrice != null" >
         #{specPrice,jdbcType=DECIMAL},
       </if>
+      <if test="specDayStock != null" >
+        #{specDayStock,jdbcType=INTEGER},
+      </if>
       <if test="specStock != null" >
-        #{specStock,jdbcType=BIGINT},
+        #{specStock,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -161,7 +178,7 @@
         #{gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="cutOff != null" >
-        #{cutOff,jdbcType=TINYINT},
+        #{cutOff,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -178,7 +195,10 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.goodsId != null" >
-        goods_id = #{record.goodsId,jdbcType=VARCHAR},
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.specKey != null" >
+        spec_key = #{record.specKey,jdbcType=VARCHAR},
       </if>
       <if test="record.specName != null" >
         spec_name = #{record.specName,jdbcType=VARCHAR},
@@ -186,8 +206,11 @@
       <if test="record.specPrice != null" >
         spec_price = #{record.specPrice,jdbcType=DECIMAL},
       </if>
+      <if test="record.specDayStock != null" >
+        spec_day_stock = #{record.specDayStock,jdbcType=INTEGER},
+      </if>
       <if test="record.specStock != null" >
-        spec_stock = #{record.specStock,jdbcType=BIGINT},
+        spec_stock = #{record.specStock,jdbcType=INTEGER},
       </if>
       <if test="record.gmtCreate != null" >
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -196,7 +219,7 @@
         gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="record.cutOff != null" >
-        cut_off = #{record.cutOff,jdbcType=TINYINT},
+        cut_off = #{record.cutOff,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -206,13 +229,15 @@
   <update id="updateByExample" parameterType="map" >
     update tyg_ms_goods_spec
     set id = #{record.id,jdbcType=BIGINT},
-      goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
+      spec_key = #{record.specKey,jdbcType=VARCHAR},
       spec_name = #{record.specName,jdbcType=VARCHAR},
       spec_price = #{record.specPrice,jdbcType=DECIMAL},
-      spec_stock = #{record.specStock,jdbcType=BIGINT},
+      spec_day_stock = #{record.specDayStock,jdbcType=INTEGER},
+      spec_stock = #{record.specStock,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      cut_off = #{record.cutOff,jdbcType=TINYINT}
+      cut_off = #{record.cutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,7 +246,10 @@
     update tyg_ms_goods_spec
     <set >
       <if test="goodsId != null" >
-        goods_id = #{goodsId,jdbcType=VARCHAR},
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="specKey != null" >
+        spec_key = #{specKey,jdbcType=VARCHAR},
       </if>
       <if test="specName != null" >
         spec_name = #{specName,jdbcType=VARCHAR},
@@ -229,8 +257,11 @@
       <if test="specPrice != null" >
         spec_price = #{specPrice,jdbcType=DECIMAL},
       </if>
+      <if test="specDayStock != null" >
+        spec_day_stock = #{specDayStock,jdbcType=INTEGER},
+      </if>
       <if test="specStock != null" >
-        spec_stock = #{specStock,jdbcType=BIGINT},
+        spec_stock = #{specStock,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -239,20 +270,22 @@
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="cutOff != null" >
-        cut_off = #{cutOff,jdbcType=TINYINT},
+        cut_off = #{cutOff,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.GoodsSpec" >
     update tyg_ms_goods_spec
-    set goods_id = #{goodsId,jdbcType=VARCHAR},
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      spec_key = #{specKey,jdbcType=VARCHAR},
       spec_name = #{specName,jdbcType=VARCHAR},
       spec_price = #{specPrice,jdbcType=DECIMAL},
-      spec_stock = #{specStock,jdbcType=BIGINT},
+      spec_day_stock = #{specDayStock,jdbcType=INTEGER},
+      spec_stock = #{specStock,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      cut_off = #{cutOff,jdbcType=TINYINT}
+      cut_off = #{cutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

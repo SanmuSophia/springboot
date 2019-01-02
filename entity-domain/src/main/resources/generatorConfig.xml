@@ -7,7 +7,7 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
             <property name="suppressJavaInterface" value="false"/>
         </plugin>
-        <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -39,21 +39,20 @@
         </sqlMapGenerator>
 
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="gcyl.entity.domain.mapper"
+        <javaClientGenerator targetPackage="gcyl.entity.domain.mapper" type="XMLMAPPER"
                              targetProject="E:\workspace-github\entity-gcyl\entity-domain\src\main\java">
             <!--<property name="enableSubPackages" value="true"/>-->
         </javaClientGenerator>
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
         <!--<table tableName="tyg_ms_category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
-        <table tableName="tyg_ms_category" domainObjectName="Category"/>
-        <table tableName="tyg_ms_goods" domainObjectName="Goods"/>
-        <table tableName="tyg_ms_goods_spec" domainObjectName="GoodsSpec"/>
-        <table tableName="tyg_ms_unit" domainObjectName="Unit"/>
-        <table tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>
-        <table tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>
+        <!--<table tableName="tyg_ms_category" domainObjectName="Category"/>-->
+        <!--<table tableName="tyg_ms_goods" domainObjectName="Goods"/>-->
+        <!--<table tableName="tyg_ms_goods_spec" domainObjectName="GoodsSpec"/>-->
+        <!--<table tableName="tyg_ms_unit" domainObjectName="Unit"/>-->
+        <!--<table tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>-->
+        <!--<table tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>-->
         <table tableName="tyg_ms_order" domainObjectName="Order"/>
-        <table tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>
+        <!--<table tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>-->
     </context>
 </generatorConfiguration>

@@ -3,13 +3,13 @@
 <mapper namespace="gcyl.entity.domain.mapper.GoodsMapper" >
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Goods" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
     <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
-    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
     <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
-    <result column="day_stock" property="dayStock" jdbcType="BIGINT" />
-    <result column="sales_volume" property="salesVolume" jdbcType="BIGINT" />
+    <result column="sales_count" property="salesCount" jdbcType="INTEGER" />
+    <result column="month_sales" property="monthSales" jdbcType="INTEGER" />
     <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
     <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
     <result column="is_default" property="isDefault" jdbcType="BIT" />
@@ -17,7 +17,7 @@
     <result column="version" property="version" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
-    <result column="cut_off" property="cutOff" jdbcType="TINYINT" />
+    <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +78,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, goods_sn, goods_name, category_id, category_name, goods_unit, day_stock, sales_volume, 
+    id, shop_id, goods_sn, goods_name, category_id, goods_unit, sales_count, month_sales, 
     is_recommend, is_on_sale, is_default, goods_img, version, gmt_create, gmt_modify, 
     cut_off
   </sql>
@@ -113,24 +113,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="gcyl.entity.domain.model.Goods" >
-    insert into tyg_ms_goods (id, goods_sn, goods_name, 
-      category_id, category_name, goods_unit, 
-      day_stock, sales_volume, is_recommend, 
+    insert into tyg_ms_goods (id, shop_id, goods_sn, 
+      goods_name, category_id, goods_unit, 
+      sales_count, month_sales, is_recommend, 
       is_on_sale, is_default, goods_img, 
       version, gmt_create, gmt_modify, 
       cut_off)
-    values (#{id,jdbcType=BIGINT}, #{goodsSn,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-      #{categoryId,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, #{goodsUnit,jdbcType=VARCHAR}, 
-      #{dayStock,jdbcType=BIGINT}, #{salesVolume,jdbcType=BIGINT}, #{isRecommend,jdbcType=BIT}, 
+    values (#{id,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{goodsSn,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT}, #{goodsUnit,jdbcType=VARCHAR}, 
+      #{salesCount,jdbcType=INTEGER}, #{monthSales,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, 
       #{isOnSale,jdbcType=BIT}, #{isDefault,jdbcType=BIT}, #{goodsImg,jdbcType=VARCHAR}, 
       #{version,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{cutOff,jdbcType=TINYINT})
+      #{cutOff,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Goods" >
     insert into tyg_ms_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
       </if>
       <if test="goodsSn != null" >
         goods_sn,
@@ -141,17 +144,14 @@
       <if test="categoryId != null" >
         category_id,
       </if>
-      <if test="categoryName != null" >
-        category_name,
-      </if>
       <if test="goodsUnit != null" >
         goods_unit,
       </if>
-      <if test="dayStock != null" >
-        day_stock,
+      <if test="salesCount != null" >
+        sales_count,
       </if>
-      <if test="salesVolume != null" >
-        sales_volume,
+      <if test="monthSales != null" >
+        month_sales,
       </if>
       <if test="isRecommend != null" >
         is_recommend,
@@ -182,6 +182,9 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
       <if test="goodsSn != null" >
         #{goodsSn,jdbcType=VARCHAR},
       </if>
@@ -189,19 +192,16 @@
         #{goodsName,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null" >
-        #{categoryId,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryName != null" >
-        #{categoryName,jdbcType=VARCHAR},
+        #{categoryId,jdbcType=BIGINT},
       </if>
       <if test="goodsUnit != null" >
         #{goodsUnit,jdbcType=VARCHAR},
       </if>
-      <if test="dayStock != null" >
-        #{dayStock,jdbcType=BIGINT},
+      <if test="salesCount != null" >
+        #{salesCount,jdbcType=INTEGER},
       </if>
-      <if test="salesVolume != null" >
-        #{salesVolume,jdbcType=BIGINT},
+      <if test="monthSales != null" >
+        #{monthSales,jdbcType=INTEGER},
       </if>
       <if test="isRecommend != null" >
         #{isRecommend,jdbcType=BIT},
@@ -225,7 +225,7 @@
         #{gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="cutOff != null" >
-        #{cutOff,jdbcType=TINYINT},
+        #{cutOff,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -241,6 +241,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=BIGINT},
+      </if>
       <if test="record.goodsSn != null" >
         goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
       </if>
@@ -248,19 +251,16 @@
         goods_name = #{record.goodsName,jdbcType=VARCHAR},
       </if>
       <if test="record.categoryId != null" >
-        category_id = #{record.categoryId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.categoryName != null" >
-        category_name = #{record.categoryName,jdbcType=VARCHAR},
+        category_id = #{record.categoryId,jdbcType=BIGINT},
       </if>
       <if test="record.goodsUnit != null" >
         goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
       </if>
-      <if test="record.dayStock != null" >
-        day_stock = #{record.dayStock,jdbcType=BIGINT},
+      <if test="record.salesCount != null" >
+        sales_count = #{record.salesCount,jdbcType=INTEGER},
       </if>
-      <if test="record.salesVolume != null" >
-        sales_volume = #{record.salesVolume,jdbcType=BIGINT},
+      <if test="record.monthSales != null" >
+        month_sales = #{record.monthSales,jdbcType=INTEGER},
       </if>
       <if test="record.isRecommend != null" >
         is_recommend = #{record.isRecommend,jdbcType=BIT},
@@ -284,7 +284,7 @@
         gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="record.cutOff != null" >
-        cut_off = #{record.cutOff,jdbcType=TINYINT},
+        cut_off = #{record.cutOff,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -294,13 +294,13 @@
   <update id="updateByExample" parameterType="map" >
     update tyg_ms_goods
     set id = #{record.id,jdbcType=BIGINT},
+      shop_id = #{record.shopId,jdbcType=BIGINT},
       goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      category_id = #{record.categoryId,jdbcType=VARCHAR},
-      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=BIGINT},
       goods_unit = #{record.goodsUnit,jdbcType=VARCHAR},
-      day_stock = #{record.dayStock,jdbcType=BIGINT},
-      sales_volume = #{record.salesVolume,jdbcType=BIGINT},
+      sales_count = #{record.salesCount,jdbcType=INTEGER},
+      month_sales = #{record.monthSales,jdbcType=INTEGER},
       is_recommend = #{record.isRecommend,jdbcType=BIT},
       is_on_sale = #{record.isOnSale,jdbcType=BIT},
       is_default = #{record.isDefault,jdbcType=BIT},
@@ -308,7 +308,7 @@
       version = #{record.version,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      cut_off = #{record.cutOff,jdbcType=TINYINT}
+      cut_off = #{record.cutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -316,6 +316,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="gcyl.entity.domain.model.Goods" >
     update tyg_ms_goods
     <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
       <if test="goodsSn != null" >
         goods_sn = #{goodsSn,jdbcType=VARCHAR},
       </if>
@@ -323,19 +326,16 @@
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryName != null" >
-        category_name = #{categoryName,jdbcType=VARCHAR},
+        category_id = #{categoryId,jdbcType=BIGINT},
       </if>
       <if test="goodsUnit != null" >
         goods_unit = #{goodsUnit,jdbcType=VARCHAR},
       </if>
-      <if test="dayStock != null" >
-        day_stock = #{dayStock,jdbcType=BIGINT},
+      <if test="salesCount != null" >
+        sales_count = #{salesCount,jdbcType=INTEGER},
       </if>
-      <if test="salesVolume != null" >
-        sales_volume = #{salesVolume,jdbcType=BIGINT},
+      <if test="monthSales != null" >
+        month_sales = #{monthSales,jdbcType=INTEGER},
       </if>
       <if test="isRecommend != null" >
         is_recommend = #{isRecommend,jdbcType=BIT},
@@ -359,20 +359,20 @@
         gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
       <if test="cutOff != null" >
-        cut_off = #{cutOff,jdbcType=TINYINT},
+        cut_off = #{cutOff,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.Goods" >
     update tyg_ms_goods
-    set goods_sn = #{goodsSn,jdbcType=VARCHAR},
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      goods_sn = #{goodsSn,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=VARCHAR},
-      category_name = #{categoryName,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=BIGINT},
       goods_unit = #{goodsUnit,jdbcType=VARCHAR},
-      day_stock = #{dayStock,jdbcType=BIGINT},
-      sales_volume = #{salesVolume,jdbcType=BIGINT},
+      sales_count = #{salesCount,jdbcType=INTEGER},
+      month_sales = #{monthSales,jdbcType=INTEGER},
       is_recommend = #{isRecommend,jdbcType=BIT},
       is_on_sale = #{isOnSale,jdbcType=BIT},
       is_default = #{isDefault,jdbcType=BIT},
@@ -380,7 +380,7 @@
       version = #{version,jdbcType=BIGINT},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      cut_off = #{cutOff,jdbcType=TINYINT}
+      cut_off = #{cutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

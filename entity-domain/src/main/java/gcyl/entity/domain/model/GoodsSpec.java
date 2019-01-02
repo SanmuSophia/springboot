@@ -7,19 +7,23 @@ import java.util.Date;
 public class GoodsSpec implements Serializable {
     private Long id;
 
-    private String goodsId;
+    private Long goodsId;
+
+    private String specKey;
 
     private String specName;
 
     private BigDecimal specPrice;
 
-    private Long specStock;
+    private Integer specDayStock;
+
+    private Integer specStock;
 
     private Date gmtCreate;
 
     private Date gmtModify;
 
-    private Byte cutOff;
+    private Boolean cutOff;
 
     private static final long serialVersionUID = 1L;
 
@@ -31,12 +35,20 @@ public class GoodsSpec implements Serializable {
         this.id = id;
     }
 
-    public String getGoodsId() {
+    public Long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(String goodsId) {
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getSpecKey() {
+        return specKey;
+    }
+
+    public void setSpecKey(String specKey) {
+        this.specKey = specKey;
     }
 
     public String getSpecName() {
@@ -55,11 +67,19 @@ public class GoodsSpec implements Serializable {
         this.specPrice = specPrice;
     }
 
-    public Long getSpecStock() {
+    public Integer getSpecDayStock() {
+        return specDayStock;
+    }
+
+    public void setSpecDayStock(Integer specDayStock) {
+        this.specDayStock = specDayStock;
+    }
+
+    public Integer getSpecStock() {
         return specStock;
     }
 
-    public void setSpecStock(Long specStock) {
+    public void setSpecStock(Integer specStock) {
         this.specStock = specStock;
     }
 
@@ -79,11 +99,32 @@ public class GoodsSpec implements Serializable {
         this.gmtModify = gmtModify;
     }
 
-    public Byte getCutOff() {
+    public Boolean getCutOff() {
         return cutOff;
     }
 
-    public void setCutOff(Byte cutOff) {
+    public void setCutOff(Boolean cutOff) {
         this.cutOff = cutOff;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", goodsId=").append(goodsId);
+        sb.append(", specKey=").append(specKey);
+        sb.append(", specName=").append(specName);
+        sb.append(", specPrice=").append(specPrice);
+        sb.append(", specDayStock=").append(specDayStock);
+        sb.append(", specStock=").append(specStock);
+        sb.append(", gmtCreate=").append(gmtCreate);
+        sb.append(", gmtModify=").append(gmtModify);
+        sb.append(", cutOff=").append(cutOff);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
