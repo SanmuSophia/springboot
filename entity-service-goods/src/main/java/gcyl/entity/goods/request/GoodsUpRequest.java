@@ -1,6 +1,5 @@
 package gcyl.entity.goods.request;
 
-import gcyl.entity.goods.form.SpecAddForm;
 import gcyl.entity.goods.form.SpecUpForm;
 
 import javax.validation.Valid;

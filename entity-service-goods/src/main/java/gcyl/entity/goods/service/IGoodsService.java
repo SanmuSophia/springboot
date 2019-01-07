@@ -1,11 +1,13 @@
 package gcyl.entity.goods.service;
 
+import gcyl.entity.common.enums.goods.StockEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.goods.request.GoodsAddRequest;
 import gcyl.entity.goods.request.GoodsStateUpRequest;
 import gcyl.entity.goods.request.GoodsUpRequest;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品管理
@@ -77,4 +79,22 @@ public interface IGoodsService {
      * @return
      */
     Result restock(long shopId, long goodsId);
+
+    /**
+     * 库存修改
+     *
+     * @param specId    规格ID
+     * @param num       数量
+     * @param stockEnum ADD增加，REDUCE修改
+     * @return 修改返回
+     */
+    Result changeStock(long specId, int num, StockEnum stockEnum);
+
+    /**
+     * 增加商品销量
+     *
+     * @param list  商品销量信息
+     * @return 增加返回
+     */
+    Result addSales(List<Map<String, Object>> list);
 }

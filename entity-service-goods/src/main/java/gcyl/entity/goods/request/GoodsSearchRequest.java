@@ -90,20 +90,20 @@ public class GoodsSearchRequest {
         this.sellOut = sellOut;
     }
 
-    public Boolean getRecommend() {
+    public Boolean getIsRecommend() {
         return isRecommend;
     }
 
-    public void setRecommend(Boolean recommend) {
-        isRecommend = recommend;
+    public void setIsRecommend(Boolean isRecommend) {
+        this.isRecommend = isRecommend;
     }
 
-    public Boolean getDefault() {
+    public Boolean getIsDefault() {
         return isDefault;
     }
 
-    public void setDefault(Boolean aDefault) {
-        isDefault = aDefault;
+    public void setSetDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     public Boolean getHot() {
@@ -114,12 +114,12 @@ public class GoodsSearchRequest {
         this.hot = hot;
     }
 
-    public Boolean getOnSale() {
+    public Boolean getIsOnSale() {
         return isOnSale;
     }
 
-    public void setOnSale(Boolean onSale) {
-        isOnSale = onSale;
+    public void setIsOnSale(Boolean isOnSale) {
+        this.isOnSale = isOnSale;
     }
 
     public String getCategoryId() {

@@ -6,11 +6,11 @@ import gcyl.entity.common.enums.order.OrderStateEnum;
 import gcyl.entity.common.enums.order.PayEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.mapper.OrderMapper;
-import gcyl.entity.domain.mapper.ext.OrderExtMapper;
+import gcyl.entity.domain.mapper.ex.OrderExtMapper;
 import gcyl.entity.domain.model.OrderExample;
-import gcyl.entity.domain.model.ext.OrderExt;
+import gcyl.entity.domain.model.ex.OrderEx;
+import gcyl.entity.domain.model.vo.OrderSNumVO;
 import gcyl.entity.domain.model.vo.OrderUNumVO;
-import gcyl.entity.order.Enum.SListTypeEnum;
 import gcyl.entity.order.Enum.UListTypeEnum;
 import gcyl.entity.order.request.OrderUListRequest;
 import gcyl.entity.order.service.IOrderUserService;
@@ -44,7 +44,44 @@ public class OrderUserService implements IOrderUserService {
      */
     @Override
     public OrderUNumVO orderNum(long userId) {
-        return orderExtMapper.countUserOdNum(userId);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userId", userId);
+        paramMap.put("userCutOff", false);
+
+        int all = orderExtMapper.countByMap(paramMap);
+
+        List<Integer> list = new ArrayList<>();
+        paramMap.put("orderStates", list);
+
+        list.add(OrderStateEnum.WAIT_RECEIVE.getCode());
+        list.add(OrderStateEnum.WAIT_SERVING.getCode());
+        list.add(OrderStateEnum.FINISH_SERVING.getCode());
+        int ordered = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.FINISH.getCode());
+        int waitEvaluate = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.CLOSE.getCode());
+        paramMap.put("isPay", true);
+        int refund = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.WAIT_RECEIVE.getCode());
+        list.add(OrderStateEnum.WAIT_SERVING.getCode());
+        list.add(OrderStateEnum.FINISH_SERVING.getCode());
+        paramMap.put("isPay", false);
+        int waitPay = orderExtMapper.countByMap(paramMap);
+
+        OrderUNumVO orderUNumVO = new OrderUNumVO();
+        orderUNumVO.setAll(all);
+        orderUNumVO.setOrdered(ordered);
+        orderUNumVO.setWaitPay(waitPay);
+        orderUNumVO.setWaitEvaluate(waitEvaluate);
+        orderUNumVO.setRefund(refund);
+
+        return orderUNumVO;
     }
 
     /**
@@ -54,7 +91,7 @@ public class OrderUserService implements IOrderUserService {
      * @return 订单列表
      */
     @Override
-    public List<OrderExt> orderList(OrderUListRequest request) {
+    public List<OrderEx> orderList(OrderUListRequest request) {
         long userId = request.getUserId();
         int pageSize = request.getPageSize();
         int pageNum = request.getPageNum();
@@ -104,7 +141,7 @@ public class OrderUserService implements IOrderUserService {
      * @return 订单详情
      */
     @Override
-    public OrderExt orderDetail(long userId, long orderId) {
+    public OrderEx orderDetail(long userId, long orderId) {
         return orderExtMapper.selectUserOdDetail(userId, orderId);
     }
 

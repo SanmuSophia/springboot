@@ -9,7 +9,6 @@ import java.math.BigDecimal;
  * @date 2018/12/24
  */
 public class CartForm {
-    /***** 公共购物车参数 *****/
     /**
      * 类目
      */
@@ -29,9 +28,6 @@ public class CartForm {
      * 是否默认
      */
     private Boolean isDefault;
-
-
-    /***** 个人购物车参数 *****/
 
     /**
      * 商品ID

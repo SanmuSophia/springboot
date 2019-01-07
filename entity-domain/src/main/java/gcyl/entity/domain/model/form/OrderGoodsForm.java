@@ -11,6 +11,16 @@ import java.math.BigDecimal;
 public class OrderGoodsForm {
 
     /**
+     * 商品ID
+     */
+    private Long goodsId;
+
+    /**
+     * 规格ID
+     */
+    private Long specId;
+
+    /**
      * 商品名
      */
     private String goodsName;
@@ -39,6 +49,22 @@ public class OrderGoodsForm {
      * 数量
      */
     private Integer num;
+
+    public Long getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Long goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public Long getSpecId() {
+        return specId;
+    }
+
+    public void setSpecId(Long specId) {
+        this.specId = specId;
+    }
 
     public String getGoodsName() {
         return goodsName;

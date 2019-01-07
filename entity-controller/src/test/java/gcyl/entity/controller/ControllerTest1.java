@@ -1,7 +1,10 @@
 package gcyl.entity.controller;
 
-import gcyl.entity.domain.mapper.ext.CategoryExtMapper;
+import gcyl.entity.domain.mapper.ex.CategoryExtMapper;
 import gcyl.entity.domain.mapper.OrderMapper;
+import gcyl.entity.domain.mapper.ex.OrderExtMapper;
+import gcyl.entity.order.service.IOrderShopService;
+import gcyl.entity.order.service.IOrderUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author lican
@@ -27,6 +29,12 @@ public class ControllerTest1 {
     CategoryExtMapper categoryExtMapper;
     @Autowired
     OrderMapper orderMapper;
+    @Autowired
+    OrderExtMapper orderExtMapper;
+    @Autowired
+    IOrderShopService orderShopService;
+    @Autowired
+    IOrderUserService orderUserService;
     @Autowired
     RedisTemplate<String, Object> template;
 
@@ -68,5 +76,11 @@ public class ControllerTest1 {
         public void setNum(Integer num) {
             this.num = num;
         }
+    }
+
+    @Test
+    public void testNum() {
+//        System.out.println(orderShopService.orderNum(1));
+//        System.out.println(orderUserService.orderNum(1));
     }
 }

@@ -2,22 +2,28 @@ package gcyl.entity.order.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import gcyl.entity.common.enums.ResultEnum;
+import gcyl.entity.common.enums.goods.StockEnum;
 import gcyl.entity.common.enums.order.OrderStateEnum;
 import gcyl.entity.common.enums.order.PayEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.common.utils.DateUtils;
 import gcyl.entity.domain.mapper.OrderMapper;
-import gcyl.entity.domain.mapper.ext.OrderExtMapper;
+import gcyl.entity.domain.mapper.ex.OrderExtMapper;
 import gcyl.entity.domain.model.Order;
 import gcyl.entity.domain.model.OrderExample;
-import gcyl.entity.domain.model.ext.OrderExt;
+import gcyl.entity.domain.model.ex.OrderEx;
+import gcyl.entity.domain.model.form.OrderGoodsForm;
+import gcyl.entity.goods.service.IGoodsService;
 import gcyl.entity.order.Enum.SListTypeEnum;
 import gcyl.entity.order.request.OrderSListRequest;
 import gcyl.entity.order.service.IOrderService;
 import gcyl.entity.order.service.IOrderShopService;
 import gcyl.entity.domain.model.vo.OrderSNumVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -30,6 +36,8 @@ import java.util.*;
 @Service
 public class OrderShopServiceImpl implements IOrderShopService {
 
+    private static Logger logger = LoggerFactory.getLogger(OrderShopServiceImpl.class);
+
     @Autowired
     OrderMapper orderMapper;
     @Autowired
@@ -37,6 +45,8 @@ public class OrderShopServiceImpl implements IOrderShopService {
 
     @Autowired
     IOrderService orderService;
+    @Autowired
+    IGoodsService goodsService;
 
     /**
      * 获取订单数量
@@ -46,7 +56,42 @@ public class OrderShopServiceImpl implements IOrderShopService {
      */
     @Override
     public OrderSNumVO orderNum(long shopId) {
-        return orderExtMapper.countShopOdNum(shopId);
+        Map<String, Object> paramMap = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        paramMap.put("orderStates", list);
+        paramMap.put("shopId", shopId);
+        paramMap.put("shopCutOff", false);
+
+        list.add(OrderStateEnum.WAIT_RECEIVE.getCode());
+        int waitReceive = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.WAIT_SERVING.getCode());
+        int waitServing = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.FINISH.getCode());
+        list.add(OrderStateEnum.EVALUATE.getCode());
+        int finish = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.CLOSE.getCode());
+        int close = orderExtMapper.countByMap(paramMap);
+
+        list.clear();
+        list.add(OrderStateEnum.WAIT_SERVING.getCode());
+        list.add(OrderStateEnum.FINISH_SERVING.getCode());
+        paramMap.put("isPay", false);
+        int waitPay = orderExtMapper.countByMap(paramMap);
+
+        OrderSNumVO orderSNumVO = new OrderSNumVO();
+        orderSNumVO.setWaitReceive(waitReceive);
+        orderSNumVO.setWaitServing(waitServing);
+        orderSNumVO.setWaitPay(waitPay);
+        orderSNumVO.setFinish(finish);
+        orderSNumVO.setClose(close);
+
+        return orderSNumVO;
     }
 
     /**
@@ -56,7 +101,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
      * @return 订单列表
      */
     @Override
-    public List<OrderExt> orderList(OrderSListRequest request) {
+    public List<OrderEx> orderList(OrderSListRequest request) {
         long shopId = request.getShopId();
         int pageSize = request.getPageSize();
         int pageNum = request.getPageNum();
@@ -98,7 +143,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
      * @return 订单详情
      */
     @Override
-    public OrderExt orderDetail(long shopId, long orderId) {
+    public OrderEx orderDetail(long shopId, long orderId) {
         return orderExtMapper.selectShopOdDetail(shopId, orderId);
     }
 
@@ -111,9 +156,19 @@ public class OrderShopServiceImpl implements IOrderShopService {
      * @return 拒绝返回
      */
     @Override
+    @Transactional
     public Result refuse(long shopId, long orderId, String reason) {
         Result result = this.isShopOrder(shopId, orderId);
         if (!result.isSuccess()) return result;
+
+        //将库存加回去
+        List<OrderGoodsForm> goodsForms = orderExtMapper.selectOrderGoodsNum(orderId);
+        for (OrderGoodsForm goodsForm : goodsForms) {
+            long specId = goodsForm.getSpecId();
+            int num = goodsForm.getNum();
+            result = goodsService.changeStock(specId, num, StockEnum.ADD);
+            if (!result.isSuccess()) return result;
+        }
 
         Order order = new Order();
         order.setId(orderId);
@@ -150,9 +205,14 @@ public class OrderShopServiceImpl implements IOrderShopService {
         Result result = this.isShopOrder(shopId, orderId);
         if (!result.isSuccess()) return result;
 
+        boolean isPay = orderExtMapper.selectIsPay(orderId);
         Order order = new Order();
         order.setId(orderId);
-        return orderService.changeState(order, OrderStateEnum.FINISH_SERVING);
+        if (isPay) {
+            return orderService.changeState(order, OrderStateEnum.FINISH);
+        } else {
+            return orderService.changeState(order, OrderStateEnum.FINISH_SERVING);
+        }
     }
 
     /**
@@ -172,6 +232,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
         int orderStare = oldOrder.getOrderState();
         if (orderStare != OrderStateEnum.FINISH_SERVING.getCode()
                 || orderStare != OrderStateEnum.WAIT_SERVING.getCode()) {
+            logger.info(ResultEnum.O2015.toString());
             result.error(ResultEnum.O2015);
             return result;
         }
@@ -187,6 +248,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
 
         int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
+            logger.info(ResultEnum.O2021.toString());
             result.error(ResultEnum.O2021);
             return result;
         }
@@ -209,6 +271,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
         example.createCriteria().andIdEqualTo(orderId).andShopIdEqualTo(shopId);
         int count = orderMapper.countByExample(example);
         if (count <= 0) {
+            logger.info(ResultEnum.O0001.toString());
             result.error(ResultEnum.O0001);
             return result;
         }

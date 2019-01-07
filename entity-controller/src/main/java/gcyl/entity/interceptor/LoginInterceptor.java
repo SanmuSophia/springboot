@@ -1,6 +1,6 @@
 package gcyl.entity.interceptor;
 
-import gcyl.entity.annotation.UserLogin;
+import gcyl.entity.common.annotation.UserLogin;
 import gcyl.entity.common.utils.HttpGetIpUtils;
 import gcyl.entity.common.utils.IpContext;
 import gcyl.entity.common.utils.LogUtils;

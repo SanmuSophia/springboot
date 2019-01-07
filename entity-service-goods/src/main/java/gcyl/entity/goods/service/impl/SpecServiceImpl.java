@@ -1,8 +1,8 @@
 package gcyl.entity.goods.service.impl;
 
 import gcyl.entity.common.enums.CutOffEnum;
-import gcyl.entity.domain.mapper.ext.SpecKeyExtMapper;
-import gcyl.entity.domain.mapper.ext.SpecValueExtMapper;
+import gcyl.entity.domain.mapper.ex.SpecKeyExtMapper;
+import gcyl.entity.domain.mapper.ex.SpecValueExtMapper;
 import gcyl.entity.domain.model.SpecKey;
 import gcyl.entity.domain.model.SpecKeyExample;
 import gcyl.entity.domain.model.SpecValue;
@@ -32,7 +32,7 @@ public class SpecServiceImpl implements ISpecService {
      * @return 规格类型集合
      */
     @Override
-    public List<SpecKey> getSpecKeys() {
+    public List<SpecKey> specKeys() {
         SpecKeyExample example = new SpecKeyExample();
         example.createCriteria()
                 .andCutOffEqualTo(CutOffEnum.FALSE.getCode());
@@ -46,7 +46,7 @@ public class SpecServiceImpl implements ISpecService {
      * @return       所有值
      */
     @Override
-    public List<SpecValue> getSpecValues(long keyId) {
+    public List<SpecValue> specValues(long keyId) {
         SpecValueExample example = new SpecValueExample();
         example.createCriteria()
                 .andKeyIdEqualTo(keyId)

@@ -546,6 +546,126 @@ public class GoodsSpecExample {
             return (Criteria) this;
         }
 
+        public Criteria andSpecSalesCountIsNull() {
+            addCriterion("spec_sales_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountIsNotNull() {
+            addCriterion("spec_sales_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountEqualTo(Integer value) {
+            addCriterion("spec_sales_count =", value, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountNotEqualTo(Integer value) {
+            addCriterion("spec_sales_count <>", value, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountGreaterThan(Integer value) {
+            addCriterion("spec_sales_count >", value, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("spec_sales_count >=", value, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountLessThan(Integer value) {
+            addCriterion("spec_sales_count <", value, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountLessThanOrEqualTo(Integer value) {
+            addCriterion("spec_sales_count <=", value, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountIn(List<Integer> values) {
+            addCriterion("spec_sales_count in", values, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountNotIn(List<Integer> values) {
+            addCriterion("spec_sales_count not in", values, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountBetween(Integer value1, Integer value2) {
+            addCriterion("spec_sales_count between", value1, value2, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecSalesCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("spec_sales_count not between", value1, value2, "specSalesCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesIsNull() {
+            addCriterion("spec_month_sales is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesIsNotNull() {
+            addCriterion("spec_month_sales is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesEqualTo(Integer value) {
+            addCriterion("spec_month_sales =", value, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesNotEqualTo(Integer value) {
+            addCriterion("spec_month_sales <>", value, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesGreaterThan(Integer value) {
+            addCriterion("spec_month_sales >", value, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesGreaterThanOrEqualTo(Integer value) {
+            addCriterion("spec_month_sales >=", value, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesLessThan(Integer value) {
+            addCriterion("spec_month_sales <", value, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesLessThanOrEqualTo(Integer value) {
+            addCriterion("spec_month_sales <=", value, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesIn(List<Integer> values) {
+            addCriterion("spec_month_sales in", values, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesNotIn(List<Integer> values) {
+            addCriterion("spec_month_sales not in", values, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesBetween(Integer value1, Integer value2) {
+            addCriterion("spec_month_sales between", value1, value2, "specMonthSales");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecMonthSalesNotBetween(Integer value1, Integer value2) {
+            addCriterion("spec_month_sales not between", value1, value2, "specMonthSales");
+            return (Criteria) this;
+        }
+
         public Criteria andGmtCreateIsNull() {
             addCriterion("gmt_create is null");
             return (Criteria) this;

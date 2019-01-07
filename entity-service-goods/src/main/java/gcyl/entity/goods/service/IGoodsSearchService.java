@@ -1,7 +1,7 @@
 package gcyl.entity.goods.service;
 
 import gcyl.entity.domain.model.GoodsSpec;
-import gcyl.entity.domain.model.ext.GoodsExt;
+import gcyl.entity.domain.model.ex.GoodsEx;
 import gcyl.entity.goods.request.GoodsSearchRequest;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface IGoodsSearchService {
      * @param request 搜索参数
      * @return 列表商品
      */
-    List<GoodsExt> goodsSearchList(GoodsSearchRequest request);
+    List<GoodsEx> goodsList(GoodsSearchRequest request);
 
     /**
      * 商品详情
@@ -28,7 +28,7 @@ public interface IGoodsSearchService {
      * @param id 商品主键
      * @return 商品详情
      */
-    GoodsExt goodsDetail(long id);
+    GoodsEx goodsDetail(long id);
 
     /**
      * 获取商品所有规格

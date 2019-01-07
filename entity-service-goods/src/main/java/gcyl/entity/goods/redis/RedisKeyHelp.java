@@ -34,5 +34,13 @@ public class RedisKeyHelp {
         return C_PREFIX + ":shopId:" + shopId + ":tableNum:" + tableNum;
     }
 
-
+    /**
+     * 库存修改锁
+     *
+     * @param specId 规格ID
+     * @return redis key
+     */
+    public static String getStockChangeLockKey(long specId) {
+        return G_PREFIX + ":stockChange:" + specId;
+    }
 }

@@ -1,7 +1,12 @@
 package gcyl.entity.order.request;
 
+import gcyl.entity.order.form.SpecNumForm;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 下单参数
@@ -64,6 +69,14 @@ public class OrderCreateRequest {
      */
     @NotNull(message = "用户数量有误")
     private Integer personNum;
+
+    /**
+     * 订单商品规格数量
+     */
+    @NotNull(message = "商品信息有误")
+    @Min(value = 1, message = "商品信息有误")
+    @Valid
+    private List<SpecNumForm> specNumForms;
 
     public Long getShopId() {
         return shopId;
@@ -135,5 +148,13 @@ public class OrderCreateRequest {
 
     public void setPersonNum(Integer personNum) {
         this.personNum = personNum;
+    }
+
+    public List<SpecNumForm> getSpecNumForms() {
+        return specNumForms;
+    }
+
+    public void setSpecNumForms(List<SpecNumForm> specNumForms) {
+        this.specNumForms = specNumForms;
     }
 }

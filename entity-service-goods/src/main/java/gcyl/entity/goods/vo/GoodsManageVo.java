@@ -1,6 +1,6 @@
 package gcyl.entity.goods.vo;
 
-import gcyl.entity.domain.model.ext.GoodsExt;
+import gcyl.entity.domain.model.ex.GoodsEx;
 
 import java.util.List;
 
@@ -13,18 +13,18 @@ public class GoodsManageVo {
     /**
      * 商品列表
      */
-    private List<GoodsExt> goodsList;
+    private List<GoodsEx> goodsList;
 
     /**
      * 商品总数
      */
     private long total;
 
-    public List<GoodsExt> getGoodsList() {
+    public List<GoodsEx> getGoodsList() {
         return goodsList;
     }
 
-    public void setGoodsList(List<GoodsExt> goodsList) {
+    public void setGoodsList(List<GoodsEx> goodsList) {
         this.goodsList = goodsList;
     }
 

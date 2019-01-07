@@ -3,7 +3,7 @@ package gcyl.entity.category.service.impl;
 import gcyl.entity.category.service.ICategorySearchService;
 import gcyl.entity.common.enums.CutOffEnum;
 import gcyl.entity.domain.mapper.GoodsMapper;
-import gcyl.entity.domain.mapper.ext.CategoryExtMapper;
+import gcyl.entity.domain.mapper.ex.CategoryExtMapper;
 import gcyl.entity.domain.model.Category;
 import gcyl.entity.domain.model.CategoryExample;
 import gcyl.entity.domain.model.GoodsExample;
@@ -30,7 +30,7 @@ public class CategorySearchService implements ICategorySearchService {
      * @return 店铺类目集合
      */
     @Override
-    public List<Category> getCategoryByShop(long shopId) {
+    public List<Category> getShopCategory(long shopId) {
         CategoryExample example = new CategoryExample();
         example.createCriteria()
                 .andShopIdEqualTo(shopId)

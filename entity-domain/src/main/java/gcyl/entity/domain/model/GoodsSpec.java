@@ -19,6 +19,10 @@ public class GoodsSpec implements Serializable {
 
     private Integer specStock;
 
+    private Integer specSalesCount;
+
+    private Integer specMonthSales;
+
     private Date gmtCreate;
 
     private Date gmtModify;
@@ -83,6 +87,22 @@ public class GoodsSpec implements Serializable {
         this.specStock = specStock;
     }
 
+    public Integer getSpecSalesCount() {
+        return specSalesCount;
+    }
+
+    public void setSpecSalesCount(Integer specSalesCount) {
+        this.specSalesCount = specSalesCount;
+    }
+
+    public Integer getSpecMonthSales() {
+        return specMonthSales;
+    }
+
+    public void setSpecMonthSales(Integer specMonthSales) {
+        this.specMonthSales = specMonthSales;
+    }
+
     public Date getGmtCreate() {
         return gmtCreate;
     }
@@ -120,6 +140,8 @@ public class GoodsSpec implements Serializable {
         sb.append(", specPrice=").append(specPrice);
         sb.append(", specDayStock=").append(specDayStock);
         sb.append(", specStock=").append(specStock);
+        sb.append(", specSalesCount=").append(specSalesCount);
+        sb.append(", specMonthSales=").append(specMonthSales);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModify=").append(gmtModify);
         sb.append(", cutOff=").append(cutOff);

@@ -38,20 +38,6 @@ public class CartRedisDaoImpl implements ICartRedisDao {
     private static final int EXPIRE_TIME = 60*60; //秒，有效时间1小时
 
     /**
-     * 获取用户购物车
-     *
-     * @param shopId    店铺ID
-     * @param tableNum  桌号
-     * @param userId    用户ID
-     * @return  购物车商品列表
-     */
-    @Override
-    public List<CartForm> getUser(long shopId, long tableNum, long userId) {
-        String key = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
-        return this.getFromRedis(key);
-    }
-
-    /**
      * 获取餐桌购物车
      *
      * @param shopId    店铺ID
@@ -86,22 +72,6 @@ public class CartRedisDaoImpl implements ICartRedisDao {
             e.printStackTrace();
         }
         return Collections.emptyList();
-    }
-
-    /**
-     * 添加个人购物车
-     *
-     * @param shopId    店铺ID
-     * @param tableNum  桌号
-     * @param userId    用户ID
-     * @param num       商品数量
-     * @param cartForm  商品参数
-     * @return  大于0添加成功
-     */
-    @Override
-    public long addUser(long shopId, long tableNum, long userId, int num, CartForm cartForm) {
-        String key = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
-        return addToRedis(key, num, cartForm);
     }
 
     /**
@@ -153,26 +123,6 @@ public class CartRedisDaoImpl implements ICartRedisDao {
     }
 
     /**
-     * 个人商品移除/减少
-     *
-     * @param shopId    店铺ID
-     * @param tableNum  桌号
-     * @param userId    用户ID
-     * @param specId    商品规格ID
-     * @param num       商品数量
-     * @return  大于0移除成功
-     */
-    @Override
-    public long removeUser(long shopId, long tableNum, long userId, long specId, int num) {
-        String userKey = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
-        String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
-        String field = String.valueOf(specId);
-        long uResult =  removeRedis(userKey, field, num);  //个人购物车移除
-        long tResult =  removeRedis(tableKey, field, num); //餐桌购物车移除
-        return uResult & tResult;
-    }
-
-    /**
      * 餐桌商品移除/减少
      *
      * @param shopId    店铺ID
@@ -186,39 +136,6 @@ public class CartRedisDaoImpl implements ICartRedisDao {
         String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
         String field = String.valueOf(specId);
         return removeRedis(tableKey, field, num); //餐桌购物车移除
-    }
-
-    /**
-     * 清空个人购物车
-     *
-     * @param shopId    店铺ID
-     * @param tableNum  桌号
-     * @param userId    用户ID
-     * @return  大于0清空成功
-     */
-    @Override
-    public long clearUser(long shopId, long tableNum, long userId) {
-        String userKey = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
-        String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
-        try (Jedis jedis = jedisPool.getResource()) {
-            Map<String, String> map =  jedis.hgetAll(userKey);
-            //删除个人购物车
-            long result = jedis.del(userKey);
-
-            //餐桌购物车商品数量减少
-            map.forEach((key, value) -> {
-                if (StringUtils.isNotBlank(value)) {
-                    CartForm oldCartForm = JsonUtils.toBean(value, CartForm.class);
-                    int num = oldCartForm.getNum();
-                    this.removeRedis(tableKey, key, num);
-                }
-            });
-
-            return result;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
     }
 
     /**
@@ -264,13 +181,98 @@ public class CartRedisDaoImpl implements ICartRedisDao {
         String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
         try (Jedis jedis = jedisPool.getResource()) {
             //获取该餐桌所有用户的key
-            String pattern = tableKey + "*";
-            List<String> allKeys = this.keyScan(pattern, 1000);
+//            String pattern = tableKey + "*";
+//            List<String> allKeys = this.keyScan(pattern, 1000);
 
-            allKeys.add(tableKey);
-            return jedis.del(allKeys.toArray(new String[]{}));
+//            allKeys.add(tableKey);
+//            return jedis.del(allKeys.toArray(new String[]{}));
+            return jedis.del(tableKey);
         }
     }
+
+    /**
+     * 获取用户购物车
+     *
+     * @param shopId    店铺ID
+     * @param tableNum  桌号
+     * @param userId    用户ID
+     * @return  购物车商品列表
+     */
+//    @Override
+//    public List<CartForm> getUser(long shopId, long tableNum, long userId) {
+//        String key = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
+//        return this.getFromRedis(key);
+//    }
+
+    /**
+     * 添加个人购物车
+     *
+     * @param shopId    店铺ID
+     * @param tableNum  桌号
+     * @param userId    用户ID
+     * @param num       商品数量
+     * @param cartForm  商品参数
+     * @return  大于0添加成功
+     */
+//    @Override
+//    public long addUser(long shopId, long tableNum, long userId, int num, CartForm cartForm) {
+//        String key = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
+//        return addToRedis(key, num, cartForm);
+//    }
+
+
+    /**
+     * 个人商品移除/减少
+     *
+     * @param shopId    店铺ID
+     * @param tableNum  桌号
+     * @param userId    用户ID
+     * @param specId    商品规格ID
+     * @param num       商品数量
+     * @return  大于0移除成功
+     */
+//    @Override
+//    public long removeUser(long shopId, long tableNum, long userId, long specId, int num) {
+//        String userKey = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
+//        String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
+//        String field = String.valueOf(specId);
+//        long uResult =  removeRedis(userKey, field, num);  //个人购物车移除
+//        long tResult =  removeRedis(tableKey, field, num); //餐桌购物车移除
+//        return uResult & tResult;
+//    }
+
+    /**
+     * 清空个人购物车
+     *
+     * @param shopId    店铺ID
+     * @param tableNum  桌号
+     * @param userId    用户ID
+     * @return  大于0清空成功
+     */
+//    @Override
+//    public long clearUser(long shopId, long tableNum, long userId) {
+//        String userKey = RedisKeyHelp.getUserCartKey(shopId, tableNum, userId);
+//        String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
+//        try (Jedis jedis = jedisPool.getResource()) {
+//            Map<String, String> map =  jedis.hgetAll(userKey);
+//            //删除个人购物车
+//            long result = jedis.del(userKey);
+//
+//            //餐桌购物车商品数量减少
+//            map.forEach((key, value) -> {
+//                if (StringUtils.isNotBlank(value)) {
+//                    CartForm oldCartForm = JsonUtils.toBean(value, CartForm.class);
+//                    int num = oldCartForm.getNum();
+//                    this.removeRedis(tableKey, key, num);
+//                }
+//            });
+//
+//            return result;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return 0;
+//    }
 
     /**
      * redis key scan
@@ -279,23 +281,23 @@ public class CartRedisDaoImpl implements ICartRedisDao {
      * @param count    每次扫描数量(建议1000-10000)
      * @return 匹配的key
      */
-    private List<String> keyScan(String pattern, int count) {
-        List<String> list = new ArrayList<>();
-        ScanParams params = new ScanParams();
-        params.count(count);
-        params.match(pattern);
-        String cursor = ScanParams.SCAN_POINTER_START;
-
-        try (Jedis jedis = jedisPool.getResource()) {
-            do {
-                ScanResult<String> result = jedis.scan(cursor, params);
-                list.addAll(result.getResult());
-                cursor = result.getStringCursor();
-            } while (!"0".equals(cursor));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
+//    private List<String> keyScan(String pattern, int count) {
+//        List<String> list = new ArrayList<>();
+//        ScanParams params = new ScanParams();
+//        params.count(count);
+//        params.match(pattern);
+//        String cursor = ScanParams.SCAN_POINTER_START;
+//
+//        try (Jedis jedis = jedisPool.getResource()) {
+//            do {
+//                ScanResult<String> result = jedis.scan(cursor, params);
+//                list.addAll(result.getResult());
+//                cursor = result.getStringCursor();
+//            } while (!"0".equals(cursor));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return list;
+//    }
 }

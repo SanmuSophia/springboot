@@ -1,7 +1,7 @@
 package gcyl.entity.order.service;
 
 import gcyl.entity.common.result.Result;
-import gcyl.entity.domain.model.ext.OrderExt;
+import gcyl.entity.domain.model.ex.OrderEx;
 import gcyl.entity.domain.model.vo.OrderUNumVO;
 import gcyl.entity.order.request.OrderUListRequest;
 
@@ -29,7 +29,7 @@ public interface IOrderUserService {
      * @param request  列表请求参数
      * @return 订单列表
      */
-    List<OrderExt> orderList(OrderUListRequest request);
+    List<OrderEx> orderList(OrderUListRequest request);
 
     /**
      * 用户订单详情
@@ -37,7 +37,7 @@ public interface IOrderUserService {
      * @param orderId  订单ID
      * @return 订单详情
      */
-    OrderExt orderDetail(long userId, long orderId);
+    OrderEx orderDetail(long userId, long orderId);
 
     /**
      * 判断是否用户订单

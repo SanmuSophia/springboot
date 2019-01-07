@@ -100,39 +100,6 @@ public final class JsonUtils {
     }
 
     /**
-     * 转换实体
-     * @param json
-     * @param type
-     * @param <T>
-     * @return
-     */
-//    public static <T> RespBase<T> toBeanBody(String json, Class<T> type) {
-//        try {
-//             return JSON.parseObject(json, new TypeReference<RespBase<T>>(type){});
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-    /**
-     * 转换实体
-     * @param json
-     * @param type
-     * @param <T>
-     * @return
-     */
-//    public static <T> RespBase<List<T>> toBeanBodyList(String json, Class<T> type) {
-//        try {
-//            return JSON.parseObject(json, new TypeReference<RespBase<List<T>>>(type){});
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-
-    /**
      * @param obj 需要转换的java bean
      * @param <T> 入参对象类型泛型
      * @return 对应的json字符串

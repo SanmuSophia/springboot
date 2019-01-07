@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gcyl.entity.domain.mapper.ex.OrderExtMapper" >
+  <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="pay_method" property="payMethod" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="table_num" property="tableNum" jdbcType="INTEGER" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
+    <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="deduct_amount" property="deductAmount" jdbcType="DECIMAL" />
+    <result column="deduct_method" property="deductMethod" jdbcType="INTEGER" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="person_num" property="personNum" jdbcType="INTEGER" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" useGeneratedKeys="true" keyProperty="id" >
+    insert into tyg_ms_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="orderState != null" >
+        order_state,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="payMethod != null" >
+        pay_method,
+      </if>
+      <if test="payWay != null" >
+        pay_way,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tableNum != null" >
+        table_num,
+      </if>
+      <if test="consumeAmount != null" >
+        consume_amount,
+      </if>
+      <if test="settleAmount != null" >
+        settle_amount,
+      </if>
+      <if test="deductAmount != null" >
+        deduct_amount,
+      </if>
+      <if test="deductMethod != null" >
+        deduct_method,
+      </if>
+      <if test="consumption != null" >
+        consumption,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="personNum != null" >
+        person_num,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="gmtReceive != null" >
+        gmt_receive,
+      </if>
+      <if test="gmtPay != null" >
+        gmt_pay,
+      </if>
+      <if test="gmtFinish != null" >
+        gmt_finish,
+      </if>
+      <if test="cutOff != null" >
+        cut_off,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=BIT},
+      </if>
+      <if test="payMethod != null" >
+        #{payMethod,jdbcType=INTEGER},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="tableNum != null" >
+        #{tableNum,jdbcType=INTEGER},
+      </if>
+      <if test="consumeAmount != null" >
+        #{consumeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="settleAmount != null" >
+        #{settleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductAmount != null" >
+        #{deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductMethod != null" >
+        #{deductMethod,jdbcType=INTEGER},
+      </if>
+      <if test="consumption != null" >
+        #{consumption,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="personNum != null" >
+        #{personNum,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtReceive != null" >
+        #{gmtReceive,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtPay != null" >
+        #{gmtPay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtFinish != null" >
+        #{gmtFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cutOff != null" >
+        #{cutOff,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 获取订单状态更新信息 -->
+  <select id="selectForStateUp" parameterType="long" resultMap="BaseResultMap">
+    select order_state, is_pay from tyg_ms_order where order_id = #{orderId} for update
+  </select>
+
+  <!-- 根据条件计算数量 -->
+  <select id="countByMap" parameterType="java.util.Map" resultType="int">
+    select count(*) from tyg_ms_order
+    <where>
+      <trim prefixOverrides="and">
+        <if test="userId != null">
+          and user_id = #{userId}
+        </if>
+        <if test="shopId != null">
+          and shop_id = #{shopId}
+        </if>
+        <if test="shopCutOff != null">
+          and shop_cut_off = #{shopCutOff}
+        </if>
+        <if test="userCutOff != null">
+          and user_cut_off = #{userCutOff}
+        </if>
+        <if test="orderStates != null">
+          and order_state in
+          <foreach collection="orderStates" open="(" close=")" item="item" index="index" separator=",">
+            #{item}
+          </foreach>
+        </if>
+        <if test="isPay != null">
+          and is_pay = #{isPay}
+        </if>
+      </trim>
+    </where>
+  </select>
+
+  <!-- 查询订单商品明细 -->
+  <select id="selectOrderGoods" parameterType="long" resultType="gcyl.entity.domain.model.form.OrderGoodsForm">
+    select
+      goods_name as goodsName,
+      goods_unit as goodsUnit,
+      goods_img as goodsImg,
+      spec_name as specName,
+      spec_price specPrice,
+      spec_num as specNum
+    from
+      tyg_ms_order_detail
+    where
+      order_id = #{orderId}
+  </select>
+
+  <!-- 查询订单商品明细 -->
+  <select id="selectOrderGoodsNum" parameterType="long" resultType="gcyl.entity.domain.model.form.OrderGoodsForm">
+    select
+      goods_id as goodsId,
+      spec_id as specId,
+      spec_num as specNum
+    from
+      tyg_ms_order_detail
+    where
+      order_id = #{orderId}
+  </select>
+
+  <!-- ***************************** 店铺 ***************************** -->
+  <resultMap id="ShopListResultMap" type="gcyl.entity.domain.model.ex.OrderEx" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="table_num" property="tableNum" jdbcType="INTEGER" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
+    <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <collection property="images" column="id" ofType="String" select="selectGoodsImage"/>
+  </resultMap>
+  <sql id="Shop_List_Column_List" >
+    id, order_state, is_pay, table_num,
+    consume_amount, settle_amount, consumption
+  </sql>
+  <!-- 根据条件店铺查询订单列表 -->
+  <select id="selectShopOdList" parameterType="java.util.Map" resultMap="ShopListResultMap">
+    select
+    <include refid="Shop_List_Column_List"/>
+    from tyg_ms_order
+    <where>
+      shop_cut_off = false
+      <if test="shopId != null">
+        and shop_id = #{shopId}
+      </if>
+      <if test="orderStates != null">
+        and order_state in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+          #{item}
+        </foreach>
+      </if>
+      <if test="isPay != null">
+        and is_pay = #{isPay}
+      </if>
+    </where>
+  </select>
+  <!-- 查询订单商品图片 -->
+  <select id="selectGoodsImage" parameterType="long" resultType="String">
+    select goods_img from tyg_ms_order_detail where order_id = #{orderId}
+  </select>
+
+  <resultMap id="ShopDetailResultMap" type="gcyl.entity.domain.model.ex.OrderEx" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="pay_method" property="payMethod" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="INTEGER" />
+    <result column="table_num" property="tableNum" jdbcType="INTEGER" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
+    <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="deduct_amount" property="deductAmount" jdbcType="DECIMAL" />
+    <result column="deduct_method" property="deductMethod" jdbcType="INTEGER" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="person_num" property="personNum" jdbcType="INTEGER" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
+    <result column="gmt_serving_finish" property="gmtServingFinish" jdbcType="TIMESTAMP" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+    <collection property="goods" column="id" ofType="OrderGoodsForm" select="selectOrderGoods"/>
+  </resultMap>
+  <sql id="Shop_Detail_Column_List" >
+    id, order_sn, order_state, is_pay, pay_method, pay_way, table_num,
+    consume_amount, settle_amount, deduct_amount, deduct_method, consumption,
+    person_num, gmt_create, gmt_modify, gmt_receive, gmt_pay, gmt_serving_finish, gmt_finish
+  </sql>
+  <!-- 查询店铺订单详情 -->
+  <select id="selectShopOdDetail" parameterType="long" resultMap="ShopDetailResultMap">
+    select
+    <include refid="Shop_Detail_Column_List"/>
+    from
+      tyg_ms_order
+    where
+      id = #{id}
+    and shop_id = #{shopId}
+    and shop_cut_off = false
+  </select>
+
+  <!-- ***************************** 用户 ***************************** -->
+  <resultMap id="userListResultMap" type="gcyl.entity.domain.model.ex.OrderEx" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="table_num" property="tableNum" jdbcType="INTEGER" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
+    <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_logo" property="shopLogo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="User_List_Column_List" >
+    o.id,
+    o.order_state,
+    o.is_pay,
+    o.consume_amount,
+    o.settle_amount,
+    o.consumption,
+    s.shop_name,
+    s.shop_logo
+  </sql>
+  <!-- 根据条件查询用户订单列表 -->
+  <select id="selectUserOdList" parameterType="java.util.Map" resultMap="userListResultMap">
+    select
+    <include refid="User_List_Column_List"/>
+    from tyg_ms_order
+    <where>
+      user_cut_off = false
+      <if test="userId != null">
+        and user_id = #{userId}
+      </if>
+      <if test="orderStates != null">
+        and order_state in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+          #{item}
+        </foreach>
+      </if>
+      <if test="isPay != null">
+        and is_pay = #{isPay}
+      </if>
+    </where>
+  </select>
+
+  <resultMap id="userDetailResultMap" type="gcyl.entity.domain.model.ex.OrderEx" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="order_state" property="orderState" jdbcType="INTEGER" />
+    <result column="is_pay" property="isPay" jdbcType="BIT" />
+    <result column="pay_method" property="payMethod" jdbcType="INTEGER" />
+    <result column="pay_way" property="payWay" jdbcType="INTEGER" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
+    <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
+    <result column="deduct_amount" property="deductAmount" jdbcType="DECIMAL" />
+    <result column="deduct_method" property="deductMethod" jdbcType="INTEGER" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <collection property="goods" column="id" ofType="OrderGoodsForm" select="selectOrderGoods"/>
+  </resultMap>
+  <sql id="user_Detail_Column_List" >
+    id, order_sn, order_state, is_pay, pay_method, pay_way,consume_amount,
+    settle_amount, deduct_amount, deduct_method, consumption, gmt_create
+  </sql>
+  <!-- 查询用户订单详情 -->
+  <select id="selectUserOdDetail" parameterType="long" resultMap="userDetailResultMap">
+    select
+    <include refid="user_Detail_Column_List"/>
+    from
+    tyg_ms_order
+    where
+    id = #{id}
+    and user_id = #{userId}
+    and user_cut_off = false
+  </select>
+</mapper>

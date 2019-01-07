@@ -9,6 +9,8 @@
     <result column="spec_price" property="specPrice" jdbcType="DECIMAL" />
     <result column="spec_day_stock" property="specDayStock" jdbcType="INTEGER" />
     <result column="spec_stock" property="specStock" jdbcType="INTEGER" />
+    <result column="spec_sales_count" property="specSalesCount" jdbcType="INTEGER" />
+    <result column="spec_month_sales" property="specMonthSales" jdbcType="INTEGER" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="cut_off" property="cutOff" jdbcType="BIT" />
@@ -72,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, goods_id, spec_key, spec_name, spec_price, spec_day_stock, spec_stock, gmt_create, 
-    gmt_modify, cut_off
+    id, goods_id, spec_key, spec_name, spec_price, spec_day_stock, spec_stock, spec_sales_count, 
+    spec_month_sales, gmt_create, gmt_modify, cut_off
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.GoodsSpecExample" >
     select
@@ -108,12 +110,14 @@
   <insert id="insert" parameterType="gcyl.entity.domain.model.GoodsSpec" >
     insert into tyg_ms_goods_spec (id, goods_id, spec_key, 
       spec_name, spec_price, spec_day_stock, 
-      spec_stock, gmt_create, gmt_modify, 
-      cut_off)
+      spec_stock, spec_sales_count, spec_month_sales, 
+      gmt_create, gmt_modify, cut_off
+      )
     values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{specKey,jdbcType=VARCHAR}, 
       #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL}, #{specDayStock,jdbcType=INTEGER}, 
-      #{specStock,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{cutOff,jdbcType=BIT})
+      #{specStock,jdbcType=INTEGER}, #{specSalesCount,jdbcType=INTEGER}, #{specMonthSales,jdbcType=INTEGER}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{cutOff,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.GoodsSpec" >
     insert into tyg_ms_goods_spec
@@ -138,6 +142,12 @@
       </if>
       <if test="specStock != null" >
         spec_stock,
+      </if>
+      <if test="specSalesCount != null" >
+        spec_sales_count,
+      </if>
+      <if test="specMonthSales != null" >
+        spec_month_sales,
       </if>
       <if test="gmtCreate != null" >
         gmt_create,
@@ -170,6 +180,12 @@
       </if>
       <if test="specStock != null" >
         #{specStock,jdbcType=INTEGER},
+      </if>
+      <if test="specSalesCount != null" >
+        #{specSalesCount,jdbcType=INTEGER},
+      </if>
+      <if test="specMonthSales != null" >
+        #{specMonthSales,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -212,6 +228,12 @@
       <if test="record.specStock != null" >
         spec_stock = #{record.specStock,jdbcType=INTEGER},
       </if>
+      <if test="record.specSalesCount != null" >
+        spec_sales_count = #{record.specSalesCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.specMonthSales != null" >
+        spec_month_sales = #{record.specMonthSales,jdbcType=INTEGER},
+      </if>
       <if test="record.gmtCreate != null" >
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -235,6 +257,8 @@
       spec_price = #{record.specPrice,jdbcType=DECIMAL},
       spec_day_stock = #{record.specDayStock,jdbcType=INTEGER},
       spec_stock = #{record.specStock,jdbcType=INTEGER},
+      spec_sales_count = #{record.specSalesCount,jdbcType=INTEGER},
+      spec_month_sales = #{record.specMonthSales,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
       cut_off = #{record.cutOff,jdbcType=BIT}
@@ -263,6 +287,12 @@
       <if test="specStock != null" >
         spec_stock = #{specStock,jdbcType=INTEGER},
       </if>
+      <if test="specSalesCount != null" >
+        spec_sales_count = #{specSalesCount,jdbcType=INTEGER},
+      </if>
+      <if test="specMonthSales != null" >
+        spec_month_sales = #{specMonthSales,jdbcType=INTEGER},
+      </if>
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -283,6 +313,8 @@
       spec_price = #{specPrice,jdbcType=DECIMAL},
       spec_day_stock = #{specDayStock,jdbcType=INTEGER},
       spec_stock = #{specStock,jdbcType=INTEGER},
+      spec_sales_count = #{specSalesCount,jdbcType=INTEGER},
+      spec_month_sales = #{specMonthSales,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
       cut_off = #{cutOff,jdbcType=BIT}

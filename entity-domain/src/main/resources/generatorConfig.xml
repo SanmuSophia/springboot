@@ -52,7 +52,7 @@
         <!--<table tableName="tyg_ms_unit" domainObjectName="Unit"/>-->
         <!--<table tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>-->
         <!--<table tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>-->
-        <table tableName="tyg_ms_order" domainObjectName="Order"/>
+        <!--<table tableName="tyg_ms_order" domainObjectName="Order"/>-->
         <!--<table tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>-->
     </context>
 </generatorConfiguration>

@@ -2,7 +2,7 @@ package gcyl.entity.goods.service.impl;
 
 import gcyl.entity.common.enums.CutOffEnum;
 import gcyl.entity.common.enums.UnitEnum;
-import gcyl.entity.domain.mapper.ext.UnitExtMapper;
+import gcyl.entity.domain.mapper.ex.UnitExtMapper;
 import gcyl.entity.domain.model.Unit;
 import gcyl.entity.domain.model.UnitExample;
 import gcyl.entity.goods.service.IUnitService;
@@ -26,7 +26,7 @@ public class UnitServiceImpl implements IUnitService {
      * @return 所有单位
      */
     @Override
-    public List<Unit> getUnits() {
+    public List<Unit> units() {
         UnitExample example = new UnitExample();
         example.createCriteria()
                 .andUnitTypeEqualTo(UnitEnum.MS.getCode())

@@ -1,5 +1,6 @@
 package gcyl.entity.order.service;
 
+import gcyl.entity.common.enums.goods.StockEnum;
 import gcyl.entity.common.enums.order.OrderStateEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.Order;

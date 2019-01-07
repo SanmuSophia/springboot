@@ -1,7 +1,7 @@
 package gcyl.entity.goods.form;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
@@ -28,13 +28,14 @@ public class SpecAddForm {
      * 规格价格
      */
     @NotNull(message = "请填写价格")
+    @Min(value = 0, message = "价格需大于0")
     private BigDecimal specPrice;
 
     /**
      * 规格日库存
      */
     @NotNull(message = "请填写日库存")
-    @Size(min = 1, message = "日库存需大于1")
+    @Min(value = 0, message = "日库存需大于0")
     private Integer specDayStock;
 
     public String getSpecKey() {

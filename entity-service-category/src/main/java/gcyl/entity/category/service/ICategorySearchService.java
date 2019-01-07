@@ -17,7 +17,7 @@ public interface ICategorySearchService {
      * @param shopId  店铺ID
      * @return 店铺类目集合
      */
-    List<Category> getCategoryByShop(long shopId);
+    List<Category> getShopCategory(long shopId);
 
     /**
      * 判断是否有默认分类

@@ -8,4 +8,7 @@ package gcyl.entity.goods.redis;
  */
 public interface IGoodsRedisDao {
 
+    boolean lock(String lockKey, int timeOut);
+
+    void unlock(String lockKey);
 }

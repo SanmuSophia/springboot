@@ -2,7 +2,6 @@ package gcyl.entity.goods.service;
 
 import gcyl.entity.domain.model.Unit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,5 +16,5 @@ public interface IUnitService {
      * 获取所有单位
      * @return 所有单位
      */
-    List<Unit> getUnits();
+    List<Unit> units();
 }

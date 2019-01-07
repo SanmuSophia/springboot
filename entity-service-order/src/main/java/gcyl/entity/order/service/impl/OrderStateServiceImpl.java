@@ -5,13 +5,13 @@ import gcyl.entity.common.enums.order.OrderStateEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.common.utils.DateUtils;
 import gcyl.entity.domain.mapper.OrderMapper;
-import gcyl.entity.domain.mapper.ext.OrderExtMapper;
+import gcyl.entity.domain.mapper.ex.OrderExtMapper;
 import gcyl.entity.domain.model.Order;
 import gcyl.entity.order.service.IOrderStateService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  * 订单状态管理
@@ -21,6 +21,8 @@ import java.util.Date;
  */
 @Service
 public class OrderStateServiceImpl implements IOrderStateService {
+
+    private static Logger logger = LoggerFactory.getLogger(OrderStateServiceImpl.class);
 
     @Autowired
     OrderMapper orderMapper;
@@ -37,6 +39,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WAIT_RECEIVE.getCode()) {
+            logger.info(ResultEnum.O2012.toString());
             result.error(ResultEnum.O2012);
             return result;
         }
@@ -46,6 +49,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setGmtReceive(DateUtils.getDate());
         int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
         if (i <= 0) {
+            logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }
@@ -62,24 +66,18 @@ public class OrderStateServiceImpl implements IOrderStateService {
     public Result toFinishServing(Order order) {
         Result result = new Result();
         long orderId = order.getId();
-        boolean isPay = order.getIsPay();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WAIT_SERVING.getCode()) {
+            logger.info(ResultEnum.O2013.toString());
             result.error(ResultEnum.O2013);
             return result;
         }
 
-        Date now = DateUtils.getDate();
-        order.setGmtServingFinish(now);
-        //若已支付，则修改为已完成，若未支付，则修改为上菜完成
-        if (isPay) {
-            order.setOrderState(OrderStateEnum.FINISH.getCode());
-            order.setGmtFinish(now);
-        } else {
-            order.setOrderState(OrderStateEnum.FINISH_SERVING.getCode());
-        }
+        order.setGmtServingFinish(DateUtils.getDate());
+        order.setOrderState(OrderStateEnum.FINISH_SERVING.getCode());
         int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
         if (i <= 0) {
+            logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }
@@ -97,7 +95,9 @@ public class OrderStateServiceImpl implements IOrderStateService {
         Result result = new Result();
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
-        if (oldOrder.getOrderState() != OrderStateEnum.FINISH_SERVING.getCode()) {
+        if (oldOrder.getOrderState() != OrderStateEnum.WAIT_SERVING.getCode()
+                && oldOrder.getOrderState() != OrderStateEnum.FINISH_SERVING.getCode()) {
+            logger.info(ResultEnum.O2014.toString());
             result.error(ResultEnum.O2014);
             return result;
         }
@@ -107,6 +107,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setGmtFinish(DateUtils.getDate());
         int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
         if (i <= 0) {
+            logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }
@@ -125,6 +126,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WAIT_RECEIVE.getCode()) {
+            logger.info(ResultEnum.O2012.toString());
             result.error(ResultEnum.O2012);
             return result;
         }
@@ -133,6 +135,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setOrderState(OrderStateEnum.CLOSE.getCode());
         int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
         if (i <= 0) {
+            logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }

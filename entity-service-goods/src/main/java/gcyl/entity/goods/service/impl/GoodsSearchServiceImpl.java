@@ -3,11 +3,11 @@ package gcyl.entity.goods.service.impl;
 import com.github.pagehelper.PageHelper;
 import gcyl.entity.common.enums.CutOffEnum;
 import gcyl.entity.goods.Enum.SortEnum;
-import gcyl.entity.domain.mapper.ext.GoodsExtMapper;
-import gcyl.entity.domain.mapper.ext.GoodsSpecExtMapper;
+import gcyl.entity.domain.mapper.ex.GoodsExtMapper;
+import gcyl.entity.domain.mapper.ex.GoodsSpecExtMapper;
 import gcyl.entity.domain.model.GoodsSpec;
 import gcyl.entity.domain.model.GoodsSpecExample;
-import gcyl.entity.domain.model.ext.GoodsExt;
+import gcyl.entity.domain.model.ex.GoodsEx;
 import gcyl.entity.goods.request.GoodsSearchRequest;
 import gcyl.entity.goods.service.IGoodsSearchService;
 import org.apache.commons.lang3.StringUtils;
@@ -40,9 +40,9 @@ public class GoodsSearchServiceImpl implements IGoodsSearchService {
      * @return 列表商品
      */
     @Override
-    public List<GoodsExt> goodsSearchList(GoodsSearchRequest request) {
+    public List<GoodsEx> goodsList(GoodsSearchRequest request) {
         long shopId = request.getShopId();
-        Boolean isOnSale = request.getOnSale();
+        Boolean isOnSale = request.getIsOnSale();
         SortEnum sortEnum = request.getSortEnum();
 
         //热销商品单独处理
@@ -54,8 +54,8 @@ public class GoodsSearchServiceImpl implements IGoodsSearchService {
         int pageNum = request.getPageNum();
         int pageSize = request.getPageSize();
         Boolean sellOut = request.getSellOut();
-        Boolean isRecommend = request.getRecommend();
-        Boolean isDefault = request.getDefault();
+        Boolean isRecommend = request.getIsRecommend();
+        Boolean isDefault = request.getIsDefault();
         String categoryId = request.getCategoryId();
         String likeValue = request.getLikeValue();
 
@@ -89,18 +89,18 @@ public class GoodsSearchServiceImpl implements IGoodsSearchService {
      * @param sortEnum  排序
      * @return 热销商品列表
      */
-    private List<GoodsExt> selectHotGoods(long shopId, Boolean isOnSale, SortEnum sortEnum) {
+    private List<GoodsEx> selectHotGoods(long shopId, Boolean isOnSale, SortEnum sortEnum) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("shopId", shopId);
         paramMap.put("orderBy", "month_sales");
 
         PageHelper.startPage(1, 10);
-        List<GoodsExt> list = goodsExtMapper.selectByMap(paramMap);
+        List<GoodsEx> list = goodsExtMapper.selectByMap(paramMap);
 
         switch (sortEnum) {
             case SELL_OUT:
-                list = list.stream().sorted(Comparator.comparing(GoodsExt::getMinSpecStock)
-                        .thenComparing(GoodsExt::getStock)).collect(Collectors.toList());
+                list = list.stream().sorted(Comparator.comparing(GoodsEx::getMinSpecStock)
+                        .thenComparing(GoodsEx::getStock)).collect(Collectors.toList());
                 break;
         }
 
@@ -118,7 +118,7 @@ public class GoodsSearchServiceImpl implements IGoodsSearchService {
      * @return 商品详情
      */
     @Override
-    public GoodsExt goodsDetail(long id) {
+    public GoodsEx goodsDetail(long id) {
         return goodsExtMapper.selectGoodsDetail(id);
     }
 

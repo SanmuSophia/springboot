@@ -4,34 +4,39 @@ import gcyl.entity.common.Constant;
 import gcyl.entity.common.enums.CutOffEnum;
 import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.enums.goods.OnSaleEnum;
+import gcyl.entity.common.enums.goods.StockEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.common.utils.DateUtils;
 import gcyl.entity.common.utils.SnGenerate;
 import gcyl.entity.domain.mapper.GoodsMapper;
-import gcyl.entity.domain.mapper.ext.GoodsExtMapper;
-import gcyl.entity.domain.mapper.ext.GoodsSpecExtMapper;
+import gcyl.entity.domain.mapper.GoodsSpecMapper;
+import gcyl.entity.domain.mapper.ex.GoodsExtMapper;
+import gcyl.entity.domain.mapper.ex.GoodsSpecExtMapper;
 import gcyl.entity.domain.model.Goods;
 import gcyl.entity.domain.model.GoodsExample;
 import gcyl.entity.domain.model.GoodsSpec;
 import gcyl.entity.goods.form.SpecAddForm;
 import gcyl.entity.goods.form.SpecUpForm;
 import gcyl.entity.goods.redis.IGoodsRedisDao;
+import gcyl.entity.goods.redis.RedisKeyHelp;
 import gcyl.entity.goods.request.GoodsAddRequest;
 import gcyl.entity.goods.request.GoodsStateUpRequest;
 import gcyl.entity.goods.request.GoodsUpRequest;
 import gcyl.entity.goods.service.IGoodsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 商品管理
- * 1.店铺修改商品操作where条件带上shopId,
- * 防止在店铺和商品信息不一致的情况的被修改
  *
  * @author lican
  * @date 2018/12/12
@@ -39,14 +44,22 @@ import java.util.*;
 @Service
 public class GoodsServiceImpl implements IGoodsService {
 
+    private static Logger logger = LoggerFactory.getLogger(GoodsServiceImpl.class);
+
     @Autowired
     GoodsMapper goodsMapper;
     @Autowired
     GoodsExtMapper goodsExtMapper;
     @Autowired
+    GoodsSpecMapper goodsSpecMapper;
+    @Autowired
     GoodsSpecExtMapper goodsSpecExtMapper;
     @Autowired
     SnGenerate snGenerate;
+
+    @Autowired
+    IGoodsRedisDao goodsRedisDao;
+
 
     /**
      * 商品添加
@@ -86,6 +99,7 @@ public class GoodsServiceImpl implements IGoodsService {
         goods.setGmtCreate(DateUtils.getDate());
         int i = goodsExtMapper.insertSelective(goods);
         if (i <= 0) {
+            logger.info(ResultEnum.G1001.toString());
             result.error(ResultEnum.G1001);
             return result;
         }
@@ -112,6 +126,7 @@ public class GoodsServiceImpl implements IGoodsService {
         }
         i = goodsSpecExtMapper.batchInsert(goodsSpecs);
         if (i <= 0) {
+            logger.info(ResultEnum.G1002.toString());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.error(ResultEnum.G1002);
             return result;
@@ -147,6 +162,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
+            logger.info(ResultEnum.G2001.toString());
             result.error(ResultEnum.G2001);
             return result;
         }
@@ -192,6 +208,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByPrimaryKeySelective(goods);
         if (i <= 0) {
+            logger.info(ResultEnum.G2001.toString());
             result.error(ResultEnum.G2001);
             return result;
         }
@@ -243,6 +260,7 @@ public class GoodsServiceImpl implements IGoodsService {
         if (addSpecs.size() > 0) {
             i = goodsSpecExtMapper.batchInsert(addSpecs);
             if (i <= 0) {
+                logger.info(ResultEnum.G2002.toString());
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 result.error(ResultEnum.G2002);
                 return result;
@@ -251,6 +269,7 @@ public class GoodsServiceImpl implements IGoodsService {
         if (upSpecs.size() > 0) {
             i = goodsSpecExtMapper.batchUpdate(upSpecs);
             if (i <= 0) {
+                logger.info(ResultEnum.G2003.toString());
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 result.error(ResultEnum.G2003);
                 return result;
@@ -277,6 +296,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
+            logger.info(ResultEnum.G3001.toString());
             result.error(ResultEnum.G3001);
             return result;
         }
@@ -301,6 +321,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
+            logger.info(ResultEnum.G2011.toString());
             result.error(ResultEnum.G2011);
             return result;
         }
@@ -325,6 +346,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
+            logger.info(ResultEnum.G2021.toString());
             result.error(ResultEnum.G2021);
             return result;
         }
@@ -351,12 +373,14 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
+            logger.info(ResultEnum.G2031.toString());
             result.error(ResultEnum.G2031);
             return result;
         }
 
         i = goodsSpecExtMapper.restockByGoodsId(goodsId);
         if (i <= 0) {
+            logger.info(ResultEnum.G2032.toString());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.error(ResultEnum.G2032);
             return result;
@@ -365,4 +389,86 @@ public class GoodsServiceImpl implements IGoodsService {
         result.success();
         return result;
     }
+
+    /**
+     * 库存修改
+     *
+     * @param specId    规格ID
+     * @param num       数量
+     * @param stockEnum ADD增加，REDUCE修改
+     * @return 修改返回
+     */
+    @Override
+    @Transactional
+    public Result changeStock(long specId, int num, StockEnum stockEnum) {
+        Result result = new Result();
+        String lockKey = RedisKeyHelp.getStockChangeLockKey(specId);
+        boolean lock = goodsRedisDao.lock(lockKey, 5);
+        if (lock) {
+            try {
+                Integer stock = goodsSpecExtMapper.selectSpecStock(specId);
+                if (stock == null) {
+                    result.error(ResultEnum.G2043);
+                    return result;
+                }
+                switch (stockEnum) {
+                    case REDUCE:
+                        if (stock >= num) {
+                            GoodsSpec goodsSpec = new GoodsSpec();
+                            goodsSpec.setId(specId);
+                            goodsSpec.setSpecDayStock(stock - num);
+                            int i = goodsSpecMapper.updateByPrimaryKeySelective(goodsSpec);
+                            if (i <= 0) {
+                                result.error(ResultEnum.G2041);
+                                return result;
+                            }
+                        } else {
+                            result.error(ResultEnum.G2042);
+                            return result;
+                        }
+                        break;
+
+                    case ADD:
+                        GoodsSpec goodsSpec = new GoodsSpec();
+                        goodsSpec.setId(specId);
+                        goodsSpec.setSpecDayStock(stock + num);
+                        int i = goodsSpecMapper.updateByPrimaryKeySelective(goodsSpec);
+                        if (i <= 0) {
+                            result.error(ResultEnum.G2041);
+                            return result;
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                result.error(ResultEnum.ERROR);
+                return result;
+            } finally {
+                goodsRedisDao.unlock(lockKey);
+            }
+        } else {
+            result.error(ResultEnum.BUSY);
+            return result;
+        }
+
+        result.success();
+        return result;
+    }
+
+    /**
+     * 增加商品销量
+     *
+     * @param list  商品销量信息
+     * @return 增加返回
+     */
+    @Override
+    public Result addSales(List<Map<String, Object>> list) {
+        Result result = new Result();
+        if (!CollectionUtils.isEmpty(list)) {
+            goodsExtMapper.batchAddSales(list);
+        }
+        result.success();
+        return result;
+    }
+
 }
