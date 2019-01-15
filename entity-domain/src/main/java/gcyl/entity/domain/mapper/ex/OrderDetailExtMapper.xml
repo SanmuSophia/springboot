@@ -22,9 +22,9 @@
     )
     values
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{orderId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
-      #{goodsUnit,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, #{specId,jdbcType=BIGINT},
-      #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL}, #{specNum,jdbcType=INTEGER}
+      (#{item.orderId,jdbcType=BIGINT}, #{item.goodsId,jdbcType=BIGINT}, #{item.goodsName,jdbcType=VARCHAR},
+      #{item.goodsUnit,jdbcType=VARCHAR}, #{item.goodsImg,jdbcType=VARCHAR}, #{item.specId,jdbcType=BIGINT},
+      #{item.specName,jdbcType=VARCHAR}, #{item.specPrice,jdbcType=DECIMAL}, #{item.specNum,jdbcType=INTEGER}
       )
     </foreach>
   </insert>

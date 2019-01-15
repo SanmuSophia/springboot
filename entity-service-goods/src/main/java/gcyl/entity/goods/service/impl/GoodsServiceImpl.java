@@ -33,7 +33,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 商品管理
@@ -63,6 +62,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
     /**
      * 商品添加
+     * TODO 默认商品有无分类,库存？
      *
      * @param request 商品参数
      * @return 添加成功与否
@@ -70,7 +70,6 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     @Transactional
     public Result add(GoodsAddRequest request) {
-        Result result = new Result();
         long shopId = request.getShopId();
         String goodsName = request.getGoodsName();
         long categoryId = request.getCategoryId();
@@ -79,8 +78,13 @@ public class GoodsServiceImpl implements IGoodsService {
         boolean isOnSale = request.getIsOnSale();
         boolean isDefault = request.getIsDefault();
         String image = request.getImage();
-        Date date = DateUtils.getDate();
         List<SpecAddForm> specAddForms = request.getSpecAddForms();
+        long now = DateUtils.getDateTime();
+
+        //判断商品是否重复
+        Result result = this.hasGoods(shopId, categoryId, goodsName, null);
+        if (!result.isSuccess()) return result;
+
 
         //生成商品编号
         String goodsSn = snGenerate.snGenerate(Constant.G_SN_PREFIX);
@@ -96,7 +100,8 @@ public class GoodsServiceImpl implements IGoodsService {
         goods.setIsOnSale(isOnSale);
         goods.setIsDefault(isDefault);
         goods.setGoodsImg(image);
-        goods.setGmtCreate(DateUtils.getDate());
+        goods.setGmtCreate(now);
+        goods.setGmtModify(now);
         int i = goodsExtMapper.insertSelective(goods);
         if (i <= 0) {
             logger.info(ResultEnum.G1001.toString());
@@ -121,7 +126,8 @@ public class GoodsServiceImpl implements IGoodsService {
             spec.setSpecPrice(specPrice);
             spec.setSpecDayStock(specDayStock);
             spec.setSpecStock(specDayStock);
-            spec.setGmtCreate(date);
+            spec.setGmtCreate(now);
+            spec.setGmtModify(now);
             goodsSpecs.add(spec);
         }
         i = goodsSpecExtMapper.batchInsert(goodsSpecs);
@@ -131,6 +137,8 @@ public class GoodsServiceImpl implements IGoodsService {
             result.error(ResultEnum.G1002);
             return result;
         }
+
+        result.success();
         return result;
     }
 
@@ -143,24 +151,26 @@ public class GoodsServiceImpl implements IGoodsService {
      */
     @Override
     public Result upState(GoodsStateUpRequest request) {
-        Result result = new Result();
         long shopId = request.getShopId();
         long goodsId = request.getGoodsId();
         boolean isRecommend = request.getRecommend();
         boolean isDefault = request.getDefault();
         boolean isOnSale = request.getOnSale();
+        long now = DateUtils.getDateTime();
+
+        //判断是否店铺商品
+        Result result = this.isShopGoods(shopId, goodsId);
+        if (!result.isSuccess()) return result;
 
         //商品修改信息
         Goods goods = new Goods();
+        goods.setId(goodsId);
         goods.setIsRecommend(isRecommend);
         goods.setIsDefault(isDefault);
         goods.setIsOnSale(isOnSale);
+        goods.setGmtModify(now);
 
-        //修改条件
-        GoodsExample example = new GoodsExample();
-        example.createCriteria().andShopIdEqualTo(shopId).andIdEqualTo(goodsId);
-
-        int i = goodsMapper.updateByExampleSelective(goods, example);
+        int i = goodsMapper.updateByPrimaryKeySelective(goods);
         if (i <= 0) {
             logger.info(ResultEnum.G2001.toString());
             result.error(ResultEnum.G2001);
@@ -179,7 +189,6 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     @Transactional
     public Result update(GoodsUpRequest request) {
-        Result result = new Result();
         long shopId = request.getShopId();
         long goodsId = request.getGoodsId();
         String goodsName = request.getGoodsName();
@@ -189,11 +198,20 @@ public class GoodsServiceImpl implements IGoodsService {
         boolean isOnSale = request.getIsOnSale();
         boolean isDefault = request.getIsDefault();
         String image = request.getImage();
-        Date date = DateUtils.getDate();
+        long now = DateUtils.getDateTime();
         List<SpecUpForm> specUpForms = request.getSpecUpForms();
+
+        //判断是否店铺商品
+        Result result = this.isShopGoods(shopId, goodsId);
+        if (!result.isSuccess()) return result;
+
+        //判断商品是否重复
+        result = this.hasGoods(shopId, categoryId, goodsName, goodsId);
+        if (!result.isSuccess()) return result;
 
         //商品基本信息修改
         Goods goods = new Goods();
+        goods.setId(goodsId);
         goods.setGoodsName(goodsName);
         goods.setCategoryId(categoryId);
         goods.setGoodsUnit(unit);
@@ -201,10 +219,7 @@ public class GoodsServiceImpl implements IGoodsService {
         goods.setIsOnSale(isOnSale);
         goods.setIsDefault(isDefault);
         goods.setGoodsImg(image);
-
-        //修改条件
-        GoodsExample example = new GoodsExample();
-        example.createCriteria().andShopIdEqualTo(shopId).andIdEqualTo(goodsId);
+        goods.setGmtModify(now);
 
         int i = goodsMapper.updateByPrimaryKeySelective(goods);
         if (i <= 0) {
@@ -233,7 +248,8 @@ public class GoodsServiceImpl implements IGoodsService {
                 addSpec.setSpecPrice(specPrice);
                 addSpec.setSpecDayStock(specDayStock);
                 addSpec.setSpecStock(specDayStock);
-                addSpec.setGmtCreate(date);
+                addSpec.setGmtCreate(now);
+                addSpec.setGmtModify(now);
                 addSpecs.add(addSpec);
             } else {
                 //修改
@@ -244,6 +260,7 @@ public class GoodsServiceImpl implements IGoodsService {
                 upSpec.setSpecPrice(specPrice);
                 upSpec.setSpecDayStock(specDayStock);
                 upSpec.setSpecStock(specDayStock);
+                upSpec.setGmtModify(now);
                 upSpecs.add(upSpec);
                 specIds.remove(specId);//减去修改的规格剩下的为删除
             }
@@ -252,6 +269,7 @@ public class GoodsServiceImpl implements IGoodsService {
         for (Long specId: specIds) {
             GoodsSpec delSpec = new GoodsSpec();
             delSpec.setId(specId);
+            delSpec.setGmtModify(now);
             delSpec.setCutOff(CutOffEnum.TRUE.getCode());
             upSpecs.add(delSpec);
         }
@@ -280,6 +298,39 @@ public class GoodsServiceImpl implements IGoodsService {
         return result;
     }
 
+
+    /**
+     * 判断商品是否重复
+     *
+     * @param shopId      店铺ID
+     * @param categoryId  类目ID
+     * @param goodsName   商品名
+     * @return
+     */
+    private Result hasGoods(long shopId, long categoryId, String goodsName, Long goodsId) {
+        Result result = new Result();
+        GoodsExample example = new GoodsExample();
+        GoodsExample.Criteria criteria = example.createCriteria();
+        criteria.andShopIdEqualTo(shopId)
+                .andCategoryIdEqualTo(categoryId)
+                .andGoodsNameEqualTo(goodsName)
+                .andCutOffEqualTo(CutOffEnum.FALSE.getCode());
+        //修改商品排除商品本身
+        if (goodsId != null) {
+            criteria.andIdNotEqualTo(goodsId);
+        }
+
+        int count = goodsMapper.countByExample(example);
+        if (count >=1 ) {
+            logger.info(ResultEnum.G0011.toString());
+            result.error(ResultEnum.G0011);
+            return result;
+        }
+
+        result.success();
+        return result;
+    }
+
     /**
      * 商品删除
      * @param shopId    店铺ID
@@ -288,11 +339,16 @@ public class GoodsServiceImpl implements IGoodsService {
      */
     @Override
     public Result delete(long shopId, List<Long> goodsIds) {
-        Result result = new Result();
+        //判断是否店铺商品
+        Result result = this.isShopGoods(shopId, goodsIds);
+        if (!result.isSuccess()) return result;
+
+        long now = DateUtils.getDateTime();
         Goods goods = new Goods();
         goods.setCutOff(CutOffEnum.TRUE.getCode());
+        goods.setGmtModify(now);
         GoodsExample example = new GoodsExample();
-        example.createCriteria().andShopIdEqualTo(shopId).andIdIn(goodsIds);
+        example.createCriteria().andIdIn(goodsIds);
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
@@ -313,11 +369,16 @@ public class GoodsServiceImpl implements IGoodsService {
      */
     @Override
     public Result offShelve(long shopId, List<Long> goodsIds) {
-        Result result = new Result();
+        //判断是否店铺商品
+        Result result = this.isShopGoods(shopId, goodsIds);
+        if (!result.isSuccess()) return result;
+
+        long now = DateUtils.getDateTime();
         Goods goods = new Goods();
         goods.setIsOnSale(OnSaleEnum.FALSE.getCode());
+        goods.setGmtModify(now);
         GoodsExample example = new GoodsExample();
-        example.createCriteria().andShopIdEqualTo(shopId).andIdIn(goodsIds);
+        example.createCriteria().andIdIn(goodsIds);
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
@@ -338,11 +399,17 @@ public class GoodsServiceImpl implements IGoodsService {
      */
     @Override
     public Result onShelve(long shopId, List<Long> goodsIds) {
-        Result result = new Result();
+        //判断是否店铺商品
+        Result result = this.isShopGoods(shopId, goodsIds);
+        if (!result.isSuccess()) return result;
+
+
+        long now = DateUtils.getDateTime();
         Goods goods = new Goods();
         goods.setIsOnSale(OnSaleEnum.TRUE.getCode());
+        goods.setGmtModify(now);
         GoodsExample example = new GoodsExample();
-        example.createCriteria().andShopIdEqualTo(shopId).andIdIn(goodsIds);
+        example.createCriteria().andIdIn(goodsIds);
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
@@ -363,26 +430,19 @@ public class GoodsServiceImpl implements IGoodsService {
      * @return
      */
     @Override
-    @Transactional
     public Result restock(long shopId, long goodsId) {
-        Result result = new Result();
-        Goods goods = new Goods();
-        goods.setGmtModify(DateUtils.getDate());
-        GoodsExample example = new GoodsExample();
-        example.createCriteria().andShopIdEqualTo(shopId).andIdEqualTo(goodsId);
+        //判断是否店铺商品
+        Result result = this.isShopGoods(shopId, goodsId);
+        if (!result.isSuccess()) return result;
 
-        int i = goodsMapper.updateByExampleSelective(goods, example);
+        long now = DateUtils.getDateTime();
+        GoodsSpec goodsSpec = new GoodsSpec();
+        goodsSpec.setGoodsId(goodsId);
+        goodsSpec.setGmtModify(now);
+        int i = goodsSpecExtMapper.restockByGoods(goodsSpec);
         if (i <= 0) {
             logger.info(ResultEnum.G2031.toString());
             result.error(ResultEnum.G2031);
-            return result;
-        }
-
-        i = goodsSpecExtMapper.restockByGoodsId(goodsId);
-        if (i <= 0) {
-            logger.info(ResultEnum.G2032.toString());
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            result.error(ResultEnum.G2032);
             return result;
         }
 
@@ -411,29 +471,33 @@ public class GoodsServiceImpl implements IGoodsService {
                     result.error(ResultEnum.G2043);
                     return result;
                 }
+
+                long now = DateUtils.getDateTime();
+                GoodsSpec goodsSpec;
                 switch (stockEnum) {
                     case REDUCE:
-                        if (stock >= num) {
-                            GoodsSpec goodsSpec = new GoodsSpec();
-                            goodsSpec.setId(specId);
-                            goodsSpec.setSpecDayStock(stock - num);
-                            int i = goodsSpecMapper.updateByPrimaryKeySelective(goodsSpec);
-                            if (i <= 0) {
-                                result.error(ResultEnum.G2041);
-                                return result;
-                            }
-                        } else {
+                        if (stock < num) {
                             result.error(ResultEnum.G2042);
+                            return result;
+                        }
+                        goodsSpec = new GoodsSpec();
+                        goodsSpec.setId(specId);
+                        goodsSpec.setSpecDayStock(stock - num);
+                        goodsSpec.setGmtModify(now);
+                        int i = goodsSpecMapper.updateByPrimaryKeySelective(goodsSpec);
+                        if (i <= 0) {
+                            result.error(ResultEnum.G2041);
                             return result;
                         }
                         break;
 
                     case ADD:
-                        GoodsSpec goodsSpec = new GoodsSpec();
+                        goodsSpec = new GoodsSpec();
                         goodsSpec.setId(specId);
                         goodsSpec.setSpecDayStock(stock + num);
-                        int i = goodsSpecMapper.updateByPrimaryKeySelective(goodsSpec);
-                        if (i <= 0) {
+                        goodsSpec.setGmtModify(now);
+                        int j = goodsSpecMapper.updateByPrimaryKeySelective(goodsSpec);
+                        if (j <= 0) {
                             result.error(ResultEnum.G2041);
                             return result;
                         }
@@ -447,6 +511,7 @@ public class GoodsServiceImpl implements IGoodsService {
                 goodsRedisDao.unlock(lockKey);
             }
         } else {
+            //若出现并发，可修改为轮询调用
             result.error(ResultEnum.BUSY);
             return result;
         }
@@ -465,8 +530,52 @@ public class GoodsServiceImpl implements IGoodsService {
     public Result addSales(List<Map<String, Object>> list) {
         Result result = new Result();
         if (!CollectionUtils.isEmpty(list)) {
-            goodsExtMapper.batchAddSales(list);
+            int i = goodsExtMapper.batchAddSales(list);
+            if (i <= 0 ){
+                result.error(ResultEnum.G2053);
+                return result;
+            }
         }
+        result.success();
+        return result;
+    }
+
+    /**
+     * 判断是否店铺商品
+     *
+     * @param shopId   店铺ID
+     * @param goodsId  商品ID
+     */
+    private Result isShopGoods(long shopId, long goodsId) {
+        Result result = new Result();
+        GoodsExample example = new GoodsExample();
+        example.createCriteria().andIdEqualTo(goodsId).andShopIdEqualTo(shopId);
+        int count = goodsMapper.countByExample(example);
+        if (count <=0 ){
+            result.error(ResultEnum.G0021);
+            return result;
+        }
+
+        result.success();
+        return result;
+    }
+
+    /**
+     * 判断是否店铺商品
+     *
+     * @param shopId    店铺ID
+     * @param goodsIds  商品ID集合
+     */
+    private Result isShopGoods(long shopId, List<Long> goodsIds) {
+        Result result = new Result();
+        GoodsExample example = new GoodsExample();
+        example.createCriteria().andIdIn(goodsIds).andShopIdEqualTo(shopId);
+        int count = goodsMapper.countByExample(example);
+        if (count < goodsIds.size() ){
+            result.error(ResultEnum.G0021);
+            return result;
+        }
+
         result.success();
         return result;
     }

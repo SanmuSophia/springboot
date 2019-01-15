@@ -68,13 +68,13 @@
   <insert id="batchInsert" parameterType="java.util.List">
     insert into tyg_ms_goods_spec (goods_id, spec_key, spec_name,
     spec_price, spec_day_stock, spec_stock,
-    gmt_create
+    gmt_create, gmt_modify
     )
     values
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{goodsId,jdbcType=BIGINT}, #{specKey,jdbcType=VARCHAR}, #{specName,jdbcType=VARCHAR},
-      #{specPrice,jdbcType=DECIMAL}, #{specDayStock,jdbcType=INTEGER}, #{specStock,jdbcType=INTEGER},
-      #{gmtCreate,jdbcType=TIMESTAMP}
+      (#{item.goodsId,jdbcType=BIGINT}, #{item.specKey,jdbcType=VARCHAR}, #{item.specName,jdbcType=VARCHAR},
+      #{item.specPrice,jdbcType=DECIMAL}, #{item.specDayStock,jdbcType=INTEGER}, #{item.specStock,jdbcType=INTEGER},
+      #{item.gmtCreate,jdbcType=BIGINT}, #{item.gmtModify,jdbcType=BIGINT}
       )
     </foreach>
   </insert>
@@ -99,6 +99,9 @@
       <if test="item.specStock != null" >
         spec_stock = #{item.specStock,jdbcType=INTEGER},
       </if>
+      <if test="item.gmtModify != null" >
+        gmt_modify = #{item.gmtModify,jdbcType=INTEGER},
+      </if>
       <if test="item.cutOff != null" >
         cut_off = #{item.cutOff,jdbcType=BIT},
       </if>
@@ -108,18 +111,20 @@
   </update>
 
   <!-- 恢复商品日库存 -->
-  <update id="restockByGoodsId" parameterType="long">
+  <update id="restockByGoods" parameterType="gcyl.entity.domain.model.GoodsSpec">
     update tyg_ms_goods_spec
-    set spec_stock = spec_day_stock
+    set spec_stock = spec_day_stock,
+        gmt_modify = #{gmtModify}
     where
       goods_id = #{goodsId}
       and cut_off = false
   </update>
 
   <!-- 恢复所有商品日库存 -->
-  <update id="restock">
+  <update id="restock" parameterType="long">
     update tyg_ms_goods_spec
-    set spec_stock = spec_day_stock
+    set spec_stock = spec_day_stock,
+        gmt_modify = #{gmtModify}
     where
       cut_off = false
   </update>

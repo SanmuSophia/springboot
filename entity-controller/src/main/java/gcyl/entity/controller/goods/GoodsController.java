@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
@@ -38,7 +39,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Result add(@Valid @RequestBody GoodsAddRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -47,9 +48,7 @@ public class GoodsController {
             return result;
         }
         result = this.validateAdd(request);
-        if (!result.isSuccess()) {
-            return result;
-        }
+        if (!result.isSuccess()) return result;
 
         return goodsService.add(request);
     }
@@ -61,7 +60,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/upState")
+    @RequestMapping(value = "/upState", method = RequestMethod.POST)
     @ResponseBody
     public Result upState(@Valid @RequestBody GoodsStateUpRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -80,7 +79,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@Valid @RequestBody GoodsUpRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -89,9 +88,8 @@ public class GoodsController {
             return result;
         }
         result = this.validateUpdate(request);
-        if (!result.isSuccess()) {
-            return result;
-        }
+        if (!result.isSuccess()) return result;
+
 
         return goodsService.update(request);
     }
@@ -103,7 +101,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@Valid @RequestBody BatchUpRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -122,7 +120,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/offShelve")
+    @RequestMapping(value = "/offShelve", method = RequestMethod.POST)
     @ResponseBody
     public Result offShelve(@Valid @RequestBody BatchUpRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -141,7 +139,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/onShelve")
+    @RequestMapping(value = "/onShelve", method = RequestMethod.POST)
     @ResponseBody
     public Result onShelve(@Valid @RequestBody BatchUpRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -160,7 +158,7 @@ public class GoodsController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/restock")
+    @RequestMapping(value = "/restock", method = RequestMethod.POST)
     @ResponseBody
     public Result restock(@Valid @RequestBody RestockRequest request, BindingResult bindingResult) {
         Result result = new Result();

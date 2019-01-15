@@ -8,12 +8,12 @@ package gcyl.entity.common.enums.order;
  */
 public enum OrderStateEnum {
 
-    WAIT_RECEIVE(10, "待接单"),
-    WAIT_SERVING(20, "待上菜(上菜中)"),
-    FINISH_SERVING(30, "上菜完成"),
-    FINISH(40, "订单完成"),
-    EVALUATE(41, "已评价"),
-    CLOSE(50, "已关闭");
+    WR(10, "待接单"),
+    WS(20, "待上菜(上菜中)"),
+    FS(30, "上菜完成"),
+    FH(40, "订单完成"),
+    EV(41, "已评价"),
+    CS(50, "已关闭");
 
     int code;
 

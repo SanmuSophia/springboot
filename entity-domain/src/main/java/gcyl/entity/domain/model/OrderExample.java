@@ -2,7 +2,6 @@ package gcyl.entity.domain.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderExample {
@@ -1096,52 +1095,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(Long value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(Long value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(Long value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(Long value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(Long value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(Long value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<Long> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<Long> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(Long value1, Long value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(Long value1, Long value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
@@ -1156,52 +1155,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyEqualTo(Date value) {
+        public Criteria andGmtModifyEqualTo(Long value) {
             addCriterion("gmt_modify =", value, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyNotEqualTo(Date value) {
+        public Criteria andGmtModifyNotEqualTo(Long value) {
             addCriterion("gmt_modify <>", value, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyGreaterThan(Date value) {
+        public Criteria andGmtModifyGreaterThan(Long value) {
             addCriterion("gmt_modify >", value, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtModifyGreaterThanOrEqualTo(Long value) {
             addCriterion("gmt_modify >=", value, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyLessThan(Date value) {
+        public Criteria andGmtModifyLessThan(Long value) {
             addCriterion("gmt_modify <", value, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyLessThanOrEqualTo(Date value) {
+        public Criteria andGmtModifyLessThanOrEqualTo(Long value) {
             addCriterion("gmt_modify <=", value, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyIn(List<Date> values) {
+        public Criteria andGmtModifyIn(List<Long> values) {
             addCriterion("gmt_modify in", values, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyNotIn(List<Date> values) {
+        public Criteria andGmtModifyNotIn(List<Long> values) {
             addCriterion("gmt_modify not in", values, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyBetween(Date value1, Date value2) {
+        public Criteria andGmtModifyBetween(Long value1, Long value2) {
             addCriterion("gmt_modify between", value1, value2, "gmtModify");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifyNotBetween(Date value1, Date value2) {
+        public Criteria andGmtModifyNotBetween(Long value1, Long value2) {
             addCriterion("gmt_modify not between", value1, value2, "gmtModify");
             return (Criteria) this;
         }
@@ -1216,52 +1215,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveEqualTo(Date value) {
+        public Criteria andGmtReceiveEqualTo(Long value) {
             addCriterion("gmt_receive =", value, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveNotEqualTo(Date value) {
+        public Criteria andGmtReceiveNotEqualTo(Long value) {
             addCriterion("gmt_receive <>", value, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveGreaterThan(Date value) {
+        public Criteria andGmtReceiveGreaterThan(Long value) {
             addCriterion("gmt_receive >", value, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtReceiveGreaterThanOrEqualTo(Long value) {
             addCriterion("gmt_receive >=", value, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveLessThan(Date value) {
+        public Criteria andGmtReceiveLessThan(Long value) {
             addCriterion("gmt_receive <", value, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveLessThanOrEqualTo(Date value) {
+        public Criteria andGmtReceiveLessThanOrEqualTo(Long value) {
             addCriterion("gmt_receive <=", value, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveIn(List<Date> values) {
+        public Criteria andGmtReceiveIn(List<Long> values) {
             addCriterion("gmt_receive in", values, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveNotIn(List<Date> values) {
+        public Criteria andGmtReceiveNotIn(List<Long> values) {
             addCriterion("gmt_receive not in", values, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveBetween(Date value1, Date value2) {
+        public Criteria andGmtReceiveBetween(Long value1, Long value2) {
             addCriterion("gmt_receive between", value1, value2, "gmtReceive");
             return (Criteria) this;
         }
 
-        public Criteria andGmtReceiveNotBetween(Date value1, Date value2) {
+        public Criteria andGmtReceiveNotBetween(Long value1, Long value2) {
             addCriterion("gmt_receive not between", value1, value2, "gmtReceive");
             return (Criteria) this;
         }
@@ -1276,52 +1275,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayEqualTo(Date value) {
+        public Criteria andGmtPayEqualTo(Long value) {
             addCriterion("gmt_pay =", value, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayNotEqualTo(Date value) {
+        public Criteria andGmtPayNotEqualTo(Long value) {
             addCriterion("gmt_pay <>", value, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayGreaterThan(Date value) {
+        public Criteria andGmtPayGreaterThan(Long value) {
             addCriterion("gmt_pay >", value, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtPayGreaterThanOrEqualTo(Long value) {
             addCriterion("gmt_pay >=", value, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayLessThan(Date value) {
+        public Criteria andGmtPayLessThan(Long value) {
             addCriterion("gmt_pay <", value, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayLessThanOrEqualTo(Date value) {
+        public Criteria andGmtPayLessThanOrEqualTo(Long value) {
             addCriterion("gmt_pay <=", value, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayIn(List<Date> values) {
+        public Criteria andGmtPayIn(List<Long> values) {
             addCriterion("gmt_pay in", values, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayNotIn(List<Date> values) {
+        public Criteria andGmtPayNotIn(List<Long> values) {
             addCriterion("gmt_pay not in", values, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayBetween(Date value1, Date value2) {
+        public Criteria andGmtPayBetween(Long value1, Long value2) {
             addCriterion("gmt_pay between", value1, value2, "gmtPay");
             return (Criteria) this;
         }
 
-        public Criteria andGmtPayNotBetween(Date value1, Date value2) {
+        public Criteria andGmtPayNotBetween(Long value1, Long value2) {
             addCriterion("gmt_pay not between", value1, value2, "gmtPay");
             return (Criteria) this;
         }
@@ -1336,52 +1335,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishEqualTo(Date value) {
+        public Criteria andGmtServingFinishEqualTo(Long value) {
             addCriterion("gmt_serving_finish =", value, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishNotEqualTo(Date value) {
+        public Criteria andGmtServingFinishNotEqualTo(Long value) {
             addCriterion("gmt_serving_finish <>", value, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishGreaterThan(Date value) {
+        public Criteria andGmtServingFinishGreaterThan(Long value) {
             addCriterion("gmt_serving_finish >", value, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtServingFinishGreaterThanOrEqualTo(Long value) {
             addCriterion("gmt_serving_finish >=", value, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishLessThan(Date value) {
+        public Criteria andGmtServingFinishLessThan(Long value) {
             addCriterion("gmt_serving_finish <", value, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishLessThanOrEqualTo(Date value) {
+        public Criteria andGmtServingFinishLessThanOrEqualTo(Long value) {
             addCriterion("gmt_serving_finish <=", value, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishIn(List<Date> values) {
+        public Criteria andGmtServingFinishIn(List<Long> values) {
             addCriterion("gmt_serving_finish in", values, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishNotIn(List<Date> values) {
+        public Criteria andGmtServingFinishNotIn(List<Long> values) {
             addCriterion("gmt_serving_finish not in", values, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishBetween(Date value1, Date value2) {
+        public Criteria andGmtServingFinishBetween(Long value1, Long value2) {
             addCriterion("gmt_serving_finish between", value1, value2, "gmtServingFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtServingFinishNotBetween(Date value1, Date value2) {
+        public Criteria andGmtServingFinishNotBetween(Long value1, Long value2) {
             addCriterion("gmt_serving_finish not between", value1, value2, "gmtServingFinish");
             return (Criteria) this;
         }
@@ -1396,52 +1395,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishEqualTo(Date value) {
+        public Criteria andGmtFinishEqualTo(Long value) {
             addCriterion("gmt_finish =", value, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishNotEqualTo(Date value) {
+        public Criteria andGmtFinishNotEqualTo(Long value) {
             addCriterion("gmt_finish <>", value, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishGreaterThan(Date value) {
+        public Criteria andGmtFinishGreaterThan(Long value) {
             addCriterion("gmt_finish >", value, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtFinishGreaterThanOrEqualTo(Long value) {
             addCriterion("gmt_finish >=", value, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishLessThan(Date value) {
+        public Criteria andGmtFinishLessThan(Long value) {
             addCriterion("gmt_finish <", value, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishLessThanOrEqualTo(Date value) {
+        public Criteria andGmtFinishLessThanOrEqualTo(Long value) {
             addCriterion("gmt_finish <=", value, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishIn(List<Date> values) {
+        public Criteria andGmtFinishIn(List<Long> values) {
             addCriterion("gmt_finish in", values, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishNotIn(List<Date> values) {
+        public Criteria andGmtFinishNotIn(List<Long> values) {
             addCriterion("gmt_finish not in", values, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishBetween(Date value1, Date value2) {
+        public Criteria andGmtFinishBetween(Long value1, Long value2) {
             addCriterion("gmt_finish between", value1, value2, "gmtFinish");
             return (Criteria) this;
         }
 
-        public Criteria andGmtFinishNotBetween(Date value1, Date value2) {
+        public Criteria andGmtFinishNotBetween(Long value1, Long value2) {
             addCriterion("gmt_finish not between", value1, value2, "gmtFinish");
             return (Criteria) this;
         }

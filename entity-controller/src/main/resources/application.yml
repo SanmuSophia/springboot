@@ -9,12 +9,13 @@ spring:
     jackson:
       date-format: yyyy-MM-dd HH:mm:ss
       time-zone: GMT+8
+#      default-property-inclusion: non_null
 
 
 
 swagger:
   title: entity-gcyl
-  description: 实体
+  description: 扫码点单
   version: 1.1.0.RELEASE
   license: Apache License, Version 2.0
   licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
@@ -27,11 +28,14 @@ swagger:
 #  paging plugin
 pagehelper:
     helperDialect: mysql
-    reasonable: true
+    reasonable: false
     supportMethodsArguments: true
     params: count=countSql
+    rowBoundsWithCount: true
 
 
-#mybatis:
-#  mapper-locations: classpath*:gcyl.entity.domain.mapper/*.xml
-#  type-aliases-package: gcyl.entity.domain.model
+mybatis:
+  mapper-locations: classpath*:gcyl.entity.domain.mapper/*.xml
+  type-aliases-package: gcyl.entity.domain.model
+  configuration:
+    cache-enabled: true

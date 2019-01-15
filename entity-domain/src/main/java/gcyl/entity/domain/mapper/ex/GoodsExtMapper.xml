@@ -15,8 +15,8 @@
     <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="BIGINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="BIGINT" />
     <result column="cut_off" property="cutOff" jdbcType="BIT" />
     <result column="minSpecStock" property="minSpecStock" jdbcType="INTEGER" />
     <result column="stock" property="stock" jdbcType="INTEGER" />
@@ -119,10 +119,10 @@
         #{version,jdbcType=BIGINT},
       </if>
       <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         #{cutOff,jdbcType=BIT},
@@ -138,10 +138,10 @@
     g.goods_img,
     g.month_sales,
     g.is_on_sale,
-    sum (gs.spec_stock) as stock,
-    min (gs.spec_stock) as minSpecStock,
-    min (gs.spec_price) as price,
-    count (gs.id) as specNum
+    sum( gs.spec_stock ) as stock,
+    min( gs.spec_stock ) as minSpecStock,
+    min( gs.spec_price ) as price,
+    count( gs.id ) as specNum
   </sql>
 
   <!-- 根据条件搜索 -->
@@ -173,7 +173,7 @@
     </where>
     group by g.id
     <if test="sellOut == true">
-    having min (gs.spec_stock) &lt;=0
+    having min(gs.spec_stock) &lt;=0
     </if>
     <if test="orderBy != null">
       order by ${orderBy}
@@ -219,27 +219,33 @@
   </select>
 
   <!-- 重置商品月售 -->
-  <update id="resetMonthSales">
+  <update id="resetMonthSales" parameterType="long">
     update tyg_ms_goods
-    set month_sales = 0
+    set month_sales = 0,
+        gmt_modify = #{gmtModify}
     where
       cut_off = false ;
 
     update tyg_ms_goods_spec
-    set spec_month_sales = 0
+    set spec_month_sales = 0,
+        gmt_modify = #{gmtModify}
     where
       cut_off = false
   </update>
 
   <!-- 批量修改销量 -->
-  <update id="batchAddSales" parameterType="java.util.list">
+  <update id="batchAddSales" parameterType="java.util.List">
     <foreach collection="list" item="item" index="index" separator=";">
       update tyg_ms_goods
-      set sales_count = sales_count + #{item.num}, month_sales = month_sales + #{item.num}
+      set sales_count = sales_count + #{item.num},
+          month_sales = month_sales + #{item.num},
+          gmt_modify = #{item.gmtModify}
       where id = #{item.goodsId};
 
       update tyg_ms_goods_spec
-      set spec_sales_count = spec_sales_count + #{item.num}, spec_month_sales = spec_month_sales + #{item.num}
+      set spec_sales_count = spec_sales_count + #{item.num},
+          spec_month_sales = spec_month_sales + #{item.num},
+          gmt_modify = #{item.gmtModify}
       where id = #{item.specId}
     </foreach>
   </update>

@@ -36,7 +36,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, shop_id, category_name
+    id, category_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="gcyl.entity.domain.model.CategoryExample" >
     select

@@ -1,5 +1,6 @@
 package gcyl.entity.controller;
 
+import gcyl.entity.common.utils.DateUtils;
 import gcyl.entity.domain.mapper.ex.CategoryExtMapper;
 import gcyl.entity.domain.mapper.OrderMapper;
 import gcyl.entity.domain.mapper.ex.OrderExtMapper;
@@ -82,5 +83,11 @@ public class ControllerTest1 {
     public void testNum() {
 //        System.out.println(orderShopService.orderNum(1));
 //        System.out.println(orderUserService.orderNum(1));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
+        System.out.println(DateUtils.getGmtDate());
+        System.out.println(DateUtils.getDateTime());
     }
 }

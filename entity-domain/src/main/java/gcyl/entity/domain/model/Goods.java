@@ -1,7 +1,6 @@
 package gcyl.entity.domain.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Goods implements Serializable {
     private Long id;
@@ -30,9 +29,9 @@ public class Goods implements Serializable {
 
     private Long version;
 
-    private Date gmtCreate;
+    private Long gmtCreate;
 
-    private Date gmtModify;
+    private Long gmtModify;
 
     private Boolean cutOff;
 
@@ -142,19 +141,19 @@ public class Goods implements Serializable {
         this.version = version;
     }
 
-    public Date getGmtCreate() {
+    public Long getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(Long gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModify() {
+    public Long getGmtModify() {
         return gmtModify;
     }
 
-    public void setGmtModify(Date gmtModify) {
+    public void setGmtModify(Long gmtModify) {
         this.gmtModify = gmtModify;
     }
 

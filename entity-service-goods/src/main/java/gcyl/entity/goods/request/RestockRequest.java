@@ -1,5 +1,7 @@
 package gcyl.entity.goods.request;
 
+import gcyl.entity.common.base.AbstractRequest;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -8,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @author lican
  * @date 2019/1/3
  */
-public class RestockRequest {
+public class RestockRequest extends AbstractRequest {
 
     /**
      * 店铺ID

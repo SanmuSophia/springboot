@@ -47,7 +47,7 @@ public class CartForm {
     /**
      * 图片
      */
-    private String goodsImage;
+    private String goodsImg;
 
     /**
      * 规格名
@@ -130,12 +130,12 @@ public class CartForm {
         this.goodsName = goodsName;
     }
 
-    public String getGoodsImage() {
-        return goodsImage;
+    public String getGoodsImg() {
+        return goodsImg;
     }
 
-    public void setGoodsImage(String goodsImage) {
-        this.goodsImage = goodsImage;
+    public void setGoodsImg(String goodsImg) {
+        this.goodsImg = goodsImg;
     }
 
     public String getSpecName() {
@@ -168,14 +168,6 @@ public class CartForm {
 
     public void setNum(Integer num) {
         this.num = num;
-    }
-
-    public Boolean getDefault() {
-        return isDefault;
-    }
-
-    public void setDefault(Boolean aDefault) {
-        isDefault = aDefault;
     }
 
     public String getGoodsUnit() {

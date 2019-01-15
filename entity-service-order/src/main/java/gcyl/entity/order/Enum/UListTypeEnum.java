@@ -9,31 +9,10 @@ package gcyl.entity.order.Enum;
  */
 public enum UListTypeEnum {
 
-    ALL(0, "所有"),
-    ORDERED(24, "待上菜(上菜中)"),
-    WAIT_PAY(25, "待付款"),
-    WAIT_EVALUATE(40, "待评价"),
-    REFUND(51, "已关闭");
+    AL, //所有
+    OD, //待上菜
+    WP, //待付款
+    WE, //待评价
+    RF  //已关闭
 
-    int code;
-
-    String name;
-
-    UListTypeEnum(int code, String name) {
-        this.code = code;
-        this.name = name;
-    }
-
-    public static UListTypeEnum getEnumByCode(int code) {
-        for (UListTypeEnum typeEnum : UListTypeEnum.values()) {
-            if (typeEnum.code == code) {
-                return typeEnum;
-            }
-        }
-        return null;
-    }
-
-    public int getCode() {
-        return code;
-    }
 }

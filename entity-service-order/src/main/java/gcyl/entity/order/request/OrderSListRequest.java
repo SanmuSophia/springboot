@@ -1,5 +1,6 @@
 package gcyl.entity.order.request;
 
+import gcyl.entity.common.base.AbstractRequest;
 import gcyl.entity.order.Enum.SListTypeEnum;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author lican
  * @date 2018/12/29
  */
-public class OrderSListRequest {
+public class OrderSListRequest extends AbstractRequest {
 
     /**
      * 店铺ID
@@ -19,15 +20,14 @@ public class OrderSListRequest {
     private Long shopId;
 
     /**
-     * 列表类型
+     * 列表类型枚举
      */
-    @NotNull(message = "订单类型有误")
-    private Integer listType;
+    private SListTypeEnum listType;
 
     /**
-     * 列表类型枚举(listType计算)
+     * 订单编号
      */
-    private SListTypeEnum typeEnum;
+    private String orderSn;
 
     /**
      * 页面大小
@@ -47,20 +47,20 @@ public class OrderSListRequest {
         this.shopId = shopId;
     }
 
-    public Integer getListType() {
+    public SListTypeEnum getListType() {
         return listType;
     }
 
-    public void setListType(Integer listType) {
+    public void setListType(SListTypeEnum listType) {
         this.listType = listType;
     }
 
-    public SListTypeEnum getTypeEnum() {
-        return typeEnum;
+    public String getOrderSn() {
+        return orderSn;
     }
 
-    public void setTypeEnum(SListTypeEnum typeEnum) {
-        this.typeEnum = typeEnum;
+    public void setOrderSn(String orderSn) {
+        this.orderSn = orderSn;
     }
 
     public int getPageSize() {

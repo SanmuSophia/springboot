@@ -19,6 +19,7 @@ import gcyl.entity.order.request.OrderSListRequest;
 import gcyl.entity.order.service.IOrderService;
 import gcyl.entity.order.service.IOrderShopService;
 import gcyl.entity.domain.model.vo.OrderSNumVO;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,25 +63,25 @@ public class OrderShopServiceImpl implements IOrderShopService {
         paramMap.put("shopId", shopId);
         paramMap.put("shopCutOff", false);
 
-        list.add(OrderStateEnum.WAIT_RECEIVE.getCode());
+        list.add(OrderStateEnum.WR.getCode());
         int waitReceive = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.WAIT_SERVING.getCode());
+        list.add(OrderStateEnum.WS.getCode());
         int waitServing = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.FINISH.getCode());
-        list.add(OrderStateEnum.EVALUATE.getCode());
+        list.add(OrderStateEnum.FH.getCode());
+        list.add(OrderStateEnum.EV.getCode());
         int finish = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.CLOSE.getCode());
+        list.add(OrderStateEnum.CS.getCode());
         int close = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.WAIT_SERVING.getCode());
-        list.add(OrderStateEnum.FINISH_SERVING.getCode());
+        list.add(OrderStateEnum.WS.getCode());
+        list.add(OrderStateEnum.FS.getCode());
         paramMap.put("isPay", false);
         int waitPay = orderExtMapper.countByMap(paramMap);
 
@@ -105,32 +106,36 @@ public class OrderShopServiceImpl implements IOrderShopService {
         long shopId = request.getShopId();
         int pageSize = request.getPageSize();
         int pageNum = request.getPageNum();
-        SListTypeEnum typeEnum = request.getTypeEnum();
+        String orderSn = request.getOrderSn();
+        SListTypeEnum typeEnum = request.getListType();
 
         List<Integer> orderStates = new ArrayList<>();
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("shopId", shopId);
-        switch (typeEnum) {
-            case WAIT_RECEIVE:
-                orderStates.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-                break;
-            case WAIT_SERVING:
-                orderStates.add(OrderStateEnum.WAIT_SERVING.getCode());
-                break;
-            case WAIT_PAY:
-                orderStates.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-                orderStates.add(OrderStateEnum.WAIT_SERVING.getCode());
-                paramMap.put("isPay", PayEnum.NOT_PAID.getCode());
-                break;
-            case FINISH:
-                orderStates.add(OrderStateEnum.FINISH.getCode());
-                orderStates.add(OrderStateEnum.EVALUATE.getCode());
-                break;
-            case CLOSE:
-                orderStates.add(OrderStateEnum.CLOSE.getCode());
-                break;
+        if (typeEnum != null) {
+            switch (typeEnum) {
+                case WR:
+                    orderStates.add(OrderStateEnum.WR.getCode());
+                    break;
+                case WS:
+                    orderStates.add(OrderStateEnum.WS.getCode());
+                    break;
+                case WP:
+                    orderStates.add(OrderStateEnum.WS.getCode());
+                    orderStates.add(OrderStateEnum.FS.getCode());
+                    paramMap.put("isPay", PayEnum.NPD.getCode());
+                    break;
+                case FH:
+                    orderStates.add(OrderStateEnum.FH.getCode());
+                    orderStates.add(OrderStateEnum.EV.getCode());
+                    break;
+                case CS:
+                    orderStates.add(OrderStateEnum.CS.getCode());
+                    break;
+            }
+            paramMap.put("orderStates", orderStates);
         }
-        paramMap.put("orderStates", orderStates);
+        if (StringUtils.isNotBlank(orderSn)) paramMap.put("orderSn", orderSn);
 
         PageHelper.startPage(pageNum, pageSize);
         return orderExtMapper.selectShopOdList(paramMap);
@@ -144,7 +149,10 @@ public class OrderShopServiceImpl implements IOrderShopService {
      */
     @Override
     public OrderEx orderDetail(long shopId, long orderId) {
-        return orderExtMapper.selectShopOdDetail(shopId, orderId);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("shopId", shopId);
+        paramMap.put("orderId", orderId);
+        return orderExtMapper.selectShopOdDetail(paramMap);
     }
 
     /**
@@ -165,7 +173,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
         List<OrderGoodsForm> goodsForms = orderExtMapper.selectOrderGoodsNum(orderId);
         for (OrderGoodsForm goodsForm : goodsForms) {
             long specId = goodsForm.getSpecId();
-            int num = goodsForm.getNum();
+            int num = goodsForm.getSpecNum();
             result = goodsService.changeStock(specId, num, StockEnum.ADD);
             if (!result.isSuccess()) return result;
         }
@@ -173,7 +181,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
         Order order = new Order();
         order.setId(orderId);
         order.setDescription(reason);
-        return orderService.changeState(order, OrderStateEnum.CLOSE);
+        return orderService.changeState(order, OrderStateEnum.CS);
     }
 
     /**
@@ -190,7 +198,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
 
         Order order = new Order();
         order.setId(orderId);
-        return orderService.changeState(order, OrderStateEnum.WAIT_SERVING);
+        return orderService.changeState(order, OrderStateEnum.WS);
     }
 
     /**
@@ -209,9 +217,9 @@ public class OrderShopServiceImpl implements IOrderShopService {
         Order order = new Order();
         order.setId(orderId);
         if (isPay) {
-            return orderService.changeState(order, OrderStateEnum.FINISH);
+            return orderService.changeState(order, OrderStateEnum.FH);
         } else {
-            return orderService.changeState(order, OrderStateEnum.FINISH_SERVING);
+            return orderService.changeState(order, OrderStateEnum.FS);
         }
     }
 
@@ -230,20 +238,23 @@ public class OrderShopServiceImpl implements IOrderShopService {
         //订单状态验证
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         int orderStare = oldOrder.getOrderState();
-        if (orderStare != OrderStateEnum.FINISH_SERVING.getCode()
-                || orderStare != OrderStateEnum.WAIT_SERVING.getCode()) {
+        if (orderStare != OrderStateEnum.FS.getCode()
+                && orderStare != OrderStateEnum.WS.getCode()) {
             logger.info(ResultEnum.O2015.toString());
             result.error(ResultEnum.O2015);
             return result;
         }
 
+        long now = DateUtils.getDateTime();
+
         Order order = new Order();
         order.setId(orderId);
-        order.setGmtPay(DateUtils.getDate());
+        order.setGmtPay(now);
+        order.setGmtModify(now);
 
         //判断是否上菜完成,若完成则修改订单为已完成
-        if (orderStare == OrderStateEnum.FINISH_SERVING.getCode()) {
-            return orderService.changeState(order, OrderStateEnum.FINISH);
+        if (orderStare == OrderStateEnum.FS.getCode()) {
+            return orderService.changeState(order, OrderStateEnum.FH);
         }
 
         int i = orderMapper.updateByPrimaryKeySelective(order);

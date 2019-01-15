@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 /**
  * 类目管理
  *
@@ -41,15 +42,21 @@ public class CategoryServiceImpl implements ICategoryService {
      */
     @Override
     public Result add(CategoryAddRequest request) {
-        Result result = new Result();
         long shopId = request.getShopId();
         String categoryName = request.getCategoryName();
+        long now = DateUtils.getDateTime();
+
+        //判断类目是否已存在
+        Result result = this.hasCategory(shopId, categoryName, null);
+        if (!result.isSuccess()) return result;
+
 
         //新增参数
         Category category = new Category();
         category.setShopId(shopId);
         category.setCategoryName(categoryName);
-        category.setGmtCreate(DateUtils.getDate());
+        category.setGmtCreate(now);
+        category.setGmtModify(now);
         int i = categoryMapper.insertSelective(category);
 
         if (i <= 0) {
@@ -70,21 +77,25 @@ public class CategoryServiceImpl implements ICategoryService {
      */
     @Override
     public Result update(CategoryUpRequest request) {
-        Result result = new Result();
         long categoryId = request.getCategoryId();
         long shopId = request.getShopId();
         String categoryName = request.getCategoryName();
 
+        //验证是否店铺类目
+        Result result = this.isShopCategory(shopId, categoryId);
+        if (!result.isSuccess()) return result;
+
+        //判断新类目是否已存在
+        result = this.hasCategory(shopId, categoryName, categoryId);
+        if (!result.isSuccess()) return result;
+
         //修改参数
         Category category = new Category();
+        category.setId(categoryId);
         category.setCategoryName(categoryName);
+        category.setGmtModify(DateUtils.getDateTime());
 
-        //修改条件
-        CategoryExample example = new CategoryExample();
-        example.createCriteria()
-                .andIdEqualTo(categoryId)
-                .andShopIdEqualTo(shopId);
-        int i = categoryMapper.updateByExampleSelective(category, example);
+        int i = categoryMapper.updateByPrimaryKeySelective(category);
 
         if (i <= 0) {
             logger.info(ResultEnum.C2001.toString());
@@ -104,24 +115,76 @@ public class CategoryServiceImpl implements ICategoryService {
      */
     @Override
     public Result delete(CategoryDelRequest request) {
-        Result result = new Result();
         long categoryId = request.getCategoryId();
         long shopId = request.getShopId();
 
+        //验证是否店铺类目
+        Result result = this.isShopCategory(shopId, categoryId);
+        if (!result.isSuccess()) return result;
+
         //删除信息
         Category category = new Category();
+        category.setId(categoryId);
         category.setCutOff(CutOffEnum.TRUE.getCode());
+        category.setGmtModify(DateUtils.getDateTime());
 
-        //删除条件
-        CategoryExample example = new CategoryExample();
-        example.createCriteria()
-                .andIdEqualTo(categoryId)
-                .andShopIdEqualTo(shopId);
-        int i = categoryMapper.updateByExampleSelective(category, example);
+        int i = categoryMapper.updateByPrimaryKeySelective(category);
 
         if (i <= 0) {
             logger.info(ResultEnum.C3001.toString());
             result.error(ResultEnum.C3001);
+            return result;
+        }
+
+        result.success();
+        return result;
+    }
+
+    /**
+     * 判断是否店铺类目
+     *
+     * @param shopId      店铺ID
+     * @param categoryId  类目ID
+     */
+    public Result isShopCategory(long shopId, long categoryId) {
+        Result result = new Result();
+        CategoryExample example = new CategoryExample();
+        example.createCriteria().andIdEqualTo(categoryId).andShopIdEqualTo(shopId);
+        int count = categoryMapper.countByExample(example);
+
+        if (count <= 0) {
+            result.error(ResultEnum.C0001);
+            return result;
+        }
+
+        result.success();
+        return result;
+    }
+
+    /**
+     * 判断类目是否已存在
+     *
+     * @param shopId        店铺ID
+     * @param categoryName  类目名
+     * @param categoryId    类目ID
+     */
+    private Result hasCategory(long shopId, String categoryName, Long categoryId){
+        Result result = new Result();
+        CategoryExample example = new CategoryExample();
+        CategoryExample.Criteria criteria = example.createCriteria();
+        criteria.andShopIdEqualTo(shopId)
+                .andCategoryNameEqualTo(categoryName)
+                .andCutOffEqualTo(CutOffEnum.FALSE.getCode());
+
+        //修改时排除类目本身
+        if (categoryId != null) {
+            criteria.andIdNotEqualTo(categoryId);
+        }
+
+        int count = categoryMapper.countByExample(example);
+        if (count >= 1) {
+            logger.info(ResultEnum.C0002.toString());
+            result.error(ResultEnum.C0002);
             return result;
         }
 

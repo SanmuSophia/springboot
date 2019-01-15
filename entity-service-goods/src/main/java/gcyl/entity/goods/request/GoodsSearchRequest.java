@@ -1,5 +1,6 @@
 package gcyl.entity.goods.request;
 
+import gcyl.entity.common.base.AbstractRequest;
 import gcyl.entity.goods.Enum.SortEnum;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author lican
  * @date 2018/12/18
  */
-public class GoodsSearchRequest {
+public class GoodsSearchRequest extends AbstractRequest {
     /**
      * 店铺ID
      */
@@ -30,7 +31,7 @@ public class GoodsSearchRequest {
     /**
      * 默认
      */
-    private Boolean isDefault;
+    private Boolean isDefault = false;
 
     /**
      * 热销
@@ -63,16 +64,9 @@ public class GoodsSearchRequest {
     private int pageSize = 5;
 
     /**
-     * 排序方式
-     * 1：默认
-     * 参考gcyl.entity.common.enums.goods.SortEnum
+     * 排序枚举
      */
-    private int sortType = 1;
-
-    /**
-     * 排序枚举,根据sortType计算
-     */
-    private SortEnum sortEnum;
+    private SortEnum sortEnum = SortEnum.D;
 
     public Long getShopId() {
         return shopId;
@@ -102,7 +96,7 @@ public class GoodsSearchRequest {
         return isDefault;
     }
 
-    public void setSetDefault(Boolean isDefault) {
+    public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
 
@@ -152,14 +146,6 @@ public class GoodsSearchRequest {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public int getSortType() {
-        return sortType;
-    }
-
-    public void setSortType(int sortType) {
-        this.sortType = sortType;
     }
 
     public SortEnum getSortEnum() {

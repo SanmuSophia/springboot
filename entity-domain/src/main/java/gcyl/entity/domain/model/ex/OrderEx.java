@@ -14,6 +14,11 @@ import java.util.List;
 public class OrderEx extends Order {
 
     /**
+     * 商品数量
+     */
+    private Integer goodsNum;
+
+    /**
      * 商品图片列表
      */
     private List<String> images;
@@ -33,6 +38,14 @@ public class OrderEx extends Order {
      * 店铺图像
      */
     private String shopLogo;
+
+    public Integer getGoodsNum() {
+        return goodsNum;
+    }
+
+    public void setGoodsNum(Integer goodsNum) {
+        this.goodsNum = goodsNum;
+    }
 
     public List<String> getImages() {
         return images;

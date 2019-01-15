@@ -25,6 +25,14 @@ public interface ICartService {
     List<CartForm> get(long shopId, long tableNum);
 
     /**
+     * 获取默认商品
+     *
+     * @param shopId    店铺ID
+     * @return  默认商品
+     */
+    List<CartForm> getDefault(long shopId);
+
+    /**
      * 添加商品
      *
      * @param request  商品参数

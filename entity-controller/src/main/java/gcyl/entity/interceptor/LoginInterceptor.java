@@ -25,13 +25,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         LogUtils.debug("当前用户请求ip:" + userIp);
         IpContext.setCurrentContext(userIp);
 
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        Method method = handlerMethod.getMethod();
-        UserLogin userLogin = method.getAnnotation(UserLogin.class);
-        if (userLogin == null) {
-            return true;
+        if (handler instanceof  HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            Method method = handlerMethod.getMethod();
+            UserLogin userLogin = method.getAnnotation(UserLogin.class);
+            if (userLogin == null) {
+                return true;
+            }
         }
         System.out.println("------------------------------");
-        return false;
+        return true;
     }
 }

@@ -3,8 +3,6 @@ package gcyl.entity.domain.mapper.ex;
 import gcyl.entity.domain.model.Order;
 import gcyl.entity.domain.model.ex.OrderEx;
 import gcyl.entity.domain.model.form.OrderGoodsForm;
-import gcyl.entity.domain.model.vo.OrderSNumVO;
-import gcyl.entity.domain.model.vo.OrderUNumVO;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -40,11 +38,10 @@ public interface OrderExtMapper {
     /**
      * 获取店铺订单详情
      *
-     * @param shopId   店铺ID
-     * @param orderId  订单ID
+     * @param paramMap  shopId,orderId
      * @return 订单详情
      */
-    OrderEx selectShopOdDetail(long shopId, long orderId);
+    OrderEx selectShopOdDetail(Map<String, Object> paramMap);
 
     /**
      * 根据条件搜索用户订单列表
@@ -57,11 +54,10 @@ public interface OrderExtMapper {
     /**
      * 获取用户订单详情
      *
-     * @param userId   用户ID
-     * @param orderId  订单ID
+     * @param paramMap   userId,orderId
      * @return 订单详情
      */
-    OrderEx selectUserOdDetail(long userId, long orderId);
+    OrderEx selectUserOdDetail(Map<String, Object> paramMap);
 
     /**
      * 获取订单商品数量

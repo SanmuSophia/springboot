@@ -35,8 +35,9 @@ public interface GoodsExtMapper {
 
     /**
      * 更新商品月售
+     * @param gmtModify  当前时间
      */
-    int resetMonthSales();
+    int resetMonthSales(long gmtModify);
 
     /**
      * 增加商品销量

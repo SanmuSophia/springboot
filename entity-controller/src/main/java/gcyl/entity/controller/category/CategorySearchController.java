@@ -8,6 +8,7 @@ import gcyl.entity.domain.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class CategorySearchController {
      * @param shopId  店铺ID
      */
     @ShopLogin
-    @RequestMapping("/getShopCategory")
+    @RequestMapping(value = "/getShopCategory", method = RequestMethod.GET)
     @ResponseBody
     public Result getShopCategory(Long shopId) {
         Result result = new Result();

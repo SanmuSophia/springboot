@@ -11,8 +11,8 @@
     <result column="spec_stock" property="specStock" jdbcType="INTEGER" />
     <result column="spec_sales_count" property="specSalesCount" jdbcType="INTEGER" />
     <result column="spec_month_sales" property="specMonthSales" jdbcType="INTEGER" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="BIGINT" />
     <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -116,7 +116,7 @@
     values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{specKey,jdbcType=VARCHAR}, 
       #{specName,jdbcType=VARCHAR}, #{specPrice,jdbcType=DECIMAL}, #{specDayStock,jdbcType=INTEGER}, 
       #{specStock,jdbcType=INTEGER}, #{specSalesCount,jdbcType=INTEGER}, #{specMonthSales,jdbcType=INTEGER}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{cutOff,jdbcType=BIT}
+      #{gmtCreate,jdbcType=BIGINT}, #{gmtModify,jdbcType=BIGINT}, #{cutOff,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.GoodsSpec" >
@@ -188,10 +188,10 @@
         #{specMonthSales,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         #{cutOff,jdbcType=BIT},
@@ -235,10 +235,10 @@
         spec_month_sales = #{record.specMonthSales,jdbcType=INTEGER},
       </if>
       <if test="record.gmtCreate != null" >
-        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="record.gmtModify != null" >
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       </if>
       <if test="record.cutOff != null" >
         cut_off = #{record.cutOff,jdbcType=BIT},
@@ -259,8 +259,8 @@
       spec_stock = #{record.specStock,jdbcType=INTEGER},
       spec_sales_count = #{record.specSalesCount,jdbcType=INTEGER},
       spec_month_sales = #{record.specMonthSales,jdbcType=INTEGER},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       cut_off = #{record.cutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -294,10 +294,10 @@
         spec_month_sales = #{specMonthSales,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         cut_off = #{cutOff,jdbcType=BIT},
@@ -315,8 +315,8 @@
       spec_stock = #{specStock,jdbcType=INTEGER},
       spec_sales_count = #{specSalesCount,jdbcType=INTEGER},
       spec_month_sales = #{specMonthSales,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{gmtModify,jdbcType=BIGINT},
       cut_off = #{cutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

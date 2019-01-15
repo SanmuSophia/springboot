@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
@@ -51,11 +52,13 @@ public class RedisConfiguration {
     }
 
     @Bean
+    @DependsOn("jedisPoolConfig")
     public JedisPool jedisPool(JedisPoolConfig jedisPoolConfig) {
         return new JedisPool(jedisPoolConfig, host, port, timeout, password, database);
     }
 
     @Bean(name = "redisConnectionFactory")
+    @DependsOn("jedisPoolConfig")
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig) {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setDatabase(database);
@@ -72,6 +75,7 @@ public class RedisConfiguration {
 
     @Bean
     @SuppressWarnings("unchecked")
+    @DependsOn("redisConnectionFactory")
     public RedisTemplate redisTemplate(@Qualifier("redisConnectionFactory") JedisConnectionFactory factory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(factory);

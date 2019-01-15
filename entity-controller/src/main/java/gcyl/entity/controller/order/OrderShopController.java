@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
@@ -37,7 +38,7 @@ public class OrderShopController {
      * @param shopId  店铺ID
      */
     @ShopLogin
-    @RequestMapping("/orderNum")
+    @RequestMapping(value = "/orderNum", method = RequestMethod.POST)
     @ResponseBody
     public Result orderNum(Long shopId) {
         Result result = new Result();
@@ -56,11 +57,11 @@ public class OrderShopController {
      * 订单列表
      */
     @ShopLogin
-    @RequestMapping("/orderList")
+    @RequestMapping(value = "/orderList", method = RequestMethod.POST)
     @ResponseBody
     public Result orderList(@Valid @RequestBody OrderSListRequest request, BindingResult bindingResult) {
         Result result = new Result();
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasFieldErrors()) {
             result.error(bindingResult.getFieldErrors().get(0).getDefaultMessage());
             return result;
         }
@@ -78,7 +79,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping("/orderDetail")
+    @RequestMapping(value = "/orderDetail", method = RequestMethod.POST)
     @ResponseBody
     public Result orderDetail(Long shopId, Long orderId) {
         Result result = new Result();
@@ -110,7 +111,7 @@ public class OrderShopController {
      * @param reason   拒接原因
      */
     @ShopLogin
-    @RequestMapping("/refuse")
+    @RequestMapping(value = "/refuse", method = RequestMethod.POST)
     @ResponseBody
     public Result refuse(Long shopId, Long orderId, String reason) {
         Result result = new Result();
@@ -137,7 +138,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping("/receive")
+    @RequestMapping(value = "/receive", method = RequestMethod.POST)
     @ResponseBody
     public Result receive(Long shopId, Long orderId) {
         Result result = new Result();
@@ -160,7 +161,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping("/finishServing")
+    @RequestMapping(value = "/finishServing", method = RequestMethod.POST)
     @ResponseBody
     public Result finishServing(Long shopId, Long orderId) {
         Result result = new Result();
@@ -183,7 +184,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping("/confirmReceipt")
+    @RequestMapping(value = "/confirmReceipt", method = RequestMethod.POST)
     @ResponseBody
     public Result confirmReceipt(Long shopId, Long orderId) {
         Result result = new Result();

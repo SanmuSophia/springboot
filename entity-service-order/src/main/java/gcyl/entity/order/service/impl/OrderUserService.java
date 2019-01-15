@@ -9,7 +9,6 @@ import gcyl.entity.domain.mapper.OrderMapper;
 import gcyl.entity.domain.mapper.ex.OrderExtMapper;
 import gcyl.entity.domain.model.OrderExample;
 import gcyl.entity.domain.model.ex.OrderEx;
-import gcyl.entity.domain.model.vo.OrderSNumVO;
 import gcyl.entity.domain.model.vo.OrderUNumVO;
 import gcyl.entity.order.Enum.UListTypeEnum;
 import gcyl.entity.order.request.OrderUListRequest;
@@ -53,24 +52,24 @@ public class OrderUserService implements IOrderUserService {
         List<Integer> list = new ArrayList<>();
         paramMap.put("orderStates", list);
 
-        list.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-        list.add(OrderStateEnum.WAIT_SERVING.getCode());
-        list.add(OrderStateEnum.FINISH_SERVING.getCode());
+        list.add(OrderStateEnum.WR.getCode());
+        list.add(OrderStateEnum.WS.getCode());
+        list.add(OrderStateEnum.FS.getCode());
         int ordered = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.FINISH.getCode());
+        list.add(OrderStateEnum.FH.getCode());
         int waitEvaluate = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.CLOSE.getCode());
+        list.add(OrderStateEnum.CS.getCode());
         paramMap.put("isPay", true);
         int refund = orderExtMapper.countByMap(paramMap);
 
         list.clear();
-        list.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-        list.add(OrderStateEnum.WAIT_SERVING.getCode());
-        list.add(OrderStateEnum.FINISH_SERVING.getCode());
+        list.add(OrderStateEnum.WR.getCode());
+        list.add(OrderStateEnum.WS.getCode());
+        list.add(OrderStateEnum.FS.getCode());
         paramMap.put("isPay", false);
         int waitPay = orderExtMapper.countByMap(paramMap);
 
@@ -95,40 +94,34 @@ public class OrderUserService implements IOrderUserService {
         long userId = request.getUserId();
         int pageSize = request.getPageSize();
         int pageNum = request.getPageNum();
-        UListTypeEnum typeEnum = request.getTypeEnum();
+        UListTypeEnum typeEnum = request.getListType();
 
-        List<Integer> orderStates = new ArrayList<>();
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userId", userId);
-        switch (typeEnum) {
-            case ALL:
-                orderStates.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-                orderStates.add(OrderStateEnum.WAIT_SERVING.getCode());
-                orderStates.add(OrderStateEnum.FINISH_SERVING.getCode());
-                orderStates.add(OrderStateEnum.FINISH.getCode());
-                orderStates.add(OrderStateEnum.EVALUATE.getCode());
-                orderStates.add(OrderStateEnum.CLOSE.getCode());
-                break;
-            case ORDERED:
-                orderStates.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-                orderStates.add(OrderStateEnum.WAIT_SERVING.getCode());
-                orderStates.add(OrderStateEnum.FINISH_SERVING.getCode());
-                break;
-            case WAIT_PAY:
-                orderStates.add(OrderStateEnum.WAIT_RECEIVE.getCode());
-                orderStates.add(OrderStateEnum.WAIT_SERVING.getCode());
-                orderStates.add(OrderStateEnum.FINISH_SERVING.getCode());
-                paramMap.put("isPay", PayEnum.NOT_PAID.getCode());
-                break;
-            case WAIT_EVALUATE:
-                orderStates.add(OrderStateEnum.FINISH.getCode());
-                break;
-            case REFUND:
-                orderStates.add(OrderStateEnum.CLOSE.getCode());
-                paramMap.put("isPay", PayEnum.PAID.getCode());
-                break;
+        if (typeEnum != null && typeEnum != UListTypeEnum.AL) {
+            List<Integer> orderStates = new ArrayList<>();
+            switch (typeEnum) {
+                case OD:
+                    orderStates.add(OrderStateEnum.WR.getCode());
+                    orderStates.add(OrderStateEnum.WS.getCode());
+                    orderStates.add(OrderStateEnum.FS.getCode());
+                    break;
+                case WP:
+                    orderStates.add(OrderStateEnum.WR.getCode());
+                    orderStates.add(OrderStateEnum.WS.getCode());
+                    orderStates.add(OrderStateEnum.FS.getCode());
+                    paramMap.put("isPay", PayEnum.NPD.getCode());
+                    break;
+                case WE:
+                    orderStates.add(OrderStateEnum.FH.getCode());
+                    break;
+                case RF:
+                    orderStates.add(OrderStateEnum.CS.getCode());
+                    paramMap.put("isPay", PayEnum.PAID.getCode());
+                    break;
+            }
+            paramMap.put("orderStates", orderStates);
         }
-        paramMap.put("orderStates", orderStates);
 
         PageHelper.startPage(pageNum, pageSize);
         return orderExtMapper.selectUserOdList(paramMap);
@@ -142,7 +135,10 @@ public class OrderUserService implements IOrderUserService {
      */
     @Override
     public OrderEx orderDetail(long userId, long orderId) {
-        return orderExtMapper.selectUserOdDetail(userId, orderId);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userId", userId);
+        paramMap.put("orderId", orderId);
+        return orderExtMapper.selectUserOdDetail(paramMap);
     }
 
     /**

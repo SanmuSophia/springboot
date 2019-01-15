@@ -39,16 +39,22 @@ public class CartServiceImpl implements ICartService {
      */
     @Override
     public List<CartForm> get(long shopId, long tableNum) {
-        List<CartForm> cartForms = cartRedisDao.getTable(shopId, tableNum);
+        return cartRedisDao.getTable(shopId, tableNum);
+    }
 
-        //获取默认商品
+    /**
+     * 获取默认商品
+     *
+     * @param shopId    店铺ID
+     * @return  默认商品列表
+     */
+    @Override
+    public List<CartForm> getDefault(long shopId) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("shopId", shopId);
         paramMap.put("isDefault", true);
-        List<CartForm> defaultGoods = cartMapper.selectByMap(paramMap);
-        cartForms.addAll(defaultGoods);
-
-        return cartForms;
+        paramMap.put("isOnSale", true);
+        return cartMapper.selectByMap(paramMap);
     }
 
     /**
@@ -76,10 +82,14 @@ public class CartServiceImpl implements ICartService {
             result.error(ResultEnum.CT1002);
             return result;
         }
+        if (cartForm.getIsDefault()) {
+            result.error(ResultEnum.CT1003);
+            return result;
+        }
         cartForm.setSpecStock(null);
 //        cartRedisDao.addUser(shopId, tableNum, userId, num, cartForm);
 
-        //添加餐桌购物车
+        //获取用户信息
         Map<String, Object> userMap = cartMapper.selectUserInfo(userId);
         if (!CollectionUtils.isEmpty(userMap)) {
             String userName = (String)userMap.get("name");
@@ -87,12 +97,8 @@ public class CartServiceImpl implements ICartService {
             cartForm.setUserName(userName);
             cartForm.setUserLogo(userLogo);
         }
-        long i = cartRedisDao.addTable(shopId, tableNum, num, cartForm);
-        if (i <= 0) {
-            result.error(ResultEnum.CT1003);
-            return result;
-        }
 
+        cartRedisDao.addTable(shopId, tableNum, num, cartForm);
         result.success();
         return result;
     }
@@ -111,12 +117,7 @@ public class CartServiceImpl implements ICartService {
         long specId = request.getSpecId();
         int num = request.getNum();
 
-        long i = cartRedisDao.removeTable(shopId, tableNum, specId, num);
-        if (i <= 0) {
-            result.error(ResultEnum.CT3002);
-            return result;
-        }
-
+        cartRedisDao.removeTable(shopId, tableNum, specId, num);
         result.success();
         return result;
     }
@@ -131,12 +132,7 @@ public class CartServiceImpl implements ICartService {
     @Override
     public Result clear(long shopId, long tableNum) {
         Result result = new Result();
-        long i = cartRedisDao.clear(shopId, tableNum);
-        if (i <= 0) {
-            result.error(ResultEnum.CT3003);
-            return result;
-        }
-
+        cartRedisDao.clear(shopId, tableNum);
         result.success();
         return result;
     }

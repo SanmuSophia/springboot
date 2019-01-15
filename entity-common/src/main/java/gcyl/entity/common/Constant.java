@@ -9,7 +9,7 @@ package gcyl.entity.common;
  */
 public interface Constant {
     //时区
-    String GMT = "+8";
+    String GMT8 = "+8";
 
     //商品编号前缀
     String G_SN_PREFIX = "MSG";

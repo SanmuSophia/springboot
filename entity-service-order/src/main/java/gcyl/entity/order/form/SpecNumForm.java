@@ -1,5 +1,6 @@
 package gcyl.entity.order.form;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -20,6 +21,7 @@ public class SpecNumForm {
      * 规格数量
      */
     @NotNull(message = "商品数量有误")
+    @Min(value = 1, message = "商品数量有误")
     private Integer num;
 
     public Long getSpecId() {

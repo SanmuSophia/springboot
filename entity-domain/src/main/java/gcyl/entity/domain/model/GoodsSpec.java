@@ -2,7 +2,6 @@ package gcyl.entity.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class GoodsSpec implements Serializable {
     private Long id;
@@ -23,9 +22,9 @@ public class GoodsSpec implements Serializable {
 
     private Integer specMonthSales;
 
-    private Date gmtCreate;
+    private Long gmtCreate;
 
-    private Date gmtModify;
+    private Long gmtModify;
 
     private Boolean cutOff;
 
@@ -103,19 +102,19 @@ public class GoodsSpec implements Serializable {
         this.specMonthSales = specMonthSales;
     }
 
-    public Date getGmtCreate() {
+    public Long getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(Long gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModify() {
+    public Long getGmtModify() {
         return gmtModify;
     }
 
-    public void setGmtModify(Date gmtModify) {
+    public void setGmtModify(Long gmtModify) {
         this.gmtModify = gmtModify;
     }
 

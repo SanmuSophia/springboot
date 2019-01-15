@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
@@ -39,7 +40,7 @@ public class GoodsSearchController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/goodsList")
+    @RequestMapping(value = "/goodsList", method = RequestMethod.POST)
     @ResponseBody
     public Result goodsList(@Valid @RequestBody GoodsSearchRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -47,17 +48,9 @@ public class GoodsSearchController {
             result.error(bindingResult.getFieldErrors().get(0).getDefaultMessage());
             return result;
         }
-
-        int sortType = request.getSortType();
-        SortEnum sortEnum = SortEnum.getEnumByCode(sortType);
-        if (sortEnum == null) {
-            result.error(ResultEnum.G0001);
-            return result;
-        }
-        request.setSortEnum(sortEnum);
-
         if (request.getIsOnSale() == null) {
             result.error(ResultEnum.G0002);
+            return result;
         }
 
         List<GoodsEx> goodsExs = goodsSearchService.goodsList(request);
@@ -71,7 +64,7 @@ public class GoodsSearchController {
      * @param goodsId  商品ID
      */
     @ShopLogin
-    @RequestMapping("/goodsDetail")
+    @RequestMapping(value = "/goodsDetail", method = RequestMethod.GET)
     @ResponseBody
     public Result goodsDetail(Long goodsId) {
         Result result = new Result();
@@ -91,7 +84,7 @@ public class GoodsSearchController {
      * @param goodsId  商品ID
      */
     @ShopLogin
-    @RequestMapping("/goodsSpecList")
+    @RequestMapping(value = "/goodsSpecList", method = RequestMethod.GET)
     @ResponseBody
     public Result goodsSpecList(Long goodsId) {
         Result result = new Result();

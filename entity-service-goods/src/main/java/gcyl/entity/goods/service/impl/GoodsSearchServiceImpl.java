@@ -70,7 +70,7 @@ public class GoodsSearchServiceImpl implements IGoodsSearchService {
             paramMap.put("likeValue", "%" + likeValue + "%");
         //排序
         switch (sortEnum) {
-            case SELL_OUT:
+            case S:
                 paramMap.put("orderBy", "minSpecStock,stock");
                 break;
         }
@@ -92,13 +92,14 @@ public class GoodsSearchServiceImpl implements IGoodsSearchService {
     private List<GoodsEx> selectHotGoods(long shopId, Boolean isOnSale, SortEnum sortEnum) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("shopId", shopId);
-        paramMap.put("orderBy", "month_sales");
+        paramMap.put("orderBy", "month_sales DESC");
+        paramMap.put("isDefault", false);
 
         PageHelper.startPage(1, 10);
         List<GoodsEx> list = goodsExtMapper.selectByMap(paramMap);
 
         switch (sortEnum) {
-            case SELL_OUT:
+            case S:
                 list = list.stream().sorted(Comparator.comparing(GoodsEx::getMinSpecStock)
                         .thenComparing(GoodsEx::getStock)).collect(Collectors.toList());
                 break;

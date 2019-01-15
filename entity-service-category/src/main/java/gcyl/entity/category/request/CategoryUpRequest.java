@@ -1,6 +1,6 @@
 package gcyl.entity.category.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gcyl.entity.common.base.AbstractRequest;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,8 +12,7 @@ import javax.validation.constraints.Size;
  * @author lican
  * @date 2018/12/12
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CategoryUpRequest {
+public class CategoryUpRequest extends AbstractRequest {
 
     /**
      * 类目ID
@@ -24,7 +23,7 @@ public class CategoryUpRequest {
     /**
      * 店铺ID
      */
-    @NotNull(message = "店铺未登录")
+    @NotNull(message = "店铺信息有误")
     private Long shopId;
 
     /**

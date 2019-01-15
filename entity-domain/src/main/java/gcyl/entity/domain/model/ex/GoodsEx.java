@@ -15,6 +15,11 @@ import java.util.List;
 public class GoodsEx extends Goods {
 
     /**
+     * 类目名
+     */
+    private String categoryName;
+
+    /**
      * 商品价格(规格最小价格)
      */
     private BigDecimal price;
@@ -38,6 +43,14 @@ public class GoodsEx extends Goods {
      * 商品规格
      */
     private List<GoodsSpec> goodsSpecList;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public BigDecimal getPrice() {
         return price;

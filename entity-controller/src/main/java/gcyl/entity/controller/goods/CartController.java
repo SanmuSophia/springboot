@@ -4,6 +4,7 @@ import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.form.CartForm;
 import gcyl.entity.goods.request.*;
 import gcyl.entity.goods.service.ICartService;
+import gcyl.entity.goods.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * 购物车管理
@@ -34,7 +37,7 @@ public class CartController {
      * @param shopId    店铺ID
      * @param tableNum  桌号
      */
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public Result get(Long shopId, Long tableNum) {
         Result result = new Result();
@@ -48,14 +51,23 @@ public class CartController {
         }
 
         List<CartForm> cartForms = cartService.get(shopId, tableNum);
-        result.success(cartForms);
+        List<CartForm> defaults = cartService.getDefault(shopId);
+
+        Map<String, List<CartForm>> cartMap = this.list2MapByCategory(cartForms);
+        Map<String, List<CartForm>> defaultMap = this.list2MapByCategory(defaults);
+
+        CartVO cartVO = new CartVO();
+        cartVO.setCartMap(cartMap);
+        cartVO.setDefaultMap(defaultMap);
+
+        result.success(cartVO);
         return result;
     }
 
     /**
      * 添加购物车
      */
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Result add(@Valid @RequestBody CartAddRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -70,7 +82,7 @@ public class CartController {
     /**
      * 移除购物车
      */
-    @RequestMapping("/remove")
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
     @ResponseBody
     public Result remove(@Valid @RequestBody CartDelRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -99,5 +111,28 @@ public class CartController {
         }
 
         return cartService.clear(shopId, tableNum);
+    }
+
+    /**
+     * 根据类目分组
+     *
+     * @param cartForms  商品集合
+     * @return 分组后的map
+     */
+    private Map<String, List<CartForm>> list2MapByCategory(List<CartForm> cartForms) {
+        //根据类目分组
+        Map<String, List<CartForm>> cartMap  = new LinkedHashMap<>();
+        for (CartForm cartForm : cartForms) {
+            String categoryName = cartForm.getCategoryName();
+            List<CartForm> list = cartMap.get(categoryName);
+            if (list == null) {
+                list = new ArrayList<>();
+                list.add(cartForm);
+                cartMap.put(categoryName, list);
+            } else {
+                list.add(cartForm);
+            }
+        }
+        return cartMap;
     }
 }

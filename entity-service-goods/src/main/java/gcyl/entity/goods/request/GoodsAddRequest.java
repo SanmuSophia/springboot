@@ -1,5 +1,6 @@
 package gcyl.entity.goods.request;
 
+import gcyl.entity.common.base.AbstractRequest;
 import gcyl.entity.goods.form.SpecAddForm;
 
 import javax.validation.Valid;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author lican
  * @date 2018/12/13
  */
-public class GoodsAddRequest {
+public class GoodsAddRequest extends AbstractRequest {
     /**
      * 店铺ID
      */
@@ -42,16 +43,9 @@ public class GoodsAddRequest {
     /**
      * 单位
      */
-    @NotNull(message = "请选择单位")
+    @NotEmpty(message = "请选择单位")
     private String unit;
 
-    /**
-     * 商品规格
-     */
-    @NotNull(message = "请填写商品详细信息")
-    @Size(max = 8, message = "商品规格最多8个")
-    @Valid
-    private List<SpecAddForm> specAddForms;
 
     /**
      * 店长推荐
@@ -70,6 +64,14 @@ public class GoodsAddRequest {
      */
     @NotNull(message = "商品在售信息有误")
     private Boolean isOnSale;
+
+    /**
+     * 商品规格
+     */
+    @NotNull(message = "请填写商品详细信息")
+    @Size(max = 8, message = "商品规格最多8个")
+    @Valid
+    private List<SpecAddForm> specAddForms;
 
     public Long getShopId() {
         return shopId;

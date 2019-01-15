@@ -1,17 +1,20 @@
 package gcyl.entity.controller.order;
 
 import gcyl.entity.common.annotation.ShopLogin;
+import gcyl.entity.common.enums.order.PayWayEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.form.CartForm;
 import gcyl.entity.goods.service.ICartService;
 import gcyl.entity.order.form.SpecNumForm;
 import gcyl.entity.order.request.OrderCreateRequest;
+import gcyl.entity.order.request.OrderPaidRequest;
 import gcyl.entity.order.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
@@ -42,7 +45,7 @@ public class OrderController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/create")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Result create(@Valid @RequestBody OrderCreateRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -52,9 +55,8 @@ public class OrderController {
         }
 
         result = this.validate(request);
-        if (!result.isSuccess()) {
-            return result;
-        }
+        if (!result.isSuccess()) return result;
+
 
         return orderService.create(request);
     }
@@ -71,31 +73,33 @@ public class OrderController {
             return result;
         }
 
-        //验证购物车列表是否发生变化
-        List<CartForm> cartForms = cartService.get(request.getShopId(), request.getTableNum());
-        List<SpecNumForm> specNumForms = request.getSpecNumForms();
-        if (cartForms.size() != specNumForms.size()) {
-            result.error("订单发生变化，请刷新");
-            return result;
-        }
-        Set<String> all = new HashSet<>();
-        Set<String> old = new HashSet<>();
-        for (CartForm form : cartForms) {
-            old.add(form.getSpecId() + ":" + form.getNum());
-            all.add(form.getSpecId() + ":" + form.getNum());
-        }
-        Set<String> now = new HashSet<>();
-        for (SpecNumForm form : specNumForms) {
-            now.add(form.getSpecId() + ":" + form.getNum());
-            all.add(form.getSpecId() + ":" + form.getNum());
-        }
-
-        if (all.size() != old.size() || all.size() != now.size()) {
-            result.error("订单发生变化，请刷新");
+        int payWay = request.getPayWay();
+        PayWayEnum payWayEnum = PayWayEnum.getEnumByCode(payWay);
+        if (payWayEnum == null) {
+            result.error("支付方式有误");
             return result;
         }
 
         result.success();
         return result;
+    }
+
+    /**
+     * 订单支付完成
+     *
+     * @param request        创建参数
+     * @param bindingResult  参数验证
+     */
+    @ShopLogin
+    @RequestMapping(value = "/paid", method = RequestMethod.POST)
+    @ResponseBody
+    public Result paid(@Valid @RequestBody OrderPaidRequest request, BindingResult bindingResult) {
+        Result result = new Result();
+        if (bindingResult.hasErrors()) {
+            result.error(bindingResult.getFieldErrors().get(0).getDefaultMessage());
+            return result;
+        }
+
+        return orderService.paid(request);
     }
 }

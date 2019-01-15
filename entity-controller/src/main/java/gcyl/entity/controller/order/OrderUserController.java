@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
@@ -36,7 +37,7 @@ public class OrderUserController {
      * @param userId  用户ID
      */
     @ShopLogin
-    @RequestMapping("/orderNum")
+    @RequestMapping(value = "/orderNum", method = RequestMethod.POST)
     @ResponseBody
     public Result orderNum(Long userId) {
         Result result = new Result();
@@ -55,7 +56,7 @@ public class OrderUserController {
      * 订单列表
      */
     @ShopLogin
-    @RequestMapping("/orderList")
+    @RequestMapping(value = "/orderList", method = RequestMethod.POST)
     @ResponseBody
     public Result orderList(@Valid @RequestBody OrderUListRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -77,7 +78,7 @@ public class OrderUserController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping("/orderDetail")
+    @RequestMapping(value = "/orderDetail", method = RequestMethod.POST)
     @ResponseBody
     public Result orderDetail(Long userId, Long orderId) {
         Result result = new Result();

@@ -38,16 +38,19 @@ public class OrderStateServiceImpl implements IOrderStateService {
         Result result = new Result();
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
-        if (oldOrder.getOrderState() != OrderStateEnum.WAIT_RECEIVE.getCode()) {
+        if (oldOrder.getOrderState() != OrderStateEnum.WR.getCode()) {
             logger.info(ResultEnum.O2012.toString());
             result.error(ResultEnum.O2012);
             return result;
         }
 
+        long now = DateUtils.getDateTime();
+
         //修改订单为待上菜
-        order.setOrderState(OrderStateEnum.WAIT_SERVING.getCode());
-        order.setGmtReceive(DateUtils.getDate());
-        int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
+        order.setOrderState(OrderStateEnum.WS.getCode());
+        order.setGmtReceive(now);
+        order.setGmtModify(now);
+        int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
             logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
@@ -67,15 +70,18 @@ public class OrderStateServiceImpl implements IOrderStateService {
         Result result = new Result();
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
-        if (oldOrder.getOrderState() != OrderStateEnum.WAIT_SERVING.getCode()) {
+        if (oldOrder.getOrderState() != OrderStateEnum.WS.getCode()) {
             logger.info(ResultEnum.O2013.toString());
             result.error(ResultEnum.O2013);
             return result;
         }
 
-        order.setGmtServingFinish(DateUtils.getDate());
-        order.setOrderState(OrderStateEnum.FINISH_SERVING.getCode());
-        int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
+        long now = DateUtils.getDateTime();
+
+        order.setGmtServingFinish(DateUtils.getDateTime());
+        order.setGmtModify(now);
+        order.setOrderState(OrderStateEnum.FS.getCode());
+        int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
             logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
@@ -95,17 +101,22 @@ public class OrderStateServiceImpl implements IOrderStateService {
         Result result = new Result();
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
-        if (oldOrder.getOrderState() != OrderStateEnum.WAIT_SERVING.getCode()
-                && oldOrder.getOrderState() != OrderStateEnum.FINISH_SERVING.getCode()) {
+        if (oldOrder.getOrderState() != OrderStateEnum.WS.getCode()
+                && oldOrder.getOrderState() != OrderStateEnum.FS.getCode()) {
             logger.info(ResultEnum.O2014.toString());
             result.error(ResultEnum.O2014);
             return result;
         }
 
+        long now = DateUtils.getDateTime();
+
         //修改订单为已完成
-        order.setOrderState(OrderStateEnum.FINISH.getCode());
-        order.setGmtFinish(DateUtils.getDate());
-        int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
+        if (oldOrder.getOrderState() == OrderStateEnum.WS.getCode())
+            order.setGmtServingFinish(now);
+        order.setOrderState(OrderStateEnum.FH.getCode());
+        order.setGmtFinish(now);
+        order.setGmtModify(now);
+        int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
             logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
@@ -125,15 +136,18 @@ public class OrderStateServiceImpl implements IOrderStateService {
         Result result = new Result();
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
-        if (oldOrder.getOrderState() != OrderStateEnum.WAIT_RECEIVE.getCode()) {
+        if (oldOrder.getOrderState() != OrderStateEnum.WR.getCode()) {
             logger.info(ResultEnum.O2012.toString());
             result.error(ResultEnum.O2012);
             return result;
         }
 
+        long now = DateUtils.getDateTime();
+
         //修改订单为已关闭
-        order.setOrderState(OrderStateEnum.CLOSE.getCode());
-        int i = orderMapper.updateByPrimaryKeySelective(oldOrder);
+        order.setOrderState(OrderStateEnum.CS.getCode());
+        order.setGmtModify(now);
+        int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
             logger.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);

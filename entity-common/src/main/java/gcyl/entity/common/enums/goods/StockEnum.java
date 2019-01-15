@@ -8,5 +8,5 @@ package gcyl.entity.common.enums.goods;
  */
 public enum StockEnum {
 
-    ADD,REDUCE;
+    ADD,REDUCE
 }

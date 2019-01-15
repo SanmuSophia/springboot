@@ -7,6 +7,7 @@ import gcyl.entity.goods.service.ISpecService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class SpecController {
     /**
      * 规格键
      */
-    @RequestMapping("/specKeys")
+    @RequestMapping(value = "/specKeys", method = RequestMethod.GET)
     @ResponseBody
     public Result specKeys() {
         Result result = new Result();
@@ -39,7 +40,7 @@ public class SpecController {
     /**
      * 规格键
      */
-    @RequestMapping("/specValues")
+    @RequestMapping(value = "/specValues", method = RequestMethod.GET)
     @ResponseBody
     public Result specValues(Long keyId) {
         Result result = new Result();

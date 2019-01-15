@@ -2,7 +2,6 @@ package gcyl.entity.domain.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Order implements Serializable {
     private Long id;
@@ -37,17 +36,17 @@ public class Order implements Serializable {
 
     private Integer personNum;
 
-    private Date gmtCreate;
+    private Long gmtCreate;
 
-    private Date gmtModify;
+    private Long gmtModify;
 
-    private Date gmtReceive;
+    private Long gmtReceive;
 
-    private Date gmtPay;
+    private Long gmtPay;
 
-    private Date gmtServingFinish;
+    private Long gmtServingFinish;
 
-    private Date gmtFinish;
+    private Long gmtFinish;
 
     private Boolean shopCutOff;
 
@@ -183,51 +182,51 @@ public class Order implements Serializable {
         this.personNum = personNum;
     }
 
-    public Date getGmtCreate() {
+    public Long getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(Long gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModify() {
+    public Long getGmtModify() {
         return gmtModify;
     }
 
-    public void setGmtModify(Date gmtModify) {
+    public void setGmtModify(Long gmtModify) {
         this.gmtModify = gmtModify;
     }
 
-    public Date getGmtReceive() {
+    public Long getGmtReceive() {
         return gmtReceive;
     }
 
-    public void setGmtReceive(Date gmtReceive) {
+    public void setGmtReceive(Long gmtReceive) {
         this.gmtReceive = gmtReceive;
     }
 
-    public Date getGmtPay() {
+    public Long getGmtPay() {
         return gmtPay;
     }
 
-    public void setGmtPay(Date gmtPay) {
+    public void setGmtPay(Long gmtPay) {
         this.gmtPay = gmtPay;
     }
 
-    public Date getGmtServingFinish() {
+    public Long getGmtServingFinish() {
         return gmtServingFinish;
     }
 
-    public void setGmtServingFinish(Date gmtServingFinish) {
+    public void setGmtServingFinish(Long gmtServingFinish) {
         this.gmtServingFinish = gmtServingFinish;
     }
 
-    public Date getGmtFinish() {
+    public Long getGmtFinish() {
         return gmtFinish;
     }
 
-    public void setGmtFinish(Date gmtFinish) {
+    public void setGmtFinish(Long gmtFinish) {
         this.gmtFinish = gmtFinish;
     }
 

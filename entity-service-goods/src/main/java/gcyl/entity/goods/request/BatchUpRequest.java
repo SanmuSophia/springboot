@@ -1,7 +1,9 @@
 package gcyl.entity.goods.request;
 
-import javax.validation.constraints.Min;
+import gcyl.entity.common.base.AbstractRequest;
+
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -10,7 +12,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/3
  */
-public class BatchUpRequest {
+public class BatchUpRequest extends AbstractRequest {
 
     /**
      * 店铺ID
@@ -22,7 +24,7 @@ public class BatchUpRequest {
      * 商品ID集合
      */
     @NotNull(message = "商品信息有误")
-    @Min(value = 1, message = "商品信息有误")
+    @Size(min = 1, message = "商品信息有误")
     private List<Long> goodsIds;
 
     public Long getShopId() {

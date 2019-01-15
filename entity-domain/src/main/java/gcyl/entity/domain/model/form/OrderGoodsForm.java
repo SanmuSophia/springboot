@@ -33,22 +33,22 @@ public class OrderGoodsForm {
     /**
      * 价格
      */
-    private BigDecimal price;
+    private BigDecimal specPrice;
 
     /**
      * 单位
      */
-    private String unit;
+    private String goodsUnit;
 
     /**
      * 图片
      */
-    private String image;
+    private String goodsImg;
 
     /**
      * 数量
      */
-    private Integer num;
+    private Integer specNum;
 
     public Long getGoodsId() {
         return goodsId;
@@ -82,35 +82,35 @@ public class OrderGoodsForm {
         this.specName = specName;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getSpecPrice() {
+        return specPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setSpecPrice(BigDecimal specPrice) {
+        this.specPrice = specPrice;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getGoodsUnit() {
+        return goodsUnit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit = goodsUnit;
     }
 
-    public String getImage() {
-        return image;
+    public String getGoodsImg() {
+        return goodsImg;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setGoodsImg(String goodsImg) {
+        this.goodsImg = goodsImg;
     }
 
-    public Integer getNum() {
-        return num;
+    public Integer getSpecNum() {
+        return specNum;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
+    public void setSpecNum(Integer specNum) {
+        this.specNum = specNum;
     }
 }

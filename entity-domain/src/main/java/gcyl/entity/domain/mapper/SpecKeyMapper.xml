@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="gcyl.entity.domain.model.SpecKey" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="spec_key" property="specKey" jdbcType="VARCHAR" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="BIGINT" />
     <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -102,8 +102,8 @@
   <insert id="insert" parameterType="gcyl.entity.domain.model.SpecKey" >
     insert into tyg_ms_spec_key (id, spec_key, gmt_create, 
       gmt_modify, cut_off)
-    values (#{id,jdbcType=BIGINT}, #{specKey,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModify,jdbcType=TIMESTAMP}, #{cutOff,jdbcType=BIT})
+    values (#{id,jdbcType=BIGINT}, #{specKey,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=BIGINT}, 
+      #{gmtModify,jdbcType=BIGINT}, #{cutOff,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.SpecKey" >
     insert into tyg_ms_spec_key
@@ -132,10 +132,10 @@
         #{specKey,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         #{cutOff,jdbcType=BIT},
@@ -158,10 +158,10 @@
         spec_key = #{record.specKey,jdbcType=VARCHAR},
       </if>
       <if test="record.gmtCreate != null" >
-        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="record.gmtModify != null" >
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       </if>
       <if test="record.cutOff != null" >
         cut_off = #{record.cutOff,jdbcType=BIT},
@@ -175,8 +175,8 @@
     update tyg_ms_spec_key
     set id = #{record.id,jdbcType=BIGINT},
       spec_key = #{record.specKey,jdbcType=VARCHAR},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       cut_off = #{record.cutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -189,10 +189,10 @@
         spec_key = #{specKey,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         cut_off = #{cutOff,jdbcType=BIT},
@@ -203,8 +203,8 @@
   <update id="updateByPrimaryKey" parameterType="gcyl.entity.domain.model.SpecKey" >
     update tyg_ms_spec_key
     set spec_key = #{specKey,jdbcType=VARCHAR},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{gmtModify,jdbcType=BIGINT},
       cut_off = #{cutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

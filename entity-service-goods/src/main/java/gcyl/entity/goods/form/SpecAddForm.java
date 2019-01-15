@@ -1,7 +1,9 @@
 package gcyl.entity.goods.form;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
@@ -15,13 +17,13 @@ public class SpecAddForm {
     /**
      * 规格类型
      */
-    @NotNull(message = "规格信息有误")
+    @NotEmpty(message = "规格信息有误")
     private String specKey;
 
     /**
      * 规格名
      */
-    @NotNull(message = "请选择规格")
+    @NotEmpty(message = "请选择规格")
     private String specName;
 
     /**

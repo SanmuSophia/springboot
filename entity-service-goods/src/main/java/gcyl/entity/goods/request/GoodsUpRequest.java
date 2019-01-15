@@ -1,5 +1,6 @@
 package gcyl.entity.goods.request;
 
+import gcyl.entity.common.base.AbstractRequest;
 import gcyl.entity.goods.form.SpecUpForm;
 
 import javax.validation.Valid;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author lican
  * @date 2018/12/19
  */
-public class GoodsUpRequest {
+public class GoodsUpRequest extends AbstractRequest {
     /**
      * 店铺ID
      */

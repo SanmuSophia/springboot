@@ -1,7 +1,9 @@
 package gcyl.entity.goods.request;
 
+import gcyl.entity.common.base.AbstractRequest;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * 购物车添加参数
@@ -9,7 +11,7 @@ import javax.validation.constraints.Size;
  * @author lican
  * @date 2018/12/24
  */
-public class CartAddRequest {
+public class CartAddRequest extends AbstractRequest {
 
     /**
      * 店铺ID
@@ -45,7 +47,7 @@ public class CartAddRequest {
      * 商品数量
      */
     @NotNull(message = "商品数量有误")
-    @Size(min = 1, message = "商品数量有误")
+    @Min(value = 1, message = "商品数量有误")
     private Integer num;
 
     public Long getShopId() {

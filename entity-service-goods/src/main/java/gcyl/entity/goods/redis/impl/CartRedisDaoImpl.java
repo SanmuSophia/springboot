@@ -1,5 +1,6 @@
 package gcyl.entity.goods.redis.impl;
 
+import com.alibaba.fastjson.JSON;
 import gcyl.entity.common.utils.JsonUtils;
 import gcyl.entity.domain.model.form.CartForm;
 import gcyl.entity.goods.redis.ICartRedisDao;
@@ -68,10 +69,7 @@ public class CartRedisDaoImpl implements ICartRedisDao {
                 list.add(cartForm);
             }
             return list;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return Collections.emptyList();
     }
 
     /**
@@ -84,9 +82,9 @@ public class CartRedisDaoImpl implements ICartRedisDao {
      * @return  大于0添加成功
      */
     @Override
-    public long addTable(long shopId, long tableNum, int num, CartForm cartForm) {
+    public void addTable(long shopId, long tableNum, int num, CartForm cartForm) {
         String key = RedisKeyHelp.getTableCartKey(shopId, tableNum);
-        return addToRedis(key, num, cartForm);
+        this.addToRedis(key, num, cartForm);
     }
 
     /**
@@ -95,9 +93,8 @@ public class CartRedisDaoImpl implements ICartRedisDao {
      * @param key      key
      * @param num      数量
      * @param cartForm 商品信息
-     * @return  大于0添加成功
      */
-    private long addToRedis(String key, int num, CartForm cartForm) {
+    private void addToRedis(String key, int num, CartForm cartForm) {
         String field = cartForm.getSpecId().toString();
         String value;
         try (Jedis jedis = jedisPool.getResource()) {
@@ -105,21 +102,18 @@ public class CartRedisDaoImpl implements ICartRedisDao {
             //没有商品 数量默认，有则增加数量
             if (StringUtils.isBlank(oldValue)) {
                 cartForm.setNum(num);
-                value = JsonUtils.toJson(cartForm);
+                value = JSON.toJSONString(cartForm);
             } else {
                 //获取旧数量
                 CartForm oldCartForm = JsonUtils.toBean(oldValue, CartForm.class);
                 int oldNum = oldCartForm.getNum();
                 //保存新数量
                 oldCartForm.setNum(oldNum + num);
-                value = JsonUtils.toJson(oldCartForm);
+                value = JSON.toJSONString(oldCartForm);
             }
+            jedis.hset(key, field, value);
             jedis.expire(key, EXPIRE_TIME);
-            return jedis.hset(key, field, value);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return 0;
     }
 
     /**
@@ -132,10 +126,10 @@ public class CartRedisDaoImpl implements ICartRedisDao {
      * @return  大于0移除成功
      */
     @Override
-    public long removeTable(long shopId, long tableNum, long specId, int num) {
+    public void removeTable(long shopId, long tableNum, long specId, int num) {
         String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
         String field = String.valueOf(specId);
-        return removeRedis(tableKey, field, num); //餐桌购物车移除
+        this.removeRedis(tableKey, field, num); //餐桌购物车移除
     }
 
     /**
@@ -144,29 +138,25 @@ public class CartRedisDaoImpl implements ICartRedisDao {
      * @param key      key
      * @param field    filed(规格ID)
      * @param num      数量
-     * @return  大于0移除成功
      */
-    private long removeRedis(String key, String field, int num) {
+    private void removeRedis(String key, String field, int num) {
         try (Jedis jedis = jedisPool.getResource()) {
             //获取旧数量
             String oldValue = jedis.hget(key, field);
-            if (StringUtils.isBlank(oldValue)) return 0;
+            if (StringUtils.isBlank(oldValue)) return;
             CartForm oldCartForm = JsonUtils.toBean(oldValue, CartForm.class);
             int oldNum = oldCartForm.getNum();
 
             //计算新数量，<=0直接从购物车移除商品，否则修改数量
             int newNum = oldNum - num;
             if (newNum <= 0) {
-                return jedis.hdel(key, field);
+                jedis.hdel(key, field);
             } else {
                 oldCartForm.setNum(num);
-                String value = JsonUtils.toJson(oldCartForm);
-                return jedis.hset(key, field, value);
+                String value = JSON.toJSONString(oldCartForm);
+                jedis.hset(key, field, value);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return 0;
     }
 
     /**
@@ -177,7 +167,7 @@ public class CartRedisDaoImpl implements ICartRedisDao {
      * @return 大于0清空成功
      */
     @Override
-    public long clear(long shopId, long tableNum) {
+    public void clear(long shopId, long tableNum) {
         String tableKey = RedisKeyHelp.getTableCartKey(shopId, tableNum);
         try (Jedis jedis = jedisPool.getResource()) {
             //获取该餐桌所有用户的key
@@ -185,8 +175,8 @@ public class CartRedisDaoImpl implements ICartRedisDao {
 //            List<String> allKeys = this.keyScan(pattern, 1000);
 
 //            allKeys.add(tableKey);
-//            return jedis.del(allKeys.toArray(new String[]{}));
-            return jedis.del(tableKey);
+//            jedis.del(allKeys.toArray(new String[]{}));
+            jedis.del(tableKey);
         }
     }
 

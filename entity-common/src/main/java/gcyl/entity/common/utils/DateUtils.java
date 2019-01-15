@@ -20,9 +20,11 @@ public class DateUtils {
     * 获取当前日期
     * @return 当前日期
     */
-   public static Date getDate() {
-       return Date.from(LocalDateTime.now(ZoneId.of(Constant.GMT))
-               .toInstant(ZoneOffset.of(Constant.GMT)));
+   public static Date getGmtDate() {
+      ZoneId zoneId = ZoneId.systemDefault();
+      ZoneOffset zoneOffset = zoneId.getRules().getOffset(LocalDateTime.now(zoneId));
+      return Date.from(LocalDateTime.now(ZoneId.of(Constant.GMT8))
+              .toInstant(zoneOffset));
    }
 
    /**
@@ -30,8 +32,8 @@ public class DateUtils {
     * @return 当前时间
     */
    public static long getDateTime() {
-      return LocalDateTime.now(ZoneId.of(Constant.GMT))
-              .toInstant(ZoneOffset.of(Constant.GMT))
+      return LocalDateTime.now(ZoneId.of(Constant.GMT8))
+              .toInstant(ZoneOffset.of(Constant.GMT8))
               .toEpochMilli();
    }
 
@@ -40,12 +42,12 @@ public class DateUtils {
     * @return 时间戳
     */
    public static long getDateEndTime() {
-         return LocalDateTime.now(ZoneId.of(Constant.GMT))
+         return LocalDateTime.now(ZoneId.of(Constant.GMT8))
                  .withHour(23)
                  .withMinute(59)
                  .withSecond(59)
                  .withNano(999999999)
-                 .toInstant(ZoneOffset.of(Constant.GMT))
+                 .toInstant(ZoneOffset.of(Constant.GMT8))
                  .toEpochMilli();
    }
 }

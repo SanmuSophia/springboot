@@ -15,8 +15,8 @@
     <result column="is_default" property="isDefault" jdbcType="BIT" />
     <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="BIGINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="BIGINT" />
     <result column="cut_off" property="cutOff" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -123,7 +123,7 @@
       #{goodsName,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT}, #{goodsUnit,jdbcType=VARCHAR}, 
       #{salesCount,jdbcType=INTEGER}, #{monthSales,jdbcType=INTEGER}, #{isRecommend,jdbcType=BIT}, 
       #{isOnSale,jdbcType=BIT}, #{isDefault,jdbcType=BIT}, #{goodsImg,jdbcType=VARCHAR}, 
-      #{version,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT}, #{gmtCreate,jdbcType=BIGINT}, #{gmtModify,jdbcType=BIGINT}, 
       #{cutOff,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Goods" >
@@ -219,10 +219,10 @@
         #{version,jdbcType=BIGINT},
       </if>
       <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         #{cutOff,jdbcType=BIT},
@@ -278,10 +278,10 @@
         version = #{record.version,jdbcType=BIGINT},
       </if>
       <if test="record.gmtCreate != null" >
-        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="record.gmtModify != null" >
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       </if>
       <if test="record.cutOff != null" >
         cut_off = #{record.cutOff,jdbcType=BIT},
@@ -306,8 +306,8 @@
       is_default = #{record.isDefault,jdbcType=BIT},
       goods_img = #{record.goodsImg,jdbcType=VARCHAR},
       version = #{record.version,jdbcType=BIGINT},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       cut_off = #{record.cutOff,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -353,10 +353,10 @@
         version = #{version,jdbcType=BIGINT},
       </if>
       <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="cutOff != null" >
         cut_off = #{cutOff,jdbcType=BIT},
@@ -378,8 +378,8 @@
       is_default = #{isDefault,jdbcType=BIT},
       goods_img = #{goodsImg,jdbcType=VARCHAR},
       version = #{version,jdbcType=BIGINT},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{gmtModify,jdbcType=BIGINT},
       cut_off = #{cutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

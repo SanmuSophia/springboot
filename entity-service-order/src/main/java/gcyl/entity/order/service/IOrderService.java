@@ -1,10 +1,10 @@
 package gcyl.entity.order.service;
 
-import gcyl.entity.common.enums.goods.StockEnum;
 import gcyl.entity.common.enums.order.OrderStateEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.Order;
 import gcyl.entity.order.request.OrderCreateRequest;
+import gcyl.entity.order.request.OrderPaidRequest;
 
 /**
  * 订单管理类
@@ -21,6 +21,13 @@ public interface IOrderService {
      * @return 创建结果
      */
     Result create(OrderCreateRequest request);
+
+    /**
+     * 订单支付完成
+     * @param request 订单支付信息
+     * @return 支付返回
+     */
+    Result paid(OrderPaidRequest request);
 
     /**
      * 订单状态修改

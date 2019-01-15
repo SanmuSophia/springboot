@@ -18,12 +18,12 @@
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="person_num" property="personNum" jdbcType="INTEGER" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
-    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
-    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
-    <result column="gmt_serving_finish" property="gmtServingFinish" jdbcType="TIMESTAMP" />
-    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="BIGINT" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="BIGINT" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="BIGINT" />
+    <result column="gmt_serving_finish" property="gmtServingFinish" jdbcType="BIGINT" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="BIGINT" />
     <result column="shop_cut_off" property="shopCutOff" jdbcType="BIT" />
     <result column="user_cut_off" property="userCutOff" jdbcType="BIT" />
   </resultMap>
@@ -136,9 +136,9 @@
       #{shopId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{tableNum,jdbcType=INTEGER}, 
       #{consumeAmount,jdbcType=DECIMAL}, #{settleAmount,jdbcType=DECIMAL}, #{deductAmount,jdbcType=DECIMAL}, 
       #{deductMethod,jdbcType=INTEGER}, #{consumption,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, 
-      #{personNum,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, 
-      #{gmtReceive,jdbcType=TIMESTAMP}, #{gmtPay,jdbcType=TIMESTAMP}, #{gmtServingFinish,jdbcType=TIMESTAMP}, 
-      #{gmtFinish,jdbcType=TIMESTAMP}, #{shopCutOff,jdbcType=BIT}, #{userCutOff,jdbcType=BIT}
+      #{personNum,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, #{gmtModify,jdbcType=BIGINT}, 
+      #{gmtReceive,jdbcType=BIGINT}, #{gmtPay,jdbcType=BIGINT}, #{gmtServingFinish,jdbcType=BIGINT}, 
+      #{gmtFinish,jdbcType=BIGINT}, #{shopCutOff,jdbcType=BIT}, #{userCutOff,jdbcType=BIT}
       )
   </insert>
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" >
@@ -267,22 +267,22 @@
         #{personNum,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="gmtReceive != null" >
-        #{gmtReceive,jdbcType=TIMESTAMP},
+        #{gmtReceive,jdbcType=BIGINT},
       </if>
       <if test="gmtPay != null" >
-        #{gmtPay,jdbcType=TIMESTAMP},
+        #{gmtPay,jdbcType=BIGINT},
       </if>
       <if test="gmtServingFinish != null" >
-        #{gmtServingFinish,jdbcType=TIMESTAMP},
+        #{gmtServingFinish,jdbcType=BIGINT},
       </if>
       <if test="gmtFinish != null" >
-        #{gmtFinish,jdbcType=TIMESTAMP},
+        #{gmtFinish,jdbcType=BIGINT},
       </if>
       <if test="shopCutOff != null" >
         #{shopCutOff,jdbcType=BIT},
@@ -350,22 +350,22 @@
         person_num = #{record.personNum,jdbcType=INTEGER},
       </if>
       <if test="record.gmtCreate != null" >
-        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="record.gmtModify != null" >
-        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
       </if>
       <if test="record.gmtReceive != null" >
-        gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
+        gmt_receive = #{record.gmtReceive,jdbcType=BIGINT},
       </if>
       <if test="record.gmtPay != null" >
-        gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
+        gmt_pay = #{record.gmtPay,jdbcType=BIGINT},
       </if>
       <if test="record.gmtServingFinish != null" >
-        gmt_serving_finish = #{record.gmtServingFinish,jdbcType=TIMESTAMP},
+        gmt_serving_finish = #{record.gmtServingFinish,jdbcType=BIGINT},
       </if>
       <if test="record.gmtFinish != null" >
-        gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
+        gmt_finish = #{record.gmtFinish,jdbcType=BIGINT},
       </if>
       <if test="record.shopCutOff != null" >
         shop_cut_off = #{record.shopCutOff,jdbcType=BIT},
@@ -396,12 +396,12 @@
       consumption = #{record.consumption,jdbcType=DECIMAL},
       description = #{record.description,jdbcType=VARCHAR},
       person_num = #{record.personNum,jdbcType=INTEGER},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
-      gmt_receive = #{record.gmtReceive,jdbcType=TIMESTAMP},
-      gmt_pay = #{record.gmtPay,jdbcType=TIMESTAMP},
-      gmt_serving_finish = #{record.gmtServingFinish,jdbcType=TIMESTAMP},
-      gmt_finish = #{record.gmtFinish,jdbcType=TIMESTAMP},
+      gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{record.gmtModify,jdbcType=BIGINT},
+      gmt_receive = #{record.gmtReceive,jdbcType=BIGINT},
+      gmt_pay = #{record.gmtPay,jdbcType=BIGINT},
+      gmt_serving_finish = #{record.gmtServingFinish,jdbcType=BIGINT},
+      gmt_finish = #{record.gmtFinish,jdbcType=BIGINT},
       shop_cut_off = #{record.shopCutOff,jdbcType=BIT},
       user_cut_off = #{record.userCutOff,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -457,22 +457,22 @@
         person_num = #{personNum,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+        gmt_modify = #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="gmtReceive != null" >
-        gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
+        gmt_receive = #{gmtReceive,jdbcType=BIGINT},
       </if>
       <if test="gmtPay != null" >
-        gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
+        gmt_pay = #{gmtPay,jdbcType=BIGINT},
       </if>
       <if test="gmtServingFinish != null" >
-        gmt_serving_finish = #{gmtServingFinish,jdbcType=TIMESTAMP},
+        gmt_serving_finish = #{gmtServingFinish,jdbcType=BIGINT},
       </if>
       <if test="gmtFinish != null" >
-        gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
+        gmt_finish = #{gmtFinish,jdbcType=BIGINT},
       </if>
       <if test="shopCutOff != null" >
         shop_cut_off = #{shopCutOff,jdbcType=BIT},
@@ -500,12 +500,12 @@
       consumption = #{consumption,jdbcType=DECIMAL},
       description = #{description,jdbcType=VARCHAR},
       person_num = #{personNum,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
-      gmt_receive = #{gmtReceive,jdbcType=TIMESTAMP},
-      gmt_pay = #{gmtPay,jdbcType=TIMESTAMP},
-      gmt_serving_finish = #{gmtServingFinish,jdbcType=TIMESTAMP},
-      gmt_finish = #{gmtFinish,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_modify = #{gmtModify,jdbcType=BIGINT},
+      gmt_receive = #{gmtReceive,jdbcType=BIGINT},
+      gmt_pay = #{gmtPay,jdbcType=BIGINT},
+      gmt_serving_finish = #{gmtServingFinish,jdbcType=BIGINT},
+      gmt_finish = #{gmtFinish,jdbcType=BIGINT},
       shop_cut_off = #{shopCutOff,jdbcType=BIT},
       user_cut_off = #{userCutOff,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

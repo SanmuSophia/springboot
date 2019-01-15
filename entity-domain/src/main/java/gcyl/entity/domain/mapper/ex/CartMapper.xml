@@ -22,7 +22,8 @@
     gs.spec_name,
     gs.spec_price,
     g.goods_img,
-    g.goods_unit
+    g.goods_unit,
+    g.is_default
   </sql>
 
   <!-- 查询规格信息 -->
@@ -33,13 +34,17 @@
       tyg_ms_goods_spec gs
       join tyg_ms_goods g on gs.goods_id = g.id
       left join tyg_ms_category c on g.category_id = c.id
-    where gs.id = #{specId}
+    where
+      gs.id = #{specId}
+      and g.is_on_sale = true
+      and g.cut_off = false
+      and gs.cut_off = false
   </select>
 
   <!-- 根据条件查询 单规格-->
   <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>, g.is_default
+    <include refid="Base_Column_List"/>
     from
     tyg_ms_goods_spec gs
     join tyg_ms_goods g on gs.goods_id = g.id
@@ -48,10 +53,13 @@
       g.cut_off = false
       and gs.cut_off = false
       <if test="shopId != null">
-        and g.shop_id = #{shopId}
+          and g.shop_id = #{shopId}
       </if>
       <if test="isDefault != null">
-        and g.is_default = #{isDefault}
+          and g.is_default = #{isDefault}
+      </if>
+      <if test="isOnSale != null">
+          and g.is_on_sale = #{isOnSale}
       </if>
     </where>
     group by g.id

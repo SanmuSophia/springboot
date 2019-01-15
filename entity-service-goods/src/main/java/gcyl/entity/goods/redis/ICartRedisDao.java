@@ -28,9 +28,8 @@ public interface ICartRedisDao {
      * @param tableNum  桌号
      * @param num       商品数量
      * @param cartForm  商品参数
-     * @return  大于0添加成功
      */
-    long addTable(long shopId, long tableNum, int num, CartForm cartForm);
+    void addTable(long shopId, long tableNum, int num, CartForm cartForm);
 
     /**
      * 餐桌商品移除/减少
@@ -39,17 +38,15 @@ public interface ICartRedisDao {
      * @param tableNum  桌号
      * @param specId    商品规格ID
      * @param num       商品数量
-     * @return  大于0移除成功
      */
-    long removeTable(long shopId, long tableNum, long specId, int num);
+    void removeTable(long shopId, long tableNum, long specId, int num);
 
     /**
      * 清空购物车
      * @param shopId    店铺ID
      * @param tableNum  桌号
-     * @return 大于0清空成功
      */
-    long clear(long shopId, long tableNum);
+    void clear(long shopId, long tableNum);
 
     /**
      * 获取用户购物车
@@ -71,7 +68,7 @@ public interface ICartRedisDao {
      * @param cartForm  商品参数
      * @return  大于0添加成功
      */
-//    long addUser(long shopId, long tableNum, long userId, int num, CartForm cartForm);
+//    void addUser(long shopId, long tableNum, long userId, int num, CartForm cartForm);
 
     /**
      * 个人商品移除/减少
@@ -83,7 +80,7 @@ public interface ICartRedisDao {
      * @param num       商品数量
      * @return  大于0移除成功
      */
-//    long removeUser(long shopId, long tableNum, long userId, long specId, int num);
+//    void removeUser(long shopId, long tableNum, long userId, long specId, int num);
 
     /**
      * 清空个人购物车
@@ -93,5 +90,5 @@ public interface ICartRedisDao {
      * @param userId    用户ID
      * @return  大于0清空成功
      */
-//    long clearUser(long shopId, long tableNum, long userId);
+//    void clearUser(long shopId, long tableNum, long userId);
 }

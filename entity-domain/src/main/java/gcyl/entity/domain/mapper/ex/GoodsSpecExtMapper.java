@@ -51,14 +51,15 @@ public interface GoodsSpecExtMapper {
 
     /**
      * 恢复商品日库存
-     * @param goodsId 商品ID
+     * @param goodsSpec 商品ID
      */
-    int restockByGoodsId(long goodsId);
+    int restockByGoods(GoodsSpec goodsSpec);
 
     /**
      * 恢复所有商品日库存
+     * @param gmtModify  当前时间
      */
-    int restock();
+    int restock(long gmtModify);
 
     /**
      * 查询商品所有规格ID
@@ -66,7 +67,7 @@ public interface GoodsSpecExtMapper {
      * @return 规格ID集合
      */
     @Select("select id " +
-            "form tyg_goods_spec " +
+            "from tyg_ms_goods_spec " +
             "where goods_id = #{goodsId} " +
             "and cut_off = false")
     List<Long> selectSpecIds(long goodsId);

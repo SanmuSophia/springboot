@@ -18,11 +18,11 @@
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="person_num" property="personNum" jdbcType="INTEGER" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
-    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
-    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
-    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="BIGINT" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="BIGINT" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="BIGINT" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="BIGINT" />
   </resultMap>
 
   <insert id="insertSelective" parameterType="gcyl.entity.domain.model.Order" useGeneratedKeys="true" keyProperty="id" >
@@ -91,9 +91,6 @@
       <if test="gmtFinish != null" >
         gmt_finish,
       </if>
-      <if test="cutOff != null" >
-        cut_off,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -145,29 +142,26 @@
         #{personNum,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtCreate,jdbcType=BIGINT},
       </if>
       <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
+        #{gmtModify,jdbcType=BIGINT},
       </if>
       <if test="gmtReceive != null" >
-        #{gmtReceive,jdbcType=TIMESTAMP},
+        #{gmtReceive,jdbcType=BIGINT},
       </if>
       <if test="gmtPay != null" >
-        #{gmtPay,jdbcType=TIMESTAMP},
+        #{gmtPay,jdbcType=BIGINT},
       </if>
       <if test="gmtFinish != null" >
-        #{gmtFinish,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cutOff != null" >
-        #{cutOff,jdbcType=BIT},
+        #{gmtFinish,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
 
   <!-- 获取订单状态更新信息 -->
   <select id="selectForStateUp" parameterType="long" resultMap="BaseResultMap">
-    select order_state, is_pay from tyg_ms_order where order_id = #{orderId} for update
+    select order_state, is_pay from tyg_ms_order where id = #{orderId} for update
   </select>
 
   <!-- 根据条件计算数量 -->
@@ -215,7 +209,7 @@
       order_id = #{orderId}
   </select>
 
-  <!-- 查询订单商品明细 -->
+  <!-- 查询订单商品数量 -->
   <select id="selectOrderGoodsNum" parameterType="long" resultType="gcyl.entity.domain.model.form.OrderGoodsForm">
     select
       goods_id as goodsId,
@@ -236,6 +230,7 @@
     <result column="consume_amount" property="consumeAmount" jdbcType="DECIMAL" />
     <result column="settle_amount" property="settleAmount" jdbcType="DECIMAL" />
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <association property="goodsNum" column="id" jdbcType="INTEGER" select="selectGoodsNum"/>
     <collection property="images" column="id" ofType="String" select="selectGoodsImage"/>
   </resultMap>
   <sql id="Shop_List_Column_List" >
@@ -254,18 +249,25 @@
       </if>
       <if test="orderStates != null">
         and order_state in
-        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+        <foreach collection="orderStates" open="(" close=")" separator="," index="index" item="item">
           #{item}
         </foreach>
       </if>
       <if test="isPay != null">
         and is_pay = #{isPay}
       </if>
+      <if test="orderSn != null">
+        and order_sn = orderSn
+      </if>
     </where>
   </select>
   <!-- 查询订单商品图片 -->
   <select id="selectGoodsImage" parameterType="long" resultType="String">
     select goods_img from tyg_ms_order_detail where order_id = #{orderId}
+  </select>
+  <!-- 查询订单商品数量 -->
+  <select id="selectGoodsNum" parameterType="long" resultType="int">
+    select sum( spec_num ) from tyg_ms_order_detail where order_id = #{orderId}
   </select>
 
   <resultMap id="ShopDetailResultMap" type="gcyl.entity.domain.model.ex.OrderEx" >
@@ -282,11 +284,11 @@
     <result column="deduct_method" property="deductMethod" jdbcType="INTEGER" />
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
     <result column="person_num" property="personNum" jdbcType="INTEGER" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_receive" property="gmtReceive" jdbcType="TIMESTAMP" />
-    <result column="gmt_pay" property="gmtPay" jdbcType="TIMESTAMP" />
-    <result column="gmt_serving_finish" property="gmtServingFinish" jdbcType="TIMESTAMP" />
-    <result column="gmt_finish" property="gmtFinish" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_receive" property="gmtReceive" jdbcType="BIGINT" />
+    <result column="gmt_pay" property="gmtPay" jdbcType="BIGINT" />
+    <result column="gmt_serving_finish" property="gmtServingFinish" jdbcType="BIGINT" />
+    <result column="gmt_finish" property="gmtFinish" jdbcType="BIGINT" />
     <collection property="goods" column="id" ofType="OrderGoodsForm" select="selectOrderGoods"/>
   </resultMap>
   <sql id="Shop_Detail_Column_List" >
@@ -295,13 +297,13 @@
     person_num, gmt_create, gmt_modify, gmt_receive, gmt_pay, gmt_serving_finish, gmt_finish
   </sql>
   <!-- 查询店铺订单详情 -->
-  <select id="selectShopOdDetail" parameterType="long" resultMap="ShopDetailResultMap">
+  <select id="selectShopOdDetail" parameterType="java.util.Map" resultMap="ShopDetailResultMap">
     select
     <include refid="Shop_Detail_Column_List"/>
     from
       tyg_ms_order
     where
-      id = #{id}
+      id = #{orderId}
     and shop_id = #{shopId}
     and shop_cut_off = false
   </select>
@@ -332,15 +334,16 @@
   <select id="selectUserOdList" parameterType="java.util.Map" resultMap="userListResultMap">
     select
     <include refid="User_List_Column_List"/>
-    from tyg_ms_order
+    from tyg_ms_order o
+    left join tyg_shop_list s on o.shop_id = s.shop_id
     <where>
       user_cut_off = false
       <if test="userId != null">
-        and user_id = #{userId}
+        and o.user_id = #{userId}
       </if>
       <if test="orderStates != null">
         and order_state in
-        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+        <foreach collection="orderStates" open="(" close=")" separator="," index="index" item="item">
           #{item}
         </foreach>
       </if>
@@ -362,7 +365,7 @@
     <result column="deduct_amount" property="deductAmount" jdbcType="DECIMAL" />
     <result column="deduct_method" property="deductMethod" jdbcType="INTEGER" />
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
     <collection property="goods" column="id" ofType="OrderGoodsForm" select="selectOrderGoods"/>
   </resultMap>
   <sql id="user_Detail_Column_List" >
@@ -370,11 +373,11 @@
     settle_amount, deduct_amount, deduct_method, consumption, gmt_create
   </sql>
   <!-- 查询用户订单详情 -->
-  <select id="selectUserOdDetail" parameterType="long" resultMap="userDetailResultMap">
+  <select id="selectUserOdDetail" parameterType="java.util.Map" resultMap="userDetailResultMap">
     select
     <include refid="user_Detail_Column_List"/>
     from
-    tyg_ms_order
+    tyg_ms_order o
     where
     id = #{id}
     and user_id = #{userId}

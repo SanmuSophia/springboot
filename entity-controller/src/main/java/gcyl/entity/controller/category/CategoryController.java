@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
@@ -35,7 +36,7 @@ public class CategoryController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Result add(@Valid @RequestBody CategoryAddRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -54,7 +55,7 @@ public class CategoryController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@Valid @RequestBody CategoryUpRequest request, BindingResult bindingResult) {
         Result result = new Result();
@@ -73,7 +74,7 @@ public class CategoryController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@Valid @RequestBody CategoryDelRequest request, BindingResult bindingResult) {
         Result result = new Result();
