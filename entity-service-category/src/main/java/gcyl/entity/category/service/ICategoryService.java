@@ -17,7 +17,6 @@ public interface ICategoryService {
      * 类目新增
      *
      * @param request 类目信息
-     * @return        添加成与否
      */
     Result add(CategoryAddRequest request);
 
@@ -25,7 +24,6 @@ public interface ICategoryService {
      * 类目修改
      *
      * @param request 类目信息
-     * @return        修改成功与否
      */
     Result update(CategoryUpRequest request);
 
@@ -33,7 +31,6 @@ public interface ICategoryService {
      * 类目删除
      *
      * @param request 类目信息
-     * @return        删除成功与否
      */
     Result delete(CategoryDelRequest request);
 }

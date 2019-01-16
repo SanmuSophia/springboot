@@ -27,7 +27,7 @@ public interface IOrderShopService {
      * 店铺订单列表
      *
      * @param request  列表请求参数
-     * @return
+     * @return 订单列表
      */
     List<OrderEx> orderList(OrderSListRequest request);
 
@@ -45,7 +45,6 @@ public interface IOrderShopService {
      * @param shopId   店铺ID
      * @param orderId  订单ID
      * @param reason   拒接原因
-     * @return 拒绝返回
      */
     Result refuse(long shopId, long orderId, String reason);
 
@@ -54,7 +53,6 @@ public interface IOrderShopService {
      *
      * @param shopId   店铺ID
      * @param orderId  订单ID
-     * @return 接单返回
      */
     Result receive(long shopId, long orderId);
 
@@ -63,7 +61,6 @@ public interface IOrderShopService {
      *
      * @param shopId   店铺ID
      * @param orderId  订单ID
-     * @return 完成返回
      */
     Result finishServing(long shopId, long orderId);
 
@@ -72,7 +69,6 @@ public interface IOrderShopService {
      *
      * @param shopId   店铺ID
      * @param orderId  订单ID
-     * @return 收款返回
      */
     Result confirmReceipt(long shopId, long orderId);
 

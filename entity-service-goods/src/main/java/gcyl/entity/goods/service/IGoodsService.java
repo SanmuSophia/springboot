@@ -23,7 +23,6 @@ public interface IGoodsService {
      * 商品添加
      *
      * @param request 商品参数
-     * @return 添加结果
      */
     Result add(GoodsAddRequest request);
 
@@ -32,7 +31,6 @@ public interface IGoodsService {
      * 加入店长推荐、默认商品、商品在售
      *
      * @param request 修改参数
-     * @return 修改结果
      */
     Result upState(GoodsStateUpRequest request);
 
@@ -40,7 +38,6 @@ public interface IGoodsService {
      * 商品修改
      *
      * @param request 修改参数
-     * @return 修改结果
      */
     Result update(GoodsUpRequest request);
 
@@ -49,7 +46,6 @@ public interface IGoodsService {
      *
      * @param shopId    店铺ID
      * @param goodsIds  商品ID集合
-     * @return 删除结果
      */
     Result delete(long shopId, List<Long> goodsIds);
 
@@ -58,7 +54,6 @@ public interface IGoodsService {
      *
      * @param shopId    店铺ID
      * @param goodsIds  商品ID集合
-     * @return 下架结果
      */
     Result offShelve(long shopId, List<Long> goodsIds);
 
@@ -67,7 +62,6 @@ public interface IGoodsService {
      *
      * @param shopId    店铺ID
      * @param goodsIds  商品ID集合
-     * @return 上架结果
      */
     Result onShelve(long shopId, List<Long> goodsIds);
 
@@ -76,7 +70,6 @@ public interface IGoodsService {
      *
      * @param shopId   店铺ID
      * @param goodsId  商品ID
-     * @return
      */
     Result restock(long shopId, long goodsId);
 
@@ -86,7 +79,6 @@ public interface IGoodsService {
      * @param specId    规格ID
      * @param num       数量
      * @param stockEnum ADD增加，REDUCE修改
-     * @return 修改返回
      */
     Result changeStock(long specId, int num, StockEnum stockEnum);
 
@@ -94,7 +86,6 @@ public interface IGoodsService {
      * 增加商品销量
      *
      * @param list  商品销量信息
-     * @return 增加返回
      */
     Result addSales(List<Map<String, Object>> list);
 }

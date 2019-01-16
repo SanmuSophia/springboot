@@ -18,14 +18,12 @@ public interface IOrderService {
      * 订单创建
      *
      * @param request  订单信息
-     * @return 创建结果
      */
     Result create(OrderCreateRequest request);
 
     /**
      * 订单支付完成
      * @param request 订单支付信息
-     * @return 支付返回
      */
     Result paid(OrderPaidRequest request);
 
@@ -34,7 +32,6 @@ public interface IOrderService {
      *
      * @param order     订单信息
      * @param stateEnum 新订单状态
-     * @return 修改返回
      */
     Result changeState(Order order, OrderStateEnum stateEnum);
 }

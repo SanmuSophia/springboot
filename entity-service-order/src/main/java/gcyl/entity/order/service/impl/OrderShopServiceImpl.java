@@ -161,7 +161,6 @@ public class OrderShopServiceImpl implements IOrderShopService {
      * @param shopId   店铺ID
      * @param orderId  订单ID
      * @param reason   拒接原因
-     * @return 拒绝返回
      */
     @Override
     @Transactional
@@ -189,7 +188,6 @@ public class OrderShopServiceImpl implements IOrderShopService {
      *
      * @param shopId   店铺ID
      * @param orderId  订单ID
-     * @return 接单返回
      */
     @Override
     public Result receive(long shopId, long orderId) {
@@ -206,7 +204,6 @@ public class OrderShopServiceImpl implements IOrderShopService {
      *
      * @param shopId   店铺ID
      * @param orderId  订单ID
-     * @return 完成返回
      */
     @Override
     public Result finishServing(long shopId, long orderId) {
@@ -228,7 +225,6 @@ public class OrderShopServiceImpl implements IOrderShopService {
      *
      * @param shopId   店铺ID
      * @param orderId  订单ID
-     * @return 收款返回
      */
     @Override
     public Result confirmReceipt(long shopId, long orderId) {

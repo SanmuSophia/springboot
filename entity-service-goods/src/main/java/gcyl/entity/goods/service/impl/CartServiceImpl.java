@@ -61,7 +61,6 @@ public class CartServiceImpl implements ICartService {
      * 添加商品
      *
      * @param request  商品参数
-     * @return  添加结果
      */
     @Override
     public Result add(CartAddRequest request) {
@@ -107,7 +106,6 @@ public class CartServiceImpl implements ICartService {
      * 移除商品
      *
      * @param request  商品参数
-     * @return  添加结果
      */
     @Override
     public Result remove(CartDelRequest request) {
@@ -127,7 +125,6 @@ public class CartServiceImpl implements ICartService {
      *
      * @param shopId    店铺ID
      * @param tableNum  桌号
-     * @return  清空结果
      */
     @Override
     public Result clear(long shopId, long tableNum) {
@@ -137,14 +134,13 @@ public class CartServiceImpl implements ICartService {
         return result;
     }
 
-    /**
-     * 获取用户购物车
-     *
-     * @param shopId    店铺ID
-     * @param tableNum  桌号
-     * @param userId    用户ID
-     * @return  购物车商品列表
-     */
+//    /**
+//     * 获取用户购物车
+//     *
+//     * @param shopId    店铺ID
+//     * @param tableNum  桌号
+//     * @param userId    用户ID
+//     */
 //    @Override
 //    public List<CartForm> getUser(long shopId, long tableNum, long userId) {
 //        return cartRedisDao.getUser(shopId, tableNum, userId);

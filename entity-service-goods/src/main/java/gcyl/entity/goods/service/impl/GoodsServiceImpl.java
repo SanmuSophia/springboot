@@ -65,7 +65,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * TODO 默认商品有无分类,库存？
      *
      * @param request 商品参数
-     * @return 添加成功与否
      */
     @Override
     @Transactional
@@ -147,7 +146,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * 加入店长推荐、默认商品、商品在售
      *
      * @param request 修改参数
-     * @return 修改结果
      */
     @Override
     public Result upState(GoodsStateUpRequest request) {
@@ -184,7 +182,6 @@ public class GoodsServiceImpl implements IGoodsService {
     /**
      * 商品修改
      * @param request 修改参数
-     * @return 修改结果
      */
     @Override
     @Transactional
@@ -305,7 +302,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * @param shopId      店铺ID
      * @param categoryId  类目ID
      * @param goodsName   商品名
-     * @return
      */
     private Result hasGoods(long shopId, long categoryId, String goodsName, Long goodsId) {
         Result result = new Result();
@@ -335,7 +331,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * 商品删除
      * @param shopId    店铺ID
      * @param goodsIds  商品ID集合
-     * @return 删除结果
      */
     @Override
     public Result delete(long shopId, List<Long> goodsIds) {
@@ -365,7 +360,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * 商品下架
      * @param shopId    店铺ID
      * @param goodsIds  商品ID集合
-     * @return 下架结果
      */
     @Override
     public Result offShelve(long shopId, List<Long> goodsIds) {
@@ -395,7 +389,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * 商品上架
      * @param shopId    店铺ID
      * @param goodsIds  商品ID集合
-     * @return 上架结果
      */
     @Override
     public Result onShelve(long shopId, List<Long> goodsIds) {
@@ -427,7 +420,6 @@ public class GoodsServiceImpl implements IGoodsService {
      *
      * @param shopId   店铺ID
      * @param goodsId  商品ID
-     * @return
      */
     @Override
     public Result restock(long shopId, long goodsId) {
@@ -456,7 +448,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * @param specId    规格ID
      * @param num       数量
      * @param stockEnum ADD增加，REDUCE修改
-     * @return 修改返回
      */
     @Override
     @Transactional
@@ -524,7 +515,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * 增加商品销量
      *
      * @param list  商品销量信息
-     * @return 增加返回
      */
     @Override
     public Result addSales(List<Map<String, Object>> list) {

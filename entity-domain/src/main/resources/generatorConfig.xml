@@ -10,9 +10,9 @@
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
         <commentGenerator>
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressDate" value="true"/>
-            <property name="suppressAllComments" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 去除注释mapper.xml会出现重复 -->
+            <!--<property name="suppressDate" value="true"/>-->
+            <!--<property name="suppressAllComments" value="true"/>-->
         </commentGenerator>
 
         <!--数据库链接URL，用户名、密码 -->
@@ -45,14 +45,14 @@
         </javaClientGenerator>
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <!--<table tableName="tyg_ms_category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
-        <!--<table tableName="tyg_ms_category" domainObjectName="Category"/>-->
-        <!--<table tableName="tyg_ms_goods" domainObjectName="Goods"/>-->
-        <!--<table tableName="tyg_ms_goods_spec" domainObjectName="GoodsSpec"/>-->
-        <!--<table tableName="tyg_ms_unit" domainObjectName="Unit"/>-->
-        <!--<table tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>-->
-        <!--<table tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>-->
-        <!--<table tableName="tyg_ms_order" domainObjectName="Order"/>-->
-        <!--<table tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_category" domainObjectName="Category" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_category" domainObjectName="Category"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_goods" domainObjectName="Goods"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_goods_spec" domainObjectName="GoodsSpec"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_unit" domainObjectName="Unit"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>-->
+        <!--<table schema="entity" tableName="tyg_ms_order" domainObjectName="Order"/>-->
+        <table  tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>
     </context>
 </generatorConfiguration>

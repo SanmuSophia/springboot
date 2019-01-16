@@ -38,7 +38,6 @@ public class CategoryServiceImpl implements ICategoryService {
      * 类目新增
      *
      * @param request 类目信息
-     * @return        添加成与否
      */
     @Override
     public Result add(CategoryAddRequest request) {
@@ -73,7 +72,6 @@ public class CategoryServiceImpl implements ICategoryService {
      * 类目修改
      *
      * @param request 类目信息
-     * @return        修改成功与否
      */
     @Override
     public Result update(CategoryUpRequest request) {
@@ -111,7 +109,6 @@ public class CategoryServiceImpl implements ICategoryService {
      * 类目删除
      *
      * @param request 类目信息
-     * @return        删除成功与否
      */
     @Override
     public Result delete(CategoryDelRequest request) {

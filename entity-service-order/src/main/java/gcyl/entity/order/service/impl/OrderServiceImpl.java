@@ -63,7 +63,6 @@ public class OrderServiceImpl implements IOrderService {
      * 订单创建
      *
      * @param request  订单信息
-     * @return 创建结果
      */
     @Override
     @Transactional
@@ -224,7 +223,6 @@ public class OrderServiceImpl implements IOrderService {
      * 若要求保证payMethod的正确性，可通过PayMethodEnum验证
      *
      * @param request 订单支付信息
-     * @return 支付返回
      */
     @Override
     public Result paid(OrderPaidRequest request) {
@@ -255,7 +253,6 @@ public class OrderServiceImpl implements IOrderService {
      *
      * @param cartForms     购物车商品
      * @param specNumForms  订单商品
-     * @return
      */
     private Result isCartChanged(List<CartForm> cartForms, List<SpecNumForm> specNumForms) {
         Result result = new Result();
@@ -290,7 +287,6 @@ public class OrderServiceImpl implements IOrderService {
      *
      * @param order     订单信息
      * @param stateEnum 新订单状态
-     * @return
      */
     @Override
     public Result changeState(Order order, OrderStateEnum stateEnum) {
