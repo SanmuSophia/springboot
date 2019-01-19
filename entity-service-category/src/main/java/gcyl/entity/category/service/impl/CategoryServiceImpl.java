@@ -12,8 +12,7 @@ import gcyl.entity.domain.mapper.CategoryMapper;
 import gcyl.entity.domain.mapper.ex.CategoryExtMapper;
 import gcyl.entity.domain.model.Category;
 import gcyl.entity.domain.model.CategoryExample;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +23,9 @@ import org.springframework.stereotype.Service;
  * @author lican
  * @date 2018/12/12
  */
+@Slf4j
 @Service
 public class CategoryServiceImpl implements ICategoryService {
-
-    private static Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
     @Autowired
     CategoryMapper categoryMapper;
@@ -59,7 +57,7 @@ public class CategoryServiceImpl implements ICategoryService {
         int i = categoryMapper.insertSelective(category);
 
         if (i <= 0) {
-            logger.info(ResultEnum.C1001.toString());
+            log.info(ResultEnum.C1001.toString());
             result.error(ResultEnum.C1001);
             return result;
         }
@@ -96,7 +94,7 @@ public class CategoryServiceImpl implements ICategoryService {
         int i = categoryMapper.updateByPrimaryKeySelective(category);
 
         if (i <= 0) {
-            logger.info(ResultEnum.C2001.toString());
+            log.info(ResultEnum.C2001.toString());
             result.error(ResultEnum.C2001);
             return result;
         }
@@ -128,7 +126,7 @@ public class CategoryServiceImpl implements ICategoryService {
         int i = categoryMapper.updateByPrimaryKeySelective(category);
 
         if (i <= 0) {
-            logger.info(ResultEnum.C3001.toString());
+            log.info(ResultEnum.C3001.toString());
             result.error(ResultEnum.C3001);
             return result;
         }
@@ -143,7 +141,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * @param shopId      店铺ID
      * @param categoryId  类目ID
      */
-    public Result isShopCategory(long shopId, long categoryId) {
+    private Result isShopCategory(long shopId, long categoryId) {
         Result result = new Result();
         CategoryExample example = new CategoryExample();
         example.createCriteria().andIdEqualTo(categoryId).andShopIdEqualTo(shopId);
@@ -180,7 +178,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
         int count = categoryMapper.countByExample(example);
         if (count >= 1) {
-            logger.info(ResultEnum.C0002.toString());
+            log.info(ResultEnum.C0002.toString());
             result.error(ResultEnum.C0002);
             return result;
         }

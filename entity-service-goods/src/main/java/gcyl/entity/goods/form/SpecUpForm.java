@@ -19,7 +19,7 @@ public class SpecUpForm {
     /**
      * 规格类型
      */
-    @NotNull(message = "规格信息有误")
+    @NotNull(message = "规格信息异常")
     private String specKey;
 
     /**

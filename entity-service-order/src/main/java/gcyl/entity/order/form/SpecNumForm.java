@@ -14,7 +14,7 @@ public class SpecNumForm {
     /**
      * 商品规格ID
      */
-    @NotNull(message = "商品规格信息有误")
+    @NotNull(message = "商品规格信息异常")
     private Long specId;
 
     /**

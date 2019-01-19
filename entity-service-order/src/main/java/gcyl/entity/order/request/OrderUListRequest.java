@@ -1,6 +1,7 @@
 package gcyl.entity.order.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.order.Enum.UListTypeEnum;
 
 import javax.validation.constraints.NotNull;
@@ -16,7 +17,7 @@ public class OrderUListRequest extends AbstractRequest {
     /**
      * 用户ID
      */
-    @NotNull(message = "用户信息有误")
+    @NotNull(message = Message.USER_ID_NULL)
     private Long userId;
 
     /**

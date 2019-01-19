@@ -1,4 +1,4 @@
-package gcyl.entity.common;
+package gcyl.entity.common.constant;
 
 /**
  * 静态常量管理类

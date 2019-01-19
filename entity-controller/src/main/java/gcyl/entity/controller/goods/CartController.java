@@ -1,5 +1,6 @@
 package gcyl.entity.controller.goods;
 
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.form.CartForm;
 import gcyl.entity.goods.request.*;
@@ -42,11 +43,11 @@ public class CartController {
     public Result get(Long shopId, Long tableNum) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (tableNum == null) {
-            result.error("餐桌信息有误");
+            result.error(Message.TABLE_NUM_NULL);
             return result;
         }
 
@@ -102,11 +103,11 @@ public class CartController {
     public Result clear(Long shopId, Long tableNum) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (tableNum == null) {
-            result.error("餐桌信息有误");
+            result.error(Message.TABLE_NUM_NULL);
             return result;
         }
 

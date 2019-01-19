@@ -8,8 +8,7 @@ import gcyl.entity.domain.mapper.OrderMapper;
 import gcyl.entity.domain.mapper.ex.OrderExtMapper;
 import gcyl.entity.domain.model.Order;
 import gcyl.entity.order.service.IOrderStateService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,9 @@ import org.springframework.stereotype.Service;
  * @author lican
  * @date 2018/12/28
  */
+@Slf4j
 @Service
 public class OrderStateServiceImpl implements IOrderStateService {
-
-    private static Logger logger = LoggerFactory.getLogger(OrderStateServiceImpl.class);
 
     @Autowired
     OrderMapper orderMapper;
@@ -39,7 +37,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WR.getCode()) {
-            logger.info(ResultEnum.O2012.toString());
+            log.info(ResultEnum.O2012.toString());
             result.error(ResultEnum.O2012);
             return result;
         }
@@ -52,7 +50,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setGmtModify(now);
         int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
-            logger.info(ResultEnum.O2002.toString());
+            log.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }
@@ -71,7 +69,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WS.getCode()) {
-            logger.info(ResultEnum.O2013.toString());
+            log.info(ResultEnum.O2013.toString());
             result.error(ResultEnum.O2013);
             return result;
         }
@@ -83,7 +81,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setOrderState(OrderStateEnum.FS.getCode());
         int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
-            logger.info(ResultEnum.O2002.toString());
+            log.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }
@@ -103,7 +101,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WS.getCode()
                 && oldOrder.getOrderState() != OrderStateEnum.FS.getCode()) {
-            logger.info(ResultEnum.O2014.toString());
+            log.info(ResultEnum.O2014.toString());
             result.error(ResultEnum.O2014);
             return result;
         }
@@ -118,7 +116,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setGmtModify(now);
         int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
-            logger.info(ResultEnum.O2002.toString());
+            log.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }
@@ -137,7 +135,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         long orderId = order.getId();
         Order oldOrder = orderExtMapper.selectForStateUp(orderId);
         if (oldOrder.getOrderState() != OrderStateEnum.WR.getCode()) {
-            logger.info(ResultEnum.O2012.toString());
+            log.info(ResultEnum.O2012.toString());
             result.error(ResultEnum.O2012);
             return result;
         }
@@ -149,7 +147,7 @@ public class OrderStateServiceImpl implements IOrderStateService {
         order.setGmtModify(now);
         int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
-            logger.info(ResultEnum.O2002.toString());
+            log.info(ResultEnum.O2002.toString());
             result.error(ResultEnum.O2002);
             return result;
         }

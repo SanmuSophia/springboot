@@ -1,6 +1,7 @@
 package gcyl.entity.order.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.order.form.SpecNumForm;
 
 import javax.validation.Valid;
@@ -21,31 +22,31 @@ public class OrderCreateRequest extends AbstractRequest {
     /**
      * 店铺ID
      */
-    @NotNull(message = "店铺信息有误")
+    @NotNull(message = Message.SHOP_ID_NULL)
     private Long shopId;
 
     /**
      * 用户ID
      */
-    @NotNull(message = "用户信息有误")
+    @NotNull(message = Message.USER_ID_NULL)
     private Long userId;
 
     /**
      * 桌号
      */
-    @NotNull(message = "餐桌信息有误")
+    @NotNull(message = Message.TABLE_NUM_NULL)
     private Integer tableNum;
 
     /**
      * 支付方式
      */
-    @NotNull(message = "支付方式有误")
+    @NotNull(message = "支付方式异常")
     private Integer payWay;
 
     /**
      * 商品总价
      */
-    @NotNull(message = "商品价格有误")
+    @NotNull(message = "商品价格异常")
     @Min(value = 0, message = "商品价格有误")
     private BigDecimal goodsAmount;
 
@@ -76,8 +77,8 @@ public class OrderCreateRequest extends AbstractRequest {
     /**
      * 订单商品规格数量
      */
-    @NotNull(message = "商品信息有误")
-    @Size(min = 1, message = "商品信息有误")
+    @NotNull(message = "订单商品信息异常")
+    @Size(min = 1, message = "订单商品信息有误")
     @Valid
     private List<SpecNumForm> specNumForms;
 

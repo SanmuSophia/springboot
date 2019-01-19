@@ -1,6 +1,7 @@
 package gcyl.entity.order.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 
 import javax.validation.constraints.NotNull;
 
@@ -14,13 +15,13 @@ public class OrderPaidRequest extends AbstractRequest {
     /**
      * 订单ID
      */
-    @NotNull(message = "订单信息有误")
+    @NotNull(message = Message.ORDER_ID_NULL)
     private Long orderId;
 
     /**
      * 支付方式 参考PayMethodEnum
      */
-    @NotNull(message = "支付方式有误")
+    @NotNull(message = "支付方式异常")
     private Integer payMethod;
 
     public Long getOrderId() {

@@ -1,6 +1,7 @@
 package gcyl.entity.controller.goods;
 
 import gcyl.entity.common.annotation.ShopLogin;
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.GoodsSpec;
@@ -69,7 +70,7 @@ public class GoodsSearchController {
     public Result goodsDetail(Long goodsId) {
         Result result = new Result();
         if (goodsId == null) {
-            result.error("商品信息有误");
+            result.error(Message.GOODS_ID_NULL);
             return result;
         }
 
@@ -89,7 +90,7 @@ public class GoodsSearchController {
     public Result goodsSpecList(Long goodsId) {
         Result result = new Result();
         if (goodsId == null) {
-            result.error("商品信息有误");
+            result.error(Message.GOODS_ID_NULL);
             return result;
         }
 

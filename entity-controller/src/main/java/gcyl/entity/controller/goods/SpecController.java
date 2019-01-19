@@ -45,7 +45,7 @@ public class SpecController {
     public Result specValues(Long keyId) {
         Result result = new Result();
         if (keyId == null) {
-            result.error("规格信息有误");
+            result.error("规格信息异常");
             return result;
         }
 

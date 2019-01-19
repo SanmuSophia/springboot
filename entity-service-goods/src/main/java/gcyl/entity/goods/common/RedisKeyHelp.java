@@ -1,4 +1,4 @@
-package gcyl.entity.goods.redis;
+package gcyl.entity.goods.common;
 
 
 /**

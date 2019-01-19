@@ -1,6 +1,7 @@
 package gcyl.entity.category.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,13 +18,13 @@ public class CategoryUpRequest extends AbstractRequest {
     /**
      * 类目ID
      */
-    @NotNull(message = "类目信息有误")
+    @NotNull(message = Message.CATEGORY_ID_NULL)
     private Long categoryId;
 
     /**
      * 店铺ID
      */
-    @NotNull(message = "店铺信息有误")
+    @NotNull(message = Message.SHOP_ID_NULL)
     private Long shopId;
 
     /**

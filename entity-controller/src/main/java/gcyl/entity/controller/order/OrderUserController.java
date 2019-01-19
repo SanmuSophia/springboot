@@ -1,6 +1,7 @@
 package gcyl.entity.controller.order;
 
 import gcyl.entity.common.annotation.ShopLogin;
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.ex.OrderEx;
@@ -42,7 +43,7 @@ public class OrderUserController {
     public Result orderNum(Long userId) {
         Result result = new Result();
         if (userId == null) {
-            result.error("用户信息有误");
+            result.error(Message.USER_ID_NULL);
             return result;
         }
 
@@ -83,11 +84,11 @@ public class OrderUserController {
     public Result orderDetail(Long userId, Long orderId) {
         Result result = new Result();
         if (userId == null) {
-            result.error("用户信息有误");
+            result.error(Message.USER_ID_NULL);
             return result;
         }
         if (orderId == null) {
-            result.error("订单信息有误");
+            result.error(Message.ORDER_ID_NULL);
             return result;
         }
 

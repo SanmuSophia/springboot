@@ -1,6 +1,6 @@
 package gcyl.entity.order.service.impl;
 
-import gcyl.entity.common.Constant;
+import gcyl.entity.common.constant.Constant;
 import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.enums.goods.StockEnum;
 import gcyl.entity.common.enums.order.OrderStateEnum;
@@ -22,8 +22,7 @@ import gcyl.entity.order.request.OrderPaidRequest;
 import gcyl.entity.order.service.IOrderService;
 import gcyl.entity.order.service.IOrderStateService;
 import gcyl.entity.order.vo.OrderCreateVO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +30,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 订单管理
@@ -38,11 +38,10 @@ import java.util.*;
  * @author lican
  * @date 2018/12/12
  */
+@Slf4j
 @Service
 public class OrderServiceImpl implements IOrderService {
-
-    private static Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
-
+    
     @Autowired
     OrderMapper orderMapper;
     @Autowired
@@ -140,6 +139,9 @@ public class OrderServiceImpl implements IOrderService {
         }
 
         //修改商品库存
+        cartForms = cartForms.stream()
+                .sorted(Comparator.comparing(CartForm::getSpecId)) //按顺序修改，避免死锁
+                .collect(Collectors.toList());
         for (CartForm cartForm : cartForms) {
             long specId = cartForm.getSpecId();
             String goodsName = cartForm.getGoodsName();
@@ -175,7 +177,7 @@ public class OrderServiceImpl implements IOrderService {
 
         int i = orderExtMapper.insertSelective(order);
         if (i <= 0) {
-            logger.info(ResultEnum.O1001.toString());
+            log.info(ResultEnum.O1001.toString());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.error(ResultEnum.O1001);
             return result;
@@ -188,7 +190,7 @@ public class OrderServiceImpl implements IOrderService {
         }
         i = orderDetailExtMapper.batchInsert(orderDetails);
         if (i <= 0) {
-            logger.info(ResultEnum.O1002.toString());
+            log.info(ResultEnum.O1002.toString());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.error(ResultEnum.O1002);
             return result;
@@ -200,7 +202,7 @@ public class OrderServiceImpl implements IOrderService {
         //清空购物车
         result = cartService.clear(shopId, tableNum);
         if (!result.isSuccess()) {
-            logger.info(ResultEnum.O1003.toString());
+            log.info(ResultEnum.O1003.toString());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.error(ResultEnum.O1003);
             return result;
@@ -260,18 +262,18 @@ public class OrderServiceImpl implements IOrderService {
             result.error(ResultEnum.CT0001);
             return result;
         }
-        Set<String> all = new HashSet<>();
 
         Set<String> old = new HashSet<>();
         for (CartForm form : cartForms) {
             old.add(form.getSpecId() + ":" + form.getNum());
-            all.add(form.getSpecId() + ":" + form.getNum());
         }
+        Set<String> all = new HashSet<>(old);
+
         Set<String> now = new HashSet<>();
         for (SpecNumForm form : specNumForms) {
             now.add(form.getSpecId() + ":" + form.getNum());
-            all.add(form.getSpecId() + ":" + form.getNum());
         }
+        all.addAll(now);
 
         if (all.size() != old.size() || all.size() != now.size()) {
             result.error(ResultEnum.CT0001);
@@ -292,7 +294,7 @@ public class OrderServiceImpl implements IOrderService {
     public Result changeState(Order order, OrderStateEnum stateEnum) {
         Result result = new Result();
         if (order.getId() == null || stateEnum == null) {
-            logger.info(ResultEnum.O2010.toString());
+            log.info(ResultEnum.O2010.toString());
             result.error(ResultEnum.O2010);
             return result;
         }
@@ -308,7 +310,7 @@ public class OrderServiceImpl implements IOrderService {
                 return stateService.toClose(order);
         }
 
-        logger.info(ResultEnum.O2011.toString());
+        log.info(ResultEnum.O2011.toString());
         result.error(ResultEnum.O2011);
         return result;
     }

@@ -13,6 +13,7 @@ import gcyl.entity.domain.model.vo.OrderUNumVO;
 import gcyl.entity.order.Enum.UListTypeEnum;
 import gcyl.entity.order.request.OrderUListRequest;
 import gcyl.entity.order.service.IOrderUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ import java.util.Map;
  * @author lican
  * @date 2018/12/28
  */
+@Slf4j
 @Service
 public class OrderUserService implements IOrderUserService {
 
@@ -155,6 +157,7 @@ public class OrderUserService implements IOrderUserService {
         example.createCriteria().andIdEqualTo(orderId).andUserIdEqualTo(userId);
         int count = orderMapper.countByExample(example);
         if (count <= 0) {
+            log.info(ResultEnum.O0002.toString());
             result.error(ResultEnum.O0002);
             return result;
         }

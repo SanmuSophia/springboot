@@ -4,19 +4,16 @@ import com.alibaba.fastjson.JSON;
 import gcyl.entity.common.utils.JsonUtils;
 import gcyl.entity.domain.model.form.CartForm;
 import gcyl.entity.goods.redis.ICartRedisDao;
-import gcyl.entity.goods.redis.RedisKeyHelp;
+import gcyl.entity.goods.common.RedisKeyHelp;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.ScanParams;
-import redis.clients.jedis.ScanResult;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 购物车redis

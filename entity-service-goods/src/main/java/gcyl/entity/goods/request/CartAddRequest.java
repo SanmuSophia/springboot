@@ -1,6 +1,7 @@
 package gcyl.entity.goods.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -16,37 +17,37 @@ public class CartAddRequest extends AbstractRequest {
     /**
      * 店铺ID
      */
-    @NotNull(message = "店铺信息有误")
+    @NotNull(message = Message.SHOP_ID_NULL)
     private Long shopId;
 
     /**
      * 桌号
      */
-    @NotNull(message = "餐桌号有误")
+    @NotNull(message = Message.TABLE_NUM_NULL)
     private Long tableNum;
 
     /**
      * 用户ID
      */
-    @NotNull(message = "用户信息有误")
+    @NotNull(message = Message.USER_ID_NULL)
     private Long userId;
 
     /**
      * 商品ID
      */
-    @NotNull(message = "商品信息有误")
+    @NotNull(message = Message.GOODS_ID_NULL)
     private Long goodsId;
 
     /**
      * 商品规格ID
      */
-    @NotNull(message = "商品规格有误")
+    @NotNull(message = Message.SPEC_ID_NULL)
     private Long specId;
 
     /**
      * 商品数量
      */
-    @NotNull(message = "商品数量有误")
+    @NotNull(message = "商品数量异常")
     @Min(value = 1, message = "商品数量有误")
     private Integer num;
 

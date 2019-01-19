@@ -1,6 +1,7 @@
 package gcyl.entity.controller.order;
 
 import gcyl.entity.common.annotation.ShopLogin;
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.ex.OrderEx;
@@ -43,7 +44,7 @@ public class OrderShopController {
     public Result orderNum(Long shopId) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
 
@@ -84,11 +85,11 @@ public class OrderShopController {
     public Result orderDetail(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (orderId == null) {
-            result.error("订单信息有误");
+            result.error(Message.ORDER_ID_NULL);
             return result;
         }
 
@@ -116,11 +117,11 @@ public class OrderShopController {
     public Result refuse(Long shopId, Long orderId, String reason) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (orderId == null) {
-            result.error("订单信息有误");
+            result.error(Message.ORDER_ID_NULL);
             return result;
         }
         if (StringUtils.isBlank(reason)) {
@@ -143,11 +144,11 @@ public class OrderShopController {
     public Result receive(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (orderId == null) {
-            result.error("订单信息有误");
+            result.error(Message.ORDER_ID_NULL);
             return result;
         }
 
@@ -166,11 +167,11 @@ public class OrderShopController {
     public Result finishServing(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (orderId == null) {
-            result.error("订单信息有误");
+            result.error(Message.ORDER_ID_NULL);
             return result;
         }
 
@@ -189,11 +190,11 @@ public class OrderShopController {
     public Result confirmReceipt(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
-            result.error("店铺信息有误");
+            result.error(Message.SHOP_ID_NULL);
             return result;
         }
         if (orderId == null) {
-            result.error("订单信息有误");
+            result.error(Message.ORDER_ID_NULL);
             return result;
         }
 

@@ -1,6 +1,7 @@
 package gcyl.entity.goods.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,13 +16,13 @@ public class RestockRequest extends AbstractRequest {
     /**
      * 店铺ID
      */
-    @NotNull(message = "店铺信息有误")
+    @NotNull(message = Message.SHOP_ID_NULL)
     private Long shopId;
 
     /**
      * 商品ID
      */
-    @NotNull(message = "商品信息有误")
+    @NotNull(message = Message.GOODS_ID_NULL)
     private Long goodsId;
 
     public Long getShopId() {

@@ -17,7 +17,7 @@ public class SpecAddForm {
     /**
      * 规格类型
      */
-    @NotEmpty(message = "规格信息有误")
+    @NotEmpty(message = "规格信息异常")
     private String specKey;
 
     /**

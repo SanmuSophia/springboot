@@ -1,4 +1,4 @@
-package gcyl.entity.order.redis;
+package gcyl.entity.order.common;
 
 
 /**

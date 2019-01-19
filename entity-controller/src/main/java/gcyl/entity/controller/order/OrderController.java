@@ -76,7 +76,7 @@ public class OrderController {
         int payWay = request.getPayWay();
         PayWayEnum payWayEnum = PayWayEnum.getEnumByCode(payWay);
         if (payWayEnum == null) {
-            result.error("支付方式有误");
+            result.error("支付方式异常");
             return result;
         }
 

@@ -1,6 +1,6 @@
 package gcyl.entity.common.utils;
 
-import gcyl.entity.common.Constant;
+import gcyl.entity.common.constant.Constant;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

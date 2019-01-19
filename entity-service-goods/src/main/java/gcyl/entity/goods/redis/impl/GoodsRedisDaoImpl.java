@@ -29,6 +29,12 @@ public class GoodsRedisDaoImpl implements IGoodsRedisDao {
             lock = nx != null && nx == 1;
             if (lock) {
                 jedis.expire(lockKey, timeOut);
+            } else {
+                long expireTime = jedis.ttl(lockKey);
+                if (expireTime < 0) {
+                    jedis.del(lockKey);
+                    return lock(lockKey, timeOut);
+                }
             }
         } catch (Exception e) {
             log.debug("redis异常:" + e);

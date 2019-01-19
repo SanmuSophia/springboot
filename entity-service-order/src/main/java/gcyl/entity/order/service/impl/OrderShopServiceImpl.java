@@ -19,14 +19,14 @@ import gcyl.entity.order.request.OrderSListRequest;
 import gcyl.entity.order.service.IOrderService;
 import gcyl.entity.order.service.IOrderShopService;
 import gcyl.entity.domain.model.vo.OrderSNumVO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 店铺订单管理
@@ -34,11 +34,10 @@ import java.util.*;
  * @author lican
  * @date 2018/12/28
  */
+@Slf4j
 @Service
 public class OrderShopServiceImpl implements IOrderShopService {
-
-    private static Logger logger = LoggerFactory.getLogger(OrderShopServiceImpl.class);
-
+    
     @Autowired
     OrderMapper orderMapper;
     @Autowired
@@ -170,6 +169,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
 
         //将库存加回去
         List<OrderGoodsForm> goodsForms = orderExtMapper.selectOrderGoodsNum(orderId);
+        goodsForms = goodsForms.stream().sorted(Comparator.comparing(OrderGoodsForm::getSpecId)).collect(Collectors.toList());
         for (OrderGoodsForm goodsForm : goodsForms) {
             long specId = goodsForm.getSpecId();
             int num = goodsForm.getSpecNum();
@@ -236,7 +236,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
         int orderStare = oldOrder.getOrderState();
         if (orderStare != OrderStateEnum.FS.getCode()
                 && orderStare != OrderStateEnum.WS.getCode()) {
-            logger.info(ResultEnum.O2015.toString());
+            log.info(ResultEnum.O2015.toString());
             result.error(ResultEnum.O2015);
             return result;
         }
@@ -255,7 +255,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
 
         int i = orderMapper.updateByPrimaryKeySelective(order);
         if (i <= 0) {
-            logger.info(ResultEnum.O2021.toString());
+            log.info(ResultEnum.O2021.toString());
             result.error(ResultEnum.O2021);
             return result;
         }
@@ -278,7 +278,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
         example.createCriteria().andIdEqualTo(orderId).andShopIdEqualTo(shopId);
         int count = orderMapper.countByExample(example);
         if (count <= 0) {
-            logger.info(ResultEnum.O0001.toString());
+            log.info(ResultEnum.O0001.toString());
             result.error(ResultEnum.O0001);
             return result;
         }

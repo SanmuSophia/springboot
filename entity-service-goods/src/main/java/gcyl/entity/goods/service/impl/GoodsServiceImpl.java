@@ -1,6 +1,6 @@
 package gcyl.entity.goods.service.impl;
 
-import gcyl.entity.common.Constant;
+import gcyl.entity.common.constant.Constant;
 import gcyl.entity.common.enums.CutOffEnum;
 import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.enums.goods.OnSaleEnum;
@@ -18,13 +18,12 @@ import gcyl.entity.domain.model.GoodsSpec;
 import gcyl.entity.goods.form.SpecAddForm;
 import gcyl.entity.goods.form.SpecUpForm;
 import gcyl.entity.goods.redis.IGoodsRedisDao;
-import gcyl.entity.goods.redis.RedisKeyHelp;
+import gcyl.entity.goods.common.RedisKeyHelp;
 import gcyl.entity.goods.request.GoodsAddRequest;
 import gcyl.entity.goods.request.GoodsStateUpRequest;
 import gcyl.entity.goods.request.GoodsUpRequest;
 import gcyl.entity.goods.service.IGoodsService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,10 +39,9 @@ import java.util.*;
  * @author lican
  * @date 2018/12/12
  */
+@Slf4j
 @Service
 public class GoodsServiceImpl implements IGoodsService {
-
-    private static Logger logger = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
     @Autowired
     GoodsMapper goodsMapper;
@@ -103,7 +101,7 @@ public class GoodsServiceImpl implements IGoodsService {
         goods.setGmtModify(now);
         int i = goodsExtMapper.insertSelective(goods);
         if (i <= 0) {
-            logger.info(ResultEnum.G1001.toString());
+            log.info(ResultEnum.G1001.toString());
             result.error(ResultEnum.G1001);
             return result;
         }
@@ -131,7 +129,7 @@ public class GoodsServiceImpl implements IGoodsService {
         }
         i = goodsSpecExtMapper.batchInsert(goodsSpecs);
         if (i <= 0) {
-            logger.info(ResultEnum.G1002.toString());
+            log.info(ResultEnum.G1002.toString());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.error(ResultEnum.G1002);
             return result;
@@ -170,7 +168,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByPrimaryKeySelective(goods);
         if (i <= 0) {
-            logger.info(ResultEnum.G2001.toString());
+            log.info(ResultEnum.G2001.toString());
             result.error(ResultEnum.G2001);
             return result;
         }
@@ -220,7 +218,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByPrimaryKeySelective(goods);
         if (i <= 0) {
-            logger.info(ResultEnum.G2001.toString());
+            log.info(ResultEnum.G2001.toString());
             result.error(ResultEnum.G2001);
             return result;
         }
@@ -275,7 +273,7 @@ public class GoodsServiceImpl implements IGoodsService {
         if (addSpecs.size() > 0) {
             i = goodsSpecExtMapper.batchInsert(addSpecs);
             if (i <= 0) {
-                logger.info(ResultEnum.G2002.toString());
+                log.info(ResultEnum.G2002.toString());
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 result.error(ResultEnum.G2002);
                 return result;
@@ -284,7 +282,7 @@ public class GoodsServiceImpl implements IGoodsService {
         if (upSpecs.size() > 0) {
             i = goodsSpecExtMapper.batchUpdate(upSpecs);
             if (i <= 0) {
-                logger.info(ResultEnum.G2003.toString());
+                log.info(ResultEnum.G2003.toString());
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 result.error(ResultEnum.G2003);
                 return result;
@@ -318,7 +316,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int count = goodsMapper.countByExample(example);
         if (count >=1 ) {
-            logger.info(ResultEnum.G0011.toString());
+            log.info(ResultEnum.G0011.toString());
             result.error(ResultEnum.G0011);
             return result;
         }
@@ -347,7 +345,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
-            logger.info(ResultEnum.G3001.toString());
+            log.info(ResultEnum.G3001.toString());
             result.error(ResultEnum.G3001);
             return result;
         }
@@ -376,7 +374,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
-            logger.info(ResultEnum.G2011.toString());
+            log.info(ResultEnum.G2011.toString());
             result.error(ResultEnum.G2011);
             return result;
         }
@@ -406,7 +404,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
         int i = goodsMapper.updateByExampleSelective(goods, example);
         if (i <= 0) {
-            logger.info(ResultEnum.G2021.toString());
+            log.info(ResultEnum.G2021.toString());
             result.error(ResultEnum.G2021);
             return result;
         }
@@ -433,7 +431,7 @@ public class GoodsServiceImpl implements IGoodsService {
         goodsSpec.setGmtModify(now);
         int i = goodsSpecExtMapper.restockByGoods(goodsSpec);
         if (i <= 0) {
-            logger.info(ResultEnum.G2031.toString());
+            log.info(ResultEnum.G2031.toString());
             result.error(ResultEnum.G2031);
             return result;
         }
@@ -450,7 +448,6 @@ public class GoodsServiceImpl implements IGoodsService {
      * @param stockEnum ADD增加，REDUCE修改
      */
     @Override
-    @Transactional
     public Result changeStock(long specId, int num, StockEnum stockEnum) {
         Result result = new Result();
         String lockKey = RedisKeyHelp.getStockChangeLockKey(specId);
@@ -495,7 +492,7 @@ public class GoodsServiceImpl implements IGoodsService {
                         break;
                 }
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                log.error(e.getMessage());
                 result.error(ResultEnum.ERROR);
                 return result;
             } finally {

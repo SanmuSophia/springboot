@@ -1,6 +1,7 @@
 package gcyl.entity.goods.request;
 
 import gcyl.entity.common.base.AbstractRequest;
+import gcyl.entity.common.constant.Message;
 import gcyl.entity.goods.Enum.SortEnum;
 
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ public class GoodsSearchRequest extends AbstractRequest {
     /**
      * 店铺ID
      */
-    @NotNull(message = "店铺信息有误")
+    @NotNull(message = Message.SHOP_ID_NULL)
     private Long shopId;
 
     /**

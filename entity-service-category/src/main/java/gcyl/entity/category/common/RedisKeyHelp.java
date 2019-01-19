@@ -1,4 +1,4 @@
-package gcyl.entity.category.redis;
+package gcyl.entity.category.common;
 
 
 /**

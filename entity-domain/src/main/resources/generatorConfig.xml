@@ -53,6 +53,7 @@
         <!--<table schema="entity" tableName="tyg_ms_spec_key" domainObjectName="SpecKey"/>-->
         <!--<table schema="entity" tableName="tyg_ms_spec_value" domainObjectName="SpecValue"/>-->
         <!--<table schema="entity" tableName="tyg_ms_order" domainObjectName="Order"/>-->
-        <table  tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>
+        <!--<table  tableName="tyg_ms_order_detail" domainObjectName="OrderDetail"/>-->
+        <table  tableName="tyg_ms_qr_code" domainObjectName="QrCode"/>
     </context>
 </generatorConfiguration>
