@@ -16,6 +16,7 @@
 		<module>entity-service-category</module>
 		<module>entity-service-goods</module>
 		<module>entity-service-order</module>
+		<module>entity-service-shop</module>
 	</modules>
 
 	<name>entity</name>
@@ -24,7 +25,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.4.RELEASE</version>
+		<version>2.1.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
