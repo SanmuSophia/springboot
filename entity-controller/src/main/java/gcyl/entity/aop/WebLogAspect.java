@@ -28,7 +28,7 @@ public class WebLogAspect {
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     @Pointcut("execution(public * gcyl.entity.controller..*.*(..)) " +
-            "&& (@annotation(org.springframework.web.bind.annotation.*))")
+            "&& (@annotation(org.springframework.web.bind.annotation.GetMapping) || @annotation(org.springframework.web.bind.annotation.PostMapping))")
     public void webLog(){
     }
 

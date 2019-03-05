@@ -48,3 +48,21 @@ spring:
       protocol:
         name: dubbo
         port: 20881
+
+    security:
+      user:
+        name: afmrlii
+        password: lican
+
+
+swagger:
+  title: entity-gcyl
+  description: 扫码点单
+  version: 1.1.0.RELEASE
+  license: Apache License, Version 2.0
+  licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact.name: lican
+  contact.email: afmrlii@163.com
+  base-package: gcyl.entity.controller
+  base-path: /**
+  exclude-path: /error, /ops/**
