@@ -12,7 +12,6 @@ spring:
 #      default-property-inclusion: non_null
 
 
-
 swagger:
   title: entity-gcyl
   description: 扫码点单

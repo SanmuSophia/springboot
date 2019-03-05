@@ -5,10 +5,7 @@ import gcyl.entity.domain.model.SpecKey;
 import gcyl.entity.domain.model.SpecValue;
 import gcyl.entity.goods.service.ISpecService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/spec")
 public class SpecController {
 
@@ -28,8 +25,7 @@ public class SpecController {
     /**
      * 规格键
      */
-    @RequestMapping(value = "/specKeys", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/specKeys")
     public Result specKeys() {
         Result result = new Result();
         List<SpecKey> specKeys = specService.specKeys();
@@ -40,8 +36,7 @@ public class SpecController {
     /**
      * 规格键
      */
-    @RequestMapping(value = "/specValues", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/specValues")
     public Result specValues(Long keyId) {
         Result result = new Result();
         if (keyId == null) {

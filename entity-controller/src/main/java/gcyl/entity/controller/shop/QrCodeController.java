@@ -8,12 +8,8 @@ import gcyl.entity.shop.request.QrCodeAddRequest;
 import gcyl.entity.shop.request.QrCodeDelRequest;
 import gcyl.entity.shop.service.IQrCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,7 +20,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/17
  */
-@Controller
+@RestController
 @RequestMapping("/qrCode")
 public class QrCodeController {
 
@@ -35,8 +31,7 @@ public class QrCodeController {
      * 新增
      */
     @ShopLogin
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/add")
     public Result add(@Valid @RequestBody QrCodeAddRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -50,8 +45,7 @@ public class QrCodeController {
      * 删除
      */
     @ShopLogin
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/delete")
     public Result delete(@Valid @RequestBody QrCodeDelRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -67,8 +61,7 @@ public class QrCodeController {
      * 查询
      */
     @ShopLogin
-    @RequestMapping(value = "/select", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/select")
     public Result select(Long shopId) {
         Result result = new Result();
         if (shopId == null) {

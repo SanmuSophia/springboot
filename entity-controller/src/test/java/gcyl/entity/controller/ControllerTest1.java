@@ -1,5 +1,6 @@
 package gcyl.entity.controller;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import gcyl.entity.common.utils.DateUtils;
 import gcyl.entity.domain.mapper.ex.CategoryExtMapper;
 import gcyl.entity.domain.mapper.OrderMapper;
@@ -11,9 +12,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author lican
@@ -86,8 +92,24 @@ public class ControllerTest1 {
     }
 
     public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
-        System.out.println(DateUtils.getGmtDate());
-        System.out.println(DateUtils.getDateTime());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+        long time1 = System.currentTimeMillis();
+        String encodePass = encoder.encode("123456");
+        long time2 = System.currentTimeMillis();
+        System.out.println(encodePass);
+        System.out.println(encoder.matches("123456", encodePass));
+        long time3 = System.currentTimeMillis();
+        System.out.println(time3 - time2);
+        System.out.println(time2 - time1);
+    }
+
+    @Autowired
+    AsyncDemo asyncDemo;
+    @Test
+    public void testAsync() throws ExecutionException, InterruptedException {
+        Future<String> future = asyncDemo.asyncInvokeReturnFuture(2);
+        asyncDemo.asyncInvokeSimplest();
+        asyncDemo.asyncInvokeWithParameter("1");
+        System.out.println(future.get());
     }
 }

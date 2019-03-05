@@ -6,16 +6,11 @@ import gcyl.entity.common.enums.ResultEnum;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.GoodsSpec;
 import gcyl.entity.domain.model.ex.GoodsEx;
-import gcyl.entity.goods.Enum.SortEnum;
 import gcyl.entity.goods.request.*;
 import gcyl.entity.goods.service.IGoodsSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,7 +22,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/goodsSearch")
 public class GoodsSearchController {
 
@@ -41,8 +36,7 @@ public class GoodsSearchController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping(value = "/goodsList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/goodsList")
     public Result goodsList(@Valid @RequestBody GoodsSearchRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -65,8 +59,7 @@ public class GoodsSearchController {
      * @param goodsId  商品ID
      */
     @ShopLogin
-    @RequestMapping(value = "/goodsDetail", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/goodsDetail")
     public Result goodsDetail(Long goodsId) {
         Result result = new Result();
         if (goodsId == null) {
@@ -85,8 +78,7 @@ public class GoodsSearchController {
      * @param goodsId  商品ID
      */
     @ShopLogin
-    @RequestMapping(value = "/goodsSpecList", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/goodsSpecList")
     public Result goodsSpecList(Long goodsId) {
         Result result = new Result();
         if (goodsId == null) {

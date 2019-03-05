@@ -122,7 +122,7 @@ public class OrderShopServiceImpl implements IOrderShopService {
                 case WP:
                     orderStates.add(OrderStateEnum.WS.getCode());
                     orderStates.add(OrderStateEnum.FS.getCode());
-                    paramMap.put("isPay", PayEnum.NPD.getCode());
+                    paramMap.put("isPay", PayEnum.NOT_PAID.getCode());
                     break;
                 case FH:
                     orderStates.add(OrderStateEnum.FH.getCode());

@@ -9,7 +9,7 @@ package gcyl.entity.common.enums.order;
 public enum PayEnum {
 
     PAID(true, "已支付"),
-    NPD(false, "未支付");
+    NOT_PAID(false, "未支付");
 
     boolean code;
     String name;

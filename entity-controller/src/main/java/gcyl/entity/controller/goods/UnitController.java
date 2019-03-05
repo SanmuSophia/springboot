@@ -4,10 +4,7 @@ import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.Unit;
 import gcyl.entity.goods.service.IUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +14,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/unit")
 public class UnitController {
 
@@ -27,8 +24,7 @@ public class UnitController {
     /**
      * 所有单位
      */
-    @RequestMapping(value = "/units", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/units")
     public Result units() {
         Result result = new Result();
         List<Unit> units = unitService.units();

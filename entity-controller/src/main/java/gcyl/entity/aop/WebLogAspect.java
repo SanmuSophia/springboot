@@ -27,44 +27,45 @@ public class WebLogAspect {
 
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Pointcut("execution(public * gcyl.entity.controller..*.*(..)) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    @Pointcut("execution(public * gcyl.entity.controller..*.*(..)) " +
+            "&& (@annotation(org.springframework.web.bind.annotation.*))")
     public void webLog(){
     }
 
     @Before("webLog()")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
+    public void doBefore(JoinPoint joinPoint) {
         startTime.set(System.currentTimeMillis());
 
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes == null) return;
         HttpServletRequest request = attributes.getRequest();
 
         // 记录下请求内容
-        StringBuilder sb = new StringBuilder("\r\n");
+        StringBuilder sb = new StringBuilder();
         if ("GET".equals(request.getMethod())) {
-            sb.append("\r\n" + "url: " + request.getRequestURL().toString());
+            sb.append("\r\n" + "url: ").append(request.getRequestURL().toString());
             if (request.getQueryString() != null) {
-                sb.append("?" + request.getQueryString());
+                sb.append("?").append(request.getQueryString());
             }
-            sb.append("\r\n" + "content-type: " + request.getContentType());
-            sb.append("\r\n" + "method : " + request.getMethod());
+            sb.append("\r\n" + "content-type: ").append(request.getContentType())
+              .append("\r\n" + "method : ").append(request.getMethod());
         } else {
-            sb.append("\r\n" + "url: " + request.getRequestURL().toString());
-            sb.append("\r\n" + "content-type: " + request.getContentType());
-            sb.append("\r\n" + "method : " + request.getMethod());
-//            sb.append(this.getRequestBody(request));
+            sb.append("\r\n" + "url: ").append(request.getRequestURL().toString())
+              .append("\r\n" + "content-type: ").append(request.getContentType())
+              .append("\r\n" + "method : ").append(request.getMethod())
+              .append("\r\n").append(this.getRequestBody(request));
         }
-        sb.append("\r\n");
         LogUtils.debug(sb.toString());
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) {
         // 处理完请求，返回内容
-        StringBuilder sb = new StringBuilder("\r\n\n");
-        sb.append("response: " + JSON.toJSON(ret) + "\r\n");
-        sb.append("time: " + (System.currentTimeMillis() - startTime.get()) + "ms"  + "\r\n");
-        LogUtils.debug(sb.toString());
+        String str = "\r\n";
+        str += "response: " + JSON.toJSON(ret) + "\r\n";
+        str += "time: " + (System.currentTimeMillis() - startTime.get()) + "ms"  + "\r\n";
+        LogUtils.debug(str);
     }
 
     /**
@@ -72,13 +73,14 @@ public class WebLogAspect {
      */
     private String getRequestBody(HttpServletRequest request) {
         BufferedReader reader;
-        String str;
         StringBuilder sb = new StringBuilder();
+        int len;
+        char[] buf = new char[1024];
         try {
             reader = request.getReader();
             request.getInputStream();
-            while ((str = reader.readLine()) != null) {
-                sb.append(str);
+            while ((len = reader.read(buf)) != -1) {
+                sb.append(new String(buf, 0, len));
             }
         } catch (IOException e) {
             return "";

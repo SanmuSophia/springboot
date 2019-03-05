@@ -10,12 +10,8 @@ import gcyl.entity.order.request.OrderSListRequest;
 import gcyl.entity.order.service.IOrderShopService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,7 +22,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/order/shop")
 public class OrderShopController {
 
@@ -39,8 +35,7 @@ public class OrderShopController {
      * @param shopId  店铺ID
      */
     @ShopLogin
-    @RequestMapping(value = "/orderNum", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/orderNum")
     public Result orderNum(Long shopId) {
         Result result = new Result();
         if (shopId == null) {
@@ -58,8 +53,7 @@ public class OrderShopController {
      * 订单列表
      */
     @ShopLogin
-    @RequestMapping(value = "/orderList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/orderList")
     public Result orderList(@Valid @RequestBody OrderSListRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasFieldErrors()) {
@@ -80,8 +74,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping(value = "/orderDetail", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/orderDetail")
     public Result orderDetail(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
@@ -112,8 +105,7 @@ public class OrderShopController {
      * @param reason   拒接原因
      */
     @ShopLogin
-    @RequestMapping(value = "/refuse", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/refuse")
     public Result refuse(Long shopId, Long orderId, String reason) {
         Result result = new Result();
         if (shopId == null) {
@@ -139,8 +131,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping(value = "/receive", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/receive")
     public Result receive(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
@@ -162,8 +153,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping(value = "/finishServing", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = "/finishServing")
     public Result finishServing(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {
@@ -185,8 +175,7 @@ public class OrderShopController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping(value = "/confirmReceipt", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/confirmReceipt")
     public Result confirmReceipt(Long shopId, Long orderId) {
         Result result = new Result();
         if (shopId == null) {

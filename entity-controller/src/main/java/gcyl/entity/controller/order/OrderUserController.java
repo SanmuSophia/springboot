@@ -9,12 +9,8 @@ import gcyl.entity.domain.model.vo.OrderUNumVO;
 import gcyl.entity.order.request.OrderUListRequest;
 import gcyl.entity.order.service.IOrderUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,7 +21,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/order/user")
 public class OrderUserController {
 
@@ -38,8 +34,7 @@ public class OrderUserController {
      * @param userId  用户ID
      */
     @ShopLogin
-    @RequestMapping(value = "/orderNum", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/orderNum")
     public Result orderNum(Long userId) {
         Result result = new Result();
         if (userId == null) {
@@ -57,8 +52,7 @@ public class OrderUserController {
      * 订单列表
      */
     @ShopLogin
-    @RequestMapping(value = "/orderList", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/orderList")
     public Result orderList(@Valid @RequestBody OrderUListRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -79,8 +73,7 @@ public class OrderUserController {
      * @param orderId  订单ID
      */
     @ShopLogin
-    @RequestMapping(value = "/orderDetail", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/orderDetail")
     public Result orderDetail(Long userId, Long orderId) {
         Result result = new Result();
         if (userId == null) {

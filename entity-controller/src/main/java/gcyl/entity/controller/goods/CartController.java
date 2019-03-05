@@ -7,17 +7,11 @@ import gcyl.entity.goods.request.*;
 import gcyl.entity.goods.service.ICartService;
 import gcyl.entity.goods.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * 购物车管理
@@ -25,7 +19,7 @@ import java.util.stream.Collectors;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/cart")
 public class CartController {
 
@@ -38,8 +32,7 @@ public class CartController {
      * @param shopId    店铺ID
      * @param tableNum  桌号
      */
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/get")
     public Result get(Long shopId, Long tableNum) {
         Result result = new Result();
         if (shopId == null) {
@@ -68,8 +61,7 @@ public class CartController {
     /**
      * 添加购物车
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/add")
     public Result add(@Valid @RequestBody CartAddRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -83,8 +75,7 @@ public class CartController {
     /**
      * 移除购物车
      */
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/remove")
     public Result remove(@Valid @RequestBody CartDelRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -98,8 +89,7 @@ public class CartController {
     /**
      * 清空购物车
      */
-    @RequestMapping(value = "/clear", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/clear")
     public Result clear(Long shopId, Long tableNum) {
         Result result = new Result();
         if (shopId == null) {

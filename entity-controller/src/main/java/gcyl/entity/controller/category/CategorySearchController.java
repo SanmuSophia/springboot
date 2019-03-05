@@ -7,10 +7,7 @@ import gcyl.entity.common.constant.Message;
 import gcyl.entity.common.result.Result;
 import gcyl.entity.domain.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ import java.util.List;
  * @author lican
  * @date 2019/1/2
  */
-@Controller
+@RestController
 @RequestMapping("/category")
 public class CategorySearchController {
 
@@ -34,8 +31,7 @@ public class CategorySearchController {
      * @param shopId  店铺ID
      */
     @ShopLogin
-    @RequestMapping(value = "/getShopCategory", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/getShopCategory")
     public Result getShopCategory(Long shopId) {
         Result result = new Result();
         if (shopId == null) {

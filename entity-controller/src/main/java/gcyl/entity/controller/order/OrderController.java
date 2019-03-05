@@ -3,25 +3,16 @@ package gcyl.entity.controller.order;
 import gcyl.entity.common.annotation.ShopLogin;
 import gcyl.entity.common.enums.order.PayWayEnum;
 import gcyl.entity.common.result.Result;
-import gcyl.entity.domain.model.form.CartForm;
 import gcyl.entity.goods.service.ICartService;
-import gcyl.entity.order.form.SpecNumForm;
 import gcyl.entity.order.request.OrderCreateRequest;
 import gcyl.entity.order.request.OrderPaidRequest;
 import gcyl.entity.order.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * 订单管理
@@ -29,7 +20,7 @@ import java.util.Set;
  * @author lican
  * @date 2019/1/3
  */
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
 
@@ -45,8 +36,7 @@ public class OrderController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/create")
     public Result create(@Valid @RequestBody OrderCreateRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {
@@ -91,8 +81,7 @@ public class OrderController {
      * @param bindingResult  参数验证
      */
     @ShopLogin
-    @RequestMapping(value = "/paid", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/paid")
     public Result paid(@Valid @RequestBody OrderPaidRequest request, BindingResult bindingResult) {
         Result result = new Result();
         if (bindingResult.hasErrors()) {

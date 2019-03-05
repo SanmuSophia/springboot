@@ -161,7 +161,7 @@ public class OrderServiceImpl implements IOrderService {
         Order order = new Order();
         order.setOrderSn(orderSn);
         order.setOrderState(OrderStateEnum.WR.getCode());
-        order.setIsPay(PayEnum.NPD.getCode());
+        order.setIsPay(PayEnum.NOT_PAID.getCode());
         order.setPayWay(payWay);
         order.setShopId(shopId);
         order.setUserId(userId);

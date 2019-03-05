@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author lican
@@ -46,7 +48,7 @@ public class DruidConfig {
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() {
-        DruidDataSource  dataSource = new DruidDataSource();
+        DruidDataSource dataSource = new DruidDataSource();
         List<Filter> filters = new ArrayList<>();
         filters.add(wallFilter);
         dataSource.setProxyFilters(filters);

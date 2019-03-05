@@ -112,7 +112,7 @@ public class OrderUserService implements IOrderUserService {
                     orderStates.add(OrderStateEnum.WR.getCode());
                     orderStates.add(OrderStateEnum.WS.getCode());
                     orderStates.add(OrderStateEnum.FS.getCode());
-                    paramMap.put("isPay", PayEnum.NPD.getCode());
+                    paramMap.put("isPay", PayEnum.NOT_PAID.getCode());
                     break;
                 case WE:
                     orderStates.add(OrderStateEnum.FH.getCode());
